@@ -70,5 +70,5 @@ destination: ./_site
 version:          0.9x beta 2
 
 remote_theme : olakara/JekyllMetro
-url:  "https://blog.github.io"
+url:  "https://star6973.github.io"
 baseurl:  ""
