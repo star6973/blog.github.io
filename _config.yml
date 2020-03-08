@@ -10,9 +10,9 @@ gems: [jekyll-paginate]
 permalink:        /blog/:year/:month/:day/:title
 
 # Setup
-title:            'star6973'
-tagline:          'A Metro theme for Jekyll'
-description:      'A Sample blog using Jekyll Metro'
+title:            'Welcome to star6973 page'
+tagline:          
+description:      'A blog using Jekyll Metro'
 url:              'http://192.168.1.11:4000'
 baseurl:          ''
 
@@ -37,17 +37,17 @@ author:         'MH.Ji'
 
 #Social Media links (Use complete URL except for email)
 dribbble:
-email:
-facebook:       'https://www.facebook.com/olakara'
+email:          'battlesun99@gmail.com'
+facebook:       'https://www.facebook.com/profile.php?id=100043450430647'
 flickr:
-github:         'https://github.com/olakara'
-gplus:          'https://plus.google.com/100425464897246255887/'
+github:         'https://github.com/star6973'
+gplus:          
 instagram:
 pinterest:
 linkedin:       
 rss:
 stackoverflow:  
-twitter:        'https://twitter.com/olakara'  
+twitter:        
 
 # Google Analytics
 gahandler: 'UA-52149651-1'
