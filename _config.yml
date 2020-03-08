@@ -1,7 +1,7 @@
 # Configurations
 markdown: kramdown
-markdown_ext:  markdown,mkdown,mkdn,mkd,md
-highlighter: pygments
+markdown_ext: markdown,mkdown,mkdn,mkd,md
+rouge: pygments
 
 # Needed for backward compatibility
 gems: [jekyll-paginate]
@@ -36,16 +36,16 @@ navigation:
 author:         'MH.Ji'
 
 #Social Media links (Use complete URL except for email)
-dribbble:
+dribbble:       
 email:          'battlesun99@gmail.com'
 facebook:       'https://www.facebook.com/profile.php?id=100043450430647'
-flickr:
+flickr:         
 github:         'https://github.com/star6973/ComputerScienceEngineering'
-gplus:          
-instagram:
-pinterest:
+gplus:           
+instagram:      
+pinterest:      
 linkedin:       
-rss:
+rss:            
 stackoverflow:  
 twitter:        
 
@@ -69,6 +69,6 @@ destination: ./_site
 # Custom vars
 version:          0.9x beta 2
 
-remote_theme : olakara/JekyllMetro
+remote_theme: olakara/JekyllMetro
 url:  "https://star6973.github.io"
 baseurl:  ""
