@@ -37,17 +37,17 @@ author:         'MH.Ji'
 
 #Social Media links (Use complete URL except for email)
 dribbble:
-email:          'battlesun99@gmail.com'
-facebook:       'https://www.facebook.com/'
+email:
+facebook:       'https://www.facebook.com/olakara'
 flickr:
-github:         'https://github.com/star6973/'
-gplus:          
+github:         'https://github.com/olakara'
+gplus:          'https://plus.google.com/100425464897246255887/'
 instagram:
 pinterest:
-linkedin:       
+linkedin:       'https://ae.linkedin.com/in/olakara/'
 rss:
-stackoverflow:  
-twitter:        
+stackoverflow:  'http://stackoverflow.com/users/185655/abdel-raoof'
+twitter:        'https://twitter.com/olakara'  
 
 # Google Analytics
 gahandler: 'UA-52149651-1'
