@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 소개
+title: 소개(Introduction)
 description: About Me page of MH.Ji
 theme: purple
 ---
@@ -13,22 +13,23 @@ Hello. My nickname is star6973, who dreaming to be a data analyst. I majored in 
 
 Thank you.
 
-## About this Site
+## 앞으로의 계획(Plan)
 
-This is a static site powered by Jekyll. The design was done by me and the theme is freely available on [Github](https://github.com/olakara/JekyllMetro). I have used Bootstrap, jQuery, icons from Metro Studio of Syncfusion and Github for hosting the site.
+1. 딥러닝까지 공부하기 (핸즈온 머신러닝)
+2. 선형대수학 공부하기 (프로그래머를 위한 선형대수)
+3. 캐글 커널 필사하기 (캐글 코리아 - 이유한님)
+4. 공공데이터를 활용한 데이터분석 프로젝트
 
-Technicals apart, this is my personal site where I plan to pen down my thoughts, technical experiences that I would like to share. But, the content and opnion that you see here are personal and not related to companies / clients i work with. And regarding the code you see there.. you may use it as per your discretion.
+1. Learning to deep learning (hands-on machine learning)
+2. Studying linear algebra (linear algebra for programmers)
+3. Typing kernel with the Kaggle (Kaggle Korea - Lee You Han)
+4. Data analysis project using public data
 
-## About this Theme
+## 프로젝트 팀원 모집(Recruiting Project Team Members)
 
-Jekyll Metro is the result of wanting a clean and new theme for my personal site. I was initially inspired by the [Hyde theme](https://github.com/poole/hyde). but soon I was googling to see if there are any Metro inspired theme available.
-Since, I couldn't find one, I decided to built one for myself. One of the main goal of building my own theme was to have a modern responsive theme that looks good on mobile, tablet and desktop.
+개인으로 프로젝트를 하는 것도 좋지만, 팀으로 같이 프로젝트를 진행하면 더 많은 시너지 효과를 얻을 수 있다고 생각합니다. 특히나 저는 무척이나 게으르기 때문에, 스터디와 같이 약속이나 목표를 세워두는 스타일입니다. 우선은 간단하게 2개월을 잡고서 공공데이터를 활용할 수 있는 데이터 분석 프로젝트를 시작하려고 합니다. 생각해둔 몇 가지 주제가 있는데, 교수님께 매주마다 검토를 받으면서 보다 가능성있는 주제를 선정하여 진행하고자 합니다. 혹시 관심이 있으시다면 개인 이메일(battlesun99@gmail.com)으로 연락주시면 감사하겠습니다. 한국인이나 외국인 등 다양한 사람들과 함께 협업을 한다면 더 재밌을 것 같습니다.
 
-You are free to use or fork this theme. And any contribution to fixes of issues are welcome.
-
-## Contact Me
-
-For short messages and quick replies, you can contact me via [Twitter](http://twitter.com/olakara) For anything longer feel free to use the comments section below and I'll reply you by email.
+It is good to start a project as an individual, but I think that if work together as a team, it will get more synergy. In particular, I'm very lazy, so it's a style to set promises and goals like a study. First, I want to start a data analysis project that can take advantage public data in as little as two months. There are a few topics I thought, and I will go through a weekly review with a professor to select a more promising topic. If you are interested, please contact us by email (battlesun99@gmail.com). It would be more fun to collaborate with various people.
 
 ### Comments:
 
