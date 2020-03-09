@@ -1,21 +1,12 @@
 ---
 layout: page
-title: Hi, I am Abdel Raoof Olakara
-description: About Me page of Abdel Raoof
+title: 소개
+description: About Me page of MH.Ji
 theme: purple
 ---
 
 I am a web focused developer mostly working using Microsoft .Net technologies. Occasionally, I end up working on non web related projects. I am based in Abu Dhabi, United Arab Emirates and work for C4 Advanced Solution as Application Developer.
 This is my personal website and blog where I put down my thoughts, solutions to problems and learning notes.
-
-## Stack Overflow
-
-Stackoverflow is a online community I hang around a lot during my free time. You can find me answering questions on Sencha's Ext Js , C# and Java. Here is my flair:
-
-<a href="http://stackexchange.com/users/62487">
-<img src="http://stackexchange.com/users/flair/62487.png?theme=clean" width="208" height="58" alt="profile for Abdel Olakara on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for Abdel Olakara on Stack Exchange, a network of free, community-driven Q&amp;A sites">
-</a>
-
 
 ## About this Site
 
