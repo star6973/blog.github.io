@@ -16,15 +16,15 @@ Thank you.
 
 ## 앞으로의 계획(Plan)
 
-1. 딥러닝까지 공부하기 (핸즈온 머신러닝)
-2. 선형대수학 공부하기 (프로그래머를 위한 선형대수)
-3. 캐글 커널 필사하기 (캐글 코리아 - 이유한님)
-4. 공공데이터를 활용한 데이터분석 프로젝트
+  + 딥러닝까지 공부하기 (핸즈온 머신러닝)
+  + 선형대수학 공부하기 (프로그래머를 위한 선형대수)
+  + 캐글 커널 필사하기 (캐글 코리아 - 이유한님)
+  + 공공데이터를 활용한 데이터분석 프로젝트
 
-1. Learning to deep learning (hands-on machine learning)
-2. Studying linear algebra (linear algebra for programmers)
-3. Typing kernel with the Kaggle (Kaggle Korea - Lee You Han)
-4. Data analysis project using public data
+  + Learning to deep learning (hands-on machine learning)
+  + Studying linear algebra (linear algebra for programmers)
+  + Typing kernel with the Kaggle (Kaggle Korea - Lee You Han)
+  + Data analysis project using public data
 <br><br><br>
 
 ## 프로젝트 팀원 모집(Recruiting Project Team Members)
