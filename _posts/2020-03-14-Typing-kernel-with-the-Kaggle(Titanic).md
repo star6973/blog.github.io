@@ -138,7 +138,7 @@ plt.show()
 ```python
 pd.crosstab([data['Sex'], data['Survived']], data['Pclass'], margins=True).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_5.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_5.JPG" width="30%">
 
 ```python
 sns.factorplot('Pclass', 'Survived', hue='Sex', data=data)
@@ -202,7 +202,7 @@ data['Initial'].replace(['Mlle', 'Mme', 'Ms', 'Dr', 'Major', 'Lady', 'Countess',
                         ['Miss', 'Miss', 'Miss', 'Mr', 'Mr', 'Mrs', 'Mrs', 'Other', 'Other', 'Other', 'Mr', 'Mr', 'Mr'], inplace=True)
 data.groupby('Initial')['Age'].mean()
 ```
-<img src="/assets/images/typing/titanic/plt_show_9.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_9.JPG" width="30%">
 
 Age의 결측치 채우기
 ```python
