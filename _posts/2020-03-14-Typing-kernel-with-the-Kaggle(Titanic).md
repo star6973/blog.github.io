@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Typing kernel with the Kaggle
+title:  Typing kernel with the Kaggle(Titanic)
 date:   2014-06-24 23:30:58
 categories: design markdown
 tags: Design Markdown
