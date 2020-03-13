@@ -129,7 +129,7 @@ sns.countplot('Pclass', hue='Survived', data=data, ax=ax[1])
 ax[1].set_title('Pclass: Survived vs Dead')
 plt.show()
 ```
-![img7](https://github.com/star6973/star6973.github.io/blob/master/assets/images/9.png)
+![img7](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_4.JPG)
 
 * Pclass 변수는 선실의 등급으로, 비행기 좌석의 클래스와 같은 개념이라고 생각하면 된다. Pclass 3의 승객 수가 가장 많지만 생존 비율을 확인했을 때, 구조 순서가 선실의 등급의 우선 순위가 부여되어 있음을 파악할 수 있다.
 * Pclass 1의 생존율은 약 63%, Pclass 2의 생존율은 약 48%, Pclass 3의 생존율은 약 25%를 보이고 있다.
@@ -194,6 +194,28 @@ for i in data:
 pd.crosstab(data['Initial'], data['Sex']).T.style.background_gradient(cmap='Oranges')
 ```
 ![img12](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_8.JPG)
+
+Mlle이나 Mme와 같은 맞춤법이 틀린 이니셜은 Miss를 의미하며, Dr의 경우 Mr로 변경할 수 있다.
+
+```python
+data['Initial'].replace(['Mlle', 'Mme', 'Ms', 'Dr', 'Major', 'Lady', 'Countess', 'Jonkheer', 'Col', 'Rev', 'Capt', 'Sir', 'Don'], 
+                        ['Miss', 'Miss', 'Miss', 'Mr', 'Mr', 'Mrs', 'Mrs', 'Other', 'Other', 'Other', 'Mr', 'Mr', 'Mr'], inplace=True)
+data.groupby('Initial')['Age'].mean()
+```
+![img13](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_9.JPG)
+
+### Age의 결측치 채우기
+```python
+data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Mr'), 'Age'] = 33
+data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Mrs'), 'Age'] = 36
+data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Master'), 'Age'] = 5
+data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Miss'), 'Age'] = 22
+data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Other'), 'Age'] = 46
+
+data['Age'].isnull().any()
+```
+![img14](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_2.JPG)
+
 
 
 
