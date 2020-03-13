@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Typing kernel
+title:  Typing kernel with the Kaggle
 date:   2014-06-24 23:30:58
 categories: design markdown
 tags: Design Markdown
