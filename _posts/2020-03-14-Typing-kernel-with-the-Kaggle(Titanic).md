@@ -45,7 +45,7 @@ data.head()
 
 ```
 
-![data.head()](star6973.github.io/_posts/typing_kernel_img/titanic/)
+![data.head()](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/train_data_head.JPG)
 
 PassengerId : 탑승객의 고유 아이디  
 Survival : 생존유무(0: 사망, 1: 생존)  
