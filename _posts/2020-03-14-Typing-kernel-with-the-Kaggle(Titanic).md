@@ -456,33 +456,534 @@ g.suptitle('Alone vs Survived')
 plt.show()
 ```
 ![img30](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_26.JPG)
+
 Family_Size가 0인 경우는 승객이 혼자임을 의미한다. 위의 그래프를 통해서 만약 승객이 혼자이거나 가족의 수가 0이라면, 생존율이 매우 낮음을 확인할 수 있다. 마찬가지로 가족의 수가 4보다 크면, 생존율도 낮아진다. 이러한 결과를 통해 Faimily_Size는 매우 중요한 특성이라고 할 수 있다.
 
+```python
+sns.factorplot('Alone', 'Survived', data=data, hue='Sex', col='Pclass')
+plt.show()
+```
+![img31](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_27.JPG)
+
+Pclass 3에서 여성 승객을 제외하고는 Sex와 Pclass와 상관없이 Alone인 경우에는 생존율이 낮아짐을 확인할 수 있다.
+<br>
+
+### Fare_Range
+운임료는 연속형 변수로, 순서형 변수로 변환해야 한다. 이를 위해 pandas에서 제공하는 qcut 메소드를 사용할 수 있다.
+
+qcut는 bins의 값에 따라 분할하거나 정렬한다. 그래서 만약 5 bins로 설정하였다면, 5개의 구간 또는 범위에 동일한 간격으로 값이 정렬된다.
+
+```python
+data['Fare_Range'] = pd.qcut(data['Fare'], 4)
+data.groupby(['Fare_Range'])['Survived'].mean().to_frame().style.background_gradient(cmap='Oranges')
+```
+![img32](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_28.JPG)
+
+앞서 살펴본 결과들을 토대로, 운임료가 증가할 수록 생존율이 높아짐을 확인할 수 있다. 하지만 이제 Fare_Range의 값을 그대로 사용할 수 없기에, Age_Band와 같이 범주형 변수로 변환을 해야한다.
+
+```python
+data['Fare_cat'] = 0
+data.loc[data['Fare']<=7.91, 'Fare_cat'] = 0
+data.loc[(data['Fare']>7.91) & (data['Fare']<=14.454), 'Fare_cat'] = 1
+data.loc[(data['Fare']>14.454) & (data['Fare']<=31), 'Fare_cat'] = 2
+data.loc[(data['Fare']>31) & (data['Fare']<=513), 'Fare_cat'] = 3
+
+sns.factorplot('Fare_cat', 'Survived', data=data, hue='Sex')
+plt.show()
+```
+![img33](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_29.JPG)
+
+이로써 확실히 운임료가 증가할 수록, 생존율이 높아짐이 자명하다. 이는 Sex와 함께 모델링을 하는데 중요한 특성이 될 것이다.
+<br>
+
+### 문자열 변수를 수치형 변수로 변환
+머신러닝 모델을 만들기 위해선, Sex, Embarked 등 문자열 변수를 수치형 변수로 변환을 해야만 한다.
+
+```python
+data['Sex'].replace(['male','female'], [0,1], inplace=True)
+data['Embarked'].replace(['S','C','Q'], [0,1,2], inplace=True)
+data['Initial'].replace(['Mr','Mrs','Miss','Master','Other'], [0,1,2,3,4], inplace=True)
+
+data.head()
+```
+![img34](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_30.JPG)
 
 
+### 필요없는 특성 제거하기
+* Name -> 범주형 변수로 변환할 수 없기 때문에 제거
+* Age -> Age_band 변수가 있기 때문에 제거
+* Ticket -> 무작위로 생성되는 문자열 변수이므로 제거
+* Fare -> Fare_cat 변수가 있기 때문에 제거
+* Cabin -> 결측치가 많으며 많은 승객에는 여러 개의 객실이 있는 것은 당연하므로 제거
+* Fare_Range -> Fare_cat 변수가 있기 때문에 제거
+* PassengerId -> 범주형 변수로 변환할 수 없기 때문에 제거
+
+```python
+data.drop(['Name', 'Age', 'Ticket', 'Fare', 'Cabin', 'Fare_Range', 'PassengerId'], axis=1, inplace=True)
+sns.heatmap(data.corr(), annot=True, cmap='RdYlGn', linewidths=0.2, annot_kws={'size':20})
+fig=plt.gcf()
+fig.set_size_inches(18, 15)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.show()
+```
+![img35](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_31.JPG)
+
+위의 상관관계에 대한 히트맵을 보았을 때, **SibSp**와 **Family_Size**, **Parch**와 **Family_Size**간의 양의 상관관계를 볼 수 있고, **Alone**과 **Family_Size**간의 음의 상관관계를 확인할 수 있다.
+<br><br>
+
+## 파트3: 모델링 예측
+우리는 EDA에서 데이터에 대한 통찰력을 얻었다. 그러나 아직까지는 승객의 생존율을 정확하게 예측할 수는 없다. 이제 머신러닝의 분류 알고리즘을 사용하여 승객의 생존율을 예측해보자.
+
+*** 1)Logistic Regression ***  
+
+*** 2)Support Vector Machines(Linear and radial) ***
+
+*** 3)Random Forest ***
+
+*** 4)K-Nearest Neighbours ***
+
+*** 5)Naive Bayes ***
+
+*** 6)Decision Tree ***
+
+```python
+from sklearn.linear_model import LogisticRegression
+from sklearn import svm
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+from sklearn.metrics import confusion_matrix
+
+train, test = train_test_split(data, test_size=0.3, random_state=0, stratify=data['Survived'])
+train_X = train[train.columns[1:]]
+train_Y = train[train.columns[:1]]
+test_X = test[test.columns[1:]]
+test_Y = test[test.columns[:1]]
+
+X = data[data.columns[1:]]
+Y = data['Survived']
+```
+
+### rbf-SVM
+```python
+model = svm.SVC(kernel='rbf', C=1, gamma=0.1)
+model.fit(train_X, train_Y)
+
+prediction1 = model.predict(test_X)
+print('Accuracy for rbf-SVM is {}'.format(metrics.accuracy_score(prediction1, test_Y)))
+```
+![img36](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_4.JPG)
+
+### linear-SVM
+```python
+model = svm.SVC(kernel='linear', C=0.1, gamma=0.1)
+model.fit(train_X, train_Y)
+
+prediction2 = model.predict(test_X)
+print('Accuracy for linear-SVM is {}'.format(metrics.accuracy_score(prediction2, test_Y)))
+```
+![img37](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_5.JPG)
+
+### Logistic Regression
+```python
+model = LogisticRegression()
+model.fit(train_X, train_Y)
+
+prediction3 = model.predict(test_X)
+print('Accuracy for Logistic Regression is {}'.format(metrics.accuracy_score(prediction3, test_Y)))
+```
+![img38](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_6.JPG)
+
+### Decision Tree
+```python
+model = DecisionTreeClassifier()
+model.fit(train_X, train_Y)
+
+prediction4 = model.predict(test_X)
+print('Accuracy for Decision Tree is {}'.format(metrics.accuracy_score(prediction4, test_Y)))
+```
+![img39](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_7.JPG)
+
+### K-Nearest Neighbors
+```python
+model = KNeighborsClassifier()
+model.fit(train_X, train_Y)
+
+prediction5 = model.predict(test_X)
+print('Accuracy for KNN is {}'.format(metrics.accuracy_score(prediction5, test_Y)))
+```
+![img40](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_8.JPG)
+
+K-Nearest Neighbors 알고리즘은 n_neighbors 속성에 따라 값이 변하기 때문에 다른 값들도 확인해보자.
+
+```python
+a_index = list(range(1, 11))
+a = pd.Series()
+x = np.arange(11)
+
+for i in a_index:
+    model = KNeighborsClassifier(n_neighbors=i)
+    model.fit(train_X, train_Y)
+    
+    prediction = model.predict(test_X)
+    a = a.append(pd.Series(metrics.accuracy_score(prediction, test_Y)))
+    
+plt.plot(a_index, a)
+plt.xticks(x)
+fig = plt.gcf()
+fig.set_size_inches(12, 6)
+plt.show()
+
+print('Accuracy for different values of n are: {} with the max value as {}'.format(a.values, a.values.max()))
+```
+![img41](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_9.JPG)
+
+### Gaussian Naive Bayes
+```python
+model = GaussianNB()
+model.fit(train_X, train_Y)
+
+prediction6 = model.predict(test_X)
+print('Accuracy for NaiveBayes is {}'.format(metrics.accuracy_score(prediction6, test_Y)))
+```
+![img42](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_10.JPG)
+
+### Random Forest
+```python
+model = RandomForestClassifier(n_estimators=100)
+model.fit(train_X, train_Y)
+
+prediction7 = model.predict(test_X)
+print('Accuracy for Random Forest is {}'.format(metrics.accuracy_score(prediction7, test_Y)))
+```
+![img43](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_11.JPG)
+
+모델의 정확성이 분류의 척도를 결정하는 유일한 요인은 아니다. 또한, 테스트셋이 변경되면 정확도도 변경된다. 이를 극복하고 일반화된 모델을 얻기 위해 **교차 검증(Cross Validation)**을 사용한다.
+<br>
+
+## 교차 검증
+#### K-Fold Cross Valildation
+* 데이터셋을 k-subset으로 나눈다.
+* 만약 k=5로 설정한다면, 테스트를 위한 1개의 파트를 예약하고, 나머지 4개의 파트는 훈련을 위해 사용한다.
+* 각 반복에서 테스트 파트를 변경하고 다른 파트에 대해 알고리즘을 훈련시켜 프로세스를 반복한다. 그런 다음 정확도와 오차의 평균을 구하여 알고리즘의 평균 정확도를 얻는다.
+* 알고리즘은 일부 훈련셋을 위한 데이터셋에 과소적합할 수 있고, 때때로 다른 데이터셋에는 과대적합이 될 수 있다. 그러므로 교차 검증을 통해 일반화된 모델을 얻을 수 있다.
+
+```python
+from sklearn.model_selection import KFold, cross_val_score, cross_val_predict
+
+kfold = KFold(n_splits=10, random_state=22)
+mean = []
+acc = []
+std = []
+classifiers = ['Linear SVM', 'Radial SVM', 'Logistic Regression', 'KNN', 'Decision Tree', 'Navie Bayes', 'Random Forest']
+models = [svm.SVC(kernel='linear'), svm.SVC(kernel='rbf'), LogisticRegression(), KNeighborsClassifier(n_neighbors=9), DecisionTreeClassifier(), GaussianNB(), RandomForestClassifier(n_estimators=100)]
+
+for i in models:
+    model = i
+    cv_result = cross_val_score(model, X, Y, cv=kfold, scoring='accuracy')
+   
+    mean.append(cv_result.mean())
+    std.append(cv_result.std())
+    acc.append(cv_result)
+    
+new_models_dataframe = pd.DataFrame({'CV Mean': mean, 'Std': std}, index=classifiers)
+new_models_dataframe
+```
+![img44](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_32.JPG)
+
+```python
+plt.subplots(figsize=(10, 5))
+box = pd.DataFrame(acc, index=[classifiers])
+box.T.boxplot()
+```
+![img45](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_33.JPG)
+
+```python
+new_models_dataframe['CV Mean'].plot.barh(width=0.8)
+plt.title('Average CV Mean Accuracy')
+fig = plt.gcf()
+fig.set_size_inches(8, 5)
+plt.show()
+```
+![img46](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_34.JPG)
+
+데이터셋의 분균형으로 인해 분류 정확도가 잘못될 수 있다. 오차 행렬(Confusion Matrix)은 모델이 어디서 잘못되었는지 혹은 잘못 예측한 클래스가 어디인지를 확인할 수 있다.
+<br>
+
+## 오차 행렬(Confusion Matrix)
+```python
+f, ax = plt.subplots(3, 3, figsize=(10, 8))
+
+y_pred = cross_val_predict(svm.SVC(kernel='rbf'), X, Y, cv=10)
+sns.heatmap(confusion_matrix(Y, y_pred), ax=ax[0, 0], annot=True, fmt='2.0f')
+ax[0, 0].set_title('Matrix for rbf-SVM')
+
+y_pred = cross_val_predict(svm.SVC(kernel='linear'), X, Y, cv=10)
+sns.heatmap(confusion_matrix(Y, y_pred), ax=ax[0, 1], annot=True, fmt='2.0f')
+ax[0, 1].set_title('Matrix for linear-SVM')
+
+y_pred = cross_val_predict(KNeighborsClassifier(n_neighbors=9), X, Y, cv=10)
+sns.heatmap(confusion_matrix(Y, y_pred), ax=ax[0, 2], annot=True, fmt='2.0f')
+ax[0, 2].set_title('Matrix for KNN')
+
+y_pred = cross_val_predict(RandomForestClassifier(n_estimators=100), X, Y, cv=10)
+sns.heatmap(confusion_matrix(Y, y_pred), ax=ax[1, 0], annot=True, fmt='2.0f')
+ax[1, 0].set_title('Matrix for Random Forest')
+
+y_pred = cross_val_predict(LogisticRegression(), X, Y, cv=10)
+sns.heatmap(confusion_matrix(Y, y_pred), ax=ax[1, 1], annot=True, fmt='2.0f')
+ax[1, 1].set_title('Matrix for Logistic Regression')
+
+y_pred = cross_val_predict(DecisionTreeClassifier(), X, Y, cv=10)
+sns.heatmap(confusion_matrix(Y, y_pred), ax=ax[1, 2], annot=True, fmt='2.0f')
+ax[1, 2].set_title('Matrix for Decision Tree')
+
+y_pred = cross_val_predict(GaussianNB(), X, Y, cv=10)
+sns.heatmap(confusion_matrix(Y, y_pred), ax=ax[2, 0], annot=True, fmt='2.0f')
+ax[2, 0].set_title('Matrix for Naive Bayes')
+
+plt.subplots_adjust(hspace=0.5, wspace=0.2)
+plt.show()
+```
+![img47](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_35.JPG)
+
+* 왼쪽 대각행렬은 각 클래스에 대한 올바른 예측 수를 나타내고, 오른쪽 대각행렬은 잘못된 예측 수를 나타낸다.
+* rbf-SVM은 사망한 승객을 정확하게 예측했지만, Naive-Bayes는 생존한 승객을 정확하게 예측했다.
 
 
+## Hyper-Parameter Tuning
+각 모델마다 설정할 수 있는 파라미터 값이 있는데 이 값들을 조정할 때마다 모델의 성능이 바뀐다. 이를 조정하는 것이 hyper-parameter tuning이라 한다.
+
+가장 잘 분류된 SVM과 RandomForest 모델만 하이퍼파라미터 조정을 해보자.
+
+### SVM
+```python
+from sklearn.model_selection import RandomizedSearchCV
+
+C = np.arange(0.5, 1.5, 0.5)
+gamma = np.arange(0.1, 2.0, 1.0)
+kernel = ['rbf', 'linear']
+
+hyper = {'kernel': kernel, 'C': C, 'gamma': gamma}
+
+rand_search = RandomizedSearchCV(estimator=svm.SVC(), param_distributions=hyper, verbose=True, n_jobs=-1)
+rand_search.fit(X, Y)
+
+print(rand_search.best_score_)
+print(rand_search.best_estimator_)
+```
+![img48](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_12.JPG)
+
+### Random Forest
+```python
+n_estimators = range(100, 1000, 100)
+
+hyper = {'n_estimators': n_estimators}
+
+rand_search = RandomizedSearchCV(estimator=RandomForestClassifier(random_state=0), param_distributions=hyper, verbose=True, n_jobs=-1)
+rand_search.fit(X, Y)
+
+print(rand_search.best_score_)
+print(rand_search.best_estimator_)
+```
+![img49](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_13.JPG)
+
+rbf-SVM의 최고 점수는 C=1.0, gamma=0.1인 82.82%를 획득하였고, Random Forest의 최고 점수는 n_estimators=300으로 81.9%를 획득하였다.
+<br>
+
+## 앙상블 기법(Ensembling)
+
+앙상블 기법은 모델의 정확도와 성능을 높이기 위한 좋은 방법이다. 간단히 설명하자면, 다양한 모델들을 결합하여 하나의 강력한 모델을 만드는 방법이다.
+
+1) Voting Classifier  
+
+2) Bagging  
+
+3) Boosting  
+
+### Voting Classifier
+
+투표 기반 분류기는 2가지 방식이 있다.
+* Hard Voting Classifier: 여러 모델을 생성하고 그 결과를 비교한다. 이 결고들을 집계하여 가장 많은 표를 얻은 클래스를 최종 예측값으로 정하는 방식이다.
+* Soft Voting Classifier: 앙상블에 사용되는 모든 뷴류기가 클래스의 확률을 예측할 수 있을 때 사용한다. 각 분류기의 예측을 평균 내어 확률이 가장 높은 클래스로 예측하는 방식이다(확률).
+
+```python
+from sklearn.ensemble import VotingClassifier
+
+ensemble = VotingClassifier(estimators=[('KNN', KNeighborsClassifier(n_neighbors=10)),
+                                        ('RBF', svm.SVC(probability=True, kernel='rbf', C=1.0, gamma=0.1)),
+                                        ('Lin', svm.SVC(probability=True, kernel='linear')),
+                                        ('RFor', RandomForestClassifier(n_estimators=300, random_state=0)),
+                                        ('LR', LogisticRegression(C=0.05)),
+                                        ('DT', DecisionTreeClassifier(random_state=0)),
+                                        ('NB', GaussianNB())], voting='soft').fit(train_X, train_Y)
+
+print('Accuracy for ensembled model is {}'.format(ensemble.score(test_X, test_Y)))
+print('Cross Validated score for ensembled model is {}'.format(cross_val_score(ensemble, X, Y, cv=10, scoring='accuracy').mean()))
+```
+![img50](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_14.JPG)
+
+### Bagging
+* 배깅은 샘플을 여러 번 뽑아 각 모델을 학습시켜 결과를 집계하는 방법이다. 대부분의 알고리즘의 학습에서는 높은 bias로 인한 과소적합과 높은 variance로 인한 과대적합이 나타나는 오류가 생긴다. 
+* 이러한 오류들을 줄이고, 알고리즘의 안정성과 정확성을 향상시키기 위해 표본을 추출하고 그 표본으로부터 평균을 추정하여 전체의 분포를 예측한다.
+
+*KNeighbors, DecisionTree, RandomForest*
+
+#### Bagged KNN
+```python
+from sklearn.ensemble import BaggingClassifier
+
+model = BaggingClassifier(base_estimator=KNeighborsClassifier(n_neighbors=3), random_state=0, n_estimators=700)
+model.fit(train_X, train_Y)
+prediction = model.predict(test_X)
+
+print('Accuracy for bagged KNN is {}'.format(metrics.accuracy_score(prediction, test_Y)))
+print('Cross Validated score for bagged KNN is {}'.format(cross_val_score(model, X, Y, cv=10, scoring='accuracy').mean()))
+```
+![img51](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_15.JPG)
+
+#### Bagged DecisionTree
+```python
+model = BaggingClassifier(base_estimator=DecisionTreeClassifier(), random_state=0, n_estimators=100)
+model.fit(train_X, train_Y)
+prediction = model.predict(test_X)
+
+print('Accuracy for bagged Decision Tree is {}'.format(metrics.accuracy_score(prediction, test_Y)))
+print('Cross Validated score for bagged Decision Tree is {}'.format(cross_val_score(model, X, Y, cv=10, scoring='accuracy').mean()))
+```
+![img52](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_16.JPG)
+
+### Boosting
+
+* 부스팅은 뷴류기의 순차적 학습을 사용하여 약한 성능의 모델을 단계별로 향상시키는 방법이다. 배깅이 일반적인 모델을 만드는데 집중되어 있다면, 부스팅은 맞추기 어려운 문제를 맞추는 데 초점이 되어있다.
+* 모델은 먼저 전체 데이터셋에 대해 학습한다. 틀리게 분류한 클래스에 대해 높은 가중치를 부여하고, 바르게 분류한 클래스에 대해 낮은 가중치를 부여한다.
+* 다음 반복에서 학습되는 모델은 앞에서 설정된 가중치에 따라 다시 분류를 한다. 이를 단계적으로 학습하여 정확도를 높여준다.
+
+*AdaBoost, XGBoost, GradientBoost, LightGBM*
+
+#### AdaBoost(Adaptive Boosting)
+```python
+from sklearn.ensemble import AdaBoostClassifier
+
+ada = AdaBoostClassifier(n_estimators=200, random_state=0, learning_rate=0.1)
+
+print('Cross Validated score for AdaBoost is {}'.format(cross_val_score(ada, X, Y, cv=10, scoring='accuracy').mean()))
+```
+![img53](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_17.JPG)
+
+#### Stochatic Gradient Boosting
+```python
+from sklearn.ensemble import GradientBoostingClassifier
+
+grad = GradientBoostingClassifier(n_estimators=500, random_state=0, learning_rate=0.1)
+
+print('Cross Validated score for Gradient Boosting is {}'.format(cross_val_score(grad, X, Y, cv=10, scoring='accuracy').mean()))
+```
+![img54](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_18.JPG)
+
+#### XGBoost
+```python
+import xgboost as xg
+
+xgboost = xg.XGBClassifier(n_estimators=900, learning_rate=0.1)
+
+print('Cross Validated score for XGBoost is {}'.format(cross_val_score(xgboost, X, Y, cv=10, scoring='accuracy').mean()))
+```
+![img55](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_19.JPG)
+
+#### LightGBM
+```python
+import lightgbm as lgb
+
+lgb = lgb.LGBMClassifier(n_estimators=900, learning_rate=0.1)
+
+print('Cross Validated score for LightGBM is {}'.format(cross_val_score(lgb, X, Y, cv=10, scoring='accuracy').mean()))
+```
+![img56](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_20.JPG)
+
+가장 정확도가 높은 모델은 AdaBoost이다. 하이퍼파라미터 튜닝을 해보자.
+
+```python
+n_estimators = list(range(100, 1100, 100))
+learning_rate = np.arange(0.05, 1.05, 0.05)
+
+hyper = {'n_estimators': n_estimators, 'learning_rate': learning_rate}
+
+rand_search = RandomizedSearchCV(estimator=AdaBoostClassifier(), param_distributions=hyper, verbose=True, n_jobs=-1)
+rand_search.fit(X, Y)
+
+print(rand_search.best_score_)
+print(rand_search.best_estimator_)
+```
+![img57](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_20.JPG)
+
+```python
+from sklearn.model_selection import GridSearchCV
+
+gd = GridSearchCV(estimator=AdaBoostClassifier(), param_grid=hyper, verbose=True, n_jobs=-1)
+gd.fit(X, Y)
+
+print(gd.best_score_)
+print(gd.best_estimator_)
+```
+![img58](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_21.JPG)
+
+### 가장 좋은 모델의 오차 행렬
+```python
+ada = gd.best_estimator_
+result = cross_val_predict(ada, X, Y, cv=10)
+
+sns.heatmap(confusion_matrix(Y, result), cmap='Spectral', annot=True, fmt='2.0f')
+plt.show()
+```
+![img59](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_36.JPG)
+<br>
+
+## 중요한 특징 추출
+```python
+f, ax = plt.subplots(2, 2, figsize=(12, 10))
+
+model = RandomForestClassifier(n_estimators=500, random_state=0)
+model.fit(X, Y)
+pd.Series(model.feature_importances_, X.columns).sort_values(ascending=True).plot.barh(width=0.8, ax=ax[0, 0], cmap='autumn')
+ax[0, 0].set_title('Feature Importance in Random Forest')
+
+model = AdaBoostClassifier(n_estimators=200, learning_rate=0.05, random_state=0)
+model.fit(X, Y)
+pd.Series(model.feature_importances_, X.columns).sort_values(ascending=True).plot.barh(width=0.8, ax=ax[0, 1], cmap='Wistia')
+ax[0, 1].set_title('Feature Importance in AdaBoost')
+
+model = GradientBoostingClassifier(n_estimators=900, learning_rate=0.1, random_state=0)
+model.fit(X, Y)
+pd.Series(model.feature_importances_, X.columns).sort_values(ascending=True).plot.barh(width=0.8, ax=ax[1, 0], cmap='summer')
+ax[1, 0].set_title('Feature Importance in Gradient Boosting')
+
+model = xg.XGBClassifier(n_estimators=900, learning_rate=0.1)
+model.fit(X, Y)
+pd.Series(model.feature_importances_, X.columns).sort_values(ascending=True).plot.barh(width=0.8, ax=ax[1, 1], cmap='winter')
+ax[1, 1].set_title('Feature Importance in XGBoost')
+
+plt.show()
+```
+![img60](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_37.JPG)
 
 
+* 일반적인 중요한 특성은 Initial, Pclass, Fare_cat, Family_Size로 확인된다.
+* 앞에서 Pclass와 결합된 Sex 특성이 좋았던 것에 비해, 이 그래프를 통해 Sex는 중요하지 않아 보인다. 즉, Sex 특성은 RandomForest에서만 중요한 특성인 것 같다.
+* Initial은 앞서 Sex와의 상관관계를 보았으므로 성별을 나타내는 중요한 특성이다.
+* Pclass 및 Fare_cat은 Alone, Parch, SibSp를 가진 승객 및 Family_Size의 상태를 나타낸다.
 
+## 최적의 모델 결과 제출
+```python
+data2 = pd.read_csv('C:/Users/battl/PycharmProjects/cse_project/coding practice/Kaggle/Titanic/test.csv')
 
+test_Survived = pd.Series(result, name='Survived')
+IDtest = data2['PassengerId']
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+result_dataframe = pd.concat([IDtest, test_Survived], axis=1)
+result_dataframe.to_csv('EDA to prediction(dietanic) star6973')
+```
