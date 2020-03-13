@@ -386,6 +386,82 @@ Pclass 1의 승객들의 운임료를 보면 큰 분포가 있는 것으로 보�
 * #### Embarked: C 승선 위치에서의 생존율이 S 승선 위치에서의 1등석 승객의 생존율 보다 높은 것으로 보임. Q 승선 위치의 대다수 승객은 3등석임.
 * #### Parch + SibSp: 1-2명의 형제 자매, 배우자 또는 1-3명의 부모님이 있는 경우 혼자거나 대가족에 비해 생존율이 높음.
 
+### 특성간의 상관관계
+```python
+sns.heatmap(data.corr(), annot=True, cmap='RdYlGn', linewidths=0.2)
+fig = plt.gcf()
+fig.set_size_inches(10, 8)
+plt.show()
+```
+![img26](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_22.JPG)
+
+### 히트맵 해석
+* 양의 상관관계: 특성 A가 증가할 때, 특성 B도 증가한다면 양의 상관관계
+* 음의 상관관계: 특성 A가 증가할 때, 특성 B가 감소한다면 음의 상관관계
+
+만약 두개의 특성이 서로 상관관계가 있다면, 두 특성 모두 매우 유사한 정보를 포함하고 있다는 것을 의미한다. 이렇게 동일한 정보를 포함하는 특성이 많은 경우를 다중공선성이라 한다.
+
+따라서 특성이 중복되므로 제거를 통해 모델링하거나 훈련하는 시간을 줄일 수 있다. 위의 히트맵에서는 다중공선성은 확인되지 않으며, 가장 높은 상관관계는 SibSp와 Parch라고 할 수 있다.
+<br><br>
+
+## 파트2: Feature Engineering 및 데이터 정제
+
+Feature Engineering이란? 모든 특성이 데이터셋에서 중요하지는 않다. 제거해야 할 중복 특성이 많이 있을 수 있다. 또한, 다른 특성에서 정보를 추출하여 새로운 특성을 만들어 추가할 수도 있다. 이러한 과정을 Feature Engineering이라 한다.
+
+### Age_band
+
+* Age의 특성이 가지고 있는 문제: Age는 연속형 변수로 머신러닝 모델에서 사용하기에 부적합하다. 만약 나이별로 그룹화를 하고자 한다면, 나이의 기준을 잡아서 범주형 변수로 변환하는 것이 옳을 것이다.
+
+* Binning 기법 사용: 승객의 최대 연령은 80세이기 때문에 0-80에서 5 bin으로 범위를 나눈다. 따라서 80 / 5 = 16이 구간별 크기이다.
+
+```python
+data['Age_band'] = 0
+data.loc[data['Age']<=16, 'Age_band'] = 0
+data.loc[(data['Age']>16) & (data['Age']<=32), 'Age_band'] = 1
+data.loc[(data['Age']>32) & (data['Age']<=48), 'Age_band'] = 2
+data.loc[(data['Age']>48) & (data['Age']<=64), 'Age_band'] = 3
+data.loc[data['Age']>64, 'Age_band'] = 4
+
+data['Age_band'].value_counts().to_frame().style.background_gradient(cmap='Oranges')
+```
+![img27](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_23.JPG)
+
+```python
+sns.factorplot('Age_band', 'Survived', data=data, col='Pclass')
+plt.show()
+```
+![img28](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_24.JPG)
+Pclass와 상관없이 나이가 증가함에 따라 생존율이 감소함을 볼 수 있다.
+
+### Family_Size and Alone
+
+새로운 특성인 'Family_Size'와 'Alone'을 추가하여 분석해보자. 이 특성들은 Parch와 SibSp 특성의 요약으로, 생존율이 승객의 가족 규모와 관련이 있는지 확인해볼 수 있는 데이터가 된다.
+```python
+data['Family_Size'] = 0
+data['Family_Size'] = data['Parch'] + data['SibSp']
+data['Alone'] = 0
+data.loc[data['Family_Size']==0, 'Alone'] = 1
+
+f = plt.figure(figsize=(10, 5))
+sns.factorplot('Family_Size', 'Survived', data=data)
+f.suptitle('Family_Size vs Survived')
+plt.show()
+```
+![img29](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_25.JPG)
+
+```python
+g = plt.figure(figsize=(10, 5))
+sns.factorplot('Alone', 'Survived', data=data)
+g.suptitle('Alone vs Survived')
+plt.show()
+```
+![img30](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_26.JPG)
+Family_Size가 0인 경우는 승객이 혼자임을 의미한다. 위의 그래프를 통해서 만약 승객이 혼자이거나 가족의 수가 0이라면, 생존율이 매우 낮음을 확인할 수 있다. 마찬가지로 가족의 수가 4보다 크면, 생존율도 낮아진다. 이러한 결과를 통해 Faimily_Size는 매우 중요한 특성이라고 할 수 있다.
+
+
+
+
+
 
 
 
