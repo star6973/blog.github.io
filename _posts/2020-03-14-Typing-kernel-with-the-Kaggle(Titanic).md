@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Markdown basics
+title:  Typing kernel
 date:   2014-06-24 23:30:58
 categories: design markdown
 tags: Design Markdown
