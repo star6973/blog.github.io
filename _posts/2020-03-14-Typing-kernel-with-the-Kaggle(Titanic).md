@@ -118,7 +118,7 @@ plt.show()
 ```python
 pd.crosstab(data['Pclass'], data['Survived'], margins=True).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_3.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_3.JPG" width="50%">
 
 ```python
 f, ax = plt.subplots(1, 2, figsize=(10, 5))
