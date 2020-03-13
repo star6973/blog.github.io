@@ -129,4 +129,4 @@ sns.countplot('Pclass', hue='Survived', data=data, ax=ax[1])
 ax[1].set_title('Pclass: Survived vs Dead')
 plt.show()
 ```
-![img7](https://github.com/star6973/star6973.github.io/blob/master/assets/images/icon.png)
+![img7](https://github.com/star6973/star6973.github.io/blob/master/assets/images/9.png)
