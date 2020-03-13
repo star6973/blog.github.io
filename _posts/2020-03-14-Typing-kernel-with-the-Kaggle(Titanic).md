@@ -6,7 +6,7 @@ categories: typing kernel
 tags: Kernel
 ---
 
-# 캐글 필사하기
+# 캐글 커널 필사하기
 [EDA To Prediction (DieTanic) - Ashwini Swain](https://www.kaggle.com/ash316/eda-to-prediction-dietanic)
 
 
