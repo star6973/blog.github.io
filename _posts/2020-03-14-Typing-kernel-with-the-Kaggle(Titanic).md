@@ -45,7 +45,7 @@ data.head()
 
 ```
 
-![data.head()]()
+![data.head()](star6973.github.io/_posts/typing_kernel_img/titanic/)
 
 PassengerId : 탑승객의 고유 아이디  
 Survival : 생존유무(0: 사망, 1: 생존)  
