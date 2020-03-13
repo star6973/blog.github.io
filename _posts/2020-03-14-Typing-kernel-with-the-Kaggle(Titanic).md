@@ -60,9 +60,12 @@ Cabin: 객실번호
 Embarked: 배에 탑승한 위치(C = Cherbourg, Q = Queenstown, S = Southampton)  
 
 
+```python
+data.isnull().sum() # 결측치 개수 확인
 ```
 
-```
+
+
 
 
 
