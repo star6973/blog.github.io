@@ -6,11 +6,6 @@ categories: Typing kernel
 tags: Typing kernel
 ---
 
-'''
-print('Hello')
-
-'''
-
 A blog is a Web site that enables you or your organization to quickly share ideas and information. Blogs contain posts that are dated and listed in reverse chronological order. People can comment on your posts, as well as provide links to interesting sites, photos, and related blogs.
 
 Posts are an essential part of a blog. They are typically journal-like entries that contain information, ideas, and opinions. They are displayed in chronological order, starting with the most recent posts.
