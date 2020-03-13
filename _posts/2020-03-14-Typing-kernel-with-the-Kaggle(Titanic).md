@@ -448,7 +448,7 @@ sns.factorplot('Family_Size', 'Survived', data=data)
 f.suptitle('Family_Size vs Survived')
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_25.JPG" width="50%">
+<img src="/assets/images/typing/titanic/plt_show_25.JPG" width="40%">
 
 ```python
 g = plt.figure(figsize=(10, 5))
@@ -456,7 +456,7 @@ sns.factorplot('Alone', 'Survived', data=data)
 g.suptitle('Alone vs Survived')
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_26.JPG" width="50%">
+<img src="/assets/images/typing/titanic/plt_show_26.JPG" width="40%">
 
 Family_Size가 0인 경우는 승객이 혼자임을 의미한다. 위의 그래프를 통해서 만약 승객이 혼자이거나 가족의 수가 0이라면, 생존율이 매우 낮음을 확인할 수 있다. 마찬가지로 가족의 수가 4보다 크면, 생존율도 낮아진다. 이러한 결과를 통해 Faimily_Size는 매우 중요한 특성이라고 할 수 있다.
 
@@ -536,17 +536,17 @@ plt.show()
 ## 파트3: 모델링 예측
 우리는 EDA에서 데이터에 대한 통찰력을 얻었다. 그러나 아직까지는 승객의 생존율을 정확하게 예측할 수는 없다. 이제 머신러닝의 분류 알고리즘을 사용하여 승객의 생존율을 예측해보자.
 
-*** 1)Logistic Regression ***  
+***1)Logistic Regression***  
 
-*** 2)Support Vector Machines(Linear and radial) ***
+***2)Support Vector Machines(Linear and radial)***
 
-*** 3)Random Forest ***
+***3)Random Forest***
 
-*** 4)K-Nearest Neighbours ***
+***4)K-Nearest Neighbours***
 
-*** 5)Naive Bayes ***
+***5)Naive Bayes***
 
-*** 6)Decision Tree ***
+***6)Decision Tree***
 
 ```python
 from sklearn.linear_model import LogisticRegression
@@ -701,7 +701,7 @@ plt.subplots(figsize=(10, 5))
 box = pd.DataFrame(acc, index=[classifiers])
 box.T.boxplot()
 ```
-<img src="/assets/images/typing/titanic/plt_show_33.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_33.JPG" width="70%">
 
 ```python
 new_models_dataframe['CV Mean'].plot.barh(width=0.8)
@@ -710,7 +710,7 @@ fig = plt.gcf()
 fig.set_size_inches(8, 5)
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_34.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_34.JPG" width="70%">
 
 데이터셋의 분균형으로 인해 분류 정확도가 잘못될 수 있다. 오차 행렬(Confusion Matrix)은 모델이 어디서 잘못되었는지 혹은 잘못 예측한 클래스가 어디인지를 확인할 수 있다.
 <br>
