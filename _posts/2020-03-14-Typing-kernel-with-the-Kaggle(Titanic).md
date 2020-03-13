@@ -2,18 +2,18 @@
 layout: post
 title:  Typing kernel with the Kaggle(Titanic)
 date:   2014-06-24 23:30:58
-categories: design markdown
-tags: Design Markdown
+categories: typing kernel
+tags: Typing Kernel
 ---
 
 
-'''python
+```python
 
   num_list = ['one', 'two', 'three']
   for num in num_list:
     print(num)
     
-'''
+```
 
 A blog is a Web site that enables you or your organization to quickly share ideas and information. Blogs contain posts that are dated and listed in reverse chronological order. People can comment on your posts, as well as provide links to interesting sites, photos, and related blogs.
 
