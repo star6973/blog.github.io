@@ -48,16 +48,16 @@ data.head()
 
   *PassengerId : 탑승객의 고유 아이디*  
   *Survival : 생존유무(0: 사망, 1: 생존)*  
-  *Pclass : 선실의 등급  
-  *Name : 이름  
-  *Sex : 성별  
-  *Age : 나이  
-  *Sibsp : 함께 탑승한 형제자매, 아내 남편의 수  
-  *Parch: 함께 탑승한 부모, 자식의 수  
-  *Ticket: 티켓번호  
-  *Fare: 티켓의 요금  
-  *Cabin: 객실번호  
-  *Embarked: 배에 탑승한 위치(C = Cherbourg, Q = Queenstown, S = Southampton)  
+  *Pclass : 선실의 등급*  
+  *Name : 이름*  
+  *Sex : 성별*  
+  *Age : 나이*  
+  *Sibsp : 함께 탑승한 형제자매, 아내 남편의 수*  
+  *Parch: 함께 탑승한 부모, 자식의 수*  
+  *Ticket: 티켓번호*  
+  *Fare: 티켓의 요금*  
+  *Cabin: 객실번호*  
+  *Embarked: 배에 탑승한 위치(C = Cherbourg, Q = Queenstown, S = Southampton)*  
 
 
 ```python
