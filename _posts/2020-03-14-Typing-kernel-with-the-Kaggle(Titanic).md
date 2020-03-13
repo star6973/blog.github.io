@@ -7,9 +7,8 @@ tags: Typing Kernel
 ---
 
 
-```python
 
-#%% md
+
 
 ## 노트북 목차
 ---
@@ -34,6 +33,8 @@ tags: Typing Kernel
 
 #%%
 
+```python
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -43,12 +44,7 @@ import warnings
 warnings.filterwarnings('ignore')
 %matplotlib inline
 
-#%%
-
 data = pd.read_csv('C:/Users/battl/PycharmProjects/cse_project/coding practice/Kaggle/Titanic/train.csv')
-
-#%%
-
 data.head()
     
 ```
