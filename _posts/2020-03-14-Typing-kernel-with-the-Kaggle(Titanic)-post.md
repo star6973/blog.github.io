@@ -1,10 +1,15 @@
 ---
 layout: post
-title:  Another Sharepoint post
-date:   2014-07-07 15:30:00
-categories: SharePoint
-tags: SharePoint Designer
+title:  Typing kernel with the Kaggle - Theme 1: Titanic
+date:   2020-03-13 18:30:00
+categories: Typing kernel
+tags: Typing kernel
 ---
+
+'''
+print('Hello')
+
+'''
 
 A blog is a Web site that enables you or your organization to quickly share ideas and information. Blogs contain posts that are dated and listed in reverse chronological order. People can comment on your posts, as well as provide links to interesting sites, photos, and related blogs.
 
