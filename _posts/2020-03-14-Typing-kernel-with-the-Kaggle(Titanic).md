@@ -6,8 +6,8 @@ categories: typing kernel
 tags: Kernel
 ---
 
-
-
+# 캐글 필사하기
+[EDA To Prediction (DieTanic) - Ashwini Swain](https://www.kaggle.com/ash316/eda-to-prediction-dietanic)
 
 
 ## 노트북 목차
@@ -984,7 +984,7 @@ plt.show()
 * 앞에서 Pclass와 결합된 Sex 특성이 좋았던 것에 비해, 이 그래프를 통해 Sex는 중요하지 않아 보인다. 즉, Sex 특성은 RandomForest에서만 중요한 특성인 것 같다.
 * Initial은 앞서 Sex와의 상관관계를 보았으므로 성별을 나타내는 중요한 특성이다.
 * Pclass 및 Fare_cat은 Alone, Parch, SibSp를 가진 승객 및 Family_Size의 상태를 나타낸다.
-<br>
+<br><br>
 
 ## 최적의 모델 결과 제출
 ```python
