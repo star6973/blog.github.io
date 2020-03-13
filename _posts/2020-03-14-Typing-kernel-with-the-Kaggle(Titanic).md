@@ -78,7 +78,7 @@ plt.show()
 
 * 위의 그래프를 통해 훈련셋에 탑승한 891명 중 350명만이 생존하였음을 확인할 수 있다. 더 나아가 데이터에서 생존하지 못한 승객을 파악할 수 있는 많은 정보를 조사해야 한다. 이는 통찰력(Insight)을 얻기 위함이다.
 * 데이터셋에서 서로 다른 특성들을 사용하여 생존율을 확인해보자. 이를 위해선 각 특성들을 이해해야 한다.
-
+<br><br>
 
 ## 특성의 종류
 ### 1. 범주형 특성(Categorical Feature)
@@ -92,6 +92,10 @@ plt.show()
 ### 3. 연속형 특성(Continous Feature)
 * 두 지점 사이 혹은 최소값, 최대값 사이의 값을 사용할 수 있는 경우를 연속형 특성이라 한다.
 * 타이타닉 데이터셋의 연속형 변수: *Age*
-
+<br>
 ### Sex -> Categorical Feature
+```python
+data.groupby(['Sex', 'Survived'])['Survived'].count()
+```
+![img4](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/data_groupby.JPG)
 
