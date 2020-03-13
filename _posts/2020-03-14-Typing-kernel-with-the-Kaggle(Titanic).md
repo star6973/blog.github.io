@@ -44,6 +44,7 @@ data.head()
 ```
 
 ![img1](/typing_kernel_img/titanic/train_data_head.JPG)
+<img src="/typing_kernel_img/titanic/train_data_head.JPG" alt="sample_03">
 
   *PassengerId : 탑승객의 고유 아이디*  
   *Survival : 생존유무(0: 사망, 1: 생존)*  
