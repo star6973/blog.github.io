@@ -118,7 +118,7 @@ plt.show()
 ```python
 pd.crosstab(data['Pclass'], data['Survived'], margins=True).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_3.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_3.JPG" width="50%">
 
 ```python
 f, ax = plt.subplots(1, 2, figsize=(10, 5))
@@ -138,13 +138,13 @@ plt.show()
 ```python
 pd.crosstab([data['Sex'], data['Survived']], data['Pclass'], margins=True).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_5.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_5.JPG" width="50%">
 
 ```python
 sns.factorplot('Pclass', 'Survived', hue='Sex', data=data)
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_6.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_6.JPG" width="50%">
 
 * FactorPlot을 사용하여 범주형 변수를 쉽게 분리할 수 있다.
 * 위의 그래프를 통해 Pclass 1에서 94명의 여성 중 3명만이 사망한 것처럼 Pclass 1 여성의 생존율은 약 95~96%임을 파악할 수 있다.
@@ -157,7 +157,7 @@ print('가장 늙은 사람의 나이: {:.2f}'.format(data['Age'].max()), '세')
 print('가장 어린 사람의 나이: {:.2f}'.format(data['Age'].min()), '세')
 print('평균 나이: {:.2f}'.format(data['Age'].mean()), '세')
 ```
-<img src="/assets/images/typing/titanic/print_1.JPG" width="30%">
+<img src="/assets/images/typing/titanic/print_1.JPG" width="100%">
 
 ```python
 f, ax = plt.subplots(1, 2, figsize=(10, 5))
@@ -202,7 +202,7 @@ data['Initial'].replace(['Mlle', 'Mme', 'Ms', 'Dr', 'Major', 'Lady', 'Countess',
                         ['Miss', 'Miss', 'Miss', 'Mr', 'Mr', 'Mrs', 'Mrs', 'Other', 'Other', 'Other', 'Mr', 'Mr', 'Mr'], inplace=True)
 data.groupby('Initial')['Age'].mean()
 ```
-<img src="/assets/images/typing/titanic/plt_show_9.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_9.JPG" width="100%">
 
 Age의 결측치 채우기
 ```python
@@ -246,7 +246,7 @@ plt.show()
 ```python
 pd.crosstab([data['Embarked'], data['Pclass']], [data['Sex'], data['Survived']], margins=True).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_12.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_12.JPG" width="50%">
 
 
 승선 항의 위치에 따른 생존율
@@ -256,7 +256,7 @@ fig = plt.gcf()
 fig.set_size_inches(5, 3)
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_13.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_13.JPG" width="50%">
 
 C(Cherbourg) 승선 위치에서의 생존율은 55%로 가장 높으며, S(Southampton) 승선 위치에서의 생존율은 가장 낮다.
 ```python
@@ -308,7 +308,7 @@ data['Embarked'].isnull().any()
 ```python
 pd.crosstab(data['SibSp'], data['Survived']).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_16.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_16.JPG" width="50%">
 
 ```python
 fig = plt.figure(figsize=(10, 5))
@@ -318,12 +318,12 @@ fig.suptitle('SibSp vs Survived')
 plt.close(2)
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_17.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_17.JPG" width="50%">
 
 ```python
 pd.crosstab(data['SibSp'], data['Pclass']).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_18.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_18.JPG" width="50%">
 
 * 그래프를 통해 승객이 혼자 탑승한 경우 생존율이 34.5% 정도 되며, 형제 수가 증가할 수록 생존율이 줄어드는 것을 확인할 수 있다. 이는 말이 될 수 있는 것이, 가족이 있다면 나보다는 가족을 먼저 살리기 위해서 노력할 것이다.
 * 놀라운 부분은 5-8인의 가족의 생존율은 0%이다. 이러한 이유는 무엇일까? 크로스탭으로 Pclass의 비율을 보면 형제 자매의 수가 3인을 초과하는 경우 모두 Pclass 3의 승객임을 알 수 있다. 즉, Pclass 3의 모든 대가족이 생존하지 못했다.
@@ -335,7 +335,7 @@ pd.crosstab(data['SibSp'], data['Pclass']).style.background_gradient(cmap='Orang
 ```python
 pd.crosstab(data['Parch'], data['Pclass']).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_19.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_19.JPG" width="50%">
 
 크로스탭으로 Parch를 확인해보면 Pclass 3일 수록 더 많은 수의 인원이 있음을 확인할 수 있다.
 ```python
@@ -345,7 +345,7 @@ plt.suptitle('Parch vs Survived')
 plt.close(2)
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_20.JPG" width="30%">
+<img src="/assets/images/typing/titanic/plt_show_20.JPG" width="50%">
 
 * 여기서도 결과가 비슷하다. 부모와 함께 탑승한 승객의 생존율이 더 높다. 그러나 숫자가 증가할 수록 생존율이 낮아진다.
 * 1-3명의 부모가 있는 경우에 생존의 기회가 높아지지만, 혼자이거나 4명 이상의 부모가 있는 경우 생존율이 낮아진다.
