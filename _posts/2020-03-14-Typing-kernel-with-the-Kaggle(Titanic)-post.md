@@ -1,10 +1,11 @@
 ---
 layout: post
 title:  Typing kernel with the Kaggle - Theme 1: Titanic
-date:   2020-03-13 18:30:00
-categories: Typing kernel
-tags: Typing kernel
+date:   2014-06-24 23:30:58
+categories: design markdown
+tags: Design Markdown
 ---
+
 
 '''python
 
