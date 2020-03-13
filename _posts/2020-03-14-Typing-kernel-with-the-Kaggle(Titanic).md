@@ -27,8 +27,8 @@ tags: Typing Kernel
 3) 앙상블 기법  
 4) 중요한 특징 추출  
 <br><br>
-## 파트1: 탐색적 데이터 분석(EDA)
 
+## 파트1: 탐색적 데이터 분석(EDA)
 ```python
 import numpy as np
 import pandas as pd
@@ -42,7 +42,6 @@ warnings.filterwarnings('ignore')
 data = pd.read_csv('train.csv')
 data.head()
 ```
-
 <img src="/assets/images/typing/titanic/train_data_head.JPG" width="100%">
 
   *PassengerId : 탑승객의 고유 아이디*  
@@ -58,11 +57,12 @@ data.head()
   *Cabin: 객실번호*  
   *Embarked: 배에 탑승한 위치(C = Cherbourg, Q = Queenstown, S = Southampton)*  
 
-
+<br>
 ```python
 data.isnull().sum() # 결측치 개수 확인
 ```
 <img src="/assets/images/typing/titanic/data_isnull_sum.JPG" width="100%">
+<br>
 
 얼마나 많이 살아남았는지 그래프를 통해 확인해보자.
 ```python
@@ -149,7 +149,7 @@ plt.show()
 * FactorPlot을 사용하여 범주형 변수를 쉽게 분리할 수 있다.
 * 위의 그래프를 통해 Pclass 1에서 94명의 여성 중 3명만이 사망한 것처럼 Pclass 1 여성의 생존율은 약 95~96%임을 파악할 수 있다.
 * Pclass 1의 남성의 생존율이 낮은 것을 보아, 여성에게 최우선 구조 순위가 부여됨을 확인할 수 있다.
-<br>
+<br><br>
 
 ### Age -> Continous Feature
 ```python
@@ -175,7 +175,7 @@ plt.show()
 * Pclass의 경우, 10세 미만의 어린이의 생존율이 양호해 보인다.  
 * Pclass1에서 20-50세의 승객의 생존율이 높고, 여성의 경우 남성보다 생존율이 더 높다.  
 * 남성의 경우 생존율은 나이가 증가할 수록 감소함을 보인다.  
-<br>
+<br><br>
 
 앞에서 살펴본 것처럼, Age의 특성은 177개의 결측치를 가지고 있다. NaN 값을 대체하기 위해선 데이터셋의 평균 나이로 할당할 수 있다.
 
@@ -188,21 +188,23 @@ data['Initial'] = 0
 for i in data:
     data['Initial'] = data['Name'].str.extract('([A-Za-z]+)\.')
 ```
-위의 코드에서 정규표현식을 사용하여 이름의 A-Z 또는 a-z 사이에 있고, .(점)이 있는 문자열을 추출하는 것이다. 따라서 이름에서 호칭을 성공적으로 추출할 수 있다.
+<br>
 
+위의 코드에서 정규표현식을 사용하여 이름의 A-Z 또는 a-z 사이에 있고, .(점)이 있는 문자열을 추출하는 것이다. 따라서 이름에서 호칭을 성공적으로 추출할 수 있다.
 ```python
 pd.crosstab(data['Initial'], data['Sex']).T.style.background_gradient(cmap='Oranges')
 ```
 <img src="/assets/images/typing/titanic/plt_show_8.JPG" width="100%">
+<br>
 
 Mlle이나 Mme와 같은 맞춤법이 틀린 이니셜은 Miss를 의미하며, Dr의 경우 Mr로 변경할 수 있다.
-
 ```python
 data['Initial'].replace(['Mlle', 'Mme', 'Ms', 'Dr', 'Major', 'Lady', 'Countess', 'Jonkheer', 'Col', 'Rev', 'Capt', 'Sir', 'Don'], 
                         ['Miss', 'Miss', 'Miss', 'Mr', 'Mr', 'Mrs', 'Mrs', 'Other', 'Other', 'Other', 'Mr', 'Mr', 'Mr'], inplace=True)
 data.groupby('Initial')['Age'].mean()
 ```
 <img src="/assets/images/typing/titanic/plt_show_9.JPG" width="100%">
+<br>
 
 Age의 결측치 채우기
 ```python
@@ -232,6 +234,7 @@ plt.show()
 * 나이가 5살 미만인 유아들이 많이 생존했음을 확인할 수 있다.
 * 가장 나이가 많은 80세의 승객이 구해졌다.
 * 생존하지 못한 승객의 연령 그룹은 30-40세가 가장 많다.
+<br>
 
 ```python
 sns.factorplot('Pclass', 'Survived', col='Initial', data=data)
@@ -240,14 +243,13 @@ plt.show()
 <img src="/assets/images/typing/titanic/plt_show_11.JPG" width="100%">
 
 영화에서도 나왔듯이, 여성과 아이의 구조가 우선이라는 원칙이 그래프를 통해 입증할 수 있다.
-<br>
+<br><br>
 
 ### Embarked -> Categorical Value
 ```python
 pd.crosstab([data['Embarked'], data['Pclass']], [data['Sex'], data['Survived']], margins=True).style.background_gradient(cmap='Oranges')
 ```
 <img src="/assets/images/typing/titanic/plt_show_12.JPG" width="50%">
-
 
 승선 항의 위치에 따른 생존율
 ```python
@@ -279,6 +281,7 @@ plt.show()
 * C 승선의 승객은 다른 위치에 비해 생존율이 높다. 아마도 Pclass 1의 비율이 높기 때문일 것이다.
 * S 승선의 승객은 Pclass 3의 승객이 약 81%가 생존하지 못했기에 전체 생존율에서는 낮다.
 * Q 승선의 승객은 95%가 Pclass 3의 사람들이다.
+<br>
 
 ```python
 sns.factorplot('Pclass', 'Survived', hue='Sex', col='Embarked', data=data)
@@ -289,9 +292,9 @@ plt.show()
 * Pclass와 상관없이 Pclass 1, Pclass 2의 여성의 생존 확률은 거의 1이다.
 * S 승선의 승객들에서 Pclass 3의 승객들은 생존율이 매우 낮음을 볼 수 있다.
 * Q 승선의 승객에서는 전체 남자들의 생존율이 매우 낮음을 볼 수 있다.
+<br>
 
-Embarked의 결측치 채우기
-
+#### Embarked의 결측치 채우기
 S 승선의 승객 수가 최대임을 보아, 결측치는 S로 대체하겠다.
 ```python
 data['Embarked'].fillna('S', inplace=True)
@@ -349,7 +352,7 @@ plt.show()
 
 * 여기서도 결과가 비슷하다. 부모와 함께 탑승한 승객의 생존율이 더 높다. 그러나 숫자가 증가할 수록 생존율이 낮아진다.
 * 1-3명의 부모가 있는 경우에 생존의 기회가 높아지지만, 혼자이거나 4명 이상의 부모가 있는 경우 생존율이 낮아진다.
-<br>
+<br><br>
 
 ### Fare -> Continous Feature
 
@@ -377,7 +380,7 @@ Pclass 1의 승객들의 운임료를 보면 큰 분포가 있는 것으로 보�
 
 * Binning: 대표적인 변수 가공(Feature Engineering) 기법 중의 하나로 수치형 변수를 범주형 변수로 변형하는 작업.
 * 예를 들어, 직원의 나이에 따라 청소년(<20), 청년(20<30), 청장년(30<55), 장년(55>=) 등으로 구분하는 작업이 binning 기법이다.
-<br>
+<br><br>
 
 ### 모든 특성에 대한 요약
 * #### Sex: 여성의 생존율이 남성에 비해 높음
@@ -398,7 +401,7 @@ plt.show()
 ### 히트맵 해석
 * 양의 상관관계: 특성 A가 증가할 때, 특성 B도 증가한다면 양의 상관관계
 * 음의 상관관계: 특성 A가 증가할 때, 특성 B가 감소한다면 음의 상관관계
-
+<br>
 만약 두개의 특성이 서로 상관관계가 있다면, 두 특성 모두 매우 유사한 정보를 포함하고 있다는 것을 의미한다. 이렇게 동일한 정보를 포함하는 특성이 많은 경우를 다중공선성이라 한다.
 
 따라서 특성이 중복되므로 제거를 통해 모델링하거나 훈련하는 시간을 줄일 수 있다. 위의 히트맵에서는 다중공선성은 확인되지 않으며, 가장 높은 상관관계는 SibSp와 Parch라고 할 수 있다.
@@ -407,11 +410,11 @@ plt.show()
 ## 파트2: Feature Engineering 및 데이터 정제
 
 Feature Engineering이란? 모든 특성이 데이터셋에서 중요하지는 않다. 제거해야 할 중복 특성이 많이 있을 수 있다. 또한, 다른 특성에서 정보를 추출하여 새로운 특성을 만들어 추가할 수도 있다. 이러한 과정을 Feature Engineering이라 한다.
+<br>
 
 ### Age_band
 
 * Age의 특성이 가지고 있는 문제: Age는 연속형 변수로 머신러닝 모델에서 사용하기에 부적합하다. 만약 나이별로 그룹화를 하고자 한다면, 나이의 기준을 잡아서 범주형 변수로 변환하는 것이 옳을 것이다.
-
 * Binning 기법 사용: 승객의 최대 연령은 80세이기 때문에 0-80에서 5 bin으로 범위를 나눈다. 따라서 80 / 5 = 16이 구간별 크기이다.
 
 ```python
@@ -433,6 +436,7 @@ plt.show()
 <img src="/assets/images/typing/titanic/plt_show_24.JPG" width="100%">
 
 Pclass와 상관없이 나이가 증가함에 따라 생존율이 감소함을 볼 수 있다.
+<br>
 
 ### Family_Size and Alone
 
@@ -467,7 +471,7 @@ plt.show()
 <img src="/assets/images/typing/titanic/plt_show_27.JPG" width="100%">
 
 Pclass 3에서 여성 승객을 제외하고는 Sex와 Pclass와 상관없이 Alone인 경우에는 생존율이 낮아짐을 확인할 수 있다.
-<br>
+<br><br>
 
 ### Fare_Range
 운임료는 연속형 변수로, 순서형 변수로 변환해야 한다. 이를 위해 pandas에서 제공하는 qcut 메소드를 사용할 수 있다.
@@ -495,7 +499,7 @@ plt.show()
 <img src="/assets/images/typing/titanic/plt_show_29.JPG" width="50%">
 
 이로써 확실히 운임료가 증가할 수록, 생존율이 높아짐이 자명하다. 이는 Sex와 함께 모델링을 하는데 중요한 특성이 될 것이다.
-<br>
+<br><br>
 
 ### 문자열 변수를 수치형 변수로 변환
 머신러닝 모델을 만들기 위해선, Sex, Embarked 등 문자열 변수를 수치형 변수로 변환을 해야만 한다.
@@ -508,7 +512,7 @@ data['Initial'].replace(['Mr','Mrs','Miss','Master','Other'], [0,1,2,3,4], inpla
 data.head()
 ```
 <img src="/assets/images/typing/titanic/plt_show_30.JPG" width="100%">
-
+<br>
 
 ### 필요없는 특성 제거하기
 * Name -> 범주형 변수로 변환할 수 없기 때문에 제거
@@ -664,7 +668,7 @@ print('Accuracy for Random Forest is {}'.format(metrics.accuracy_score(predictio
 <img src="/assets/images/typing/titanic/print_11.JPG" width="100%">
 
 모델의 정확성이 분류의 척도를 결정하는 유일한 요인은 아니다. 또한, 테스트셋이 변경되면 정확도도 변경된다. 이를 극복하고 일반화된 모델을 얻기 위해 **교차 검증(Cross Validation)**을 사용한다.
-<br>
+<br><br>
 
 ## 교차 검증
 #### K-Fold Cross Valildation
@@ -713,7 +717,7 @@ plt.show()
 <img src="/assets/images/typing/titanic/plt_show_34.JPG" width="70%">
 
 데이터셋의 분균형으로 인해 분류 정확도가 잘못될 수 있다. 오차 행렬(Confusion Matrix)은 모델이 어디서 잘못되었는지 혹은 잘못 예측한 클래스가 어디인지를 확인할 수 있다.
-<br>
+<br><br>
 
 ## 오차 행렬(Confusion Matrix)
 ```python
@@ -754,7 +758,7 @@ plt.show()
 
 * 왼쪽 대각행렬은 각 클래스에 대한 올바른 예측 수를 나타내고, 오른쪽 대각행렬은 잘못된 예측 수를 나타낸다.
 * rbf-SVM은 사망한 승객을 정확하게 예측했지만, Naive-Bayes는 생존한 승객을 정확하게 예측했다.
-
+<br>
 
 ## Hyper-Parameter Tuning
 각 모델마다 설정할 수 있는 파라미터 값이 있는데 이 값들을 조정할 때마다 모델의 성능이 바뀐다. 이를 조정하는 것이 hyper-parameter tuning이라 한다.
@@ -794,7 +798,7 @@ print(rand_search.best_estimator_)
 <img src="/assets/images/typing/titanic/print_13.JPG" width="100%">
 
 rbf-SVM의 최고 점수는 C=1.0, gamma=0.1인 82.82%를 획득하였고, Random Forest의 최고 점수는 n_estimators=300으로 81.9%를 획득하였다.
-<br>
+<br><br>
 
 ## 앙상블 기법(Ensembling)
 
@@ -833,7 +837,7 @@ print('Cross Validated score for ensembled model is {}'.format(cross_val_score(e
 * 이러한 오류들을 줄이고, 알고리즘의 안정성과 정확성을 향상시키기 위해 표본을 추출하고 그 표본으로부터 평균을 추정하여 전체의 분포를 예측한다.
 
 *KNeighbors, DecisionTree, RandomForest*
-
+<br>
 #### Bagged KNN
 ```python
 from sklearn.ensemble import BaggingClassifier
@@ -865,7 +869,7 @@ print('Cross Validated score for bagged Decision Tree is {}'.format(cross_val_sc
 * 다음 반복에서 학습되는 모델은 앞에서 설정된 가중치에 따라 다시 분류를 한다. 이를 단계적으로 학습하여 정확도를 높여준다.
 
 *AdaBoost, XGBoost, GradientBoost, LightGBM*
-
+<br>
 #### AdaBoost(Adaptive Boosting)
 ```python
 from sklearn.ensemble import AdaBoostClassifier
@@ -932,6 +936,7 @@ print(gd.best_score_)
 print(gd.best_estimator_)
 ```
 <img src="/assets/images/typing/titanic/print_21.JPG" width="100%">
+<br>
 
 ### 가장 좋은 모델의 오차 행렬
 ```python
@@ -942,7 +947,7 @@ sns.heatmap(confusion_matrix(Y, result), cmap='Spectral', annot=True, fmt='2.0f'
 plt.show()
 ```
 <img src="/assets/images/typing/titanic/plt_show_36.JPG" width="50%">
-<br>
+<br><br>
 
 ## 중요한 특징 추출
 ```python
@@ -977,6 +982,7 @@ plt.show()
 * 앞에서 Pclass와 결합된 Sex 특성이 좋았던 것에 비해, 이 그래프를 통해 Sex는 중요하지 않아 보인다. 즉, Sex 특성은 RandomForest에서만 중요한 특성인 것 같다.
 * Initial은 앞서 Sex와의 상관관계를 보았으므로 성별을 나타내는 중요한 특성이다.
 * Pclass 및 Fare_cat은 Alone, Parch, SibSp를 가진 승객 및 Family_Size의 상태를 나타낸다.
+<br>
 
 ## 최적의 모델 결과 제출
 ```python
