@@ -39,9 +39,9 @@ plt.style.use('fivethirtyeight')
 import warnings
 warnings.filterwarnings('ignore')
 %matplotlib inline
-
-data = pd.read_csv('train.csv')
-data.head()
+```
+`data = pd.read_csv('train.csv')`
+`data.head()`
 
 ```
 
