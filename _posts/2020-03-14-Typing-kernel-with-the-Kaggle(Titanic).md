@@ -214,7 +214,20 @@ data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Other'), 'Age'] = 46
 
 data['Age'].isnull().any()
 ```
-![img14](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_2.JPG)
+
+```python
+f, ax = plt.subplots(1, 2, figsize=(10, 5))
+data[data['Survived'] == 0]['Age'].plot.hist(ax=ax[0], bins=20, edgecolor='black', color='red')
+ax[0].set_title('Survived = 0')
+x1 = list(range(0, 85, 5))
+ax[0].set_xticks(x1)
+data[data['Survived'] == 1]['Age'].plot.hist(ax=ax[1], bins=20, edgecolor='black', color='green')
+ax[1].set_title('Survived = 1')
+x2 = list(range(0, 85, 5))
+ax[1].set_xticks(x2)
+plt.show()
+```
+![img14](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_10.JPG)
 
 
 
