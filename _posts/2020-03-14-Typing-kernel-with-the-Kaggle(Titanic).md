@@ -62,7 +62,7 @@ data.head()
 ```python
 data.isnull().sum() # 결측치 개수 확인
 ```
-![img2](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/data_isnull_sum.JPG)
+<img src="/assets/images/typing/titanic/data_isnull_sum.JPG" width="100%">
 
 얼마나 많이 살아남았는지 그래프를 통해 확인해보자.
 ```python
@@ -74,7 +74,7 @@ sns.countplot('Survived', data=data, ax=ax[1])
 ax[1].set_title('Survived')
 plt.show()
 ```
-![img3](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_1.JPG)
+<img src="/assets/images/typing/titanic/plt_show_1.JPG" width="100%">
 
 * 위의 그래프를 통해 훈련셋에 탑승한 891명 중 350명만이 생존하였음을 확인할 수 있다. 더 나아가 데이터에서 생존하지 못한 승객을 파악할 수 있는 많은 정보를 조사해야 한다. 이는 통찰력(Insight)을 얻기 위함이다.
 * 데이터셋에서 서로 다른 특성들을 사용하여 생존율을 확인해보자. 이를 위해선 각 특성들을 이해해야 한다.
@@ -98,7 +98,7 @@ plt.show()
 ```python
 data.groupby(['Sex', 'Survived'])['Survived'].count()
 ```
-![img4](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/data_groupby.JPG)
+<img src="/assets/images/typing/titanic/data_groupby.JPG" width="100%">
 
 ```python
 f, ax = plt.subplots(1, 2, figsize=(10, 5))
@@ -108,7 +108,7 @@ sns.countplot('Sex', hue='Survived', data=data, ax=ax[1])
 ax[1].set_title('Sex: Survived vs Dead')
 plt.show()
 ```
-![img5](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_2.JPG)
+<img src="/assets/images/typing/titanic/plt_show_2.JPG" width="100%">
 
 * 타이타닉 호의 승선한 남성의 수는 여성의 수보다 훨씬 많음에도 불구하고 여성의 생존율은 75%, 남성의 생존율은 약 18~19%임을 확인할 수 있다.  
 * 위의 결과를 보았을 때, 성별은 중요한 특성임을 파악할 수 있지만, 과연 이것만으로도 충분할까? 다른 특성도 확인해보자.  
@@ -118,7 +118,7 @@ plt.show()
 ```python
 pd.crosstab(data['Pclass'], data['Survived'], margins=True).style.background_gradient(cmap='Oranges')
 ```
-![img6](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_3.JPG)
+<img src="/assets/images/typing/titanic/plt_show_3.JPG" width="100%">
 
 ```python
 f, ax = plt.subplots(1, 2, figsize=(10, 5))
@@ -129,7 +129,7 @@ sns.countplot('Pclass', hue='Survived', data=data, ax=ax[1])
 ax[1].set_title('Pclass: Survived vs Dead')
 plt.show()
 ```
-![img7](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_4.JPG)
+<img src="/assets/images/typing/titanic/plt_show_4.JPG" width="100%">
 
 * Pclass 변수는 선실의 등급으로, 비행기 좌석의 클래스와 같은 개념이라고 생각하면 된다. Pclass 3의 승객 수가 가장 많지만 생존 비율을 확인했을 때, 구조 순서가 선실의 등급의 우선 순위가 부여되어 있음을 파악할 수 있다.
 * Pclass 1의 생존율은 약 63%, Pclass 2의 생존율은 약 48%, Pclass 3의 생존율은 약 25%를 보이고 있다.
@@ -138,13 +138,13 @@ plt.show()
 ```python
 pd.crosstab([data['Sex'], data['Survived']], data['Pclass'], margins=True).style.background_gradient(cmap='Oranges')
 ```
-![img8](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_5.JPG)
+<img src="/assets/images/typing/titanic/plt_show_5.JPG" width="100%">
 
 ```python
 sns.factorplot('Pclass', 'Survived', hue='Sex', data=data)
 plt.show()
 ```
-![img9](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_6.JPG)
+<img src="/assets/images/typing/titanic/plt_show_6.JPG" width="100%">
 
 * FactorPlot을 사용하여 범주형 변수를 쉽게 분리할 수 있다.
 * 위의 그래프를 통해 Pclass 1에서 94명의 여성 중 3명만이 사망한 것처럼 Pclass 1 여성의 생존율은 약 95~96%임을 파악할 수 있다.
@@ -157,7 +157,7 @@ print('가장 늙은 사람의 나이: {:.2f}'.format(data['Age'].max()), '세')
 print('가장 어린 사람의 나이: {:.2f}'.format(data['Age'].min()), '세')
 print('평균 나이: {:.2f}'.format(data['Age'].mean()), '세')
 ```
-![img10](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_1.JPG)
+<img src="/assets/images/typing/titanic/print_1.JPG" width="100%">
 
 ```python
 f, ax = plt.subplots(1, 2, figsize=(10, 5))
@@ -169,7 +169,7 @@ ax[1].set_title('Sex and Age vs Survived')
 ax[1].set_yticks(range(0, 110, 10))
 plt.show()
 ```
-![img11](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_7.JPG)
+<img src="/assets/images/typing/titanic/plt_show_7.JPG" width="100%">
 
 그래프를 통해 확인할 수 있는 점(Pclass와 Age의 생존율, Sex와 Age의 생존율)
 * Pclass의 경우, 10세 미만의 어린이의 생존율이 양호해 보인다.  
@@ -193,7 +193,7 @@ for i in data:
 ```python
 pd.crosstab(data['Initial'], data['Sex']).T.style.background_gradient(cmap='Oranges')
 ```
-![img12](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_8.JPG)
+<img src="/assets/images/typing/titanic/plt_show_8.JPG" width="100%">
 
 Mlle이나 Mme와 같은 맞춤법이 틀린 이니셜은 Miss를 의미하며, Dr의 경우 Mr로 변경할 수 있다.
 
@@ -202,7 +202,7 @@ data['Initial'].replace(['Mlle', 'Mme', 'Ms', 'Dr', 'Major', 'Lady', 'Countess',
                         ['Miss', 'Miss', 'Miss', 'Mr', 'Mr', 'Mrs', 'Mrs', 'Other', 'Other', 'Other', 'Mr', 'Mr', 'Mr'], inplace=True)
 data.groupby('Initial')['Age'].mean()
 ```
-![img13](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_9.JPG)
+<img src="/assets/images/typing/titanic/plt_show_9.JPG" width="100%">
 
 Age의 결측치 채우기
 ```python
@@ -227,7 +227,7 @@ x2 = list(range(0, 85, 5))
 ax[1].set_xticks(x2)
 plt.show()
 ```
-![img14](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_10.JPG)
+<img src="/assets/images/typing/titanic/plt_show_10.JPG" width="100%">
 
 * 나이가 5살 미만인 유아들이 많이 생존했음을 확인할 수 있다.
 * 가장 나이가 많은 80세의 승객이 구해졌다.
@@ -237,7 +237,7 @@ plt.show()
 sns.factorplot('Pclass', 'Survived', col='Initial', data=data)
 plt.show()
 ```
-![img15](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_11.JPG)
+<img src="/assets/images/typing/titanic/plt_show_11.JPG" width="100%">
 
 영화에서도 나왔듯이, 여성과 아이의 구조가 우선이라는 원칙이 그래프를 통해 입증할 수 있다.
 <br>
@@ -246,7 +246,7 @@ plt.show()
 ```python
 pd.crosstab([data['Embarked'], data['Pclass']], [data['Sex'], data['Survived']], margins=True).style.background_gradient(cmap='Oranges')
 ```
-![img16](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_12.JPG)
+<img src="/assets/images/typing/titanic/plt_show_12.JPG" width="100%">
 
 
 승선 항의 위치에 따른 생존율
@@ -256,7 +256,7 @@ fig = plt.gcf()
 fig.set_size_inches(5, 3)
 plt.show()
 ```
-![img16](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_13.JPG)
+<img src="/assets/images/typing/titanic/plt_show_13.JPG" width="100%">
 
 C(Cherbourg) 승선 위치에서의 생존율은 55%로 가장 높으며, S(Southampton) 승선 위치에서의 생존율은 가장 낮다.
 ```python
@@ -273,7 +273,7 @@ ax[1, 1].set_title('Embarked vs Pclass')
 plt.subplots_adjust(wspace=0.2, hspace=0.5)
 plt.show()
 ```
-![img17](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_14.JPG)
+<img src="/assets/images/typing/titanic/plt_show_14.JPG" width="100%">
 
 * S 승선 위치에서 온 대다수는 Pclass 3의 사람들이다.
 * C 승선의 승객은 다른 위치에 비해 생존율이 높다. 아마도 Pclass 1의 비율이 높기 때문일 것이다.
@@ -284,7 +284,7 @@ plt.show()
 sns.factorplot('Pclass', 'Survived', hue='Sex', col='Embarked', data=data)
 plt.show()
 ```
-![img18](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_15.JPG)
+<img src="/assets/images/typing/titanic/plt_show_15.JPG" width="100%">
 
 * Pclass와 상관없이 Pclass 1, Pclass 2의 여성의 생존 확률은 거의 1이다.
 * S 승선의 승객들에서 Pclass 3의 승객들은 생존율이 매우 낮음을 볼 수 있다.
@@ -308,7 +308,7 @@ data['Embarked'].isnull().any()
 ```python
 pd.crosstab(data['SibSp'], data['Survived']).style.background_gradient(cmap='Oranges')
 ```
-![img19](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_16.JPG)
+<img src="/assets/images/typing/titanic/plt_show_16.JPG" width="100%">
 
 ```python
 fig = plt.figure(figsize=(10, 5))
@@ -318,12 +318,12 @@ fig.suptitle('SibSp vs Survived')
 plt.close(2)
 plt.show()
 ```
-![img20](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_17.JPG)
+<img src="/assets/images/typing/titanic/plt_show_17.JPG" width="100%">
 
 ```python
 pd.crosstab(data['SibSp'], data['Pclass']).style.background_gradient(cmap='Oranges')
 ```
-![img21](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_18.JPG)
+<img src="/assets/images/typing/titanic/plt_show_18.JPG" width="100%">
 
 * 그래프를 통해 승객이 혼자 탑승한 경우 생존율이 34.5% 정도 되며, 형제 수가 증가할 수록 생존율이 줄어드는 것을 확인할 수 있다. 이는 말이 될 수 있는 것이, 가족이 있다면 나보다는 가족을 먼저 살리기 위해서 노력할 것이다.
 * 놀라운 부분은 5-8인의 가족의 생존율은 0%이다. 이러한 이유는 무엇일까? 크로스탭으로 Pclass의 비율을 보면 형제 자매의 수가 3인을 초과하는 경우 모두 Pclass 3의 승객임을 알 수 있다. 즉, Pclass 3의 모든 대가족이 생존하지 못했다.
@@ -335,7 +335,7 @@ pd.crosstab(data['SibSp'], data['Pclass']).style.background_gradient(cmap='Orang
 ```python
 pd.crosstab(data['Parch'], data['Pclass']).style.background_gradient(cmap='Oranges')
 ```
-![img22](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_19.JPG)
+<img src="/assets/images/typing/titanic/plt_show_19.JPG" width="100%">
 
 크로스탭으로 Parch를 확인해보면 Pclass 3일 수록 더 많은 수의 인원이 있음을 확인할 수 있다.
 ```python
@@ -345,7 +345,7 @@ plt.suptitle('Parch vs Survived')
 plt.close(2)
 plt.show()
 ```
-![img23](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_20.JPG)
+<img src="/assets/images/typing/titanic/plt_show_20.JPG" width="100%">
 
 * 여기서도 결과가 비슷하다. 부모와 함께 탑승한 승객의 생존율이 더 높다. 그러나 숫자가 증가할 수록 생존율이 낮아진다.
 * 1-3명의 부모가 있는 경우에 생존의 기회가 높아지지만, 혼자이거나 4명 이상의 부모가 있는 경우 생존율이 낮아진다.
@@ -358,7 +358,7 @@ print('가장 비싼 운임료: {:.2f}'.format(data['Fare'].max()))
 print('가장 싼 운임료: {:.2f}'.format(data['Fare'].min()))
 print('평균 운임료: {:.2f}'.format(data['Fare'].mean()))
 ```
-![img24](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_3.JPG)
+<img src="/assets/images/typing/titanic/print_3.JPG" width="100%">
 
 ```python
 f, ax = plt.subplots(1, 3, figsize=(10, 5))
@@ -371,7 +371,7 @@ ax[2].set_title('Fares in Pclass 3')
 
 plt.show()
 ```
-![img25](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_21.JPG)
+<img src="/assets/images/typing/titanic/plt_show_21.JPG" width="100%">
 
 Pclass 1의 승객들의 운임료를 보면 큰 분포가 있는 것으로 보인다. 그리고 이 분포는 표준이 감소함에 따라 줄어드는 것을 확인할 수 있다. 이러한 이산형 데이터는 Binning 기법을 사용하여 불연속값으로 변환할 수 있다.
 
@@ -393,7 +393,7 @@ fig = plt.gcf()
 fig.set_size_inches(10, 8)
 plt.show()
 ```
-![img26](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_22.JPG)
+<img src="/assets/images/typing/titanic/plt_show_22.JPG" width="100%">
 
 ### 히트맵 해석
 * 양의 상관관계: 특성 A가 증가할 때, 특성 B도 증가한다면 양의 상관관계
@@ -424,13 +424,14 @@ data.loc[data['Age']>64, 'Age_band'] = 4
 
 data['Age_band'].value_counts().to_frame().style.background_gradient(cmap='Oranges')
 ```
-![img27](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_23.JPG)
+<img src="/assets/images/typing/titanic/plt_show_23.JPG" width="100%">
 
 ```python
 sns.factorplot('Age_band', 'Survived', data=data, col='Pclass')
 plt.show()
 ```
-![img28](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_24.JPG)
+<img src="/assets/images/typing/titanic/plt_show_24.JPG" width="100%">
+
 Pclass와 상관없이 나이가 증가함에 따라 생존율이 감소함을 볼 수 있다.
 
 ### Family_Size and Alone
@@ -447,7 +448,7 @@ sns.factorplot('Family_Size', 'Survived', data=data)
 f.suptitle('Family_Size vs Survived')
 plt.show()
 ```
-![img29](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_25.JPG)
+<img src="/assets/images/typing/titanic/plt_show_25.JPG" width="100%">
 
 ```python
 g = plt.figure(figsize=(10, 5))
@@ -455,7 +456,7 @@ sns.factorplot('Alone', 'Survived', data=data)
 g.suptitle('Alone vs Survived')
 plt.show()
 ```
-![img30](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_26.JPG)
+<img src="/assets/images/typing/titanic/plt_show_26.JPG" width="100%">
 
 Family_Size가 0인 경우는 승객이 혼자임을 의미한다. 위의 그래프를 통해서 만약 승객이 혼자이거나 가족의 수가 0이라면, 생존율이 매우 낮음을 확인할 수 있다. 마찬가지로 가족의 수가 4보다 크면, 생존율도 낮아진다. 이러한 결과를 통해 Faimily_Size는 매우 중요한 특성이라고 할 수 있다.
 
@@ -463,7 +464,7 @@ Family_Size가 0인 경우는 승객이 혼자임을 의미한다. 위의 그래
 sns.factorplot('Alone', 'Survived', data=data, hue='Sex', col='Pclass')
 plt.show()
 ```
-![img31](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_27.JPG)
+<img src="/assets/images/typing/titanic/plt_show_27.JPG" width="100%">
 
 Pclass 3에서 여성 승객을 제외하고는 Sex와 Pclass와 상관없이 Alone인 경우에는 생존율이 낮아짐을 확인할 수 있다.
 <br>
@@ -477,7 +478,7 @@ qcut는 bins의 값에 따라 분할하거나 정렬한다. 그래서 만약 5 b
 data['Fare_Range'] = pd.qcut(data['Fare'], 4)
 data.groupby(['Fare_Range'])['Survived'].mean().to_frame().style.background_gradient(cmap='Oranges')
 ```
-![img32](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_28.JPG)
+<img src="/assets/images/typing/titanic/plt_show_28.JPG" width="100%">
 
 앞서 살펴본 결과들을 토대로, 운임료가 증가할 수록 생존율이 높아짐을 확인할 수 있다. 하지만 이제 Fare_Range의 값을 그대로 사용할 수 없기에, Age_Band와 같이 범주형 변수로 변환을 해야한다.
 
@@ -491,7 +492,7 @@ data.loc[(data['Fare']>31) & (data['Fare']<=513), 'Fare_cat'] = 3
 sns.factorplot('Fare_cat', 'Survived', data=data, hue='Sex')
 plt.show()
 ```
-![img33](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_29.JPG)
+<img src="/assets/images/typing/titanic/plt_show_29.JPG" width="100%">
 
 이로써 확실히 운임료가 증가할 수록, 생존율이 높아짐이 자명하다. 이는 Sex와 함께 모델링을 하는데 중요한 특성이 될 것이다.
 <br>
@@ -506,7 +507,7 @@ data['Initial'].replace(['Mr','Mrs','Miss','Master','Other'], [0,1,2,3,4], inpla
 
 data.head()
 ```
-![img34](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_30.JPG)
+<img src="/assets/images/typing/titanic/plt_show_30.JPG" width="100%">
 
 
 ### 필요없는 특성 제거하기
@@ -527,7 +528,7 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()
 ```
-![img35](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_31.JPG)
+<img src="/assets/images/typing/titanic/plt_show_31.JPG" width="100%">
 
 위의 상관관계에 대한 히트맵을 보았을 때, **SibSp**와 **Family_Size**, **Parch**와 **Family_Size**간의 양의 상관관계를 볼 수 있고, **Alone**과 **Family_Size**간의 음의 상관관계를 확인할 수 있다.
 <br><br>
@@ -576,7 +577,7 @@ model.fit(train_X, train_Y)
 prediction1 = model.predict(test_X)
 print('Accuracy for rbf-SVM is {}'.format(metrics.accuracy_score(prediction1, test_Y)))
 ```
-![img36](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_4.JPG)
+<img src="/assets/images/typing/titanic/print_4.JPG" width="100%">
 
 ### linear-SVM
 ```python
@@ -586,7 +587,7 @@ model.fit(train_X, train_Y)
 prediction2 = model.predict(test_X)
 print('Accuracy for linear-SVM is {}'.format(metrics.accuracy_score(prediction2, test_Y)))
 ```
-![img37](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_5.JPG)
+<img src="/assets/images/typing/titanic/print_5.JPG" width="100%">
 
 ### Logistic Regression
 ```python
@@ -596,7 +597,7 @@ model.fit(train_X, train_Y)
 prediction3 = model.predict(test_X)
 print('Accuracy for Logistic Regression is {}'.format(metrics.accuracy_score(prediction3, test_Y)))
 ```
-![img38](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_6.JPG)
+<img src="/assets/images/typing/titanic/print_6.JPG" width="100%">
 
 ### Decision Tree
 ```python
@@ -606,7 +607,7 @@ model.fit(train_X, train_Y)
 prediction4 = model.predict(test_X)
 print('Accuracy for Decision Tree is {}'.format(metrics.accuracy_score(prediction4, test_Y)))
 ```
-![img39](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_7.JPG)
+<img src="/assets/images/typing/titanic/print_7.JPG" width="100%">
 
 ### K-Nearest Neighbors
 ```python
@@ -616,7 +617,7 @@ model.fit(train_X, train_Y)
 prediction5 = model.predict(test_X)
 print('Accuracy for KNN is {}'.format(metrics.accuracy_score(prediction5, test_Y)))
 ```
-![img40](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_8.JPG)
+<img src="/assets/images/typing/titanic/print_8.JPG" width="100%">
 
 K-Nearest Neighbors 알고리즘은 n_neighbors 속성에 따라 값이 변하기 때문에 다른 값들도 확인해보자.
 
@@ -640,7 +641,7 @@ plt.show()
 
 print('Accuracy for different values of n are: {} with the max value as {}'.format(a.values, a.values.max()))
 ```
-![img41](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_9.JPG)
+<img src="/assets/images/typing/titanic/print_9.JPG" width="100%">
 
 ### Gaussian Naive Bayes
 ```python
@@ -650,7 +651,7 @@ model.fit(train_X, train_Y)
 prediction6 = model.predict(test_X)
 print('Accuracy for NaiveBayes is {}'.format(metrics.accuracy_score(prediction6, test_Y)))
 ```
-![img42](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_10.JPG)
+<img src="/assets/images/typing/titanic/print_10.JPG" width="100%">
 
 ### Random Forest
 ```python
@@ -660,7 +661,7 @@ model.fit(train_X, train_Y)
 prediction7 = model.predict(test_X)
 print('Accuracy for Random Forest is {}'.format(metrics.accuracy_score(prediction7, test_Y)))
 ```
-![img43](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_11.JPG)
+<img src="/assets/images/typing/titanic/print_11.JPG" width="100%">
 
 모델의 정확성이 분류의 척도를 결정하는 유일한 요인은 아니다. 또한, 테스트셋이 변경되면 정확도도 변경된다. 이를 극복하고 일반화된 모델을 얻기 위해 **교차 검증(Cross Validation)**을 사용한다.
 <br>
@@ -693,14 +694,14 @@ for i in models:
 new_models_dataframe = pd.DataFrame({'CV Mean': mean, 'Std': std}, index=classifiers)
 new_models_dataframe
 ```
-![img44](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_32.JPG)
+<img src="/assets/images/typing/titanic/plt_show_32.JPG" width="100%">
 
 ```python
 plt.subplots(figsize=(10, 5))
 box = pd.DataFrame(acc, index=[classifiers])
 box.T.boxplot()
 ```
-![img45](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_33.JPG)
+<img src="/assets/images/typing/titanic/plt_show_33.JPG" width="100%">
 
 ```python
 new_models_dataframe['CV Mean'].plot.barh(width=0.8)
@@ -709,7 +710,7 @@ fig = plt.gcf()
 fig.set_size_inches(8, 5)
 plt.show()
 ```
-![img46](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_34.JPG)
+<img src="/assets/images/typing/titanic/plt_show_34.JPG" width="100%">
 
 데이터셋의 분균형으로 인해 분류 정확도가 잘못될 수 있다. 오차 행렬(Confusion Matrix)은 모델이 어디서 잘못되었는지 혹은 잘못 예측한 클래스가 어디인지를 확인할 수 있다.
 <br>
@@ -749,7 +750,7 @@ ax[2, 0].set_title('Matrix for Naive Bayes')
 plt.subplots_adjust(hspace=0.5, wspace=0.2)
 plt.show()
 ```
-![img47](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_35.JPG)
+<img src="/assets/images/typing/titanic/plt_show_35.JPG" width="100%">
 
 * 왼쪽 대각행렬은 각 클래스에 대한 올바른 예측 수를 나타내고, 오른쪽 대각행렬은 잘못된 예측 수를 나타낸다.
 * rbf-SVM은 사망한 승객을 정확하게 예측했지만, Naive-Bayes는 생존한 승객을 정확하게 예측했다.
@@ -776,7 +777,7 @@ rand_search.fit(X, Y)
 print(rand_search.best_score_)
 print(rand_search.best_estimator_)
 ```
-![img48](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_12.JPG)
+<img src="/assets/images/typing/titanic/print_12.JPG" width="100%">
 
 ### Random Forest
 ```python
@@ -790,7 +791,7 @@ rand_search.fit(X, Y)
 print(rand_search.best_score_)
 print(rand_search.best_estimator_)
 ```
-![img49](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_13.JPG)
+<img src="/assets/images/typing/titanic/print_13.JPG" width="100%">
 
 rbf-SVM의 최고 점수는 C=1.0, gamma=0.1인 82.82%를 획득하였고, Random Forest의 최고 점수는 n_estimators=300으로 81.9%를 획득하였다.
 <br>
@@ -825,7 +826,7 @@ ensemble = VotingClassifier(estimators=[('KNN', KNeighborsClassifier(n_neighbors
 print('Accuracy for ensembled model is {}'.format(ensemble.score(test_X, test_Y)))
 print('Cross Validated score for ensembled model is {}'.format(cross_val_score(ensemble, X, Y, cv=10, scoring='accuracy').mean()))
 ```
-![img50](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_14.JPG)
+<img src="/assets/images/typing/titanic/print_14.JPG" width="100%">
 
 ### Bagging
 * 배깅은 샘플을 여러 번 뽑아 각 모델을 학습시켜 결과를 집계하는 방법이다. 대부분의 알고리즘의 학습에서는 높은 bias로 인한 과소적합과 높은 variance로 인한 과대적합이 나타나는 오류가 생긴다. 
@@ -844,7 +845,7 @@ prediction = model.predict(test_X)
 print('Accuracy for bagged KNN is {}'.format(metrics.accuracy_score(prediction, test_Y)))
 print('Cross Validated score for bagged KNN is {}'.format(cross_val_score(model, X, Y, cv=10, scoring='accuracy').mean()))
 ```
-![img51](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_15.JPG)
+<img src="/assets/images/typing/titanic/print_15.JPG" width="100%">
 
 #### Bagged DecisionTree
 ```python
@@ -855,7 +856,7 @@ prediction = model.predict(test_X)
 print('Accuracy for bagged Decision Tree is {}'.format(metrics.accuracy_score(prediction, test_Y)))
 print('Cross Validated score for bagged Decision Tree is {}'.format(cross_val_score(model, X, Y, cv=10, scoring='accuracy').mean()))
 ```
-![img52](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_16.JPG)
+<img src="/assets/images/typing/titanic/print_16.JPG" width="100%">
 
 ### Boosting
 
@@ -873,7 +874,7 @@ ada = AdaBoostClassifier(n_estimators=200, random_state=0, learning_rate=0.1)
 
 print('Cross Validated score for AdaBoost is {}'.format(cross_val_score(ada, X, Y, cv=10, scoring='accuracy').mean()))
 ```
-![img53](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_17.JPG)
+<img src="/assets/images/typing/titanic/print_17.JPG" width="100%">
 
 #### Stochatic Gradient Boosting
 ```python
@@ -883,7 +884,7 @@ grad = GradientBoostingClassifier(n_estimators=500, random_state=0, learning_rat
 
 print('Cross Validated score for Gradient Boosting is {}'.format(cross_val_score(grad, X, Y, cv=10, scoring='accuracy').mean()))
 ```
-![img54](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_18.JPG)
+<img src="/assets/images/typing/titanic/print_18.JPG" width="100%">
 
 #### XGBoost
 ```python
@@ -893,7 +894,7 @@ xgboost = xg.XGBClassifier(n_estimators=900, learning_rate=0.1)
 
 print('Cross Validated score for XGBoost is {}'.format(cross_val_score(xgboost, X, Y, cv=10, scoring='accuracy').mean()))
 ```
-![img55](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_19.JPG)
+<img src="/assets/images/typing/titanic/print_19.JPG" width="100%">
 
 #### LightGBM
 ```python
@@ -903,7 +904,7 @@ lgb = lgb.LGBMClassifier(n_estimators=900, learning_rate=0.1)
 
 print('Cross Validated score for LightGBM is {}'.format(cross_val_score(lgb, X, Y, cv=10, scoring='accuracy').mean()))
 ```
-![img56](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_20.JPG)
+<img src="/assets/images/typing/titanic/print_20.JPG" width="100%">
 
 가장 정확도가 높은 모델은 AdaBoost이다. 하이퍼파라미터 튜닝을 해보자.
 
@@ -919,7 +920,7 @@ rand_search.fit(X, Y)
 print(rand_search.best_score_)
 print(rand_search.best_estimator_)
 ```
-![img57](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_20.JPG)
+<img src="/assets/images/typing/titanic/print_20.JPG" width="100%">
 
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -930,7 +931,7 @@ gd.fit(X, Y)
 print(gd.best_score_)
 print(gd.best_estimator_)
 ```
-![img58](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_21.JPG)
+<img src="/assets/images/typing/titanic/print_21.JPG" width="100%">
 
 ### 가장 좋은 모델의 오차 행렬
 ```python
@@ -940,7 +941,7 @@ result = cross_val_predict(ada, X, Y, cv=10)
 sns.heatmap(confusion_matrix(Y, result), cmap='Spectral', annot=True, fmt='2.0f')
 plt.show()
 ```
-![img59](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_36.JPG)
+<img src="/assets/images/typing/titanic/plt_show_36.JPG" width="100%">
 <br>
 
 ## 중요한 특징 추출
@@ -969,7 +970,7 @@ ax[1, 1].set_title('Feature Importance in XGBoost')
 
 plt.show()
 ```
-![img60](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_37.JPG)
+<img src="/assets/images/typing/titanic/plt_show_37.JPG" width="100%">
 
 
 * 일반적인 중요한 특성은 Initial, Pclass, Fare_cat, Family_Size로 확인된다.
