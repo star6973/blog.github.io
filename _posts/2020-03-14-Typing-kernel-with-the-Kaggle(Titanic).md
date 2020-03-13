@@ -204,7 +204,7 @@ data.groupby('Initial')['Age'].mean()
 ```
 ![img13](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_9.JPG)
 
-### Age의 결측치 채우기
+Age의 결측치 채우기
 ```python
 data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Mr'), 'Age'] = 33
 data.loc[(data['Age'].isnull()) & (data['Initial'] == 'Mrs'), 'Age'] = 36
@@ -228,6 +228,183 @@ ax[1].set_xticks(x2)
 plt.show()
 ```
 ![img14](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_10.JPG)
+
+* 나이가 5살 미만인 유아들이 많이 생존했음을 확인할 수 있다.
+* 가장 나이가 많은 80세의 승객이 구해졌다.
+* 생존하지 못한 승객의 연령 그룹은 30-40세가 가장 많다.
+
+```python
+sns.factorplot('Pclass', 'Survived', col='Initial', data=data)
+plt.show()
+```
+![img15](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_11.JPG)
+
+영화에서도 나왔듯이, 여성과 아이의 구조가 우선이라는 원칙이 그래프를 통해 입증할 수 있다.
+<br>
+
+### Embarked -> Categorical Value
+```python
+pd.crosstab([data['Embarked'], data['Pclass']], [data['Sex'], data['Survived']], margins=True).style.background_gradient(cmap='Oranges')
+```
+![img16](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_12.JPG)
+
+
+승선 항의 위치에 따른 생존율
+```python
+sns.factorplot('Embarked', 'Survived', data=data)
+fig = plt.gcf()
+fig.set_size_inches(5, 3)
+plt.show()
+```
+![img16](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_13.JPG)
+
+C(Cherbourg) 승선 위치에서의 생존율은 55%로 가장 높으며, S(Southampton) 승선 위치에서의 생존율은 가장 낮다.
+```python
+f, ax = plt.subplots(2, 2, figsize=(10, 5))
+sns.countplot('Embarked', data=data, ax=ax[0, 0])
+ax[0, 0].set_title('No. Of Passengers Boarded')
+sns.countplot('Embarked', hue='Sex', data=data, ax=ax[0, 1])
+ax[0, 1].set_title('Male-Female Split for Embarked')
+sns.countplot('Embarked', hue='Survived', data=data, ax=ax[1, 0])
+ax[1, 0].set_title('Embarked vs Survived')
+sns.countplot('Embarked', hue='Pclass', data=data, ax=ax[1, 1])
+ax[1, 1].set_title('Embarked vs Pclass')
+
+plt.subplots_adjust(wspace=0.2, hspace=0.5)
+plt.show()
+```
+![img17](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_14.JPG)
+
+* S 승선 위치에서 온 대다수는 Pclass 3의 사람들이다.
+* C 승선의 승객은 다른 위치에 비해 생존율이 높다. 아마도 Pclass 1의 비율이 높기 때문일 것이다.
+* S 승선의 승객은 Pclass 3의 승객이 약 81%가 생존하지 못했기에 전체 생존율에서는 낮다.
+* Q 승선의 승객은 95%가 Pclass 3의 사람들이다.
+
+```python
+sns.factorplot('Pclass', 'Survived', hue='Sex', col='Embarked', data=data)
+plt.show()
+```
+![img18](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_15.JPG)
+
+* Pclass와 상관없이 Pclass 1, Pclass 2의 여성의 생존 확률은 거의 1이다.
+* S 승선의 승객들에서 Pclass 3의 승객들은 생존율이 매우 낮음을 볼 수 있다.
+* Q 승선의 승객에서는 전체 남자들의 생존율이 매우 낮음을 볼 수 있다.
+
+Embarked의 결측치 채우기
+
+S 승선의 승객 수가 최대임을 보아, 결측치는 S로 대체하겠다.
+```python
+data['Embarked'].fillna('S', inplace=True)
+data['Embarked'].isnull().any()
+```
+<br>
+
+### SibSp -> Discrete Feature
+
+이 특성은 가족 구성원 수를 나타내는 것이다.  
+* Sibling = 형제, 자매, 의붓형제, 이복 누이  
+* Spouse = 남편, 아내 
+
+```python
+pd.crosstab(data['SibSp'], data['Survived']).style.background_gradient(cmap='Oranges')
+```
+![img19](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_16.JPG)
+
+```python
+fig = plt.figure(figsize=(10, 5))
+sns.barplot('SibSp', 'Survived', data=data)
+fig.suptitle('SibSp vs Survived')
+
+plt.close(2)
+plt.show()
+```
+![img20](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_17.JPG)
+
+```python
+pd.crosstab(data['SibSp'], data['Pclass']).style.background_gradient(cmap='Oranges')
+```
+![img21](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_18.JPG)
+
+* 그래프를 통해 승객이 혼자 탑승한 경우 생존율이 34.5% 정도 되며, 형제 수가 증가할 수록 생존율이 줄어드는 것을 확인할 수 있다. 이는 말이 될 수 있는 것이, 가족이 있다면 나보다는 가족을 먼저 살리기 위해서 노력할 것이다.
+* 놀라운 부분은 5-8인의 가족의 생존율은 0%이다. 이러한 이유는 무엇일까? 크로스탭으로 Pclass의 비율을 보면 형제 자매의 수가 3인을 초과하는 경우 모두 Pclass 3의 승객임을 알 수 있다. 즉, Pclass 3의 모든 대가족이 생존하지 못했다.
+<br>
+
+### Parch
+
+함께 탑승한 부모, 자식의 수
+```python
+pd.crosstab(data['Parch'], data['Pclass']).style.background_gradient(cmap='Oranges')
+```
+![img22](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_19.JPG)
+
+크로스탭으로 Parch를 확인해보면 Pclass 3일 수록 더 많은 수의 인원이 있음을 확인할 수 있다.
+```python
+fig = plt.figure(figsize=(10, 5))
+sns.barplot('Parch', 'Survived', data=data)
+plt.suptitle('Parch vs Survived')
+plt.close(2)
+plt.show()
+```
+![img23](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_20.JPG)
+
+* 여기서도 결과가 비슷하다. 부모와 함께 탑승한 승객의 생존율이 더 높다. 그러나 숫자가 증가할 수록 생존율이 낮아진다.
+* 1-3명의 부모가 있는 경우에 생존의 기회가 높아지지만, 혼자이거나 4명 이상의 부모가 있는 경우 생존율이 낮아진다.
+<br>
+
+### Fare -> Continous Feature
+
+```python
+print('가장 비싼 운임료: {:.2f}'.format(data['Fare'].max()))
+print('가장 싼 운임료: {:.2f}'.format(data['Fare'].min()))
+print('평균 운임료: {:.2f}'.format(data['Fare'].mean()))
+```
+![img24](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_3.JPG)
+
+```python
+f, ax = plt.subplots(1, 3, figsize=(10, 5))
+sns.distplot(data[data['Pclass'] == 1]['Fare'], ax=ax[0])
+ax[0].set_title('Fares in Pclass 1')
+sns.distplot(data[data['Pclass'] == 2]['Fare'], ax=ax[1])
+ax[1].set_title('Fares in Pclass 2')
+sns.distplot(data[data['Pclass'] == 3]['Fare'], ax=ax[2])
+ax[2].set_title('Fares in Pclass 3')
+
+plt.show()
+```
+![img25](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_21.JPG)
+
+Pclass 1의 승객들의 운임료를 보면 큰 분포가 있는 것으로 보인다. 그리고 이 분포는 표준이 감소함에 따라 줄어드는 것을 확인할 수 있다. 이러한 이산형 데이터는 Binning 기법을 사용하여 불연속값으로 변환할 수 있다.
+
+* Binning: 대표적인 변수 가공(Feature Engineering) 기법 중의 하나로 수치형 변수를 범주형 변수로 변형하는 작업.
+* 예를 들어, 직원의 나이에 따라 청소년(<20), 청년(20<30), 청장년(30<55), 장년(55>=) 등으로 구분하는 작업이 binning 기법이다.
+<br>
+
+### 모든 특성에 대한 요약
+* #### Sex: 여성의 생존율이 남성에 비해 높음
+* #### Pclass: 1등석 승객이 더 생존율이 높음. 여성의 경우 1등석의 생존율은 거의 1이며, 2등석 역시 매우 높음.
+* #### Age: 5-10세 미만의 어린이는 생존율이 높음. 15-35세 그룹의 승객의 사망자 수가 높음.
+* #### Embarked: C 승선 위치에서의 생존율이 S 승선 위치에서의 1등석 승객의 생존율 보다 높은 것으로 보임. Q 승선 위치의 대다수 승객은 3등석임.
+* #### Parch + SibSp: 1-2명의 형제 자매, 배우자 또는 1-3명의 부모님이 있는 경우 혼자거나 대가족에 비해 생존율이 높음.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
