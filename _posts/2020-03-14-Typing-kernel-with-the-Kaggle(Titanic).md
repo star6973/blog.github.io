@@ -93,9 +93,12 @@ plt.show()
 * 두 지점 사이 혹은 최소값, 최대값 사이의 값을 사용할 수 있는 경우를 연속형 특성이라 한다.
 * 타이타닉 데이터셋의 연속형 변수: *Age*  
 <br>
+
 ### Sex -> Categorical Feature
 ```python
 data.groupby(['Sex', 'Survived'])['Survived'].count()
 ```
 ![img4](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/data_groupby.JPG)
+
+
 
