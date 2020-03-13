@@ -45,6 +45,8 @@ data.head()
 
 ```
 
+![data.head()]()
+
 PassengerId : 탑승객의 고유 아이디  
 Survival : 생존유무(0: 사망, 1: 생존)  
 Pclass : 선실의 등급  
