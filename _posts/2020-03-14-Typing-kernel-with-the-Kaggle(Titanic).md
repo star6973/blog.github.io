@@ -43,7 +43,7 @@ data = pd.read_csv('train.csv')
 data.head()
 ```
 
-![img1](/assets/images/typing/titanic/train_data_head.JPG width="300" height="300")
+![img1](/assets/images/typing/titanic/train_data_head.JPG){: width="80%" height="80%"}
 
   *PassengerId : 탑승객의 고유 아이디*  
   *Survival : 생존유무(0: 사망, 1: 생존)*  
