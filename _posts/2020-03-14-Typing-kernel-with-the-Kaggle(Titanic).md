@@ -40,10 +40,8 @@ import warnings
 warnings.filterwarnings('ignore')
 %matplotlib inline
 ```
-`data = pd.read_csv('train.csv')`
-`data.head()`
-
-```
+`data = pd.read_csv('train.csv')`  
+`data.head()`  
 
 ![data.head()](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/train_data_head.JPG)
 
