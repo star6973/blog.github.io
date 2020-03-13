@@ -63,7 +63,8 @@ data.head()
 ```python
 data.isnull().sum() # 결측치 개수 확인
 ```
-![img2](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/data_isnull_sum.JPG)
+![img2](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/data_isnull_sum.JPG)  
+<img src="./typing_kernel_img/titanic/data_isnull_sum.JPG" alt="sample_04">
 
 얼마나 많이 살아남았는지 그래프를 통해 확인해보자.
 ```python
