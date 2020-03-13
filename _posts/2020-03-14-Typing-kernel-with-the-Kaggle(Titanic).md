@@ -130,3 +130,71 @@ ax[1].set_title('Pclass: Survived vs Dead')
 plt.show()
 ```
 ![img7](https://github.com/star6973/star6973.github.io/blob/master/assets/images/9.png)
+
+* Pclass 변수는 선실의 등급으로, 비행기 좌석의 클래스와 같은 개념이라고 생각하면 된다. Pclass 3의 승객 수가 가장 많지만 생존 비율을 확인했을 때, 구조 순서가 선실의 등급의 우선 순위가 부여되어 있음을 파악할 수 있다.
+* Pclass 1의 생존율은 약 63%, Pclass 2의 생존율은 약 48%, Pclass 3의 생존율은 약 25%를 보이고 있다.
+* 다른 특성들도 더 파악해보기 전에 Sex와 Pclass를 함께 살펴보자.
+
+```python
+pd.crosstab([data['Sex'], data['Survived']], data['Pclass'], margins=True).style.background_gradient(cmap='Oranges')
+```
+![img8](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_5.JPG)
+
+```python
+sns.factorplot('Pclass', 'Survived', hue='Sex', data=data)
+plt.show()
+```
+![img9](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_6.JPG)
+
+* FactorPlot을 사용하여 범주형 변수를 쉽게 분리할 수 있다.
+* 위의 그래프를 통해 Pclass 1에서 94명의 여성 중 3명만이 사망한 것처럼 Pclass 1 여성의 생존율은 약 95~96%임을 파악할 수 있다.
+* Pclass 1의 남성의 생존율이 낮은 것을 보아, 여성에게 최우선 구조 순위가 부여됨을 확인할 수 있다.
+<br>
+
+### Age -> Continous Feature
+```python
+print('가장 늙은 사람의 나이: {:.2f}'.format(data['Age'].max()), '세')
+print('가장 어린 사람의 나이: {:.2f}'.format(data['Age'].min()), '세')
+print('평균 나이: {:.2f}'.format(data['Age'].mean()), '세')
+```
+![img10](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/print_1.JPG)
+
+```python
+f, ax = plt.subplots(1, 2, figsize=(10, 5))
+sns.violinplot('Pclass', 'Age', hue='Survived', data=data, split=True, ax=ax[0])
+ax[0].set_title('Pclass and Age vs Survived')
+ax[0].set_yticks(range(0, 110, 10))
+sns.violinplot('Sex', 'Age', hue='Survived', data=data, split=True, ax=ax[1])
+ax[1].set_title('Sex and Age vs Survived')
+ax[1].set_yticks(range(0, 110, 10))
+plt.show()
+```
+![img11](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_7.JPG)
+
+그래프를 통해 확인할 수 있는 점(Pclass와 Age의 생존율, Sex와 Age의 생존율)
+* Pclass의 경우, 10세 미만의 어린이의 생존율이 양호해 보인다.  
+* Pclass1에서 20-50세의 승객의 생존율이 높고, 여성의 경우 남성보다 생존율이 더 높다.  
+* 남성의 경우 생존율은 나이가 증가할 수록 감소함을 보인다.  
+<br>
+
+앞에서 살펴본 것처럼, Age의 특성은 177개의 결측치를 가지고 있다. NaN 값을 대체하기 위해선 데이터셋의 평균 나이로 할당할 수 있다.
+
+하지만, 연령층이 높은 사람들이 꽤 많다는 것을 알 수 있다. 때문에 실제 4살의 아이를 평균 연령 29살로 할당하는 것은 바람직하지 않다. 그렇다면 어떻게 승객이 어떤 연령대인지를 확인할 수 있을까?
+
+정답은 바로 이름에서 힌트를 얻을 수 있다. 이름에는 Mr. 또는 Mrs.와 같은 호칭이 붙어있기에 이 평균값을 각 그룹에 할당할 수 있다.
+
+```python
+data['Initial'] = 0
+for i in data:
+    data['Initial'] = data['Name'].str.extract('([A-Za-z]+)\.')
+```
+위의 코드에서 정규표현식을 사용하여 이름의 A-Z 또는 a-z 사이에 있고, .(점)이 있는 문자열을 추출하는 것이다. 따라서 이름에서 호칭을 성공적으로 추출할 수 있다.
+
+```python
+pd.crosstab(data['Initial'], data['Sex']).T.style.background_gradient(cmap='Oranges')
+```
+![img12](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show_8.JPG)
+
+
+
+
