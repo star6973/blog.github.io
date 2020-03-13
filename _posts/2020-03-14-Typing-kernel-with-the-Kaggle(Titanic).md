@@ -108,7 +108,7 @@ sns.countplot('Sex', hue='Survived', data=data, ax=ax[1])
 ax[1].set_title('Sex: Survived vs Dead')
 plt.show()
 ```
-![img](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show2.JPG)
+![img5](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show2.JPG)
 
 * 타이타닉 호의 승선한 남성의 수는 여성의 수보다 훨씬 많음에도 불구하고 여성의 생존율은 75%, 남성의 생존율은 약 18~19%임을 확인할 수 있다.
 
@@ -119,4 +119,4 @@ plt.show()
 ```python
 pd.crosstab(data['Pclass'], data['Survived'], margins=True).style.background_gradient(cmap='Oranges')
 ```
-![img](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show3.JPG)
+![img6](https://github.com/star6973/star6973.github.io/blob/master/_posts/typing_kernel_img/titanic/plt_show3.JPG)
