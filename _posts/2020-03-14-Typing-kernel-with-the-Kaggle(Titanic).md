@@ -308,7 +308,7 @@ data['Embarked'].isnull().any()
 ```python
 pd.crosstab(data['SibSp'], data['Survived']).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_16.JPG" width="50%">
+<img src="/assets/images/typing/titanic/plt_show_16.JPG" width="30%">
 
 ```python
 fig = plt.figure(figsize=(10, 5))
@@ -318,12 +318,12 @@ fig.suptitle('SibSp vs Survived')
 plt.close(2)
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_17.JPG" width="50%">
+<img src="/assets/images/typing/titanic/plt_show_17.JPG" width="100%">
 
 ```python
 pd.crosstab(data['SibSp'], data['Pclass']).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_18.JPG" width="50%">
+<img src="/assets/images/typing/titanic/plt_show_18.JPG" width="30%">
 
 * 그래프를 통해 승객이 혼자 탑승한 경우 생존율이 34.5% 정도 되며, 형제 수가 증가할 수록 생존율이 줄어드는 것을 확인할 수 있다. 이는 말이 될 수 있는 것이, 가족이 있다면 나보다는 가족을 먼저 살리기 위해서 노력할 것이다.
 * 놀라운 부분은 5-8인의 가족의 생존율은 0%이다. 이러한 이유는 무엇일까? 크로스탭으로 Pclass의 비율을 보면 형제 자매의 수가 3인을 초과하는 경우 모두 Pclass 3의 승객임을 알 수 있다. 즉, Pclass 3의 모든 대가족이 생존하지 못했다.
@@ -335,7 +335,7 @@ pd.crosstab(data['SibSp'], data['Pclass']).style.background_gradient(cmap='Orang
 ```python
 pd.crosstab(data['Parch'], data['Pclass']).style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_19.JPG" width="50%">
+<img src="/assets/images/typing/titanic/plt_show_19.JPG" width="30%">
 
 크로스탭으로 Parch를 확인해보면 Pclass 3일 수록 더 많은 수의 인원이 있음을 확인할 수 있다.
 ```python
@@ -345,7 +345,7 @@ plt.suptitle('Parch vs Survived')
 plt.close(2)
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_20.JPG" width="50%">
+<img src="/assets/images/typing/titanic/plt_show_20.JPG" width="100%">
 
 * 여기서도 결과가 비슷하다. 부모와 함께 탑승한 승객의 생존율이 더 높다. 그러나 숫자가 증가할 수록 생존율이 낮아진다.
 * 1-3명의 부모가 있는 경우에 생존의 기회가 높아지지만, 혼자이거나 4명 이상의 부모가 있는 경우 생존율이 낮아진다.
@@ -448,7 +448,7 @@ sns.factorplot('Family_Size', 'Survived', data=data)
 f.suptitle('Family_Size vs Survived')
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_25.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_25.JPG" width="50%">
 
 ```python
 g = plt.figure(figsize=(10, 5))
@@ -456,7 +456,7 @@ sns.factorplot('Alone', 'Survived', data=data)
 g.suptitle('Alone vs Survived')
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_26.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_26.JPG" width="50%">
 
 Family_Size가 0인 경우는 승객이 혼자임을 의미한다. 위의 그래프를 통해서 만약 승객이 혼자이거나 가족의 수가 0이라면, 생존율이 매우 낮음을 확인할 수 있다. 마찬가지로 가족의 수가 4보다 크면, 생존율도 낮아진다. 이러한 결과를 통해 Faimily_Size는 매우 중요한 특성이라고 할 수 있다.
 
@@ -478,7 +478,7 @@ qcut는 bins의 값에 따라 분할하거나 정렬한다. 그래서 만약 5 b
 data['Fare_Range'] = pd.qcut(data['Fare'], 4)
 data.groupby(['Fare_Range'])['Survived'].mean().to_frame().style.background_gradient(cmap='Oranges')
 ```
-<img src="/assets/images/typing/titanic/plt_show_28.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_28.JPG" width="30%">
 
 앞서 살펴본 결과들을 토대로, 운임료가 증가할 수록 생존율이 높아짐을 확인할 수 있다. 하지만 이제 Fare_Range의 값을 그대로 사용할 수 없기에, Age_Band와 같이 범주형 변수로 변환을 해야한다.
 
@@ -492,7 +492,7 @@ data.loc[(data['Fare']>31) & (data['Fare']<=513), 'Fare_cat'] = 3
 sns.factorplot('Fare_cat', 'Survived', data=data, hue='Sex')
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_29.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_29.JPG" width="50%">
 
 이로써 확실히 운임료가 증가할 수록, 생존율이 높아짐이 자명하다. 이는 Sex와 함께 모델링을 하는데 중요한 특성이 될 것이다.
 <br>
@@ -694,7 +694,7 @@ for i in models:
 new_models_dataframe = pd.DataFrame({'CV Mean': mean, 'Std': std}, index=classifiers)
 new_models_dataframe
 ```
-<img src="/assets/images/typing/titanic/plt_show_32.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_32.JPG" width="50%">
 
 ```python
 plt.subplots(figsize=(10, 5))
@@ -941,7 +941,7 @@ result = cross_val_predict(ada, X, Y, cv=10)
 sns.heatmap(confusion_matrix(Y, result), cmap='Spectral', annot=True, fmt='2.0f')
 plt.show()
 ```
-<img src="/assets/images/typing/titanic/plt_show_36.JPG" width="100%">
+<img src="/assets/images/typing/titanic/plt_show_36.JPG" width="50%">
 <br>
 
 ## 중요한 특징 추출
