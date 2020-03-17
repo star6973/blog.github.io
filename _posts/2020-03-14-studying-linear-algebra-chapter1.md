@@ -2,6 +2,7 @@
 title: "Studying linear algebra [Chapter1]"
 date: 2020-03-14 18:00:30
 categories: Studying linear algebra
+use_math: true
 tag: LinearAlgebra
 ---
 
@@ -26,7 +27,3 @@ tag: LinearAlgebra
 
 $\int_{\Omega(t)}{f(x,t)dV}$
 
-
-<script type="text/javascript" 
-src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
-</script>
