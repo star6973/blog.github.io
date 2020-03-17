@@ -23,6 +23,5 @@ tag: LinearAlgebra
 
 예시) 3차원 공간 R2에 대한 기저를 
 
-$$
-\sqrt{3x-1}+(1+x)^2
-$$
+
+$\int_{\Omega(t)}{f(x,t)dV}$
