@@ -2,6 +2,9 @@
 markdown: kramdown
 markdown_ext: markdown,mkdown,mkdn,mkd,md
 rouge: pygments
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
 
 # Needed for backward compatibility
 gems: [jekyll-paginate]
