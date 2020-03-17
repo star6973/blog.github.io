@@ -24,4 +24,4 @@ use_math: true
 
 예시) 3차원 공간 $$R^3$$에 대한 기저는 무엇일까? 즉, 독립이면서 3차원 공간을 span하는 벡터는 무엇일까?
 
-$$v^(->) = 3e^(->) + 2e^(->)$$
+$$\overrightarrow{v} = 3\overrightarrow{e} + 2\overrightarrow{e}$$
