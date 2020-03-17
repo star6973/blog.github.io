@@ -2,6 +2,7 @@
 markdown: kramdown
 markdown_ext: markdown,mkdown,mkdn,mkd,md
 rouge: pygments
+highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
