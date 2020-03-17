@@ -22,10 +22,4 @@ use_math: true
 1) 기저 벡터들은 서로 독립이다.
 2) 기저 벡터들은 공간을 span 한다.
 
-예시) 3차원 공간 R2에 대한 기저를 
-
-$$
-\lim_{x\to 0}{\frac{e^x-1}{2x}}
-\overset{\left[\frac{0}{0}\right]}{\underset{\mathrm{H}}{=}}
-\lim_{x\to 0}{\frac{e^x}{2}}={\frac{1}{2}}
-$$
+예시) 3차원 공간 $$R^3$$에 대한 기저는 무엇일까? 즉, 독립이면서 3차원 공간을 span하는 벡터는 무엇일까?
