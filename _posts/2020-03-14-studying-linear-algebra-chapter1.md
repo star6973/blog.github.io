@@ -3,6 +3,7 @@ title: "Studying linear algebra [Chapter1]"
 date: 2020-03-14 18:00:30
 categories: Studying linear algebra
 use_math: true
+comments: true
 tag: LinearAlgebra
 ---
 
