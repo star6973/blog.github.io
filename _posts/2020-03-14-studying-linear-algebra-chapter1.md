@@ -10,8 +10,8 @@ use_math: true
 ## 챕터1: 벡터, 행렬, 행렬식
 ### 1.1. 벡터와 공간
 + 벡터: 수치의 조합을 정리하여 나타내는 기법이다. 
-[img1]()
-[img2]()
+<img src="/assets/images/studying/chapter1/1.JPG" width="100%">
+<img src="/assets/images/studying/chapter1/2.JPG" width="100%">
 수를 나열한 것으로, 성분수를 명시하고 싶을 때는 각각 2차원 벡터, 3차원 벡터로 불린다.
 
 + 공간: 2차원 벡터는 x, y 축으로 이루어지는 좌표에 점으로 찍을 수 있으며, 3차원 벡터는 x, y, z축으로 이루어진 좌표에 점을 찍을 수 있다. 이런 식으로 위치에 대응시키는 것을 강조할 때는 '위치 벡터'라고 부르기도 한다.
@@ -23,7 +23,7 @@ use_math: true
   span이라는 것은 이 벡터들로 형성할 수 있는 공간을 의미한다. 즉, 선형 조합을 통해 만들어지는 공간이다.
 
 + 기저(bias): 특정 벡터 $$\overrightarrow{v}를 지정하는데, '여기'라고 손가락으로 가리키는 것 보다 말로도 위치를 전달할 수 있도록 '번지(좌표)'를 매겨주자. 아래의 그림과 같은 기준이 되는 벡터 $$\overrightarrow{e_1}, $$\overrightarrow{e_2}를 정한다. 
-[img3]()
+<img src="/assets/images/studying/chapter1/3.JPG" width="100%">
 
 기준을 정하면 '$$\overrightarrow{e_1}을 3칸, $$\overrightarrow{e_2}를 2칸'처럼 말하여 벡터 $$\overrightarrow{v}의 위치를 지정할 수 있다.
 
