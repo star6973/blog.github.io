@@ -71,14 +71,14 @@ use_math: true
 &nbsp;&nbsp;&nbsp;&nbsp;위의 표현을 식으로 나타내면 $$AB \neq BA$$로, 행렬의 곱은 교환법칙이 성립하지 않는다.<br><br>
 
 #### 1.2.3. 행렬 연산의 성질<br>
-+ $$(cA)x = c(Ax) = A(cx)$$  
-+ $$(A + B)x = Ax + Bx$$  
-+ $$A + B = B + A$$  
-+ $$(A + B) + C = A + (B + C)$$  
-+ $$(c + c')A = cA + c'A$$  
-+ $$(cc')A = c(c'A)$$  
-+ $$A(B + C) = AB + AC$$  
-+ $$(A + B)C = AC + BC$$  
++ $$(cA)x = c(Ax) = A(cx)$$<br>
++ $$(A + B)x = Ax + Bx$$<br>
++ $$A + B = B + A$$<br>
++ $$(A + B) + C = A + (B + C)$$<br>
++ $$(c + c')A = cA + c'A$$<br>
++ $$(cc')A = c(c'A)$$<br>
++ $$A(B + C) = AB + AC$$<br>
++ $$(A + B)C = AC + BC$$<br>
 + $$(cA)B = c(AB) = A(cB)$$<br><br>
 
 #### 1.2.4. 행렬의 거듭제곱은 사상의 반복이다<br>
