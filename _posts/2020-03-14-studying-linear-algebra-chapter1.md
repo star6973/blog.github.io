@@ -64,9 +64,9 @@ use_math: true
 
 &nbsp;&nbsp;&nbsp;&nbsp;두 행렬 $$A, B$$의 곱을 살펴보자. 행렬 $${\displaystyle A={\begin{bmatrix}a\\b\end{bmatrix}}}$$와 $${\displaystyle B={\begin{bmatrix}c&d\end{bmatrix}}}$$가 있을 때, 이 둘의 곱셈은 다음과 같다.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;$${\displaystyle A\times B={\begin{bmatrix}a\\b\end{bmatrix}}\times {\begin{bmatrix}c&d\end{bmatrix}}={\begin{bmatrix}ac&ad\\bc&bd\end{bmatrix}}}$$<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$${\displaystyle A\times B={\begin{bmatrix}a\\b\end{bmatrix}}\times {\begin{bmatrix}c&d\end{bmatrix}}={\begin{bmatrix}ac&ad\\bc&bd\end{bmatrix}}}$$<br><br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;$${\displaystyle A\times B={\begin{bmatrix}a&b\\c&d\end{bmatrix}}\times {\begin{bmatrix}e&f\\g&h\end{bmatrix}}={\begin{bmatrix}ae+bg&af+bh\\ce+dg&cf+dh\end{bmatrix}}}$$<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$${\displaystyle A\times B={\begin{bmatrix}a&b\\c&d\end{bmatrix}}\times {\begin{bmatrix}e&f\\g&h\end{bmatrix}}={\begin{bmatrix}ae+bg&af+bh\\ce+dg&cf+dh\end{bmatrix}}}$$<br><br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;위의 표현을 식으로 나타내면 $$AB \neq BA$$로, 행렬의 곱은 교환법칙이 성립하지 않는다.  
 
