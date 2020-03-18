@@ -10,8 +10,7 @@ use_math: true
 ## 챕터1: 벡터, 행렬, 행렬식
 ### 1.1. 벡터와 공간
 + 벡터: 수치의 조합을 정리하여 나타내는 기법이다. 
-<img src="/assets/images/studying/chapter1/1.JPG">
-<img src="/assets/images/studying/chapter1/2.JPG">
+<img src="/assets/images/studying/chapter1/1.JPG"> <img src="/assets/images/studying/chapter1/2.JPG">
 수를 나열한 것으로, 성분수를 명시하고 싶을 때는 각각 2차원 벡터, 3차원 벡터로 불린다.
 
 + 공간: 2차원 벡터는 x, y 축으로 이루어지는 좌표에 점으로 찍을 수 있으며, 3차원 벡터는 x, y, z축으로 이루어진 좌표에 점을 찍을 수 있다. 이런 식으로 위치에 대응시키는 것을 강조할 때는 '위치 벡터'라고 부르기도 한다.
