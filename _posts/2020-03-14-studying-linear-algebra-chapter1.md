@@ -45,10 +45,10 @@ use_math: true
 
 ### 1.2. 행렬과 사상
 #### 1.2.1. 행렬은 사상이다<br>
-&nbsp;&nbsp;&nbsp;&nbsp;n차원 벡터 x에 $$m x n$$ 행렬 A를 곱하면 m차원 벡터 $$y = Ax$$가 얻어진다. 즉, 행렬 A를 지정하면 벡터를 다른 벡터에 옮기는 사상이 결정된다. 행렬을 단순히 "수가 나열되어 있다"로 보지말고, "사상되어 있다"로 보자.<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;$$n차원 벡터 x에 m \times n 행렬 A를 곱하면 m차원 벡터 y = Ax가 얻어진다. 즉, 행렬 A$$를 지정하면 벡터를 다른 벡터에 옮기는 사상이 결정된다. 행렬을 단순히 "수가 나열되어 있다"로 보지말고, "사상되어 있다"로 보자.<br><br>
 
 #### 1.2.2. 행렬의 곱은 사상의 합이다<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A, B를 각각 $$m x n, n x p$$ 행렬이라고 하자. A와 B의 곱 AB는 다음과 같은 항을 갖는 $$m x p$$ 행렬로 정의된다.
+&nbsp;&nbsp;&nbsp;&nbsp;A, B를 각각 $$m \times n, n \times p$$ 행렬이라고 하자. A와 B의 곱 AB는 다음과 같은 항을 갖는 $$m \times p$$ 행렬로 정의된다.
 
 $${\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}{\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}$$
 
