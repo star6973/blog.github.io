@@ -50,13 +50,13 @@ use_math: true
 #### 1.2.2. 행렬의 곱은 사상의 합이다<br>
 &nbsp;&nbsp;&nbsp;&nbsp;$$A, B$$를 각각 $$m \times n, n \times p$$ 행렬이라고 하자. $$A$$와 $$B$$의 곱 $$AB$$는 다음과 같은 항을 갖는 $$m \times p$$ 행렬로 정의된다.
 
-$${\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}{\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}$$<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;$${\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}{\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}$$<br><br>
 
-즉,<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;즉,<br><br>
 
-$${\displaystyle \mathbf {AB} ={\begin{pmatrix}\sum _{k=1}^{n}A_{1k}B_{k1}&\sum _{k=1}^{n}A_{1k}B_{k2}&\cdots &\sum _{k=1}^{n}A_{1k}B_{kp}\\\sum _{k=1}^{n}A_{2k}B_{k1}&\sum _{k=1}^{n}A_{2k}B_{k2}&\cdots &\sum _{k=1}^{n}A_{2k}B_{kp}\\\vdots &\vdots &&\vdots \\\sum _{k=1}^{n}A_{mk}B_{k1}&\sum _{k=1}^{n}A_{mk}B_{k2}&\cdots &\sum _{k=1}^{n}A_{mk}B_{kp}\end{pmatrix}}}$$<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;$${\displaystyle \mathbf {AB} ={\begin{pmatrix}\sum _{k=1}^{n}A_{1k}B_{k1}&\sum _{k=1}^{n}A_{1k}B_{k2}&\cdots &\sum _{k=1}^{n}A_{1k}B_{kp}\\\sum _{k=1}^{n}A_{2k}B_{k1}&\sum _{k=1}^{n}A_{2k}B_{k2}&\cdots &\sum _{k=1}^{n}A_{2k}B_{kp}\\\vdots &\vdots &&\vdots \\\sum _{k=1}^{n}A_{mk}B_{k1}&\sum _{k=1}^{n}A_{mk}B_{k2}&\cdots &\sum _{k=1}^{n}A_{mk}B_{kp}\end{pmatrix}}}$$<br><br>
 
-좌측 행렬의 열 수와 우측 행렬의 행 수가 서로 같아야, 두 행렬의 곱이 정의된다.[위키백과]<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;좌측 행렬의 열 수와 우측 행렬의 행 수가 서로 같아야, 두 행렬의 곱이 정의된다.[위키백과]<br><br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;세 행렬 $$A, B, C$$의 곱을 살펴보자.
 + '$$A$$하고, $$B$$한다'를 하고 나서 $$C$$를 한다.
