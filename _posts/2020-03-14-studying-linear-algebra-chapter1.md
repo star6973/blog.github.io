@@ -44,3 +44,28 @@ use_math: true
 &nbsp;&nbsp;&nbsp;&nbsp;n차원이면 기저 벡터는 n개이다. 즉, 차원은 기저 벡터의 개수라 할 수 있다.<br><br>
 
 ### 1.2. 행렬과 사상
+#### 1.2.1. 행렬은 사상이다<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n차원 벡터 x에 $$m x n$$ 행렬 A를 곱하면 m차원 벡터 $$y = Ax$$가 얻어진다. 즉, 행렬 A를 지정하면 벡터를 다른 벡터에 옮기는 사상이 결정된다. 행렬을 단순히 "수가 나열되어 있다"로 보지말고, "사상되어 있다"로 보자.<br><br>
+
+#### 1.2.2. 행렬의 곱은 사상의 합이다<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A, B를 각각 $$m x n, n x p$$ 행렬이라고 하자. A와 B의 곱 AB는 다음과 같은 항을 갖는 $$m x p$$ 행렬로 정의된다.
+
+$${\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}{\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}$$
+
+&nbsp;&nbsp;&nbsp;&nbsp;세 행렬 A, B, C의 곱을 살펴보자.
++ 'A하고, B한다'를 하고 나서 C를 한다.
++ A를 하고 나서 'B하고, C한다'를 한다.
+&nbsp;&nbsp;&nbsp;&nbsp;위의 표현을 식으로 나타내면 다음과 같다.
++ C(BA)
++ (CB)A
+
+
+
+
+
+
+
+
+
+
+
