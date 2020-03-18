@@ -71,18 +71,18 @@ use_math: true
 &nbsp;&nbsp;&nbsp;&nbsp;위의 표현을 식으로 나타내면 $$AB \neq BA$$로, 행렬의 곱은 교환법칙이 성립하지 않는다.<br><br>
 
 #### 1.2.3. 행렬 연산의 성질<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(cA)x = c(Ax) = A(cx)$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(A + B)x = Ax + Bx$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$A + B = B + A$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(A + B) + C = A + (B + C)$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(c + c')A = cA + c'A$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(cc')A = c(c'A)$$  
++ $$(cA)x = c(Ax) = A(cx)$$  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ $$(A + B)x = Ax + Bx$$  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+$$A + B = B + A$$  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+$$(A + B) + C = A + (B + C)$$  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $$(c + c')A = cA + c'A$$  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-$$(cc')A = c(c'A)$$  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$A(B + C) = AB + AC$$  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(A + B)C = AC + BC$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(cA)B = c(AB) = A(cB)$$  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(cA)B = c(AB) = A(cB)$$<br><br>
 
 #### 1.2.4. 행렬의 거듭제곱은 사상의 반복이다<br>
-&nbsp;&nbsp;&nbsp;&nbsp;정방행렬 $$A$$에 대해 $$AA = A^2, AAA = A^3$$은 사상으로서 '$$A$$하고 한층 더 $$A$$한다', '$$A$$하고 $$A$$하고 $$A$$한다'이다. 즉, $$A^n$$은 '$$A$$를 $$n$$번 반복 적용한다'이다.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;정방행렬 $$A$$에 대해 $$AA = A^2, AAA = A^3$$은 사상으로서 '$$A$$하고 한층 더 $$A$$한다', '$$A$$하고 $$A$$하고 $$A$$한다'이다. 즉, $$A^n$$은 '$$A$$를 $$n$$번 반복 적용한다'이다.<br><br>
 
 #### 1.2.5. 영행렬, 단위행렬, 대각행렬<br>
 + 영행렬: 모든 성분이 $$0$$인 행렬로, 모든 것을 원점으로 이동시키는 사상이다.
