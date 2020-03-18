@@ -48,7 +48,7 @@ use_math: true
 &nbsp;&nbsp;&nbsp;&nbsp;$$n$$차원 벡터 $$x$$에 $$m \times n$$ 행렬 $$A$$를 곱하면 $$m$$차원 벡터 $$y = Ax$$가 얻어진다. 즉, 행렬 $$A$$를 지정하면 벡터를 다른 벡터에 옮기는 사상이 결정된다. 행렬을 단순히 "수가 나열되어 있다"로 보지말고, "사상되어 있다"로 보자.<br><br>
 
 #### 1.2.2. 행렬의 곱은 사상의 합이다<br>
-&nbsp;&nbsp;&nbsp;&nbsp;$$A, B$$를 각각 $$m \times n, n \times p$$ 행렬이라고 하자. $$A$$와 $$B$$의 곱 $$AB$$는 다음과 같은 항을 갖는 $$m \times p$$ 행렬로 정의된다.
+&nbsp;&nbsp;&nbsp;&nbsp;$$A, B$$를 각각 $$m \times n, n \times p$$ 행렬이라고 하자. $$A$$와 $$B$$의 곱 $$AB$$는 다음과 같은 항을 갖는 $$m \times p$$ 행렬로 정의된다.<br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;$${\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}{\displaystyle (\mathbf {AB} )_{ij}=A_{i1}B_{1j}+A_{i2}B_{2j}+\cdots +A_{in}B_{nj}=\sum _{k=1}^{n}A_{ik}B_{kj}}$$<br><br>
 
@@ -56,14 +56,20 @@ use_math: true
 
 &nbsp;&nbsp;&nbsp;&nbsp;좌측 행렬의 열 수와 우측 행렬의 행 수가 서로 같아야, 두 행렬의 곱이 정의된다.[위키백과]<br><br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;행렬의 곱은 교환법칙이 성립하지 않기 때문에, 순서가 중요하다.  
 &nbsp;&nbsp;&nbsp;&nbsp;세 행렬 $$A, B, C$$의 곱을 살펴보자.  
 + '$$A$$하고, $$B$$한다'를 하고 나서 $$C$$를 한다.  
 + $$A$$를 하고 나서 '$$B$$하고, $$C$$한다'를 한다.  
 
-&nbsp;&nbsp;&nbsp;&nbsp;위의 표현을 식으로 나타내면 다음과 같다.  
-&nbsp;&nbsp;&nbsp;&nbsp;$$C(BA) = (CB)A$$
+&nbsp;&nbsp;&nbsp;&nbsp;위의 표현을 식으로 나타내면 $$C(BA) = (CB)A$$와 같다. 이렇듯, 행렬의 곱은 결합법칙이 성립한다.  
 
+&nbsp;&nbsp;&nbsp;&nbsp;두 행렬 $$A, B$$의 곱을 살펴보자.
+&nbsp;&nbsp;&nbsp;&nbsp;$$행렬 $${\displaystyle A={\begin{bmatrix}a\\b\end{bmatrix}}}{\displaystyle A={\begin{bmatrix}a\\b\end{bmatrix}}}$$와 $${\displaystyle B={\begin{bmatrix}c&d\end{bmatrix}}}{\displaystyle B={\begin{bmatrix}c&d\end{bmatrix}}}$$가 있을 때, 이 둘의 곱셈은 다음과 같다.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;$$$${\displaystyle A\times B={\begin{bmatrix}a\\b\end{bmatrix}}\times {\begin{bmatrix}c&d\end{bmatrix}}={\begin{bmatrix}ac&ad\\bc&bd\end{bmatrix}}}$$<br><br>
+
+$${\displaystyle A\times B={\begin{bmatrix}a&b\\c&d\end{bmatrix}}\times {\begin{bmatrix}e&f\\g&h\end{bmatrix}}={\begin{bmatrix}ae+bg&af+bh\\ce+dg&cf+dh\end{bmatrix}}}$$<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;위의 표현을 식으로 나타내면 $$AB \neq BA$$로, 행렬의 곱은 교환법칙이 성립하지 다.  
 
 
 
