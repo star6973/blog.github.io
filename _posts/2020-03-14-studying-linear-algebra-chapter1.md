@@ -72,14 +72,14 @@ use_math: true
 
 #### 1.2.3. 행렬 연산의 성질<br>
 + $$(cA)x = c(Ax) = A(cx)$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ $$(A + B)x = Ax + Bx$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+$$A + B = B + A$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+$$(A + B) + C = A + (B + C)$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- $$(c + c')A = cA + c'A$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-$$(cc')A = c(c'A)$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$A(B + C) = AB + AC$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(A + B)C = AC + BC$$  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$$(cA)B = c(AB) = A(cB)$$<br><br>
++ $$(A + B)x = Ax + Bx$$  
++ $$A + B = B + A$$  
++ $$(A + B) + C = A + (B + C)$$  
++ $$(c + c')A = cA + c'A$$  
++ $$(cc')A = c(c'A)$$  
++ $$A(B + C) = AB + AC$$  
++ $$(A + B)C = AC + BC$$  
++ $$(cA)B = c(AB) = A(cB)$$<br><br>
 
 #### 1.2.4. 행렬의 거듭제곱은 사상의 반복이다<br>
 &nbsp;&nbsp;&nbsp;&nbsp;정방행렬 $$A$$에 대해 $$AA = A^2, AAA = A^3$$은 사상으로서 '$$A$$하고 한층 더 $$A$$한다', '$$A$$하고 $$A$$하고 $$A$$한다'이다. 즉, $$A^n$$은 '$$A$$를 $$n$$번 반복 적용한다'이다.<br><br>
