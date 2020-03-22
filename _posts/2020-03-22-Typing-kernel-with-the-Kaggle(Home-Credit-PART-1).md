@@ -51,14 +51,14 @@ import seaborn as sns
 
 훈련용 파일 1개, 테스트용 파일 1개, 예제 제출 파일 1개, 대출금에 대한 추가 정보가 포함된 기타 파일 6개로 총 9개 파일이 있다.
 
-```python
+```{.python .cb.run}
 app_train = pd.read_csv('./input/home-credit-default-risk/application_train.csv')
 print('Training data shape: {}'.format(app_train.shape))
 app_train.head()
 ```
 <img src="/assets/images/typing/home-credit1/1.JPG" width="100%"><br>
 
-```python
+```{.python .cb.run}
 app_test = pd.read_csv('./input/home-credit-default-risk/application_test.csv')
 print('Testing data shape: {}'.format(app_test.shape))
 app_test.head()
