@@ -38,7 +38,7 @@ tags: Kernel
 <br>
 
 # Feature Engineering 메뉴얼 파트 1 (Manual Feature Engineering Part One)
-```python
+```{.python .cb.run}
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
