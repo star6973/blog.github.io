@@ -38,7 +38,7 @@ tags: Kernel
 
 
 ## Feature Engineering 메뉴얼 파트 1 (Manual Feature Engineering Part One)
-
+```python
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
@@ -47,16 +47,16 @@ import warnings
 warnings.filterwarnings('ignore')
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+```
 
 훈련용 파일 1개, 테스트용 파일 1개, 예제 제출 파일 1개, 대출금에 대한 추가 정보가 포함된 기타 파일 6개로 총 9개 파일이 있다.
 
-
+```python
 app_train = pd.read_csv('./input/home-credit-default-risk/application_train.csv')
 print('Training data shape: {}'.format(app_train.shape))
 app_train.head()
+```
 
-#%%
 
 app_test = pd.read_csv('./input/home-credit-default-risk/application_test.csv')
 print('Testing data shape: {}'.format(app_test.shape))
