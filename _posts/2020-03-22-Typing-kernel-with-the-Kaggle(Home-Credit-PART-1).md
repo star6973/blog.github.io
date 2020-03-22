@@ -8,7 +8,7 @@ tags: Kernel
 
 # 캐글 커널 필사하기
 [Introduction: Home Credit Default Risk Competition - Will Koehrsen](https://www.kaggle.com/willkoehrsen/start-here-a-gentle-introduction)
-
+<br>
 ## Introduction: Home Credit Default Risk Competition
 
 보통 신용기록이 없는 사람들은 안정적인 금융권에서 대출을 받는데 어려움이 많아 고리 대출을 이용하게 된다. home credit에서는 다양한 데이터와 통계 및 머신러닝 기법으로 고객의 상환 능력을 예측하여 이러한 사람들에게도 긍정적인 대출 경험을 제공하려고 한다.
@@ -25,7 +25,7 @@ tags: Kernel
 + installments_payment: home credit의 이전 대출금 지불 기록이다. 지불할 때마다 한 행씩, 결제할 때마다 한 행씩 있다.
 
 ### 신용기록이 없는 사람들에게도 대출이 가능하도록 '이 사람이 상환능력이 되는가, 되지 않는가'의 예측 모델을 생성하는 것이 목표이다.
-
+<br><br>
 ## Home Credit 데이터를 이용한 데이터 분석 노트북 구성
 #### 1. Feature Engineering 메뉴얼 파트 1 (Manual Feature Engineering Part One)
 #### 2. Feature Engineering 메뉴얼 파트 2 (Manual Feature Engineering Part Two)
@@ -35,7 +35,7 @@ tags: Kernel
 #### 6. 모델 튜닝: 그리드 탐색과 랜덤 탐색 (Intro to Model Tuning: Grid and Random Search)
 #### 7. 자동화된 모델 튜닝 방법 (Automated Model Tuning)
 #### 8. 모델 튜닝 결과 (Model Tuning Results)
-
+<br>
 
 ## Feature Engineering 메뉴얼 파트 1 (Manual Feature Engineering Part One)
 ```python
@@ -535,8 +535,7 @@ submit.to_csv('log_reg_baseline.csv', index=False)
 이 예측값은 대출금이 상환되지 않을 확률을 0에서 1사이로 나타낸다. 만약 우리가 이러한 예측을 신청자들을 분류하기 위해 사용한다면, 우리는 대출이 위험하다는 것을 결정하기 위한 확률의 임계값을 설정할 수 있을 것이다.
 
 제출하였을 때, 로지스틱 회귀를 사용한 모델의 점수는 0.671이다.
-
-#%% md
+<br>
 
 ### Improved Model: Random Forest
 
