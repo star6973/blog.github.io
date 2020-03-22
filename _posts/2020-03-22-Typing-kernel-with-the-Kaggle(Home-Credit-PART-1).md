@@ -56,7 +56,7 @@ app_train = pd.read_csv('./input/home-credit-default-risk/application_train.csv'
 print('Training data shape: {}'.format(app_train.shape))
 app_train.head()
 ```
-<img src="/assets/images/typing/home-credit1/1.JPG" width="100%"><br>
+
 
 ```{.python .cb.run}
 app_test = pd.read_csv('./input/home-credit-default-risk/application_test.csv')
