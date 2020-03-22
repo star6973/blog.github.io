@@ -57,29 +57,26 @@ print('Training data shape: {}'.format(app_train.shape))
 app_train.head()
 ```
 
-
+```python
 app_test = pd.read_csv('./input/home-credit-default-risk/application_test.csv')
 print('Testing data shape: {}'.format(app_test.shape))
 app_test.head()
-
-#%% md
+```
+<br><br>
 
 ## EDA
 타겟 데이터는 우리가 예측하는 것으로, 0이면 대출금을 갚을 능력이 있다는 것이고, 1이면 대출금을 갚기가 어려운 것을 나타낸다. 우리는 각 카테고리에 속하는 대출금들의 수를 조사할 수 있다.
 
-#%%
-
+```python
 app_train['TARGET'].value_counts()
+```
 
-#%%
-
+```python
 app_train['TARGET'].astype(int).plot.hist()
-
-#%% md
+```
 
 위의 그래프를 통해 제때 갚지 못한 대출금보다 제때 갚은 대출금이 훨씬 많은 불균형 문제를 살펴볼 수 있다. 좀 더 정교한 머신러닝 모델을 만들게 된다면, 이러한 데이터의 불균형을 반영할 수 있다.
-
-#%% md
+<br><br>
 
 ### 결측치 조사
 
