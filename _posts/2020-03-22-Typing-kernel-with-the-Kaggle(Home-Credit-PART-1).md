@@ -237,7 +237,7 @@ app_test['DAYS_EMPLOYED'].replace({365243: np.nan}, inplace=True)
 
 print('There are {} anomalies in the test data out of {} entries'.format(app_test['DAYS_EMPLOYED_ANOM'].sum(), len(app_test)))
 ```
-<img src="/assets/images/typing/home-credit1/17.JPG" width="50%"><br>
+<img src="/assets/images/typing/home-credit1/17.JPG" width="70%"><br>
 
 ### 상관관계
 상관계수는 특성의 '관련성'을 나타내는 가장 좋은 방법은 아니지만, 데이터 내에서 가능한 관계에 대한 아이디어를 제공해준다.
@@ -417,7 +417,7 @@ poly_features_test = poly_transformer.transform(poly_features_test)
 
 print('Polynomial Features shape: {}'.format(poly_features.shape))
 ```
-<img src="/assets/images/typing/home-credit1/29.JPG" width="50%"><br>
+<img src="/assets/images/typing/home-credit1/29.JPG" width="60%"><br>
 
 ```python
 poly_transformer.get_feature_names(input_features=['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 'DAYS_BIRTH'])[:15]
@@ -455,7 +455,7 @@ app_train_poly, app_test_poly = app_train_poly.align(app_test_poly, join='inner'
 print('Training data with polynomial features shape: {}'.format(app_train_poly.shape))
 print('Testing data with polynomial features shape: {}'.format(app_test_poly.shape))
 ```
-<img src="/assets/images/typing/home-credit1/32.JPG" width="50%"><br>
+<img src="/assets/images/typing/home-credit1/32.JPG" width="60%"><br>
 
 ### Domain Knowledge Features
 
@@ -534,7 +534,7 @@ test = scaler.transform(test)
 print('Training data shape: {}'.format(train.shape))
 print('Testing data shape: {}'.format(test.shape))
 ```
-<img src="/assets/images/typing/home-credit1/35.JPG" width="50%"><br>
+<img src="/assets/images/typing/home-credit1/35.JPG" width="60%"><br>
 
 ```python
 from sklearn.linear_model import LogisticRegression
@@ -542,7 +542,7 @@ from sklearn.linear_model import LogisticRegression
 log_reg = LogisticRegression(C=0.0001, multi_class='ovr', solver='liblinear')
 log_reg.fit(train, train_labels)
 ```
-<img src="/assets/images/typing/home-credit1/36.JPG" width="50%"><br>
+<img src="/assets/images/typing/home-credit1/36.JPG" width="60%"><br>
 
 모델을 훈련시켰으니, 우리는 이제 예측을 할 수 있다. 우리는 대출금을 지불하지 않을 확률을 예측하기를 원하기 때문에 `predict.proba`를 사용한다. 이것은 m x 2 배열을 반환하고, 여기서 m은 관측치이다. 첫 번째 열은 0일 확률이고, 두 번째 열은 1일 확률이다. 우리는 대출금이 상환되지 않을 확률을 원하기 때문에 두 번째 열을 선택한다.
 
