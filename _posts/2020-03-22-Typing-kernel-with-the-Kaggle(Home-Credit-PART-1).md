@@ -106,7 +106,7 @@ def missing_values_table(df):
 missing_values = missing_values_table(app_train)
 missing_values.head(20)
 ```
-<br>
+<img src="/assets/images/typing/home-credit1/5.JPG" width="100%"><br>
 
 ### Column Types
 각 column의 데이터 타입을 살펴보자. `int64`와 `float64`는 수치형 특성이고, `object`는 문자열을 포함하고 범주형 특성이다.
@@ -114,10 +114,11 @@ missing_values.head(20)
 ```python
 app_train.dtypes.value_counts()
 ```
-
+<img src="/assets/images/typing/home-credit1/6.JPG" width="100%"><br>
 ```python
 app_train.select_dtypes('object').apply(pd.Series.nunique, axis=0)
 ```
+<img src="/assets/images/typing/home-credit1/7.JPG" width="100%"><br>
 <br>
 
 ### 범주형 특성 인코딩
@@ -148,6 +149,7 @@ for col in app_train:
             
 print('{} columns were label encoded.'.format(le_count))
 ```
+<img src="/assets/images/typing/home-credit1/8.JPG" width="100%"><br>
 
 ```python
 app_train = pd.get_dummies(app_train)
@@ -156,7 +158,7 @@ app_test = pd.get_dummies(app_test)
 print('Training Features shape: {}'.format(app_train.shape))
 print('Testing Features shape: {}'.format(app_test.shape))
 ```
-<br>
+<img src="/assets/images/typing/home-credit1/9.JPG" width="100%"><br>
 
 ### Training과 Testing Data 정렬
 훈련셋과 테스트셋에는 같은 특징이 있다. 테스트셋에는 표현되지 않은 카테고리 변수들로 인해 훈련셋을 원-핫 인코딩을 사용하면 더 많은 열이 생성된다. 따라서 테스트셋에는 없는 훈련셋의 변수들을 제거하기 위해 데이터프레임을 정렬해야 한다.
@@ -170,7 +172,7 @@ app_train['TARGET'] = train_labels
 print('Training Features shape: {}'.format(app_train.shape))
 print('Testing Features shape: {}'.format(app_test.shape))
 ```
-<br><br>
+<img src="/assets/images/typing/home-credit1/10.JPG" width="100%"><br><br>
 
 ## Anomalies(이상치)
 이상치를 통계적인 수치로 확인할 수 있는 방법은 데이터프레임의 `describe`함수이다. 
@@ -178,10 +180,12 @@ print('Testing Features shape: {}'.format(app_test.shape))
 ```python
 (app_train['DAYS_BIRTH'] / -365).describe()
 ```
+<img src="/assets/images/typing/home-credit1/12.JPG" width="100%"><br>
 
 ```python
 app_train['DAYS_EMPLOYED'].describe()
 ```
+<img src="/assets/images/typing/home-credit1/13.JPG" width="100%"><br>
 
 DAYS_BIRTH 특성은 아무 문제가 없어보이지만, DAYS_EMPLOYED의 최대값이 약 1,000년이라는 것은 문제가 있어보인다.
 
@@ -189,6 +193,7 @@ DAYS_BIRTH 특성은 아무 문제가 없어보이지만, DAYS_EMPLOYED의 최�
 app_train['DAYS_EMPLOYED'].plot.hist(title='Days Employment Histogram')
 plt.xlabel('Days Employment')
 ```
+<img src="/assets/images/typing/home-credit1/14.JPG" width="100%"><br>
 
 변칙적인 고객들의 집합을 만들어서 그들이 나머지 고객들보다 더 높거나 낮은 채무 불이행률을 가지는 경향이 있는지 확인해보자.
 
@@ -200,6 +205,7 @@ print('The non-anomalies default on {:.2f}% of loans'.format(100 * non_anom['TAR
 print('The anomalies default on {:.2f}% of loans'.format(100 * anom['TARGET'].mean()))
 print('There are {} anomalous days of employment'.format(len(anom)))
 ```
+<img src="/assets/images/typing/home-credit1/15.JPG" width="100%"><br>
 
 이상치가 디폴트값보다 낮은 것으로 보인다. 
 
@@ -219,6 +225,7 @@ app_train['DAYS_EMPLOYED'].replace({365243: np.nan}, inplace=True)
 app_train['DAYS_EMPLOYED'].plot.hist(title='Days Employment Histogram')
 plt.xlabel('Days Employment')
 ```
+<img src="/assets/images/typing/home-credit1/16.JPG" width="100%"><br>
 
 분포를 보면 우리가 예상한 것보다 훨씬 일치한다. 또한, 우리는 이러한 값이 원래 이상치였다는 것을 모델에 말하기 위해 새로운 열을 만들어준 것이다.
 
@@ -230,7 +237,7 @@ app_test['DAYS_EMPLOYED'].replace({365243: np.nan}, inplace=True)
 
 print('There are {} anomalies in the test data out of {} entries'.format(app_test['DAYS_EMPLOYED_ANOM'].sum(), len(app_test)))
 ```
-<br>
+<img src="/assets/images/typing/home-credit1/17.JPG" width="100%"><br>
 
 ### 상관관계
 상관계수는 특성의 '관련성'을 나타내는 가장 좋은 방법은 아니지만, 데이터 내에서 가능한 관계에 대한 아이디어를 제공해준다.
@@ -241,6 +248,7 @@ correlations = app_train.corr()['TARGET'].sort_values()
 print('Most Positive Correlations:\n {}'.format(correlations.tail(15)))
 print('\nMost Negative Correlations:\n {}'.format(correlations.head(15)))
 ```
+<img src="/assets/images/typing/home-credit1/18.JPG" width="100%"><br>
 
 위의 상관관계를 보면 `DAYS_BIRTH`가 가장 긍정 상관관계에 있다는 것을 확인할 수 있다. `DAYS_BIRTH`는 대출 당시 고객의 나이이다. 상관관계에서는 양수지만, 이 특징의 가치는 사실 음수로, 클라이언트의 나이가 들수록 대출금의 채무불이행 발생률이 낮아진다는 것을 의미한다. 이러한 결과는 혼동을 불러일으킬 수 있기 때문에 절댓값을 취하는 것이 좋다.
 
@@ -248,6 +256,7 @@ print('\nMost Negative Correlations:\n {}'.format(correlations.head(15)))
 app_train['DAYS_BIRTH'] = abs(app_train['DAYS_BIRTH'])
 app_train['DAYS_BIRTH'].corr(app_train['TARGET'])
 ```
+<img src="/assets/images/typing/home-credit1/19.JPG" width="100%"><br>
 
 이로써, 클라이언트의 나이가 들수록 그들의 대출금을 제때 갚으려는 경향이 있다.
 
@@ -258,7 +267,7 @@ plt.title('Age of Client')
 plt.xlabel('Age (years)')
 plt.ylabel('Count')
 ```
-<br>
+<img src="/assets/images/typing/home-credit1/20.JPG" width="100%"><br>
 
 ### KDE(Kernel Density Estimation)
 ```python
@@ -271,6 +280,7 @@ plt.xlabel('Age (years)')
 plt.ylabel('Density')
 plt.title('Distribution of Ages')
 ```
+<img src="/assets/images/typing/home-credit1/21.JPG" width="100%"><br>
 
 target == 1의 곡선이 젊은 쪽으로 기울어지는 것을 확인할 수 있다. 이것은 유의미한 상관관계가 아니지만, 머신러닝 모델에서 타겟에 영향을 줄 수 있기 때문에 사용할 수 있다. 평균 연령대별 대출상환 불이행을 통해 관계를 살펴보자.
 
@@ -280,11 +290,13 @@ age_data['YEARS_BIRTH'] = age_data['DAYS_BIRTH'] / 365
 age_data['YEARS_BINNED'] = pd.cut(age_data['YEARS_BIRTH'], bins=np.linspace(20, 70, num=11))
 age_data.head(10)
 ```
+<img src="/assets/images/typing/home-credit1/22.JPG" width="100%"><br>
 
 ```python
 age_groups = age_data.groupby('YEARS_BINNED').mean()
 age_groups
 ```
+<img src="/assets/images/typing/home-credit1/23.JPG" width="100%"><br>
 
 ```python
 plt.figure(figsize=(8, 8))
@@ -294,6 +306,7 @@ plt.xlabel('Age Group (years)')
 plt.ylabel('Failure to Repay (%)')
 plt.title('Failure to Repay by Age Group')
 ```
+<img src="/assets/images/typing/home-credit1/24.JPG" width="100%"><br>
 
 위의 그래프를 통해 확실히 젊은 연령대가 대출 상환금을 제때 갚지 못하는 것을 알 수 있다. 이러한 정보는 은행들에게 직접적으로 도움이 될 수 있다. 은행은 아마도 젊은 고객들에게 대출금을 갚기가 어려움을 알기 때문에, 그들에게 재정적인 계획 팁을 알려주거나 가이드를 제시할 필요가 있다. 또한, 이러한 정보를 통해 젊은 고객층을 배제하는 것이 아니라 그들이 제때 갚을 수 있도록 예방책을 마련하는 것이 중요하다.
 <br<br>
@@ -307,12 +320,14 @@ ext_data = app_train[['TARGET', 'EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 
 ext_data_corrs = ext_data.corr()
 ext_data_corrs
 ```
+<img src="/assets/images/typing/home-credit1/25.JPG" width="100%"><br>
 
 ```python
 plt.figure(figsize=(8, 6))
 sns.heatmap(ext_data_corrs, cmap=plt.cm.RdYlBu_r, vmin=-0.25, annot=True, vmax=0.6)
 plt.title('Correlation Heatmap')
 ```
+<img src="/assets/images/typing/home-credit1/26.JPG" width="100%"><br>
 
 ```python
 plt.figure(figsize=(10, 12))
@@ -328,6 +343,7 @@ for i, source in enumerate(['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3']):
     
     plt.tight_layout(h_pad=2.5)
 ```
+<img src="/assets/images/typing/home-credit1/27.JPG" width="100%"><br>
 
 `EXT_SOURCE_3`가 타겟 데이터에 대해 가장 큰 차이가 나타난다. 우리는 이 특징이 대출 상환 신청자와 어느정도 관계가 있는 가능성이 있다고 볼 수 있다. 하지만 그 관계는 그다지 강한 편은 아니지만, 이러한 변수들이 이후에 머신러닝 학습 모델에 있어서 지원자가 제때에 대출금을 상환할지 여부를 예측하는 데 유용할 것이다.
 <br>
@@ -354,6 +370,7 @@ grid.map_lower(sns.kdeplot, cmap=plt.cm.OrRd_r)
 
 plt.suptitle('Ext Source and Age Features Pairs Plot', size=32, y=1.05)
 ```
+<img src="/assets/images/typing/home-credit1/28.JPG" width="100%"><br>
 
 위의 그래프에서, 빨간색 선은 갚은 대출금, 파란색 선은 갚지 않은 대출금을 나타낸다. `EXT_SOURCE_1`과 `DAYS_BIRTH` 사이에는 중간 정도의 양의 선형관계가 있는 것으로 보인다. 이러한 특징들은 고객의 연령을 생각하는 것을 알 수 있다.
 <br><br>
@@ -400,10 +417,12 @@ poly_features_test = poly_transformer.transform(poly_features_test)
 
 print('Polynomial Features shape: {}'.format(poly_features.shape))
 ```
+<img src="/assets/images/typing/home-credit1/29.JPG" width="100%"><br>
 
 ```python
 poly_transformer.get_feature_names(input_features=['EXT_SOURCE_1', 'EXT_SOURCE_2', 'EXT_SOURCE_3', 'DAYS_BIRTH'])[:15]
 ```
+<img src="/assets/images/typing/home-credit1/30.JPG" width="100%"><br>
 
 ```python
 # 위의 특성들을 가지고 데이터프레임 생성하기
@@ -415,6 +434,7 @@ poly_corrs = poly_features.corr()['TARGET'].sort_values()
 print(poly_corrs.head(10))
 print(poly_corrs.tail(5))
 ```
+<img src="/assets/images/typing/home-credit1/31.JPG" width="100%"><br>
 
 몇몇의 새로운 변수들이 기존의 특성들보다 타겟과의 더 높은 관계를 보여주고 있다. 우리는 머신러닝 모델을 만들 때, 이 특성들이 과연 도움이 될지 확인해봐야 한다.
 
@@ -435,7 +455,7 @@ app_train_poly, app_test_poly = app_train_poly.align(app_test_poly, join='inner'
 print('Training data with polynomial features shape: {}'.format(app_train_poly.shape))
 print('Testing data with polynomial features shape: {}'.format(app_test_poly.shape))
 ```
-<br>
+<img src="/assets/images/typing/home-credit1/32.JPG" width="100%"><br>
 
 ### Domain Knowledge Features
 
@@ -478,6 +498,8 @@ for i, feature in enumerate(['CREDIT_INCOME_PERCENT', 'ANNUITY_INCOME_PERCENT', 
     plt.ylabel('Density')
     plt.tight_layout(h_pad=2.5)
 ```
+<img src="/assets/images/typing/home-credit1/33.JPG" width="100%">  
+<img src="/assets/images/typing/home-credit1/34.JPG" width="100%"><br>
 
 새로운 특성들이 유용할지는 모르겠지만, 시험을 해보면서 살펴봐야 할 것 같다.  
 <br><br>
@@ -512,6 +534,7 @@ test = scaler.transform(test)
 print('Training data shape: {}'.format(train.shape))
 print('Testing data shape: {}'.format(test.shape))
 ```
+<img src="/assets/images/typing/home-credit1/35.JPG" width="100%"><br>
 
 ```python
 from sklearn.linear_model import LogisticRegression
@@ -519,6 +542,7 @@ from sklearn.linear_model import LogisticRegression
 log_reg = LogisticRegression(C=0.0001, multi_class='ovr', solver='liblinear')
 log_reg.fit(train, train_labels)
 ```
+<img src="/assets/images/typing/home-credit1/36.JPG" width="100%"><br>
 
 모델을 훈련시켰으니, 우리는 이제 예측을 할 수 있다. 우리는 대출금을 지불하지 않을 확률을 예측하기를 원하기 때문에 `predict.proba`를 사용한다. 이것은 m x 2 배열을 반환하고, 여기서 m은 관측치이다. 첫 번째 열은 0일 확률이고, 두 번째 열은 1일 확률이다. 우리는 대출금이 상환되지 않을 확률을 원하기 때문에 두 번째 열을 선택한다.
 
@@ -534,6 +558,7 @@ submit['TARGET'] = log_reg_pred
 
 submit.head()
 ```
+<img src="/assets/images/typing/home-credit1/37.JPG" width="100%"><br>
 
 ```python
 submit.to_csv('log_reg_baseline.csv', index=False)
@@ -668,6 +693,7 @@ def plot_feature_importances(df):
 ```python
 feature_importances_sorted = plot_feature_importances(feature_importances)
 ```
+<img src="/assets/images/typing/home-credit1/38.JPG" width="100%"><br>
 
 예상했던 것과 같이, 가장 중요한 특성은 `EXT_SOURCE`와 `DAYS_BIRTH`이다. 우리는 모델에게 중요한 몇 가지 특성만 존재한다는 것을 알 수 있는데, 이는 우리가 모델의 성능을 저하시킬 수 있는 많은 특성들이 있다는 것을 시사한다.
 
@@ -676,6 +702,7 @@ feature_importances_sorted = plot_feature_importances(feature_importances)
 ```python
 feature_importances_domain_sorted = plot_feature_importances(feature_importances_domain)
 ```
+<img src="/assets/images/typing/home-credit1/39.JPG" width="100%"><br>
 
 위의 그래프를 통해 우리가 직접 만든 특성들이 상위 15개의 중요도 안에 들어가는 것을 확인할 수 있다.
 <br><br>
@@ -842,6 +869,7 @@ print(metrics)
 ```python
 feature_importances_sorted = plot_feature_importances(feature_importances)
 ```
+<img src="/assets/images/typing/home-credit1/40.JPG" width="100%"><br>
 
 ```python
 submission.to_csv('baseline_lgb.csv', index=False)
@@ -861,6 +889,7 @@ print(metrics_domain)
 ```python
 feature_importances_sorted = plot_feature_importances(feature_importances_domain)
 ```
+<img src="/assets/images/typing/home-credit1/41.JPG" width="100%"><br>
 
 ```python
 submission_domain.to_csv('baseline_lgb_domain_features.csv', index=False)
