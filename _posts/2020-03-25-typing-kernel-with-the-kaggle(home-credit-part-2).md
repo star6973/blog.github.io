@@ -336,7 +336,7 @@ train.head()
 ```python
 train.shape
 ```
-<img src="/assets/images/typing/home-credit2/18.PNG" width="60%"><br>
+<img src="/assets/images/typing/home-credit2/18.PNG" width="30%"><br>
 
 ```python
 train.iloc[:10, 123:]
@@ -383,7 +383,7 @@ bureau_counts.head()
 bureau_balance = pd.read_csv('../input/home-credit-default-risk/bureau_balance.csv')
 bureau_balance.head()
 ```
-<img src="/assets/images/typing/home-credit2/21.PNG" width="60%"><br>
+<img src="/assets/images/typing/home-credit2/21.PNG" width="40%"><br>
 
 ```python
 # 이전의 대출금에 대한 상태를 계산(위에서 구한 범주형 함수 사용)
@@ -860,7 +860,7 @@ submission, feature_importances, metrics = model(train_control, test_control)
 ```python
 metrics
 ```
-<img src="/assets/images/typing/home-credit2/45.PNG" width="60%"><br>
+<img src="/assets/images/typing/home-credit2/45.PNG" width="40%"><br>
 
 훈련셋의 점수가 검증셋의 점수보다 높은 것으로 보아 control 데이터는 과적합이 일어난 것을 볼 수 있다. 우리는 이것을 이후에 `reg_lambda`와 `reg_alpha`를 사용한 모델을 정규화를 통해 다룰 수 있다.
 
@@ -922,7 +922,7 @@ submission_corr, feature_importances_corr, metrics_corr = model(train_corrs_remo
 ```python
 metrics_corr
 ```
-<img src="/assets/images/typing/home-credit2/50.PNG" width="60%"><br>
+<img src="/assets/images/typing/home-credit2/50.PNG" width="40%"><br>
 
 ```python
 feature_importances_corr_sorted = plot_feature_importances(feature_importances_corr)
