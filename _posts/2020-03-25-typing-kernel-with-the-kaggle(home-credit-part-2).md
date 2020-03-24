@@ -48,7 +48,7 @@ bureau.head()
 previous_loan_counts = bureau.groupby('SK_ID_CURR', as_index=False)['SK_ID_BUREAU'].count().rename(columns = {'SK_ID_BUREAU': 'previous_loan_counts'})
 previous_loan_counts.head()
 ```
-<img src="/assets/images/typing/home-credit2/2.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/2.PNG" width="60%"><br>
 
 ```python
 train = pd.read_csv('../input/home-credit-default-risk/application_train.csv')
@@ -100,14 +100,14 @@ def kde_target(var_name, df):
 ```python
 kde_target('EXT_SOURCE_3', train)
 ```
-<img src="/assets/images/typing/home-credit2/4.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/4.PNG" width="70%"><br>
 
 이제 우리가 방금 만든 새로운 변수와 다른 기관의 이전 대출 건수를 적용해보자.
 
 ```python
 kde_target('previous_loan_counts', train)
 ```
-<img src="/assets/images/typing/home-credit2/5.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/5.PNG" width="70%"><br>
 
 위의 분포는 상관관계 계수가 너무나 약하기 때문에 중요하다고 확신할 수 없다. ㄸ라서 데이터프레임에서 몇 가지 변수를 더 만들어보자.
 <br><br>
@@ -165,14 +165,14 @@ for col in columns:
 new_corrs = sorted(new_corrs, key=lambda x: abs(x[1]), reverse=True)
 new_corrs[:15]
 ```
-<img src="/assets/images/typing/home-credit2/9.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/9.PNG" width="70%"><br>
 
 새로운 변수들 중 어느 것도 `TARGET`과 유의미한 상관관계를 가지고 있지 않다. KDE 그림으로 가장 높은 상관관계 변수를 확인해보자.
 
 ```python
 kde_target('bureau_DAYS_CREDIT_mean', train)
 ```
-<img src="/assets/images/typing/home-credit2/10.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/10.PNG" width="70%"><br>
 
 이 컬럼은 Home Credit에서 대출을 위한 지원서를 작성하기 전에 대출금을 신청한 일수다. 따라서 더 큰 음수가 나타나면, 현재의 대출 신청하기 이전에 대출이 더 있었음을 나타낸다.
 
@@ -303,12 +303,12 @@ categorical_grouped.head()
 ```python
 categorical_grouped.columns.levels[0][:10]
 ```
-<img src="/assets/images/typing/home-credit2/14.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/14.PNG" width="60%"><br>
 
 ```python
 categorical_grouped.columns.levels[1]
 ```
-<img src="/assets/images/typing/home-credit2/15.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/15.PNG" width="60%"><br>
 
 ```python
 group_var = 'SK_ID_CURR'
@@ -336,7 +336,7 @@ train.head()
 ```python
 train.shape
 ```
-<img src="/assets/images/typing/home-credit2/18.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/18.PNG" width="60%"><br>
 
 ```python
 train.iloc[:10, 123:]
@@ -383,7 +383,7 @@ bureau_counts.head()
 bureau_balance = pd.read_csv('../input/home-credit-default-risk/bureau_balance.csv')
 bureau_balance.head()
 ```
-<img src="/assets/images/typing/home-credit2/21.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/21.PNG" width="60%"><br>
 
 ```python
 # 이전의 대출금에 대한 상태를 계산(위에서 구한 범주형 함수 사용)
@@ -499,7 +499,7 @@ bureau_balance_by_client = agg_numeric(bureau_by_loan.drop(columns=['SK_ID_BUREA
 original_features = list(train.columns)
 print('Original Number of Features: {}'.format(len(original_features)))
 ```
-<img src="/assets/images/typing/home-credit2/30.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/30.PNG" width="60%"><br>
 
 ```python
 train = train.merge(bureau_counts, on='SK_ID_CURR', how='left')
@@ -511,7 +511,7 @@ train = train.merge(bureau_balance_by_client, on='SK_ID_CURR', how='left')
 new_features = list(train.columns)
 print('Number of features using previous loans from other institutions data: {}'.format(len(new_features)))
 ```
-<img src="/assets/images/typing/home-credit2/31.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/31.PNG" width="60%"><br>
 <br><br>
 
 ## Features Engineering Outcomes
@@ -546,7 +546,7 @@ def missing_values_table(df):
 missing_train = missing_values_table(train)
 missing_train.head(10)
 ```
-<img src="/assets/images/typing/home-credit2/32.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/32.PNG" width="70%"><br>
 
 누락된 값을 제거하는 임계치는 정해져 있지 않고, 문제에 따라 달라진다. 우리는 90% 이상의 결측치를 가지는 훈련셋 또는 테스트셋의 컬럼을 제거할 것이다.
 
@@ -554,7 +554,7 @@ missing_train.head(10)
 missing_train_vars = list(missing_train.index[missing_train['% of Total Values'] > 90])
 len(missing_train_vars)
 ```
-<img src="/assets/images/typing/home-credit2/33.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/33.PNG" width="60%"><br>
 
 ### Calculate Information for Testing Data
 
@@ -568,7 +568,7 @@ test = test.merge(bureau_balance_by_client, on='SK_ID_CURR', how='left')
 ```python
 print('Shape of Testing Data: {}'.format(test.shape))
 ```
-<img src="/assets/images/typing/home-credit2/34.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/34.PNG" width="60%"><br>
 
 ```python
 train_labels = train['TARGET']
@@ -581,7 +581,7 @@ train['TARGET'] = train_labels
 print('Training Data Shape: {}'.format(train.shape))
 print('Testing Data Shape: {}'.format(test.shape))
 ```
-<img src="/assets/images/typing/home-credit2/35.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/35.PNG" width="60%"><br>
 
 훈련셋과 테스트셋을 동일한 열로 맞췄기 때문에 누락된 데이터를 파악할 수 있다.
 
@@ -589,19 +589,19 @@ print('Testing Data Shape: {}'.format(test.shape))
 missing_test = missing_values_table(test)
 missing_test.head(10)
 ```
-<img src="/assets/images/typing/home-credit2/36.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/36.PNG" width="70%"><br>
 
 ```python
 missing_test_vars = list(missing_test.index[missing_test['% of Total Values'] > 90])
 len(missing_test_vars)
 ```
-<img src="/assets/images/typing/home-credit2/37.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/37.PNG" width="60%"><br>
 
 ```python
 missing_columns = list(set(missing_test_vars + missing_train_vars))
 print('There are %d columns with more than 90%% missing in either the training or testing data.' % len(missing_columns))
 ```
-<img src="/assets/images/typing/home-credit2/38.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/38.PNG" width="60%"><br>
 
 ```python
 # 결측치 제거
@@ -628,24 +628,24 @@ corrs = corrs.sort_values('TARGET', ascending=False)
 
 pd.DataFrame(corrs['TARGET'].head(10))
 ```
-<img src="/assets/images/typing/home-credit2/39.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/39.PNG" width="60%"><br>
 
 ```python
 pd.DataFrame(corrs['TARGET'].dropna().tail(10))
 ```
-<img src="/assets/images/typing/home-credit2/40.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/40.PNG" width="60%"><br>
 
 상관관계를 보면 우리가 만든 변수들이 제일 높은 것을 알 수 있다. 하지만 이 변수들이 얼마나 유용할지는 모델에 적용해봐야 알 수 있기 때문에 섣불리 판단할 수는 없다.
 
 ```python
 kde_target(var_name='client_bureau_balance_MONTHS_BALANCE_count_mean', df=train)
 ```
-<img src="/assets/images/typing/home-credit2/41.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/41.PNG" width="70%"><br>
 
 ```python
 kde_target(var_name='bureau_CREDIT_ACTIVE_Active_count_norm', df=train)
 ```
-<img src="/assets/images/typing/home-credit2/42.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/42.PNG" width="70%"><br>
 
 KDE 그림을 통해 명확한 결론을 얻으려 했지만, 너무 약하다고 생각한다.
 <br>
@@ -680,7 +680,7 @@ for key, value in above_threshold_vars.items():
 cols_to_remove = list(set(cols_to_remove))
 print("Number of columns to remove: {}".format(len(cols_to_remove)))
 ```
-<img src="/assets/images/typing/home-credit2/43.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/43.PNG" width="60%"><br>
 
 ```python
 train_corrs_removed = train.drop(columns=cols_to_remove)
@@ -689,7 +689,7 @@ test_corrs_removed = test.drop(columns=cols_to_remove)
 print('Training Corrs Removed Shape: {}'.format(train_corrs_removed.shape))
 print('Testing Corrs Removed Shape: {}'.format(test_corrs_removed.shape))
 ```
-<img src="/assets/images/typing/home-credit2/44.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/44.PNG" width="60%"><br>
 
 ```python
 train_corrs_removed.to_csv('train_bureau_corrs_removed.csv', index=False)
@@ -860,14 +860,14 @@ submission, feature_importances, metrics = model(train_control, test_control)
 ```python
 metrics
 ```
-<img src="/assets/images/typing/home-credit2/45.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/45.PNG" width="60%"><br>
 
 훈련셋의 점수가 검증셋의 점수보다 높은 것으로 보아 control 데이터는 과적합이 일어난 것을 볼 수 있다. 우리는 이것을 이후에 `reg_lambda`와 `reg_alpha`를 사용한 모델을 정규화를 통해 다룰 수 있다.
 
 ```python
 feature_importances_sorted = plot_feature_importances(feature_importances)
 ```
-<img src="/assets/images/typing/home-credit2/46.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/46.PNG" width="80%"><br>
 
 ```python
 submission.to_csv('control.csv', index=False)
@@ -885,14 +885,14 @@ submission_raw, feature_importances_raw, metrics_raw = model(train, test)
 ```python
 metrics_raw
 ```
-<img src="/assets/images/typing/home-credit2/47.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/47.PNG" width="80%"><br>
 
 결과를 보았을 때, control 데이터에 비해서 더 좋은 점수를 받은 것을 볼 수 있다. 그러나 우리는 이것이 테스트셋에 적용했을 경우 더 나은 검증 성능이 나올 수 있다고 말하기 전에 미리 예측결과를 리더보드에 제출해야 할 것이다.
 
 ```python
 feature_importances_raw_sorted = plot_feature_importances(feature_importances_raw)
 ```
-<img src="/assets/images/typing/home-credit2/48.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/48.PNG" width="80%"><br>
 
 가장 중요한 100가지의 특성의 비율을 구해보자. 그러나 단순히 기존의 특성과 비교하기보다는 단열로 인코딩된 기존의 특성과 비교하는 것이 좋을 것 같다. 이것들은 이미 feature_importances에 기록되어 있다.
 
@@ -902,7 +902,7 @@ new_features = [x for x in top_100 if x not in list(feature_importances['feature
 
 print('%% of Top 100 Features created from the bureau data = %d.00' % len(new_features))
 ```
-<img src="/assets/images/typing/home-credit2/49.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/49.PNG" width="60%"><br>
 
 상위 100개의 특성이 우리가 만든 데이터임을 볼 수 있다. 앞서 해놓은 어려웠던 작업들이 가치가 있다는 것을 증명해준다!
 
@@ -922,12 +922,12 @@ submission_corr, feature_importances_corr, metrics_corr = model(train_corrs_remo
 ```python
 metrics_corr
 ```
-<img src="/assets/images/typing/home-credit2/50.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/50.PNG" width="60%"><br>
 
 ```python
 feature_importances_corr_sorted = plot_feature_importances(feature_importances_corr)
 ```
-<img src="/assets/images/typing/home-credit2/51.PNG" width="100%"><br>
+<img src="/assets/images/typing/home-credit2/51.PNG" width="80%"><br>
 
 ```python
 submission_corr.to_csv('test_two.csv', index=False)
