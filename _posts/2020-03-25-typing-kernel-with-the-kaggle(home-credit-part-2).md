@@ -27,7 +27,7 @@ import warnings
 warnings.filterwarnings('ignore')
 plt.style.use('fivethirtyeight')
 ```
-<br><br>
+<br>
 
 ### Counts of a client's previous loans
 
