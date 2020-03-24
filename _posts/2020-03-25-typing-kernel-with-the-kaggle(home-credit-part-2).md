@@ -9,8 +9,7 @@ tags: Kernel
 # 캐글 커널 필사하기
 [Introduction: Home Credit Default Risk Competition - Will Koehrsen](https://www.kaggle.com/willkoehrsen/start-here-a-gentle-introduction)
 <br>
-# Feature Engineering 메뉴얼 파트 2 (Manual Feature Engineering Part Two)
-<br>
+## Feature Engineering 메뉴얼 파트 2 (Manual Feature Engineering Part Two)
 
 Home Credit에서는 `application` 데이터로만 사용하여 모델을 만들었다. 가장 최상의 모델의 점수는 LightGBM을 사용하여 0.75 정도였다. 이 점수를 더 향상시키기 위해서, 다른 데이터프레임으로부터 더 많은 정보를 추가할 것이다.
 
@@ -28,6 +27,7 @@ import warnings
 warnings.filterwarnings('ignore')
 plt.style.use('fivethirtyeight')
 ```
+<br><br>
 
 ### Counts of a client's previous loans
 
@@ -58,6 +58,7 @@ train['previous_loan_counts'] = train['previous_loan_counts'].fillna(0)
 train.head()
 ```
 <img src="/assets/images/typing/home-credit2/3.PNG" width="100%"><br>
+<br><br>
 
 ## Assessing Usefulness of New Variable with r value
 
@@ -109,6 +110,7 @@ kde_target('previous_loan_counts', train)
 <img src="/assets/images/typing/home-credit2/5.PNG" width="100%"><br>
 
 위의 분포는 상관관계 계수가 너무나 약하기 때문에 중요하다고 확신할 수 없다. ㄸ라서 데이터프레임에서 몇 가지 변수를 더 만들어보자.
+<br><br>
 
 ## Aggregating Numeric Columns
 
@@ -236,6 +238,7 @@ def target_corrs(df):
     
     return corrs
 ```
+<br><br>
 
 ## 범주형 변수
 
@@ -368,6 +371,7 @@ bureau_counts = count_categorical(bureau, group_var='SK_ID_CURR', df_name='burea
 bureau_counts.head()
 ```
 <img src="/assets/images/typing/home-credit2/20.PNG" width="100%"><br>
+<br><br>
 
 ## Applying Operations to another dataframe
 
@@ -430,6 +434,7 @@ bureau_balance_by_client.head()
 + `client_bureau_balance_STATUS_X_count_norm_sum`: 각 대출에 대해 `STATUS == X`의 발생 횟수를 계산한다. 그런 다음 각 고객에 대해 각 대출에 대한 값을 추가하자.
 
 모든 변수를 하나의 데이터프레임에 함께 채워질 때까지 상관관계를 연기하자!!
+<br><br>
 
 ## Putting the Functions Together
 
@@ -507,6 +512,7 @@ new_features = list(train.columns)
 print('Number of features using previous loans from other institutions data: {}'.format(len(new_features)))
 ```
 <img src="/assets/images/typing/home-credit2/31.PNG" width="100%"><br>
+<br><br>
 
 ## Features Engineering Outcomes
 
@@ -607,6 +613,7 @@ test = test.drop(columns=missing_columns)
 train.to_csv('train_bureau_raw.csv', index=False)
 test.to_csv('test_bureau_raw.csv', index=False)
 ```
+<br><br>
 
 ## Correlations
 
@@ -641,7 +648,7 @@ kde_target(var_name='bureau_CREDIT_ACTIVE_Active_count_norm', df=train)
 <img src="/assets/images/typing/home-credit2/42.PNG" width="100%"><br>
 
 KDE 그림을 통해 명확한 결론을 얻으려 했지만, 너무 약하다고 생각한다.
-
+<br>
 
 ### 다중공선성
 
@@ -690,6 +697,7 @@ test_corrs_removed.to_csv('test_bureau_corrs_removed.csv', index=False)
 ```
 
 훈련셋과 테스트셋 각각에서 중복된 변수를 제거한 후 이전에 만들었던 csv 파일과의 성능을 비교할 것이다.
+<br><br>
 
 ## Modeling
 
@@ -866,7 +874,7 @@ submission.to_csv('control.csv', index=False)
 ```
 
 control 데이터셋의 점수는 0.754이다.
-
+<br>
 
 ### Test One
 
@@ -903,6 +911,7 @@ submission_raw.to_csv('test_one.csv', index=False)
 ```
 
 Test One 데이터셋의 점수는 0.759이다.
+<br>
 
 ### Test Two
 
@@ -925,7 +934,7 @@ submission_corr.to_csv('test_two.csv', index=False)
 ```
 
 Test Two 데이터셋의 점수는 0.753이다.
-
+<br><br>
 
 ## Results
 
