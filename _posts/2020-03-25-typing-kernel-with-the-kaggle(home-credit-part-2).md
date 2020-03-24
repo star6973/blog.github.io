@@ -885,7 +885,7 @@ submission_raw, feature_importances_raw, metrics_raw = model(train, test)
 ```python
 metrics_raw
 ```
-<img src="/assets/images/typing/home-credit2/47.PNG" width="80%"><br>
+<img src="/assets/images/typing/home-credit2/47.PNG" width="40%"><br>
 
 결과를 보았을 때, control 데이터에 비해서 더 좋은 점수를 받은 것을 볼 수 있다. 그러나 우리는 이것이 테스트셋에 적용했을 경우 더 나은 검증 성능이 나올 수 있다고 말하기 전에 미리 예측결과를 리더보드에 제출해야 할 것이다.
 
