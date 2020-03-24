@@ -41,6 +41,7 @@ plt.style.use('fivethirtyeight')
 bureau = pd.read_csv('../input/home-credit-default-risk/bureau.csv')
 bureau.head()
 ```
+<img src="/assets/images/typing/home-credit2/1.JPG" width="100%"><br>
 
 ```python
 # Group by the client id (SK_ID_CURR)
