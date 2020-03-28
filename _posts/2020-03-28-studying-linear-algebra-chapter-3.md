@@ -1,12 +1,10 @@
 ---
-layout: post
-published: true
 title: "Studying linear algebra [Chapter 3]"
 date: 2020-03-28 22:30
-comments: true
-author: BL
+categories: Studying linear algebra
+tag: LinearAlgebra
 slides: simple
-categories: architecture resque redis bus
+use_math: true
 ---
 
 {% slide %}
