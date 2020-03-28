@@ -5,7 +5,7 @@ categories: Studying linear algebra
 tag: LinearAlgebra
 slides: simple
 use_math: true
----
+---  
 
 {% slide %}
 ## Resque Bus
