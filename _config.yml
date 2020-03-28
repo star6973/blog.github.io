@@ -70,6 +70,18 @@ paginate: 10 # Posts per page on the blog index
 paginate_path: '/blog/page:num'
 destination: ./_site
 
+# Embed Server-side speaker notes?
+reveal_notes_server: false
+
+# Additional reveal.js options
+reveal_options: 
+
+# Additional reveal.js dependencies
+reveal_dependencies: 
+
+# Reveal.js subdirectory
+reveal_path: reveal.js/
+
 # Custom vars
 version:          0.9x beta 2
 
