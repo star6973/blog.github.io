@@ -13,9 +13,11 @@ use_math: true
 ##Composition in Ruby  
 ###extend vs. include  
 </section>
+
 <section data-markdown>  
 module behavior can be *mixed-in* to other objects  
 </section>  
+
 <section data-markdown>  
 ###`extend`
 
@@ -162,6 +164,7 @@ end
         </code></pre>
     </section>
 </section>
+
 <section data-markdown>
 ###Questions
 ####and hopefully, answers</h4>
