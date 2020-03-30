@@ -1,4 +1,5 @@
 ---
+layout: slides-deck
 title: "Studying linear algebra [Chapter 3]"
 date: 2020-03-28 22:30
 categories: Studying linear algebra
