@@ -6,16 +6,17 @@ categories: Studying linear algebra
 tag: LinearAlgebra
 transition: slide
 use_math: true
----
+---  
 
-<section data-markdown>
-##Composition in Ruby
-###extend vs. include
+
+<section data-markdown>  
+##Composition in Ruby  
+###extend vs. include  
 </section>
-<section data-markdown>
-module behavior can be *mixed-in* to other objects
-</section>
-<section data-markdown>
+<section data-markdown>  
+module behavior can be *mixed-in* to other objects  
+</section>  
+<section data-markdown>  
 ###`extend`
 
 - Defined on `Object` (including `Module` and `Class`!)
