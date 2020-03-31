@@ -8,4 +8,4 @@ tag: LinearAlgebra
 
 # 3장. 컴퓨터에서의 계산(1) - LU 분해로 가자
 
-[ppt](https://star6973.github.io/reveal.js/test/examples/embedded-media.html)
+[PPT_Slide](https://star6973.github.io/reveal.js/test/examples/embedded-media.html)
