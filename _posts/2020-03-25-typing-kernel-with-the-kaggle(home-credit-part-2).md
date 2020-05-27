@@ -2,7 +2,6 @@
 layout: post
 title:  Typing Kernel with the Kaggle(Home Credit PART 2)
 date:   2020-03-25 05:30:20
-categories: typing kernel
 tags: Kernel
 ---
 
