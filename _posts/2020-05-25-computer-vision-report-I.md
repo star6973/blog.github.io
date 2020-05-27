@@ -102,6 +102,7 @@ tags: deep learning
   - Faster R-CNN은 훈련에 소요되는 시간은 비교적 많지만, 높은 정확도  
   
 3.2. CNN 모델에 따른 객체 인식 성능 비교
+<img src="/assets/images/report/cnn-technology-trends/객체인식방법 비교.PNG" width="70%"><br>
   - ResNet-101과 Inception ResNet V2의 정확도가 가장 높음  
 
 3.3. 결론  
