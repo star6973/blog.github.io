@@ -76,7 +76,7 @@ tags: DeepLearning
     + 8개의 층으로 이루어진 CNN 구조로, 이전보다 규모가 크고 깊은 CNN을 사용함. 이로 인해 발생되는 과적합 문제를 방지하기 위해, 2개의 GPU를 사용함.  
     + AlexNet은 5개의 합성곱 층과 3개의 완전하게 연결된 층(Fully-Connected Layer)으로 이루어진 2개의 CNN이 병렬적으로 구성되어 있고, 2개의 GPU를 이용하여 각 CNN을 학습함.  
     + 활성 함수로는 ReLU(Rectified Linear Unit)을 사용하여 학습 속도를 약 6배 향상시킴.  
-    + 과적합을 방지하기 위해 입력 영상을 임의로 잘라내거나 픽셀의 밝기를 조정하는 데이터 가공 방법을 이용하고, 완전연결 층에 Dropout[]을 적용.  
+    + 과적합을 방지하기 위해 입력 영상을 임의로 잘라내거나 픽셀의 밝기를 조정하는 데이터 가공 방법을 이용하고, 완전연결 층에 Dropout을 적용.  
     
   - ZFNet  
 <img src="/assets/images/report/cnn-technology-trends/ZFNet.png" width="70%"><br>
@@ -128,12 +128,4 @@ tags: DeepLearning
   - 객체를 상자 형태로만 검출하는 것이 아니라, 정확한 픽셀 단위로 분할하는 연구가 이루어짐.  
   - 모바일 환경이나 다른 임베디드 시스템에 고성능의 딥러닝 기반 객체 인식 기술을 적용하기에는 아직 어려움이 많음.  
   - 따라서, 보다 단순한 구조의 객체 인식 방법과 가벼운 CNN 모델에 대한 연구가 진행되어야 함.  
-
-
-
-## CNN(Convolutional Neural Network) 관련 논문  
-### 1. 
-### 2. 
-### 3. 
-### 4.
-## 
+<br><br>
