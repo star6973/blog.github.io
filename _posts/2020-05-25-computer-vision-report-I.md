@@ -48,7 +48,7 @@ tags: DeepLearning
     + RPN은 R-CNN에서 CNN의 출력인 Feature map을 입력으로 받아 객체의 위치를 추정하여 후보 영역을 출력하는 네트워크이다. CNN에서 추출된 Feature map을 RPN에서 추정된 후보 영역으로 잘라내어 객체를 인식한다. 이렇게 Feature map을 추출하는 CNN 과정과 후보 영역을 생성하는 과정을 일련의 네트워크로 구성함으로써 속도 개선을 시켰다.  
   
   - R-FCN  
-<img src="/assets/images/report/cnn-technology-trends/R-FCN.jpeg" width="70%"><br>
+<img src="/assets/images/report/cnn-technology-trends/R-FCN.jpg" width="70%"><br>
     + R-FCN은 위치 정보를 포함하고 있는 Score map을 이용하여 물체의 위치를 정확하고 효율적으로 찾아냄. 이 Score map은 CNN을 통해 추출된 Feature map으로부터 얻어지며, 각 Score map은 입력된 영상 내 특정 위치의 정보를 포함함. 이를 이용하여 특정 위치마다 분류 결과를 얻어내고, 이 결과를 종합하여 최종적으로 특정 위치 내의 객체를 분류.  
     + 특정 위치가 찾고자 하는 객체를 포함할 경우, Score map의 반응이 커짐.  
     + 특정 위치가 찾고자 하는 객체를 포함하지 않을 경우, Score map의 반응이 작아짐.  
