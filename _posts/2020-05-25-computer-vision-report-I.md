@@ -9,7 +9,7 @@ tags: deep learning
 # 딥러닝 기반 객체 인식 기술 동향(ETRI)  
 
 ### 1. 과거의 객체 인식 연구 
-1.1. 과거의 객체 인식 연구는 SHIFT(Scale Invariant Feature Transform), SURF(Speeded-Up Robust Features), Haar, 4) HOG(Histogram of Oriented Gradients) 등과 같이 객체가 가지는 특징을 설계하고 검출함으로써 객체를 찾아내는 방식으로 진행.  
+1.1. 과거의 객체 인식 연구는 SHIFT(Scale Invariant Feature Transform), SURF(Speeded-Up Robust Features), Haar, 4) HOG(Histogram of Oriented Gradients) 등과 같이 객체가 가지는 특징을 설계하고 검출함으로써 객체를 찾아내는 방식으로 진행.<br>  
 
 1.2. 예를 들면 책의 경우, 영상에서는 사다리꼴 형태로 나타나고 꼭짓점에서는 각이 생기는 특징 -> DPM(Deformable Part-based Model)을 이용해 물체를 여러 부분으로 나누어 특징 정보 구성 -> SVM(Support Vector Machine)을 이용해 기계학습  
 
