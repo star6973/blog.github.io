@@ -15,6 +15,7 @@ tags: DeepLearning
 <br>
 
 1.3. 합성곱 신경망(CNN) 등장 이후부터 딥러닝을 이용한 객체 인식 방법이 주류가 됨. 따라서 자연스럽게 CNN의 인식률 향상을 위해 ZFNet, VGG, ResNet, GoogLeNet, DenseNet 등이 등장.  
+<img src="/assets/images/report/cnn-technology-trends/CNN.jpeg" width="70%"><br>
 <br>
 
 1.4. CNN을 통해 영상에서 객체가 무엇(what)인지 인식은 성공하였으나, 객체가 어디(where)에 존재하는 지 고민  
