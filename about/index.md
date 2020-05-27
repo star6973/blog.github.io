@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 소개(Introduction)
+title: Project
 description: About Me page of MH.Ji
 theme: purple
 ---
