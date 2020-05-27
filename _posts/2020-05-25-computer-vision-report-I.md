@@ -13,8 +13,10 @@ tags: deep learning
 <br>
 
 1.2. 예를 들면 책의 경우, 영상에서는 사다리꼴 형태로 나타나고 꼭짓점에서는 각이 생기는 특징 -> DPM(Deformable Part-based Model)을 이용해 물체를 여러 부분으로 나누어 특징 정보 구성 -> SVM(Support Vector Machine)을 이용해 기계학습  
+<br>
 
 1.3. 합성곱 신경망(CNN) 등장 이후부터 딥러닝을 이용한 객체 인식 방법이 주류가 됨. 따라서 자연스럽게 CNN의 인식률 향상을 위해 ZFNet, VGG, ResNet, GoogLeNet, DenseNet 등이 등장.  
+<br>
 
 1.4. CNN을 통해 영상에서 객체가 무엇(what)인지 인식은 성공하였으나, 객체가 어디(where)에 존재하는 지 고민  
   - R-CNN(Region-based CNN)은 where를 찾기 위해 딥러닝 회귀 방법으로 해결한 초기 연구  
@@ -60,7 +62,7 @@ tags: deep learning
     + CNN 모델로부터 얻은 Feature map은 합성곱 층이 진행됨에 따라 크기가 줄어들며, 이 과정에서 추출된 모든 Feature map들을 추론 과정에 사용하여 객체를 인식함.  
     + 얕은 깊이에서 추출되어 크기가 큰 Feature map은 작은 물체들을 검출할 수 있고, 깊은 깊이에서 추출되어 크기가 작은 Feature map은 큰 물체들을 검출할 수 있음.  
     + SSD는 RPN을 제거함으로써 훈련 속도를 향상시켰으며, 다양한 크기의 Feature map을 이용하여 객체를 인식하기 때문에 YOLO보다 정확함.  
-
+<br>
 
 2.2. 객체 인식 모델  
   - AlexNet  
@@ -102,10 +104,12 @@ tags: deep learning
 <img src="/assets/images/report/cnn-technology-trends/객체인식방법 비교.PNG" width="70%"><br>
   - R-FCN과 SSD는 훈련에 소요되는 시간은 비교적 적지만, 낮은 정확도  
   - Faster R-CNN은 훈련에 소요되는 시간은 비교적 많지만, 높은 정확도  
-  
+<br>
+
 3.2. CNN 모델에 따른 객체 인식 성능 비교  
 <img src="/assets/images/report/cnn-technology-trends/객체인식성능 비교.PNG" width="70%"><br>
   - ResNet-101과 Inception ResNet V2의 정확도가 가장 높음  
+<br>
 
 3.3. 결론  
   - 현재의 객체 인식 기술은 특정 도메인에서의 객체 인식 정확도는 높지만, 일반적인 객체를 인식하는 데는 좋지 못함.  
