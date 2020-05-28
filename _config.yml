@@ -1,23 +1,16 @@
 # Configurations
 markdown: kramdown
-markdown_ext: markdown,mkdown,mkdn,mkd,md
-rouge: pygments
+markdown_ext:  markdown,mkdown,mkdn,mkd,md
 highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: false
-
-# Needed for backward compatibility
-gems: [jekyll-paginate]
 
 # Permalinks
-permalink:        /blog/:year/:month/:day/:title
+permalink:        /blog/:year/:month/:day/:title/
 
 # Setup
-title:            'Welcome to star6973'
-tagline:          
-description:      'A blog using Jekyll Metro'
-url:              'http://192.168.1.11:4000'
+title:            'Abdel Raoof'
+tagline:          'Tangled web dairy of Abdel Raoof'
+description:      'This is personal site of Abdel Raoof Olakara'
+url:              'http://abdelraoof.com'
 baseurl:          ''
 
 # Navigation
@@ -32,59 +25,31 @@ navigation:
   url: /tags/
 - text: Archive
   url : /archive/
-- text: Search
-  url: /search/
-
 
 # Author Details
-author:         'MH.Ji'
+author:         'Abdel Raoof Olakara'
 
 #Social Media links (Use complete URL except for email)
-dribbble:       
-email:          'battlesun99@gmail.com'
-facebook:       'https://www.facebook.com/profile.php?id=100043450430647'
-flickr:         
-github:         'https://github.com/star6973/cse_project'
-gplus:           
-instagram:      
-pinterest:      
-linkedin:       
-rss:            
-stackoverflow:  
-twitter:        
+facebook:       'https://www.facebook.com/olakara'
+github:         'https://github.com/olakara'
+gplus:          'https://plus.google.com/100425464897246255887/'
+linkedin:       'https://ae.linkedin.com/in/olakara/'
+stackoverflow:  'http://stackoverflow.com/users/185655/abdel-raoof'
+twitter:        'https://twitter.com/olakara'
 
 # Google Analytics
-gahandler: 'UA-52149651-1'
+gahandler: 'UA-53220404-1'
 
 #if footersvg is 'true' the social media links will be shown top on the copy right in the footer
 footersvg: 'true'
 
 # Disqus
-disqushandler: 'testingblogo'
-
-# txtpen
-txtpenhandler: 'testingblogo'
+disqushandler: 'abdelraoof'
 
 # Blog Configurations
 paginate: 10 # Posts per page on the blog index
 paginate_path: '/blog/page:num'
 destination: ./_site
 
-# Embed Server-side speaker notes?
-reveal_notes_server: false
-
-# Additional reveal.js options
-reveal_options: 
-
-# Additional reveal.js dependencies
-reveal_dependencies: 
-
-# Reveal.js subdirectory
-reveal_path: reveal.js/
-
 # Custom vars
-version:          0.9x beta 2
-
-remote_theme: olakara/JekyllMetro
-url:  "https://star6973.github.io"
-baseurl:  ""
+version:          0.12 (custom)

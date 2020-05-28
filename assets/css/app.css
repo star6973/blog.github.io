@@ -2,10 +2,18 @@
     text-align: justify;
 }
 
+p {
+font-size: 1.25em;
+}
+
 .publish-tag {
     font-variant: small-caps;
     color: #aaa;
     padding-bottom: 10px;
+}
+
+.post-title {
+text-align: left;
 }
 
 .image-center {
@@ -62,7 +70,7 @@
 }
 
 .left-nav-item {
-    font-size: 18px;
+    font-size: 1.5em;
     text-indent: 100px;
     line-height: 50px;
 }
