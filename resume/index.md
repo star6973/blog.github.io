@@ -1,9 +1,16 @@
 ---
 layout: page
 title: Resume
-description: Resume
+description: Resume of Abdel Raoof
 theme: red
 ---
+Six years of experience in software development on Microsoft and Java technologies. Experienced in design and development of enterprise web applications, content management systems and enterprise application integration.
+
+**Experience in Web Technology:**
+Building and Supporting web applications using Microsoft Technologies (ASP.Net & ASP.Net MVC). Developing UI using Ext JS and jQuery.
+
+**Experience in Enterprise Content Management:**
+Implemented custom applications for content and knowledge management. Have also worked with leading industry ECM applications like SharePoint 2013, MOSS 2007, SharePoint 2010 and Documentum.
 
 <!-- Skills -->
 <section class="row">
@@ -15,15 +22,18 @@ theme: red
 			<div class="col-md-6">
 				<ul class="list-group">
 					<li class="list-group-item active"><h4><strong>Programming</strong></h4></li>
-					<li class="list-group-item">C / C++ / Java / Python</li>
+					<li class="list-group-item">C#</li>
+					<li class="list-group-item">ASP.Net / ASP.Net MVC</li>
 					<li class="list-group-item">Javascript</li>
 					<li class="list-group-item">HTML & CSS</li>
 				</ul>
 			</div>
 			<div class="col-md-6">
 				<ul class="list-group">
-					<li class="list-group-item active"><h4><strong>Tool</strong></h4></li>
-					<li class="list-group-item">Pycharm</li>
+					<li class="list-group-item active"><h4><strong>Specialties</strong></h4></li>
+					<li class="list-group-item">.Net Web Technologies</li>
+					<li class="list-group-item">SharePoint 2013</li>
+					<li class="list-group-item">Sencha Ext Js</li>
 				</ul>
 			</div>
 		</div>
@@ -38,12 +48,12 @@ theme: red
 	<div class="col-md-9">
 		<ul>
 			<li>
-				<h4>AI Training Course for Mobile Robot Recognition and Movement</h4>
-				<p>May 2020 - November 2020, KIRO </p>
+				<h4>Master of Computer Applications (MCA)</h4>
+				<p>2004-2007 - Vellore Institute of Technology</p>
 			</li>
 			<li>
-				<h4>Computer Science Engineering</h4>
-				<p>March 2014 - December 2019, University of Koreatech</p>
+				<h4>Bachelor of Sscience - Computer Science</h4>
+				<p>2001-2004 - University of Calicut</p>
 			</li>
 		</ul>
 	</div>
@@ -57,14 +67,24 @@ theme: red
 	<div class="col-md-9">
 		<ul>
 			<li>
-				<h4>DI.Mosaic Internship</h4>
-				<h5>June 2020 - December 2020</h5>
-				<p>Data Engineer and Machine Learning Engineer</p>
+				<h4>C4 Advanced Solutions</h4>
+				<h5>Present</h5>
+				<p>Working as Application Developer</p>
 			</li>
 			<li>
-				<h4>Daumsoft Internship</h4>
-				<h5>January 2020 - February 2020</h5>
-				<p>Data Analysist and Fullstack Developer</p>
+				<h4>Abdul Samad Al Qurashi</h4>
+				<h5>March 2010 - January 2013</h5>
+				<p>Worked as Web Developer</p>
+			</li>
+			<li>
+				<h4>Samsung SDS</h4>
+				<h5>May 2009 - March 2010</h5>
+				<p>Worked as Web Developer with MIS team</p>
+			</li>
+			<li>
+				<h4>Honeywell Technology Solutions</h4>
+				<h5>December 2006 - December 2008</h5>
+				<p>Worked as Project Trainee & later Software Engineer</p>
 			</li>
 		</ul>
 	</div>
