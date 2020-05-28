@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - Recess
-description: All articles with Recess tag assigned
+title: Tags - Certificate
+description: All articles with Certificate tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>Recess</h3>
+                <h3>Certificate</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'Recess' %}
+                            {% if otag == 'Certificate' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
