@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - Firebase
-description: All articles with Firebase tag assigned
+title: Tags - Algorithm
+description: All articles with Algorithm tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>Firebase</h3>
+                <h3>Algorithm</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'Firebase' %}
+                            {% if otag == 'Algorithm' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
