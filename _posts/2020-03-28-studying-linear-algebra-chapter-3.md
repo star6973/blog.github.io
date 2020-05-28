@@ -6,7 +6,7 @@ categories: MachineLearning
 tag: MachineLearning
 ---
 
-# 선형대수학 공부하기
+# 선형대수학
 ## 챕터3. 컴퓨터에서의 계산(1) - LU 분해로 가자  
 
 [PPT_Slide](https://star6973.github.io/reveal.js/slide/linear-algebra-chapter-3.html)
