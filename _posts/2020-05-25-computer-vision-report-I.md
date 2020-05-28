@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Computer Vision Report I
-date:   2020-05-25 19:00:00
+date:   2020-05-25 19:00:00-22:00:00
 categories: DeepLearning
 tag: DeepLearning
 ---
