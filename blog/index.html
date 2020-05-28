@@ -1,11 +1,9 @@
 ---
 layout: master
-title: Abdel Raoof's Blog
+title: star6973's Github Blog
 description: Landing Page for the blog
 bloghome: true
 ---
-
-
       <div class="container-fluid">
         <div class="row">
           <div class="hidden-xs col-md-2 col-sm-3 orange sidebar">
@@ -26,12 +24,8 @@ bloghome: true
 		              <div class="tags">
                   {% if post.tags %}
               		{% for tag in post.tags %}
-                    {% if tag == 'C#'%}
-                      <a href="/tags/CSharp"><span class="label btn-orange">{{tag}}</span></a>
-                    {% else %}
-                      <a href="/tags/{{tag}}"><span class="label btn-orange">{{tag}}</span></a>
-                    {% endif %}
-                  {% endfor %}
+                			<a href="/tags/{{tag}}"><span class="label btn-orange">{{tag}}</span></a>
+              		{% endfor %}
            		 {% else %}
               		None
             	 {% endif %}
@@ -45,9 +39,9 @@ bloghome: true
             <div class="row">
               <div class="col-sm-6 col-xs-6 text-left">
                   {% if paginator.next_page %}
-                    <a class="btn btn-orange" href="{{paginator.next_page_path}}">← Older</a>
+                    <a class="btn btn-orange" href="{{paginator.next_page_path}}">← previous</a>
                   {% else %}
-                    <span class="btn btn-orange disabled">← Older</span>
+                    <span class="btn btn-orange disabled">← previous</span>
                   {% endif %}
               </div>
               <div class="col-sm-6 col-xs-6 text-right">
@@ -55,14 +49,14 @@ bloghome: true
                     {% if paginator.page == 2 %}
                     <a class="btn btn-orange" href="/blog/">Newer →</a>
                     {% else %}
-                    <a class="btn btn-orange" href="{{paginator.previous_page_path}}">Newer →</a>
+                    <a class="btn btn-orange" href="{{paginator.previous_page_path}}">next →</a>
                     {% endif %}
                   {% else %}
-                    <span class="btn btn-orange disabled">Newer →</span>
+                    <span class="btn btn-orange disabled">next →</span>
                   {% endif %}
               </div>
             </div>
             {% include footer.html %}
-          </div>
+          </div>          
         </div>
       </div>

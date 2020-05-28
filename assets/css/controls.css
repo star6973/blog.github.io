@@ -18,9 +18,9 @@
     height:32px;
     text-decoration: none;
     position:fixed;
-    bottom:138px;
-    right:50px;
-    display:none;
+    top:500px;
+    right:45px;
+    display:none;    
 }
 .scrollToTop:hover{
     text-decoration:none;
