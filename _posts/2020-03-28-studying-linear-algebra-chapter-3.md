@@ -2,7 +2,8 @@
 layout: post
 title: "Studying linear algebra [Chapter 3]"
 date: 2020-03-28 22:30
-tag: LinearAlgebra
+categories: MachineLearning
+tag: MachineLearning
 ---
 
 # 선형대수학 공부하기
