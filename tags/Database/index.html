@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - Github
-description: All articles with Github tag assigned
+title: Tags - Database
+description: All articles with Database tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>Github</h3>
+                <h3>Database</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'Github' %}
+                            {% if otag == 'Database' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
