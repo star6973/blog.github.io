@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Typing Kernel with the Kaggle(Titanic)
-date:   2020-03-14 00:51:20
+date:   2020-03-14 00:51:20-05:14:00
 categories: Kaggle
 tag: Kaggle
 ---
