@@ -2,7 +2,8 @@
 layout: post
 title:  Typing Kernel with the Kaggle(Titanic)
 date:   2020-03-14 00:51:20
-tags: Kernel
+category: Kaggle
+tags: Kaggle
 ---
 
 # 캐글 커널 필사하기
