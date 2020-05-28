@@ -7,7 +7,7 @@ tag: MachineLearning
 use_math: true
 ---
 
-# 선형대수학 공부하기
+# 선형대수학
 ## 챕터1: 벡터, 행렬, 행렬식
 ### 1.1. 벡터와 공간
 #### 1.1.1. 벡터(vector)<br>
