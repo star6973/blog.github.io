@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - Node.js
-description: All articles with Node.js tag assigned
+title: Tags - MachineLearning
+description: All articles with MachineLearning tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>Node.js</h3>
+                <h3>MachineLearning</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'NodeJS' %}
+                            {% if otag == 'MachineLearning' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
