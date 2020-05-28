@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - Ext JS
-description: All articles with Ext JS tag assigned
+title: Tags - Language
+description: All articles with Language tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>Sencha Ext JS</h3>
+                <h3>Language</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'ExtJS' %}
+                            {% if otag == 'Language' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
