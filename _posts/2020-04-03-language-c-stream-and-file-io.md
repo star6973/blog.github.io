@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "C Programming [Stream and File IO]"
-date: 2020-04-03 20:00:00
+date: 2020-04-03 20:00:00-21:00:00
 categories: Language
 tag: Language
 use_math: true
