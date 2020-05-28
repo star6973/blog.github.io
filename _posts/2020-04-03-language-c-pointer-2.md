@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "C Programming [Pointer 2]"
-date: 2020-04-03 15:00:00
+date: 2020-04-03 15:00:00-17:00:00
 categories: Language
 tag: Language
 use_math: true
