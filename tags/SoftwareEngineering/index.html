@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - Travis
-description: All articles with Travis tag assigned
+title: Tags - SoftwareEngineering
+description: All articles with SoftwareEngineering tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>Travis</h3>
+                <h3>SoftwareEngineering</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'Travis' %}
+                            {% if otag == 'SoftwareEngineering' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
