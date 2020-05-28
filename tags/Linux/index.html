@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - PHP
-description: All articles with PHP tag assigned
+title: Tags - Linux
+description: All articles with Linux tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>PHP</h3>
+                <h3>Linux</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'PHP' %}
+                            {% if otag == 'Linux' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
