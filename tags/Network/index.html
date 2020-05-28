@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Tags - JavaScript
-description: All articles with JavaScript tag assigned
+title: Tags - Network
+description: All articles with Network tag assigned
 theme: red
 ---
     <div class="row">
@@ -25,11 +25,11 @@ theme: red
     <div class="row">
         <div class="col-md-12">
             <section>
-                <h3>JavaScript</h3>
+                <h3>Network</h3>
                 <ul>
                     {% for post in site.posts %}
                         {% for otag in post.tags %}
-                            {% if otag == 'JavaScript' %}
+                            {% if otag == 'Network' %}
                                 <li class="alink"><a href="{{ post.url }}" class="red-link">{{ post.title }}</a></li>
                             {% endif %}
                         {% endfor %}
