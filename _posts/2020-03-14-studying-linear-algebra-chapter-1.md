@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Studying linear algebra [Chapter 1]"
+title: "Linear Algebra [Chapter 1]"
 date: 2020-03-14 18:00:30
-categories: LinearAlgebra
-tag: LinearAlgebra
+categories: MachineLearning
+tag: MachineLearning
 use_math: true
 ---
 
