@@ -7,6 +7,8 @@ tag: Language
 use_math: true
 ---
 
+# C++ 예제 3일만에 뽀개기 - Day 3
+
     #include <iostream>
     #include <string>
     using namespace std;
