@@ -27,12 +27,12 @@ tag: OpenCV
 
 7. 영상처리와 딥러닝
 
-8. Instance Recognition and Segmentation
-- R-CNN, Fast-RCNN, Faster R-CNN, Mask R-CNN, ...
+8. Instance Recognition and Segmentation  
+   1. R-CNN, Fast-RCNN, Faster R-CNN, Mask R-CNN, ...
 
-9. 2D/3D 기하학 처리 이론 및 실습
-- 사상, 크기 변경(확대/축소), 보간, 평행이동, 회전, 행렬 연산을 통한 기하학 변환  
-- 어파인 변환, 원근 투시(투명) 변환, 3차원 공간에서의 좌표변환  
+9. 2D/3D 기하학 처리 이론 및 실습  
+   1. 사상, 크기 변경(확대/축소), 보간, 평행이동, 회전, 행렬 연산을 통한 기하학 변환  
+   2. 어파인 변환, 원근 투시(투명) 변환, 3차원 공간에서의 좌표변환  
 
 10. 변환영역 처리 이론 및 실습  
 - 공간 주파수의 이해, 이산 푸리에 변환, 고속 푸리에 변환, FFT를 이용한 주파수 영역, 필터링, 이산 코사인 변환
