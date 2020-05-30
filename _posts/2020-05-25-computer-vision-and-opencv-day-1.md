@@ -2,8 +2,8 @@
 layout: post
 title:  Computer Vision and OpenCV [Day 1]
 date:   2020-05-25 10:30:00-13:00:00
-categories: DeepLearning
-tag: DeepLearning
+categories: OpenCV
+tag: OpenCV
 ---
 
 ## 숭실대학교 이정진 교수님
