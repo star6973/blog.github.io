@@ -6,7 +6,7 @@ categories: OpenCV
 tag: OpenCV
 ---
 
-OpenCV 설치 후 제대로 설치되었는지 아래 코드를 통해 확인
+OpenCV 설치 후 제대로 설치되었는지 아래 코드를 통해 확인  
 
   #include <opencv2/highgui.hpp>
 
@@ -16,7 +16,6 @@ OpenCV 설치 후 제대로 설치되었는지 아래 코드를 통해 확인
     cv::imshow("영상보기", image);
     cv::waitKey(0);
   }
-
 
 Point_ 클래스
 1. 가로와 세로 위치를 2차원 좌표로 나타내기 위한 템플릿 클래스
