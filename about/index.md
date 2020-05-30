@@ -79,11 +79,11 @@ theme: purple
 
 [논문]
 - 포트폴리오 : Reddit으로 작성
-- 논문으로 시작하는 딥러닝(https://github.com/kweonwooj/papers/issues)
-- 논문 정리법(https://github.com/kweonwooj/papers/issues)
+- [논문으로 시작하는 딥러닝](https://github.com/kweonwooj/papers/issues)
+- [논문 정리법](https://github.com/kweonwooj/papers/issues)
 
 [프로젝트]
-- Kaggle Competition(https://kaggle-kr.tistory.com/32)
+- [Kaggle Competition](https://kaggle-kr.tistory.com/32)
 - 빅데이터 공모전 참가(기상청 빅데이터 콘테스트)
 - 국비지원 프로젝트(컴퓨터 비전)
 
