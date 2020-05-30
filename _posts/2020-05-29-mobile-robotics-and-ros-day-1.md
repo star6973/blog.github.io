@@ -71,7 +71,7 @@ tag: DeepLearning
       
 11. 일반적인 모바일 로봇 시스템
     
-    <img src="/assets/images/opencv/6.PNG" width="50%"><br>
+    <img src="/assets/images/ros/2.PNG" width="50%"><br>
 
     1) Localization(자기 위치에서 만들어진 지도)
     2) path : 경로 - 거리(움직이는 길)
@@ -104,8 +104,8 @@ tag: DeepLearning
             : 시맨틱한 정보들(의미있는)
 
 14. From Perception to Understanding
-    raw data        ->      features        ->      objects         ->      places/situations   
-                                                   (주방 기구)                  (주방이구나)  
+    raw data        ->      features        ->      objects(주방 기구)          ->      places/situations(주방이구나)     
+                                                                    
                                          물체를 인식할 수 있으면 소통 가능 => 상황 부여 가능(서비스)  
             < Navigation >             < Interaction >    < Servicing/Reasoning >
               perception                 recognition
