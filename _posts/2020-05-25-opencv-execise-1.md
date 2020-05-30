@@ -266,43 +266,35 @@ using namespace cv;
 using namespace std;
 
 int main() {
-Mat			image(300, 500, CV_8UC1, Scalar(255));
-Point2f		center(250, 150), pts[4];
-Size2f		size(300, 100);
-RotatedRect	rot_rect(center, size, 20);			 // 회전사각형 선언
+	Mat			image(300, 500, CV_8UC3, Scalar(255, 255, 255));
+	Point2f		center(250, 150), pts[4];
+	Size2f		size(300, 100);
+	RotatedRect	rot_rect(center, size, 20);			 // 회전사각형 선언
 
-Rect bound_rect = rot_rect.boundingRect();
-rectangle(image, bound_rect, Scalar(0), 1);		 // 사각형 그리기
-circle(image, rot_rect.center, 1, Scalar(0), 2); // 원 그리기
+	Rect bound_rect = rot_rect.boundingRect();
+	rectangle(image, bound_rect, Scalar(0), 1);		 // 사각형 그리기
+	circle(image, rot_rect.center, 1, Scalar(0), 2); // 원 그리기
 
+	
+	rot_rect.points(pts); // 회전사각형의 꼭짓점 반환
+	for (int i = 0; i < 4; i++) {
+		circle(image, pts[i], 4, Scalar(0), 1);
+		line(image, pts[i], pts[(i + 1) % 4], Scalar(0), 2);
+	}
 
-rot_rect.points(pts); // 회전사각형의 꼭짓점 반환
-for (int i = 0; i < 4; i++) {
-  circle(image, pts[i], 4, Scalar(0), 1);
-  line(image, pts[i], pts[(i + 1) % 4], Scalar(0), 2);
-}
-
-
-//	Point2i topleft;
-//	topleft = bound_rect.tl();
-//	circle(image, topleft, 10, Scalar(128), 3);
-//	circle(image, pts[1], 10, Scalar(128), 3);
-//	line(image, topleft, pts[1], Scalar(128), 5);
-
-
-Point2f		center2(bound_rect.x, bound_rect.y), pts2[4];
-Size2f		size2(bound_rect.width, bound_rect.height);
-RotatedRect	rot_rect2(center, size2, 0);
-rot_rect2.points(pts2);
-for (int j = 0; j < 4; j++) {
-  circle(image, pts2[j], 10, Scalar(128), 3);
+	Point2f		center2(bound_rect.x, bound_rect.y), pts2[4];
+	Size2f		size2(bound_rect.width, bound_rect.height);
+	RotatedRect	rot_rect2(center, size2, 0);
+	rot_rect2.points(pts2);
+	for (int j = 0; j < 4; j++) {
+		circle(image, pts2[j], 10, Scalar(255, 0, 0), 3);
 //		Point2f pts3 = pts2[j] - pts[j];
-//		cout << pts3 << endl;
-  line(image, pts[j]+pts2[j-1], (pts[(j + 1) % 4]+pts2[(j-1) % 4]), Scalar(128), 2);
-}
+		cout << pts2[j] << endl;
+		line(image, pts2[j], pts[j % 4], Scalar(0, 0, 255), 3);
+	}
 
-imshow("회전사각형", image);
-waitKey(0);
-return 0;
+	imshow("회전사각형", image);
+	waitKey(0);
+	return 0;
 }
 ```
