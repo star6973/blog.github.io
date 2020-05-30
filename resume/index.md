@@ -57,7 +57,7 @@ theme: red
 	<div class="col-md-9">
 		<ul>
 			<li>
-				<h4>DI.Mosaic Internship</h4>
+				<h4>DI.Mosaic Startup</h4>
 				<h5>June 2020 - December 2020</h5>
 				<p>Data Engineer and Machine Learning Engineer</p>
 			</li>
@@ -65,6 +65,11 @@ theme: red
 				<h4>Daumsoft Internship</h4>
 				<h5>January 2020 - February 2020</h5>
 				<p>Data Analysist and Fullstack Developer</p>
+			</li>
+			<li>
+				<h4>DoTS Founding Club</h4>
+				<h5>September 2018 - December 2019</h5>
+				<p>Back-End Developer</p>
 			</li>
 		</ul>
 	</div>
