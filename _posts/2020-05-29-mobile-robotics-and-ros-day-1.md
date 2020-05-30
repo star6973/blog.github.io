@@ -105,8 +105,8 @@ tag: DeepLearning
 
 14. From Perception to Understanding  
 
-        raw data      ->      features        ->      objects(주방 기구)          ->      places/situations(주방이구나)     
-                                                                    
-                                                물체를 인식할 수 있으면 소통 가능   => 상황 부여 가능(서비스)  
+        raw data      ->      features        ->      objects(주방 기구)          ->      places/situations(주방이구나) 
+                                                물체를 인식할 수 있으면 소통 가능   => 상황 부여 가능(서비스)
+                                                
                 < Navigation >         < Interaction >                  < Servicing/Reasoning >
                   perception             recognition
