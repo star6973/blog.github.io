@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "C Programming [Preprocessing and Bit]"
-date: 2020-04-03 18:00:00-19:00:00
+date: 2014-06-03 18:00:00-19:00:00
 categories: Language
 tag: Language
 use_math: true
