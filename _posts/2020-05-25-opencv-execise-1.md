@@ -19,7 +19,7 @@ cv::waitKey(0);
 ```
 <img src="/assets/images/opencv/9.PNG" width="50%"><br>
 위의 사진처럼 나오면 ok
-<br>
+<br><br>
 
 Point_ 클래스
 1. 가로와 세로 위치를 2차원 좌표로 나타내기 위한 템플릿 클래스
