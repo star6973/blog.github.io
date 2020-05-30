@@ -7,573 +7,1520 @@ tag: Language
 use_math: true
 ---
 
-```angular2
-#if 0
-
-	namespace의 필요성
-	1. 하나의 프로그램은 수십 ~ 수백개의 파일로 구성될 수 있고,
-	   수십명의 개발자가 같이 작업을 할 수도 있다.
-	
-	2. 함수 및 구조체의 이름 충돌이 발생할 수 있다.
-
-	namespace의 장점
-	1. 프로그램의 다양한 요소(함수, 구조체 등)를 연관된 요소끼리 묶어서 관리할 수 있다.
-
-	2. 기능별로 다른 이름 공간을 사용함으로써 함수/구조체의 이름 충돌을 막을 수 있다.
-
-#include <stdio.h>
-namespace Audio {
-    void init() {
-        printf("Audio init\n");
-    }
-}
-
-namespace Video {
-    void init() {
-        printf("Video init\n");
-    }
-}
-
-// global namespace (namespace를 설정안하면, 자동으로 global로 인식)
-void init() {
-    printf("System init\n");
-}
-
-int main() {
-
-    init();
-    Audio::init();
-    Video::init();
-
-}
-#endif
-```
-
-```angular2
-#if 1
-
-	namespace에 있는 요소 접근 방법 3가지
-	1. "한정된 이름(qualified name)"을 사용한 접근 방법 => Audio::init();
-
-	2. "using 선언(declaration)"을 사용한 접근 => Audio::init();
-											   => init 함수는 Audio 이름없이 사용가능
-
-	3. "using 지시어 (directive)"을 사용한 접근 => using namespace Audio;
-											    => Audio namespace의 모든 요소를 Audio 이름 없이 사용가능
-#include <stdio.h>
-namespace Audio {
-	void init() { printf("Audio init\n"); }
-	void reset() { printf("Audio reset"); }
-}
-void init() { printf("System init\n"); }
-
-int main() {
-
-	Audio::init();
-	// using Audio::init; // using 선언 -> AUdio 안에 있는 특정 함수를 오픈해서 접근 가능하도록
-	// init();
-	// using Audio::reset;
-	using namespace Audio; // Audio 자체를 오픈함 -> Audio 안에 있는 함수 접근 가능
-	reset();
-	::init(); // global로 선언된 함수를 선언
-
-}
-#endif
-```
-
-```angular2
-#if 2
-#include <algorithm>
-using namespace std;
-int main() {
-
-	int n = max(1, 2);
-
-}
-#endif
-```
-
-```angular2
-#if 3
-	표준의 count 함수와 전역변수의 이름 충돌 발생의 예
-
-	count 함수
-	1. C++ 표준이 제공하는 함수 "std" 이름 공간안에 있다.
-	2. <algorithm> 헤더
-
-#include <stdio.h>
-#include <algorithm>
-int count = 10;
-using std::max;
-using namespace std; // 라이브러리 안에 count라는 내장함수도 있음
-int main() {
-
-	printf("%d\n", max(11234143, 2324213));
-	printf("%d\n", std::max(1, 2));
-	printf("count = %d\n", ::count); // global로 선언해줘야, std 라이브러리 안에 있는 내장함수랑 중복되지 않음
-
-}
-#endif
-```
-
-```angular2
-#if 4
-
-	C++ 헤더파일의 특징
-	<stdio.h> vs <cstdio>
-
-#include <cstdio>
-#include <algorithm>
-int main() {
-
-	std::printf("Hello World\n");
-	printf("%d\n", std::max(1, 2));
-
-	int i = 10;
-	printf("i = %d\n", i);
-	{
-		int i = 20;
-		printf("i = %d\n", i);
-	}
-	printf("i = %d\n", i);
-
-}
-#endif
-```
-
-```angular2
-#if 5
-#include <cstdio>
-namespace Audio { void init() { std::printf("Audio::init()\n"); } }
-void PNT() { printf("foo()\n"); }
-namespace STD { 
-	using::PNT;
-	void init() { std::printf("STD::init()\n"); } 
-}
-int main() {
-
-	Audio::init();
-	STD::PNT(); // PNT() 선언과 같음
-	STD::init();
-
-}
-#endif
-```
-
-```angular2
-#if 6
-#include <iostream>
-using namespace std;
-int main() {
-
-	int age = 0;
-	std::cout << "How old are you ? >> ";
-	std::cin >> age;
-	std::cout << "age = " << age << std::endl;
-	cout << "Hello World" << endl;
-
-}
-#endif
-```
-
-```angular2
-#if 7
-#include <iostream>
-#include <iomanip>
-int main() {
-	int n = 10;
-	std::cout << n << std::endl;
-	std::cout << std::hex << n << std::endl; // 16진수로 출력
-	printf("n = %d\n", n);
-	printf("n = %x\n", n);
-	std::cout << "Hello" << std::endl;
-	std::cout << std::setw(10) << "Hello" << std::endl;
-	std::cout << std::setw(10) << std::setfill('#') << "Hello" << std::endl;
-	std::cout << std::setw(10) << std::setfill('#') << std::left << "Hello" << std::endl;
-}
-#endif
-```
-
-```angular2
-#if 8
-
-	일관된 초기화(uniform initialization)
-	1. 변수를 초기화할 떄, "중괄호 {}를 사용해서 초기화"하는것
-
-	일관된 초기화의 장점
-	1. 모든 종류의 변수를 초기화할 때, "하나의 방식(uniform)으로 초기화"할 수 있다.
-
-	2. "데이터 손실이 발생할 경우 컴파일 에러 발생" (prevent narrow)
-
-#include <iostream>
-using namespace std;
-struct Point {
-	int x;
-	int y;
-};
-int main() {
-
-	int n1 = 0xb;
-	cout << n1 << endl;
-
-	bool b = true;
-	b = 3; // b에 3을 넣더라도, bool형이기 때문에 0 아니면 1로 나온다
-	cout << b << endl;
-
-	long long c = 10;
-	cout << sizeof(c) << endl;
-
-	const char* s1 = "aaa";
-	cout << s1 << endl;
-
-	int n2 = 10.5; // 암시적 형변환에 따른 데이터 손실 warning 처리
-	int a[3] = { 1, 2, 3 };
-	int n3 = { 10 };
-	Point pt = { 99, 98 };
-
-}
-#endif
-```
-
-```angular2
-#if 9
-
-auto, decltype
-	1. 변수의 타입을 컴파일러가 결정하는 문법 ==> 컴파일 시간에 결정되므로 실행시간 오버헤드는 없다.
-
-	2. auto	: 우변의 수식(expression)으로 촤변의 타입 결정 ==> 반드시 "초기값(우변식)이 필요"하다.
-
-	3. decltype : "() 안에 표현식"을 가지고 타입을 결정 ==> 초기값이 없어도 된다.
-	
-
-#include <iostream>
-using namespace std;
-int main() {
-
-	int x1 = 10;
-	int x2 = x1;
-	auto x3 = x2; // n2의 타입을 자동으로 맞춰주기(x의 값에 따라)
-
-	decltype(x3) x4;
-	x4 = x2;
-
-	cout << "x1 = " << x1 << endl;
-	cout << "x2 = " << x2 << endl;
-	cout << "x3 = " << x3 << endl;
-	cout << "x4 = " << x4 << endl;
-
-	int y1 = 10;
-	auto y2 = y1;
-	decltype(y1) y3;
-	y3 = y2;
-
-	int y4[3] = { 1, 2, 3 };
-	auto y5 = y4; // 1. int y5[3] = y4 이라고 추론하면 error
-				  // 2. int* y5 = y4라고 추론된다.
-
-	cout << "y1 = " << y1 << endl;
-	cout << "y2 = " << y2 << endl;
-	cout << "y3 = " << y3 << endl;
-	cout << "y4 = " << y4 << endl;
-	cout << "y5 = " << y5 << endl;
-	cout << endl;
-
-	for (int i = 0; i < 3; i++)
-		cout << "y4[" << i << "]" << " = " << y4[i] << endl;
-	cout << endl;
-
-	// y4의 값들도 변환됨(y5는 int* 타입이기 떄문에)
-	y5[0] = 4;
-	y5[1] = 5;
-	y5[2] = 6;
-
-	for (int i = 0; i < 3; i++)
-		cout << "y5[" << i << "]" << " = " << y5[i] << endl;
-	cout << endl;
-
-	for (int i = 0; i < 3; i++)
-		cout << "y4[" << i << "]" << " = " << y4[i] << endl;
-
-	
-
-	int z1[2] = { 1, 2 };
-	auto z2 = z1[0]; // int z2라고 추론된다.
-	
-	cout << z1[0] << ", " << z1[1] << endl;
-	
-	z2 = 7;
-
-	cout << z1[0] << ", " << z1[1] << ", " << z2 << endl;
-
-}
-#endif
-```
-
-```angular2
-#if 10
-
-	decltype과 함수 호출식
-	1. decltype(함수이름) ==> 함수 타입
-	
-	2. decltype(&함수이름) ==> 함수 포인터 타입
-	
-	3. decltype(함수 호출식) ==> 함수 반환 타입
-							 ==> 실제로 함수가 호출되는 것은 아님(평가되지 않는 표현식, unevaluated expression)
-
-	변수의 타입을 조사하는 방법
-	1. typeid(변수이름).name() ==> <typeinfo> 헤더파일 필요
-							   ==> 완벽하게 정확한 타입이 나오지는 않음(const, volatile, reference, static)
-
-#include <iostream>
-using namespace std;
-int foo(int a, double b) {
-
-	std::cout << "foo" << std::endl;
-	return 0;
-
-}
-
-int main() {
-
-	decltype(foo) d1;			// 함수 타입 ==> int(int.double)
-	decltype(&foo) d2;			// 함수 포인터 타입 ==> int(*)(int, double) int(*d2)(int, doublee)
-	decltype(foo(1, 3.12)) d3;	// int 형 타입
-
-	d2 = foo;
-	d2(10, 10.1);
-
-	d2 = &foo;
-	d2(10, 10.1);
-
-	d3 = 5;
-	cout << d3 << endl;
-
-	cout << typeid(d1).name() << endl;
-	cout << typeid(d2).name() << endl;
-	cout << typeid(d3).name() << endl;
-
-	const int c = 0;
-	cout << typeid(c).name() << endl;
-
-}
-#endif
-```
-
-```angular2
-#if 11
-
-	1. using => 기존 "타입의 별칭(alias)"을 만들 때 사용
-			 => C++11부터 도입된 문법
-
-	2. using vs typedef ==> typedef는 "타입의 별칭만 만들 수 있다"
-						==> using은 타입뿐 아니라 "템플릿의 별칭"도 만들 수 있다.
-						==> "template alias"라 함
-
-#include <iostream>
-using namespace std;
-typedef int i32;
-// typedef void *FP(void);
-using FP = void(*)(void); // typedef와 따로 함수에 호출할 필요없음.
-using FG = int(*)(int a, double b);
-
-void foo(void) { cout << "foo() 호출" << endl; }
-int goo(int a, double b) { cout << "goo() 호출" << endl; return 0; }
-
-int main() {
-
-	i32 a = 30;
-	cout << "a = " << a << endl;
-	
-	// void (*fp)(void) = foo;
-	// fp();
-	// 간편하게 사용하기 위해서 위의 typedef 형태로 선언
-	FP fp = &foo;
-	fp();
-
-	FG ft = &goo;
-	ft(3, 5.5);
-
-}
-#endif
-```
-
-```angular2
-#if 12
-
-	constexpr
-	1. 컴파일 시간 상수를 만드는 새로운 키워드 ==> "컴파일 시간에 결정되는 상수 값"으로만 초기화할 수 있다.
-	2. "C++11"에서 도입된 문법
-
-	compile time : 파일을 만들 때 실행되는 시간
-	run time : 메모리에 올라온 변수를 확인하는 시간
-
-#include <cstdio>
-int main() {
-
-	const int c1 = 10;		// 변경 불가능
-	constexpr int c2 = 0;	// 변경 불가능
-
-	int i = 10;				// 변수의 선언은 런타임에 결정이 됨 ==> 또 다른 배열의 크기로 선언할 수 없음(늦기 때문에)
-	// int arr1[i];			// 배열의 선언은 컴파일 타임에 결정이 되므로, 런타임에 결정되는 상수로는 불가능
-
-	const int j = 10;		// 컴파일 타임에 j의 값이 결정된다.  
-	int arr2[j];
-
-	const int k = i;		// 런타임에 k의 값이 결정된다.
-	// int arr3[k];
-
-	constexpr int m = 10;	// constexpr는 무조건 컴파일 타임에 결정이 됨
-	int arr4[m];
-
-	constexpr int n = j;
-	int arr5[n];
-
-}
-#endif
-```
-
-```angular2
-#if 13
-	
-	structured binding 개념, 사용법
-
-#include <iostream>
-using namespace std;
-struct Point {
-	int x{ 10 };
-	int y{ 20 };
-};
-int main() {
-
-	Point pt;
-
-//	int x = pt.x;
-//	int y = pt.y;
-
-	// 위의 변수 선언이랑 같은 방법
-	// C++17 버전부터 사용가능
-	// i = 10, j = 20
-	auto [i, j] = pt;
-	cout << i << ", " << j << endl;
-
-	int arr[2] = { 1, 2 };
-	auto [m, n] = arr;
-	cout << m << ", " << n << endl;
-
-	const auto [p, q] = pt;
-	auto& [c, d] = pt; // int& c = pt.x, double& d = pt.y
-
-}
-#endif
-```
-
-```angular2
-#if 14
-	
-	C++에서 문자열 처리하는 방법(std::string 사용법)
-
-
-#include <cstdio>
-#include <cstring>
-#include <iostream>
-using namespace std;
-
-void foo(const char* s) {
-	printf("foo: %s\n", s);
-}
-
-int main() {
-
-	// char s1[32] = "hello";
-	string s1 = "hello";
-
-	// const char* s2 = "world";
-	string s2 = "world";
-
-	s1 = s2;	
-	cout << s1 << " " << s2 << endl;
-
-	if (s1 == s2) { cout << "같은 문자열" << endl; }
-	else { cout << "다른 문자열" << endl; }
-
-	string s3 = "c++";
-	foo(s3.c_str()); // const char* 형태로 변환해서 넘겨줌(객체 -> 문자열로 변환)
-
-}
-#endif
-```
-
-```angular2
-#if 15
-
-	default parameter
-	1. 함수 호출시 인자를 전달하지 않으면 "미리 지정된 인자값"을 사용할 수 있다.
-	
-	주의사항 2가지
-	1. 함수의 "마지막 인자부터 차례대로 디폴트값을 지정"해야 한다.
-	2. 함수를 선언과 구현으로 분리할 때는 "함수 선언부에만 디폴트값을 표기"해야 한다.
-
-
-#include <iostream>
-using namespace std;
-
-void setAlarm(int h, int m = 0, int s = 0) { cout << h << "시 " << m << "분 " << s << "초입니다" << endl;  }
-// void setAlarm(int h, int m) { cout << h << "시 " << m << "분입니다" << endl; }
-// void setAlarm(int h) { cout << h << "시입니다" << endl; }
-
-void foo(int a, int b = 0, int c = 10) { cout << a << ", " << b << ", " << c << endl; }
-
-int main() {
-	
-	setAlarm(3, 4, 5);
-	setAlarm(3, 0, 0);
-	setAlarm(3);
-	setAlarm(3, 30);
-
-	foo(10);
-	foo(10, 20, 30);
-
-}
-#endif
-```
-
-```angular2
-#if 16
-
-	함수 오버로딩(function overloading)
-    // int add(int a, int b) { std::cout << "int add()" << std::endl;  return a + b; }
-    // double add(double a, double b) { std::cout << "double add()" << std::endl; return a + b; }
+    //go to 는 절대 쓰지 않는다.
+    //switch 의 경우 쓸일이 적음
+
+    #include <iostream>
+    using namespace std;
     
-    // 위의 두 가지 형태의 함수를 하나로 묶기
+    void main(void)
+    {
+        int income, tax;
+    
+        cout <<"Enter income: ";
+        cin>>income;
+    
+        if(income<=1000)
+            tax =(int)(0.09*income);  // 형변환(type casting)
+        else if(income<4000)
+            tax =(int)(0.18*income);
+        else if(income<=8000)
+            tax =(int)(0.27*income);
+        else
+            tax =(int)(0.36*income);
+        cout<<tax<<endl;
+    
+    }
 
-	템플릿을 만들고 사용하는 방법
-	1. template parameter ==> 컴파일 시간에 전달되어서 함수가 생성
-					      ==> 함수가 생성되는 과정을 "템플릿 인스턴스화(template instantiation)"이라고 한다.
+---
 
-	2. call parameter ==? 실행시간에 함수에 전달
-	
-	3. template parameter를 표기할 때, "typename" 또는 "class" 키워드 사용가능
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {
+        int fruit;
+    
+        cout<<"Enter number: ";
+        cin>>"fruit";
+        
+        switch (fruit)
+        {
+        case 1 : cout<<"apple \n";
+            break;
+        case 2 : cout<<"pear \n";
+            break;
+        case 3 : cout<<"banana \n";
+            break;
+        default:cout<<"fruit \n";
+            break;
+        }
+    }
 
-	4. 함수 템플릿 사용시 타입을 명시적으로 지정하지 않으면 "함수 호출 인자를 보고 컴파일러가 결정(type deduction, 추론/연역)"
+---
 
-#include <iostream>
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {	
+        int days, month, year;
+    
+        cout << "일수를 알고 싶은 해의 달을 입력하시오: "; 
+        cin>> year>>month;
+    
+        switch (month){
+            case 1 : case 3 : case 5:
+            case 7 : case 8 : case 10: case 12:
+                days=31;
+                break;
+            case 4 : case 6: case 9: case 11:
+                days=30;
+                break;
+            case 2:
+                if(((year%4==0)&&(year%100 !=0)) ||(year%400==0))
+                    days=29;
+                else
+                    days=28;
+                break;
+            default:
+                cout <<"입력이상"<<endl;
+                break;
+        }
+        cout<<"월의 날수는"<<days<<endl;
+    
+    }
 
-template<typename T> 
-// call parameter
-T add(T a, T b) { std::cout << "add(): " << a + b << std::endl; return a + b; }
+## 구구단
 
-int main() {
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {	
+        int n, i;
+        cout <<"출력단을 입력:";
+        cin>> n;
+    
+        i=1;
+        while(i<=9)
+        {
+            cout<<n<<"*"<<i<<"="<<n*i<<endl; //구구단 만들기
+            i++; //지속적으로 값을 높여줘야지 가능
+        }
+    
+    }
 
-	add(10, 20);
-	// add(10, 30.5);	// 명시적으로 지정되지 않은 함수 호출 시, 인자를 보고 결정하지만, 선언된 함수는 이 조건에 부합하지 않음.
-	add(10.2, 20.2);
 
-	add<int>(10, 20);
-	add<double>(10.2, 20.20);
-	add<char>('a', 'b');
+## 최대 공약수 만들기
 
-	return 0;
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {	
+        int x,y,r; //최대 공약수 만들기
+    
+        cout<< "두개의 정수 입력(큰수, 작은수): "; // 숫자에 대해서 나오는 순서는 상관이 없다
+        cin >>x>>y;
+    
+        while(y !=0)
+        {
+            r=x%y; //나머지 계산하기
+            x=y;
+            y=r;
+        }
+        cout <<"최대공약수는"<<x<<"입니다.\n";
 
-}
-#endif
-```
+## 난수 발생기를 통해서 숫자 찾기
+
+    #include <iostream>
+    #include <cstdlib> //시간값
+    #include <ctime>
+    using namespace std;
+    
+    void main(void)
+    {	
+        int answer, guess;
+        int tries=0;
+    
+        srand(time(NULL)); //시간에 따라 난수 발생기 변환
+        answer = 1 + rand()%50; //1~50까지 만드는거
+    
+        do
+        {
+            cout<<"정답 추측:";
+            cin>>guess;
+            tries++;
+            if(guess>answer)
+                cout<<"너무 큼.\n";
+            if(guess<answer)
+                cout<<"너무 작음.\n";
+        }
+        while (guess!=answer);
+        cout<<"횟수: "<<tries<<endl;
+
+---
+
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {
+        double fact =1; //곱을 구하는 경우 1로 초기화
+        int n;
+        
+        cout<<"정수 입력: ";
+        cin >>n;
+    
+        for(int i =1; i<=n; i++)
+            fact *=1; //fact=fact*i;
+        cout<<n<<"!은"<<fact<<"입니다\n";
+    
+        cout <<fixed;
+        cout.precision(4);
+        cout <<n<<"!은 "<<fact<<"입니다\n";
+    
+        printf("%.4lf\n", fact);
+    }
+
+## 제곱근 구하기
+
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {
+        double value;
+    
+        while(true) //무한 loop, for(;;)
+        {
+            cout<<"실수값 입력: ";
+            cin>>value;
+    
+    
+            if(value<0.0)
+                break;
+            cout<<value<<"의 제곱근은"<<sqrt(value)<<"입니다.\n";
+        }
+    
+    }
+
+## 대문자 만들기
+
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {
+        char letter;
+    
+        while(true)
+        {
+            cout<<"ENTER LOWER CASE LETTER:";
+            cin>>letter;
+    
+            if(letter == 'Q')
+                break;
+            if(letter <'a'|| letter>'z')
+                continue;
+            letter-=32;
+            cout<<"대문자:"<<letter<<endl;
+        }
+    
+    }
+
+## 기울기를 이용해 삼각형 가능/불가능 찾기
+
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {
+        double x1, y1, x2, y2, x3, y3;
+        double slope1, slope2;
+    
+        cout<<"첫번째 점의 위치를 알려주세요(X,Y 좌표)"<<endl;
+        cin>>x1>>y1;
+        cout<<"두번째 점의 위치를 알려주세요(X,Y 좌표)"<<endl;
+        cin>>x2>>y2;
+        cout<<"세번째 점의 위치를 알려주세요(X,Y 좌표)"<<endl;
+        cin>>x3>>y3;
+    
+        slope1 = (y2-y1)/(x2-x1);
+        slope2 = (y3-y1)/(x3-x1);
+        cout<<slope1<<","<<slope2;
+    
+        if(slope1==slope2)
+            cout<<"삼각형 불가"<<endl;
+        else
+            cout<<"삼각형 가능"<<endl;
+    
+    }
+
+## 2진수를 10진수로 만드는 방법
+ 
+    #include <iostream>
+    using namespace std;
+    
+    void main(void)
+    {
+        int num, i=0;
+        int decimal =0;
+        int digit;
+    
+        cout<<"2진수를 입력해 주시길 바랍니다"<<endl;
+        cin>> num;
+    
+        cout<<"2진수를 10진수로"<<endl;
+    
+        while(num !=0)
+        {
+            digit= num%10;
+            decimal = decimal + digit * pow(2.0, i);
+            num /=10;
+            i++;
+        }
+        cout <<decimal<<endl;
+    }
+
+---
+
+    #include <iostream>
+    #include <cmath>
+    using namespace std;
+    
+    void main()
+    {
+        int num, i, decimal = 0;
+        int digit;
+    
+        cout << "Enter binary number : ";
+        cin >> num;
+    
+        while(num != 0)
+        {
+            digit = num %10;
+            decimal = decimal + digit * pow(2.0, i);
+            num /= 10;
+            i++;
+        }
+        cout << decimal << endl;
+    }
+
+---
+
+    #include <iostream>
+    #include <cctype>
+    using namespace std;
+    
+    void main()
+    {
+        char ch;
+        cout<<"문자를 입력:";
+        cin>>ch;
+    
+        if(isupper(ch))   // ----> 대문자로 변환하고 싶으면 islower(ch)
+        {
+            ch=tolower(ch); //소문자로 변환   // ----> 대문자로 변환하고 싶으면 toupper(ch)
+            cout<<ch<<endl;
+        }
+        else
+            cout<<"대문자를 입력"<<endl;
+    }
+
+---
+
+    //cin은 공백, 개행문자 무시
+    //따라서 공백이나 개행문자를 읽으려면 cin.get() 사용 (엔터키를 쓸때까지)
+
+    void main()
+    {
+        char ch;
+        int count=0;
+    
+        cout<<"입력:";
+        //cin>>ch;  cin은 안됨
+        ch=cin.get();
+        while(ch!='\n')
+        {
+            if(ch=='a')
+                count++;
+            ch=cin.get();
+        }
+        cout<<"a 개수"<<count<<endl;
+    }
+    
+---
+
+    int compute_sum(int);
+    
+    void main()
+    {
+        int n,sum;
+        cout<<"Enter number:";
+        cin>>n;
+    
+        sum=compute_sum(n); /// 값에 의한 호출 Call-by-Value
+        cout<<sum<<endl;
+        cout<<&n<<endl;
+    }
+    
+    int compute_sum(int n) 
+    {
+        int result=0;
+    
+        cout<<&n<<endl;
+        for(int i=0;i<=n;i++)
+            result+=i;
+        return result;
+    }
+
+---
+
+    // 디폴트 매개변수는 함수 원형에만 정의, 반드시 뒤에서부터 정의한다, 되도록 사용하지 않는다
+    int calc_deposit(int salary=200,int month=12); 
+    
+    void main()
+    {
+        cout<<"default parameter 0\n";
+        cout<< calc_deposit(100,6) <<endl;
+    
+        cout<<"default parameter 1\n";
+        cout<< calc_deposit(100) <<endl;
+    
+        cout<<"default parameter 2\n";
+        cout<< calc_deposit() <<endl;
+    }
+    
+    int calc_deposit(int s,int m)
+    {
+        return s*m;
+    }
+
+---
+
+    #include <iostream>
+    using namespace std;
+       
+    // inline 함수, 길이가 짧은 함수의 경우 함수 호출에 대한 overhead를 줄일 수 있다.
+    inline double square(double);  
+    
+    void main()
+    {
+        double result;
+        cout<<square(2.0)<<endl;  // 2.0*2.0으로 치환
+        cout<<square(3.0)<<endl;  // 3.0*3.0으로 치환
+    }
+    double square(double n)
+    {
+        return n*n;
+    }
+
+---
+
+    // 변수의 scope(사용 영역) 예제
+    void Function(int);
+    
+    int num; // 전역변수,함수 외부에서 선언
+             // 모든 함수에서 사용 가능
+             // 자동으로 초기화(0)
+             // 되도록 사용하지 않는다
+    
+    void main()
+    {
+        int val=10;   // 지역변수,함수 내부에서 선언
+                      // 지역변수는 선언된 함수 내에서만 사용 가능
+                      // 자동 초기화 안됨
+        
+        cout<<num<<","<<val<<endl;
+        function(val); // 함수에서 값을 바꿔도 변하지 않는다
+        cout<<num<<","<<val<<endl;
+    }
+    void function(int n)
+    {
+        int val=100;  // 함수가 다르면 동일 이름의 변수 사용 가능
+                      // 지역변수는 사용영역이 함수 내부로 제한되기 때문
+    
+        n=1000;
+        num=200;
+    }
+
+---
+
+    // static변수
+    void function();
+    
+    void main() 
+    {
+        for(int i=0;i<5;i++)
+            function();
+    }
+    
+    void function()
+    {
+        int num=0; // 지역변수
+        static int snum=0;  // static 변수는 단 한번만 초기화 된다.
+                            // 호출되면 변화된 값을 유지한다.
+        cout<<num<<","<<snum<<endl;
+        num++;
+        snum++;
+    
+        cout<<"function 호출 횟수: "<<snum<<endl;
+    }
+
+
+---
+
+    extern int sum;  // 외부 파일에 있는 변수, 전역변수만 extern이 될 수 있다
+    extern int get_square(int); // 외부 파일에 있는 함수;
+    
+    void main()
+    {
+        int num=5;
+        cout<<get_square(num)<<endl;
+        cout<<sum<<endl;
+    }
+ 
+---
+
+    const int STUDENTS=5; // 통상 상수는 main 함수 이전에 선언
+    
+    void main()
+    {
+        int grade[STUDENTS];  // 변수로는 배열 크기 설정할 수 없음
+        int sum=0,i,average;
+        /*
+        int num=10;
+        int score[num];
+        */     // 컴파일 에러----> const를 붙여주자
+    
+        for(i=0;i<STUDENTS;i++)
+        {
+            cout<<"성적 입력: ";
+            cin>>grade[i];
+        }
+        for(i=0;i<STUDENTS;i++)
+            sum+=grade[i];
+    
+        average=sum/STUDENTS;
+        cout<<"평균: "<<average<<endl;
+    }
+
+---
+
+    const int SIZE=5;
+    
+    void main()
+    {
+        int a[SIZE] = {1,2,3,4,5};
+        int b[SIZE],i;
+    
+        for(i=0;i<SIZE;i++)       // b=a; error
+            b[i]=a[i];
+    
+        for(i=0;i<SIZE;i++)       // a=b; error
+            if(a[i]!=b[i])
+            {
+                cout<<"다른 배열\n";
+                break;
+            }
+        if(i==SIZE)
+            cout<<"같은 배열\n";
+    }
+ 
+---
+ 
+    void main()
+    {
+        int grade[100];
+        int i,max,min;
+    
+        srand((unsigned int)time(NULL));
+        for(i=0;i<10;i++)
+        {
+            grade[i]=rand();
+            cout<<grade[i]<<endl;
+        }
+        max=min=grade[0];
+        for(i=1;i<10;i++)
+        {
+            if(max<grade[i])
+                max=grade[i];
+            if(min>grade[i])
+                min=grade[i];
+        }
+        cout<<"Max: "<<max<<endl;
+        cout<<"Min: "<<min<<endl;
+    }
+
+---
+
+    int global_array[5]; // 전역 배열은 자동 초기화
+    
+    void main()
+    { 
+        int local_array[5]={0}; // 지역 배열은 자동 초기화 되지 않는다
+        int grade[]={31,52,43,34,25};
+    
+        for(int i=0;i<5;i++)
+        {
+            cout<<global_array[i]<<endl;
+            cout<<local_array[i]<<endl;
+            cout<<grade[i]<<endl<<endl;
+        }
+    }
+
+------------------------------------------------------
+
+    void main()
+    {
+        int freq[10];
+        int i,score;
+    
+        for(i=0;i<10;i++)
+            freq[i]=0;
+        while(true)
+        {
+            cout<<"숫자 입력(0-9(종료-1)) : ";
+            cin>>score;
+            if(score<0)
+                break;
+            freq[score]++;  // 입력값을 배열의 첨자로 활용
+        }
+        cout<<"값 빈도\n";
+        for(i=0;i<10;i++)
+            cout<<i<<" "<<freq[i]<<endl;
+    }
+    
+---
+
+    void main()
+    {
+        int array[10]={0}, i;
+        int num,max;
+    
+        srand((unsigned int)time(NULL));
+        for(i=0;i<100;i++)
+        {
+            num=rand()%10;
+            array[num]++;  // array[rand()%10]++;
+        }
+    
+        for(i=0;i<10;i++)  // 배열 출력
+            cout<<i<<" : "<<array[i]<<endl;
+    
+        max=0;  // 최댓값 찾기
+        for(i=1;i<10;i++)
+            if(array[max]<array[i])
+                max=i;
+    
+        cout<<"가장 많이 생성된 수는: "<<max<<endl;
+        cout<<"횟수 : "<<array[max]<<endl;
+    }
+
+----------------------------------------
+
+    #include <iostream>
+    #include <iomanip>         // setw() 칸수 제어
+    using namespace std;
+    
+    
+    void main()
+    {
+        int s[3][5] = { 0 };
+        int i, j, value = 0;
+    
+        for (i = 0; i < 3; i++)
+            for (j = 0; j < 5; j++)
+                s[i][j] = value++;
+        for (i = 0; i < 3; i++)
+        {
+            for (j = 0; j < 5; j++)
+                cout << setw(3) << s[i][j];  // ==printf("%3d",s[i][j])
+        }
+        cout << endl;
+    }
+
+--------------------------------------------------------
+
+    #include <iostream>
+    using namespace std;
+    
+    void main()
+    {
+        int grade[8] = { 3,6,1,3,6,7,5,7};
+        int select[8] = { 0 };
+    
+        for (int i = 0; i < 8; i++)
+            cout << grade[i] << " ";
+    
+        cout << endl << endl;
+    
+        for (int i = 0; i < 8; i++)
+        {
+            for(int j=0;j<8;j++)
+                if (grade[j] > grade[j + 1])
+                {
+                    select[j] = grade[j];
+                    grade[j] = grade[j + 1];
+                    grade[j + 1] = select[j];
+                }
+        }
+    
+        for (int i = 0; i < 8; i++)
+            cout << grade[i] << " ";
+    }
+
+--------------------------------------
+
+    #include <iostream>
+    #include <ctime>
+    using namespace std;
+    
+    void main()
+    {
+        int i;
+        time_t start, end; // time_t == long
+    
+        start = clock();
+    
+        for (int i = 0; i < 10000000; i++); // 천만번
+    
+        end = clock();
+        cout << (double)(end - start) / CLOCKS_PER_SEC << endl << endl;
+    
+    }  // 천만번까지 세는데 시간
+
+## 순차배열
+
+    #include <iostream>
+    using namespace std;
+    
+    const int SIZE=10;
+    
+    void selection_sort(int list[],int n);
+    void print_list(int list[],int n);
+    
+    int main()
+    {
+        int grade[SIZE]={3,2,9,7,1,4,5,9,2,8};
+        cout<<"원래의 배열"<<endl;
+        print_list(grade,SIZE);
+    
+        selection_sort(grade,SIZE);
+    
+        cout<<"정렬된 배열"<<endl;
+        print_list(grade,SIZE);
+    
+        return 0;
+    }
+    
+    void print_list(int list[],int n)
+    {
+        int i;
+        for(i=0;i<n;i++)
+            cout<<list[i]<<" ";
+        cout<<endl;
+    }
+    
+    void selection_sort(int list[],int n)
+    {
+        int i,j,temp,least;
+    
+        for(i=0;i<n-1;i++)
+        {
+            least=i;
+    
+            for(j=i+1;j<n;j++)
+            {
+                if(list[j]<list[least])
+                    least=j;
+            }
+            temp=list[i];
+            list[i]=list[least];
+            list[least]=temp;
+        }
+    }
+ 
+## 이진탐색
+
+    #include <iostream>
+    using namespace std;
+    
+    const int SIZE=10;
+    
+    int binary_search(int list[],int n,int key);
+    
+    int main(void)
+    {
+        int key;
+        int grade[SIZE]={1,2,3,4,5,6,7,8,9};
+    
+        cout<<"탐색할 값을 입력하시오:";
+        cin>>key;
+        cout<<"탐색결과:"<<binary_search(grade,SIZE,key)<<endl;
+        return 0;
+    }
+    int binary_search(int list[],int n,int key)
+    {
+        int low,high,middle;
+    
+        low=0;
+        high=n-1;
+    
+        while(low<=high)
+        {
+            middle=(low+high)/2;
+            if(key==list[middle])
+                return middle;
+            else if(key>list[middle])
+                low=middle+1;
+            else
+                high=middle-1;
+        }
+        return -1;
+    }
+
+
+    //모든 포인터 변수는 타입에 관계 없이 4바이트를 할당한다
+    //포인터 변수는 메모리 주소를 갖기 위한 변수이고
+    //주소는 4바이트를 사용하기 때문이다.
+
+    #include <iostream>
+    using namespace std;
+    
+    void main()
+    {
+        int i=30;
+        int *pi=&i;
+    
+        printf("%d %d\n",&i,i);
+        printf("%d %d %d\n",pi,*pi,&pi);
+        // pi: 포임터 변수가 참조하는 곳의 주소
+        // *pi: 포인터 변수가 참조하는 곳의 값
+        // &pi: 포인터 변수의 메모리 주소
+    
+        char ch='a';
+        char *pc;
+        pc=&ch;
+        printf("%c %d\n",ch,&ch);
+        printf("%c %d %d\n",*pc,pc,&pc);
+    
+        double d=3.14;
+        double *pd=&d;
+        printf("%.2lf %d\n",d,&d);
+        printf("%.2lf %d %d\n",*pd,pd,&pd);
+    
+        printf("%d %d %d\n",sizeof(pi),sizeof(pc),sizeof(pd));
+    }
+
+-----------------------------------------------------------
+
+    void main()
+    {
+        int i=10;
+        int *ptr;
+    
+        ptr=&i;
+        printf("%d %d\n",i,&i);
+        printf("%d %d %d\n",*ptr,ptr,&ptr);
+    
+        *ptr=100;
+        printf("%d %d\n",i,&i);
+        printf("%d %d %d\n",*ptr,ptr,&ptr);
+    
+        (*ptr)++;
+        printf("%d %d\n",*ptr,i);
+    
+        *ptr+=1;
+        printf("%d %d\n",*ptr,i);
+    
+        printf("%d %u %x %x %p\n",&i,&i,&i,&i,&i);
+    }
+
+------------------------------------------------------------------
+
+    void main()
+    {
+        char ch[]={'a','b','c'};
+        int num[]={1,2,3};
+        double d[]={1.1,2.2,3.3};
+    
+        char *pc=ch;   // 배열의 이름은 배열의 시작 주소를 의미한다.
+        int *pi=num;
+        double *pd=d;
+    
+        printf("%d %d %d\n",ch,num,d);
+        printf("%d %d %d\n",pc,pi,pd);
+        pc++; // 자료형에 따라 더하는 값이 바뀜 -> char형이므로 1바이트므로 1개씩
+        pi++; // int형이므로 4바이트이므로 4개
+        pd++;
+        printf("%d %d %d\n",pc,pi,pd);
+    
+        pi=&num[2];
+        cout<<*pi<<","<<num[2]<<endl;
+        //num=pi; 배열의 주소는 바꿀수 없다.(배열상수,포인터변수)
+    
+    }
+
+------------------------------------------------------
+
+    void main()
+    {
+        int num[]={10,20,30};
+        int *pi=num;
+    
+        for(int i=0;i<3;i++)
+        {
+            cout<<num[i]<<","<<*(pi+i)<<endl;
+            cout<<&num[i]<<","<<pi+i<<endl;
+        }
+        for(int i=0;i<3;i++)
+        {
+            cout<<num[i]<<","<<*pi<<endl;
+            cout<<&num[i]<<","<<pi<<endl;
+            pi++; // pi의 기준값이 바뀜
+        }
+        cout<<pi<<endl; // 범위에 벗어난 값
+        pi=num;
+        cout<<pi<<endl;  // 배열의 시작위치로 이동
+    }
+
+-------------------------------------------------
+
+    void main()
+    {
+        int *pi=NULL;  // NULL로 초기화하는 경우(아무것도 가리키지 않는다)
+    
+        pi=new int;  // pi가 참조하는 4바이트 할당
+        cout<<pi<<" : "<<*pi<<endl;
+        *pi=100;
+        cout<<pi<<" : "<<*pi<<endl;
+    
+        delete pi;
+    
+        int *ptr=new int[5];
+    
+        for(int i=0;i<5;i++)
+        {
+            cout<<"Enter number :";
+            cin>>ptr[i];
+        }
+        for(int i=0;i<5;i++)
+            cout<<ptr[i]<<endl;
+        delete []ptr;
+    }
+
+--------------------------------------------
+
+    void main()
+    {
+        int num;
+        int *ptr;
+    
+        cout<<"Enter number of data: ";
+        cin>>num; 
+            // int arr[]; 배열을 쓰면 메모리를 무조건 정해주어야한다. 만약에 10000개를 써놓고 100개만 쓰면 
+                   // 엄청난 데이터의 손실이 되기때문에 메모리 동적할당을 하게 되면 나중에 메모리를
+                   // 쓰고 싶은 만큼 쓸 수 있다
+                
+        ptr=new int[num];  // 동적 메모리 할당
+                         // 실행 시간에 필요한 메모리 할당 가능
+    
+        for(int i=0;i<num;i++)
+        {
+            cout<<"Enter data: ";
+            cin>>ptr[i];
+        }
+        for(int i=0;i<num;i++)
+            cout<<ptr[i]<<endl;
+        delete []ptr;
+    }
+
+-------------------------------------
+
+    #include <iostream>
+    using namespace std;
+    
+    void swap2(int *,int *); //call by reference(주소는 반드시 포인터로 받는다)
+    
+    void main()
+    {
+        int n1=10,n2=20;
+    
+        cout<<&n1<<","<<&n2<<endl;
+    
+        swap2(&n1,&n2);
+        cout<<n1<<","<<n2<<endl;
+    }
+    void swap2(int *n1,int *n2) // 주소는 반드시 포인터로 받는다
+    {
+        int temp;
+        cout<<n1<<","<<n2<<endl; // main의 변수들과 같은 주소
+        temp=*n1;
+        *n1=*n2;
+        *n2=temp;
+        cout<<"swap2: "<<*n1<<","<<*n2<<endl;
+    }
+
+-----------------------------------------------
+    
+    #include <iostream>
+    using namespace std;
+    
+    void min_max(int [],int *,int *);
+    
+    void main()
+    {
+        int array[]={3,2,5,6,4};
+        int min,max;
+    
+        min_max(array,&min,&max); // min,max의 주소 전달
+        cout<<"Min: "<<min<<endl;
+        cout<<"Max: "<<max<<endl;
+    }
+    
+    void min_max(int a[],int *min,int*max)
+    {
+        int i;
+    
+        *min=*max=a[0];
+        for(i=1;i<5;i++)
+        {
+            if(*min>a[i])
+                *min=a[i];
+            if(*max<a[i])
+                *max=a[i];
+        } //main에 있는 min,max의 주소에 값을 저장
+    }
+
+--------------------------------------------------
+
+    #include <iostream>
+    using namespace std;
+    /*
+    void get_sum_diff(int *a,int *b,int *p_sum,int *p_diff);
+    
+    void main()
+    {
+        int A=10,B=20;
+        int sum;
+        int diff;
+        get_sum_diff(&A,&B,&sum,&diff);
+        cout<<"두 수의 합:"<<sum<<"두 수의 차:"<<diff<<endl;
+    }
+    
+    void get_sum_diff(int *a,int *b,int *p_sum,int *p_diff)
+    {
+        *p_sum=*a+*b;
+        *p_diff=*a-*b;
+    }
+    */  ---------------> 수의 합과 차
+    
+    void get_sum_diff(int A[],int B[],int *p_sum,int *p_diff)
+    {
+        for(int i=0;i<5;i++)
+        {
+            p_sum[i]=A[i]+B[i];
+            p_diff[i]=A[i]-B[i];
+        }
+        cout<<"두 배열의 합"<<endl;
+        for(int i=0;i<5;i++)
+        {
+            cout<<p_sum[i]<<" ";
+        }
+        cout<<endl<<endl;
+        cout<<"두 배열의 차"<<endl;
+        for(int i=0;i<5;i++)
+        {
+            cout<<p_diff[i]<<" ";
+        }
+    }
+    
+    void main()
+    {
+        int A[5]={5,4,3,2,1};
+        int B[5]={1,2,3,4,5};
+        int sum[5];
+        int diff[5];
+        get_sum_diff(A,B,sum,diff);
+    }  ----------------------> 배열의 각각 합과 차
+
+--------------------------------------------------
+
+    #include <iostream>
+    #include <string>
+    using namespace std;
+    
+    void Swap(int *,int *);
+    
+    void main()
+    {
+        int A[5]={1,2,3,4,5};
+        int B[5]={9,8,7,6,5};
+        
+        Swap(A,B);
+    }
+    
+    void Swap(int *a,int *b)
+    {
+        int temp[5];
+        for(int i=0;i<5;i++)
+        {
+            temp[i]=a[i];
+            a[i]=b[i];
+            b[i]=temp[i];
+        }
+        cout<<"A[]"<<endl;
+        for(int i=0;i<5;i++)
+        {
+            cout<<a[i]<<" ";
+        }
+        cout<<endl<<endl;
+        cout<<"B[]"<<endl;
+        for(int i=0;i<5;i++)
+        {
+            cout<<b[i]<<" ";
+        }
+    } ---------------> 배열의 값을 서로 바꾸는것
+    /*
+    void main()
+    {
+        string s1="This is a test";
+        string s2;
+    
+        cout<<s1<<endl;
+        cout<<"Enter string:";
+        cin>>s2;
+        cout<<s2<<endl;
+    }
+    */ ---------------> string 함수
+
+-----------------------------------------------
+
+    void main()
+    {
+        string s1; // ----> string은 널문자 포함 안함
+    
+        cout<<"enter string: ";
+        getline(cin,s1,'\n'); // 전체 라인 입력, '\n'은 default(지워도 상관없음) 끝점의 기준을 정해준
+        cout<<s1.size()<<endl; //문자열의 길이
+        cout<<s1.length()<<endl; //문자열의 길이
+        s1.insert(4,"Hello"); // 4번째 문자에 "Hello"를 넣어라
+        cout<<s1<<endl;
+    
+        s1.erase(4,5); // 4번에서부터 5글자를 삭제하라
+        cout<<s1<<endl;
+    
+        if(s1.empty())
+            cout<<"empty string"<<endl;
+        else
+            cout<<"not empty string"<<endl;
+        s1.erase(); // 전체 삭제
+        cout<<s1<<endl;
+    }
+
+---------------------------
+
+    void main()
+    {
+        string s1="Money";
+        string s2=" has no value";
+        string s3=s1+s2; //  +연산자로 문자열 연결, =연산자로 문자열 치환
+    
+        s1+=s2;
+        cout<<s1<<endl;
+        cout<<s2<<endl;
+        cout<<s3<<endl;
+    
+        string str1("Slow"),str2("steady"); // string객체를 만드는 다른방법
+        string str3="the race";
+    
+        string s4=str1+" and "+str2+" wins "+str3;
+        cout<<s4<<endl;
+    
+        if(s1==s2) //string 비교  ------> strcmp사용할 필요 없다
+            cout<<"same"<<endl;
+        else
+            cout<<"different"<<endl;
+    }
+
+-------------------------------------------------------
+
+    /*
+    void main()
+    {
+        string s;
+        cout<<"주민번호 입력(-포함) :";
+        cin>>s;
+        for(int i=0;i<s.size();i++) // ---> string은 배열처럼 사용가능
+        {
+            if(s[i]!='-') // string의 각 문자 점검(배열 사용)
+            {
+                cout<<s[i];
+            }
+            //if(s.at(i)!='-') // 함수 사용
+                cout<<s.at(i);//
+            
+        }
+    }
+    */
+    void main()
+    {
+        char str[30];
+        string name;
+    
+        cout<<"Enter string:";
+        cin.getline(str,30); // iostream 함수 --> 배열인 경우에만 사용가능
+        cout<<str<<endl;
+    
+        cout<<"Enter string:";
+        getline(cin,name,'\n'); // '\n'은 default,string 함수 --> string인 경우에만 사용가능(이걸 자주 사용하자)
+        cout<<name<<endl;
+    }
+
+------------------------------------------------
+
+    void main()
+    {
+        string str;
+        int numA=0,numB=0,numC=0;
+    
+        cout<<"문자열을 입력하시오:";
+        getline(cin,str); // cin에 엔터키를 칠때까지 str을 넣어라
+        for(int i=0;i<str.length();i++)
+        {
+            if(isalpha(str.at(i)))
+                numA++;
+            else if(isdigit(str.at(i)))
+                numB++;
+            else if(isspace(str.at(i)))
+                numC++;
+            else
+                cout<<"Incorrect character"<<endl;
+        }
+        cout<<"alphabet :"<<numA<<endl;
+        cout<<"numeric :"<<numB<<endl;
+        cout<<"space :"<<numC<<endl;
+    }
+
+----------------------------------------
+
+    /*
+    void main()
+    {
+        string str, search, replace;
+    
+        cout<<"Enter string: ";
+        getline(cin,str);
+        cout<<"Enter string to find: ";
+        getline(cin,search);
+        cout<<"Enter string to replace: ";
+        getline(cin,replace);
+    
+        int position=str.find(search); // 없으면 string::npos 리턴
+        if(position!=string::npos) // 문자열의 최대길이 +1
+        {
+            str.replace(position,search.length(),replace);
+            str.erase(position,search.length());
+            //str.erase(psition,search.length()); //두번째 방법임
+            //str.insert(position,replace);
+            cout<<str<<endl;
+        }
+        else 
+            cout<<search<<" is not exist"<<endl;
+    }*/
+    
+    // 바꿀 문자열이 여러개 있는 경우
+    
+    void main()
+    {
+        string str, search, replace;
+        int position=0,start=0;
+    
+        cout<<"Enter string: ";
+        getline(cin,str);
+        cout<<"Enter string to find: ";
+        getline(cin,search);
+        cout<<"Enter string to replace: ";
+        getline(cin,replace);
+    
+        while(true)
+        {
+            position=str.find(search,start);
+            if(position==string::npos)
+                break;
+            str.replace(position,search.length(),replace);
+    
+            cout<<str<<endl;
+            start=position+search.length();
+        }
+    }
+
+---
+
+    #include <iostream>
+    using namespace std;
+    
+    void main()
+    {
+        int var;
+        int &ref=var; // var는 ref라는 별명을 갖는다
+    
+        var=10;
+        cout<<var<<","<<ref<<endl;
+    
+        ref=20;
+        cout<<var<<","<<ref<<endl;
+    
+        int num=100;
+        ref=num;  // ref가 num을 참조하는 것이 아니고 num의 값을 ref에 대입
+        cout<<var<<","<<ref<<endl;
+        cout<<&var<<","<<&ref<<","<<&num<<endl;
+    }
+    
+    // reference를 위한 메모리는 할당되지 않는다
+    // 선언과 동시에 기존의 변수로 초기화 되어야 한다
+    // 상수 초기화 불가(int &ref=100;)
+
+--------------------------------
+
+    #include <iostream>
+    using namespace std;
+    
+    void swap1(int *, int *);
+    void swap2(int &, int &);
+    
+    void main()
+    {
+        int a=10,b=20;
+    
+        swap1(&a,&b);
+        cout<<a<<","<<b<<endl;
+    
+        swap2(a,b);
+        cout<<a<<","<<b<<endl;
+    }
+    void swap1(int *pa,int *pb)
+    {
+        int temp;
+        temp=*pa;
+        *pa=*pb;
+        *pb=temp;
+    }
+    void swap2(int &ra,int &rb)
+    {
+        int temp;
+    
+        temp=ra;
+        ra=rb;
+        rb=temp;
+    }
+
+-----------------------------------
+
+    #include <iostream>
+    using namespace std;
+    
+    int squre(int);
+    double square(double);
+    
+    void main()
+    {
+        int i=10;
+        double d=3.4;
+    
+        cout<<square(i)<<endl;
+        cout<<square(d)<<endl;
+    }
+    int squrae(int i)
+    {
+        return i*i;
+    }
+    double square(double d)
+    {
+        return d*d;
+    }
+
+----------------------------------
+
+    #include <iostream>
+    using namespace std;
+    
+    void main()
+    {
+        int *p1=new int;
+        *p1=100;
+        cout<<p1<<","<<*p1<<endl;
+        delete p1;
+    
+        int *p2=new int[10];
+        for(int i=0;i<10;i++)
+        {
+            p2[i]=i;
+            cout<<&p2[i]<<" : "<<p2[i]<<endl;
+        }
+        delete [] p2;
+    }
+
+---------------------------
+
+    #include <iostream>
+    using namespace std;
+    
+    int mode;
+    
+    namespace Graphics
+    {
+        int mode, x, y;
+    
+        void message()
+        {
+            cout<<"Graphics namespace의 message()"<<endl;
+        }
+    }
+    
+    namespace Network
+    {
+        int mode, speed;
+    
+        void send()
+        {
+            cout<<"Network namespace의 send()"<<endl;
+        }
+        void message()
+        {
+            cout<<"Network namespace의 message()"<<endl;
+        }
+    }
+    
+    void main()
+    {
+        //x=y=100;
+        //speed=200;
+        Graphics::x = Graphics::y =100;  // :: 영역지정연산자
+        Network::speed = 200;
+    
+        mode = 1;  // 전역변수
+        Graphics::mode = 1;
+        Network::mode = 2;
+    
+        Graphics::message();
+        Network::message();
+    }
+    
+    /*
+    using namespace Graphics;
+    using namespace Network;
+    
+    ---> ::mode ---> 전역변수
+    */
+
+--------------------------------------------
+
+    #include <iostream>
+    using namespace std;
+    
+    void get_input(int &x)
+    {
+        cout<<"enter num:";
+        cin>>x;
+    }
+    
+    void get_input(int *y)
+    {
+        cout<<"enter num:";
+        cin>>*y;
+    }
+    
+    void main()
+    {
+        int num1;
+        int num2;
+    
+        get_input(num1);
+        cout<<num1<<endl;
+    
+        get_input(&num2);
+        cout<<num2<<endl;
+    }
+
+----------------------------------------------
+
+    #include <iostream>
+    using namespace std;
+
+    void get_input(int &x)
+    {
+        cout<<"enter num:";
+        cin>>x;
+    }
+    
+    void get_input(int *y)
+    {
+        cout<<"enter num:";
+        cin>>*y;
+    }
+    
+    void get_input(int &z, int &w)
+    {
+        cout<<"enter num:";
+        cin>>z>>w;
+    }
+    
+    void main()
+    {
+        int num1;
+        int num2;
+    
+        get_input(num1);
+        cout<<num1<<endl;
+    
+        get_input(&num2);
+        cout<<num2<<endl;
+    
+        get_input(num1,num2);
+        cout<<num1<<" "<<num2<<endl;
+    }
+
+---
+
+    int& get_max(int &x,int &y)
+    {
+        if(x>y)
+            return x;
+        else
+            return y;
+    }
+    
+    double get_max(double &x,double &y)
+    {
+        if(x>y)
+            return x;
+        else
+            return y;
+    }
+    
+    void main()
+    {
+        int num1=10,num2=20;
+        double num3=2.3,num4=1.3;
+        cout<<"정수형 큰 값:"<<get_max(num1,num2)<<endl;
+        cout<<"실수형 큰 값:"<<get_max(num3,num4)<<endl;
+    }
+
+---
+
+    int make_double(int &x)
+    {
+        x*=2;
+        return x;
+    }
+    
+    void main()
+    {
+        int num=20;
+        make_double(num);
+        cout<<"두 배의 값:"<<num<<endl;
+    }
