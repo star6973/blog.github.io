@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "C Programming [String]"
-date: 2020-04-02 15:00:00
+date: 2014-06-02 15:00:00
 categories: Language
 tag: Language
 use_math: true
