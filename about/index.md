@@ -19,27 +19,27 @@ theme: purple
 - 도메인 관련 지식
 
 [알고리즘 역량(브루트포스, 스택/큐, 이분탐색, DFS/BFS, 그리디, 동적계획법, DP)]
-- SW Expert Academy(https://swexpertacademy.com/main/main.do)
-- Programmers(https://programmers.co.kr/)
-- BOJ(https://www.acmicpc.net/)
-- Codeforces(https://codeforces.com/)
+- [SW Expert Academy](https://swexpertacademy.com/main/main.do)
+- [Programmers](https://programmers.co.kr/)
+- [BOJ](https://www.acmicpc.net/)
+- [Codeforces](https://codeforces.com/)
 
 [딥러닝 기초 과정]
-- 김성훈 교수님의 모두를 위한 딥러닝(https://www.youtube.com/playlist?list=PLlMkM4tgfjnLSOjrEJN31gZATbcj_MpUm)  
+- [김성훈 교수님의 모두를 위한 딥러닝](https://www.youtube.com/playlist?list=PLlMkM4tgfjnLSOjrEJN31gZATbcj_MpUm)  
 - 도서 : 밑바닥부터 시작하는 딥러닝  
 - 선형대수 강의
-   + 이상화 교수님의 선형대수(https://www.youtube.com/playlist?list=PLSN_PltQeOyjDGSghAf92VhdMBeaLZWR3)  
-   + 선형대수 스터디(https://github.com/kwangjunechoi7/Linear_Algebra_HS)
+   + [이상화 교수님의 선형대수](https://www.youtube.com/playlist?list=PLSN_PltQeOyjDGSghAf92VhdMBeaLZWR3)  
+   + [선형대수 스터디](https://github.com/kwangjunechoi7/Linear_Algebra_HS)
 - 확룰과통계 강의
-   + 이상철 교수님의 확률과 통계 (https://www.youtube.com/channel/UCgJL39Q2O5UTY0B5na1kxHA)  
-   + 확률과통계 스터디(https://github.com/kwangjunechoi7/Statistics_HS)
+   + [이상철 교수님의 확률과 통계](https://www.youtube.com/channel/UCgJL39Q2O5UTY0B5na1kxHA)  
+   + [확률과통계 스터디](https://github.com/kwangjunechoi7/Statistics_HS)
 
 [딥러닝 심화 과정]
 - 컴퓨터 비전
-   + https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq  
-   + https://zzsza.github.io/tag/data-cs231/  
+   + [Stanford University School of Engineering](https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq)
+   + [변성유님의 깃허브 블로그](https://zzsza.github.io/tag/data-cs231/)
 - 딥러닝  
-   + 최성준님의 논문으로 보는 딥러닝(https://www.edwith.org/deeplearningchoi)
+   + [최성준님의 논문으로 보는 딥러닝](https://www.edwith.org/deeplearningchoi)
 
 ---
 
