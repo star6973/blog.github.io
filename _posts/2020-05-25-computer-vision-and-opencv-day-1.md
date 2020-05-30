@@ -140,3 +140,4 @@ tag: OpenCV
        참고사이트[https://kaen2891.tistory.com/20]  
 
 ### 2.2. OpenCV 실습  
+[실습](https://star6973.github.io/tags/OpenCV)
