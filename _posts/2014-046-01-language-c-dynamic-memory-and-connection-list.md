@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "C Programming [Dynamic Memory and Connection List]"
-date: 2020-04-01 17:00:00-18:00:00
+date: 2014-06-01 17:00:00-18:00:00
 categories: Language
 tag: Language
 use_math: true
