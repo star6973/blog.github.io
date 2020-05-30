@@ -7,6 +7,8 @@ tag: Language
 use_math: true
 ---
 
+# C++ 예제 3일만에 뽀개기 - Day 1
+
     //go to 는 절대 쓰지 않는다.
     //switch 의 경우 쓸일이 적음
 
