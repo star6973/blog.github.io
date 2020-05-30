@@ -438,8 +438,9 @@ void main()
 	com2.Set_Real_num();
 	com2.Set_Imaginary_num();
 	com2.print();
-                                                                            com1.Add_Min_num(com1.Get_Real_num(),com2.Get_Real_num(),com1.Get_Imaginary_num(),com2.Get_Imaginary_num()); // com1객체에 대한 클래스 내에서 합과 차를 구한다
-// 인자로 com1의 실수부와 허수부, com2의 실수부와 허수부를 전달한다
+	// com1객체에 대한 클래스 내에서 합과 차를 구한다
+        com1.Add_Min_num(com1.Get_Real_num(),com2.Get_Real_num(),com1.Get_Imaginary_num(),com2.Get_Imaginary_num());
+	// 인자로 com1의 실수부와 허수부, com2의 실수부와 허수부를 전달한다
 }
 ```
 
@@ -963,14 +964,14 @@ class SalariedEmployee : public Employee
 private:
 	int pay; //월급이라는 추가 멤버변수
 public:
-	SalariedEmployee(char *n,char *i,int s,int p); //자식클래스에서 부모클래스의                                                           //변수를 이니셜라이저를 이용해 초기화 해준다
+	SalariedEmployee(char *n,char *i,int s,int p); //자식클래스에서 부모클래스의 변수를 이니셜라이저를 이용해 초기화 해준다
 	void set_pay(int p);
 	int get_pay();
 	void print() const;
 	int computeSalary(); //오버라이딩된 함수
 	~SalariedEmployee();
 };
-SalariedEmployee::SalariedEmployee(char *n,char *i,int s,int p) :                    
+SalariedEmployee::SalariedEmployee(char *n,char *i,int s,int p) :
 Employee(n,i,s),pay(p)
 {
 	cout<<"SalariedEmployee 생성자 호출"<<endl;
