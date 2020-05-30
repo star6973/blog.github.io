@@ -29,8 +29,10 @@ theme: purple
 - 도서 : 밑바닥부터 시작하는 딥러닝  
 - 선형대수 강의
    + 이상화 교수님의 선형대수(https://www.youtube.com/playlist?list=PLSN_PltQeOyjDGSghAf92VhdMBeaLZWR3)  
+   + 선형대수 스터디(https://github.com/kwangjunechoi7/Linear_Algebra_HS)
 - 확룰과통계 강의
    + 이상철 교수님의 확률과 통계 (https://www.youtube.com/channel/UCgJL39Q2O5UTY0B5na1kxHA)  
+   + 확률과통계 스터디(https://github.com/kwangjunechoi7/Statistics_HS)
 
 [딥러닝 심화 과정]
 - 컴퓨터 비전
