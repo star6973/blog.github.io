@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "C++ Programming [Day 3]"
-date: 2020-04-07 09:00:00-18:00:00
+date: 2017-04-07 09:00:00-18:00:00
 categories: Language
 tag: Language
 use_math: true
