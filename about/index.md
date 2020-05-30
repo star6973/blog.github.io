@@ -27,15 +27,17 @@ theme: purple
 [딥러닝 기초 과정]
 - 김성훈 교수님의 모두를 위한 딥러닝(https://www.youtube.com/playlist?list=PLlMkM4tgfjnLSOjrEJN31gZATbcj_MpUm)  
 - 도서 : 밑바닥부터 시작하는 딥러닝  
-- 선형대수 강의 : 이상화 교수님의 선형대수(https://www.youtube.com/playlist?list=PLSN_PltQeOyjDGSghAf92VhdMBeaLZWR3)  
-- 확룰과통계 강의 : 이상철 교수님의 확률과 통계 (https://www.youtube.com/channel/UCgJL39Q2O5UTY0B5na1kxHA)  
+- 선형대수 강의
+   + 이상화 교수님의 선형대수(https://www.youtube.com/playlist?list=PLSN_PltQeOyjDGSghAf92VhdMBeaLZWR3)  
+- 확룰과통계 강의
+   + 이상철 교수님의 확률과 통계 (https://www.youtube.com/channel/UCgJL39Q2O5UTY0B5na1kxHA)  
 
 [딥러닝 심화 과정]
 - 컴퓨터 비전
-   - https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq  
-   - https://zzsza.github.io/tag/data-cs231/  
+   + https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq  
+   + https://zzsza.github.io/tag/data-cs231/  
 - 딥러닝  
-   - 최성준님의 논문으로 보는 딥러닝(https://www.edwith.org/deeplearningchoi)
+   + 최성준님의 논문으로 보는 딥러닝(https://www.edwith.org/deeplearningchoi)
 
 ---
 
@@ -75,8 +77,7 @@ theme: purple
 
 [논문]
 - 포트폴리오 : Reddit으로 작성
-- 논문으로 시작하는 딥러닝(https://github.com/kweonwooj/papers/issues
-Tensorflow KR의 PR12)
+- 논문으로 시작하는 딥러닝(https://github.com/kweonwooj/papers/issues)
 - 논문 정리법(https://github.com/kweonwooj/papers/issues)
 
 [프로젝트]
