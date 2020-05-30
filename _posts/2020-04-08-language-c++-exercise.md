@@ -195,19 +195,19 @@ using namespace std;
 void reverse(int * A,int n); //주어진 문제의 함수원형을 선언
 void main()
 {
-	int Arr[5]={1,2,3,4,5}; //int형 배열을 선언하여 임의로 5의 길이와 각 배열                                 의 값을 1부터 5까지 초기화 시켜줌
+	int Arr[5]={1,2,3,4,5}; //int형 배열을 선언하여 임의로 5의 길이와 각 배열의 값을 1부터 5까지 초기화 시켜줌
 	int len=sizeof(Arr)/sizeof(int); //배열의 길이를 sizeof로 구한다
-	reverse(Arr,len); //함수원형의 매개변수에서 int * A는 int A[]와 같으므로                            그대로 Arr를 보내주고 len은 배열의 길이이다
+	reverse(Arr,len); //함수원형의 매개변수에서 int * A는 int A[]와 같으므로 그대로 Arr를 보내주고 len은 배열의 길이이다
 }
 void reverse(int * A,int n)
 {
 	int temp; //배열의 값을 바꿔주기 위해 temp라는 변수 선언
-	          //temp의 역할은 왼쪽부터 시작한 배열의 값을 저장, 마지막 부                      분에 넣어주는 역할
-	for(int i=0;i<n/2;i++) //i가 n/2까지인 이유는 중간지점까지 설정해주어야                                 중간을 기점으로 좌우가 바뀐다. 하지만 n까지하면                                다시 원위치로 가기 때문이다.
+	          //temp의 역할은 왼쪽부터 시작한 배열의 값을 저장, 마지막 부분에 넣어주는 역할
+	for(int i=0;i<n/2;i++) //i가 n/2까지인 이유는 중간지점까지 설정해주어야 중간을 기점으로 좌우가 바뀐다. 하지만 n까지하면 다시 원위치로 가기 때문이다.
 	{
 		temp=A[i]; //temp라는 정수형 변수에 A[0]부터의 배열의 값을 저장
 		A[i]=A[(n-i)-1]; //배열 A의 처음과 마지막을 바꿔주는 과정
-		A[(n-i)-1]=temp; //배열 마지막에 temp의 값을 넣어준다(배열 A의                                   처음값과 동일)
+		A[(n-i)-1]=temp; //배열 마지막에 temp의 값을 넣어준다(배열 A의 처음값과 동일)
 	}
 	for(int i=0;i<n;i++)
 	{
@@ -228,9 +228,8 @@ double get_stat(double A[],double *p_avg_double *p_max_double *p_sum);
 
 void main()
 {
-	double Arr[5]={1,2,3,4,5}; //double형 배열 선언 배열의 길이는 임의로 5                                              로 정하며 배열의 값도 임의로 1부터 5로 초기화함
-	double avg=0,max=0,sum=0; //avg(평균값), max(최대값), sum(전체의 합)의 변수
-                                      를 0으로 초기해줌
+	double Arr[5]={1,2,3,4,5}; //double형 배열 선언 배열의 길이는 임의로 5로 정하며 배열의 값도 임의로 1부터 5로 초기화함
+	double avg=0,max=0,sum=0; //avg(평균값), max(최대값), sum(전체의 합)의 변수를 0으로 초기해줌
 	get_stat(Arr,&avg,&max,&sum); //주소값을 전달해주어야 되기 때문에 &를 붙임
 
 	cout<<"평균값: "<<avg<<endl;
@@ -243,9 +242,9 @@ double get_stat(double A[5],double *p_avg,double *p_max,double *p_sum)
 	int i; // 배열의 인덱스값인 동시에 평균값을 구하기 위한 변수의 횟수
 	for(i=0;i<5;i++)
 	{
-		*p_sum+=A[i]; //전체의 합을 구하기 위해 for문으로 한 번 반복될때마                                     다 변수에 배열 A의 값을 더해줌
+		*p_sum+=A[i]; //전체의 합을 구하기 위해 for문으로 한 번 반복될때마다 변수에 배열 A의 값을 더해줌
 		if(*p_max<A[i])
-			*p_max=A[i]; //최대값을 구하기 위해 반복할 때마다 배열 A의 값                                         과 초기값을 0으로 최대값을 맞춰 준 p_max의 값                                         과 더해줌
+			*p_max=A[i]; //최대값을 구하기 위해 반복할 때마다 배열 A의 값과 초기값을 0으로 최대값을 맞춰 준 p_max의 값과 더해줌
 	}
 	*p_avg=*p_sum/i; // 위에서 구한 전체의 합을 변수의 개수만큼 나눠 평균을 구함
 	return *A; //배열의 주소값을 반환한다
@@ -288,8 +287,8 @@ void main()
         int serial_length=6; //주어진 문제에서 물품 번호의 길이는 6이라고 지정
 	int len=serial_num.length(); //string 함수의 문자열 길이를 반환하는 length
 	int i=0; //string 함수도 배열처럼 사용가능하다. i는 인덱스값이다.
-	int check_alpha=0; //사용자가 넣어준 문자가 영문인지 확인해서 그 수를 세주기                                위한 변수
-	int check_digit=0; //사용자가 넣어준 문자가 숫자인지 확인해서 그 수를 세주기                                위한 변수
+	int check_alpha=0; //사용자가 넣어준 문자가 영문인지 확인해서 그 수를 세주기 위한 변수
+	int check_digit=0; //사용자가 넣어준 문자가 숫자인지 확인해서 그 수를 세주기 위한 변수
 	
 	if(len!=serial_length) //사용자가 입력한 문자열의 길이가 6과 같지 않다면
 	{
@@ -300,11 +299,11 @@ void main()
 		cout<<"물품 번호의 길이가 맞습니다"<<endl;
 		
     
-	for(i;i<2;i++) //string 함수를 배열처럼 사용가능 하기 때문에 첫 번째 인덱스와            {              두 번째 인덱스의 값에 대해 문자가 영문인지 확인한다
+	for(i;i<2;i++) //string 함수를 배열처럼 사용가능 하기 때문에 첫 번째 인덱스와 { // 두 번째 인덱스의 값에 대해 문자가 영문인지 확인한다
 		if(!(isalpha(serial_num[i]))==0) //!()==0은 ()가 참이면 조건이 성립한다
 			check_alpha++;
 	}
-	for(i;i<serial_length;i++) //넘어온 인덱스값은 2부터 시작하며 나머지 문자열의 길          {                         이만큼 각 문자가 숫자인지 확인한다
+	for(i;i<serial_length;i++) //넘어온 인덱스값은 2부터 시작하며 나머지 문자열의 길 { // 이만큼 각 문자가 숫자인지 확인한다
 		if(!(isdigit(serial_num[i]))==0)
 			check_digit++;
         }
@@ -313,7 +312,7 @@ void main()
 	else
 		cout<<"물품 종류가 다릅니다"<<endl;
 	
-	if(check_digit==4) //문자열의 세 번째 배열값부터 나머지 배열값이 숫자가 맞다면                              4개가 나온다 
+	if(check_digit==4) //문자열의 세 번째 배열값부터 나머지 배열값이 숫자가 맞다면 4개가 나온다 
 		cout<<"물품 번호가 맞습니다"<<endl;
 	else
 		cout<<"물품 번호가 다릅니다"<<endl;
@@ -358,7 +357,7 @@ void main()
 	temp=new char[len]; //temp를 동적할당함(len길이만큼)
 	int p=0; //temp배열의 인덱스
 	
-	for(int i=0;i<len/2;i++) //과제의 문제1번과 같이 중간을 기점으로 앞뒤를 바꿔주는                                  방식을 써보았다.
+	for(int i=0;i<len/2;i++) //과제의 문제1번과 같이 중간을 기점으로 앞뒤를 바꿔주는 방식을 써보았다.
 	{
 		temp[p]=str[i];
 		str[i]=str[(len-i)-1];
@@ -964,7 +963,7 @@ class SalariedEmployee : public Employee
 private:
 	int pay; //월급이라는 추가 멤버변수
 public:
-	SalariedEmployee(char *n,char *i,int s,int p); //자식클래스에서 부모클래스의                                                           //변수를 이니셜라이저를 이용                                                          //해 초기화 해준다
+	SalariedEmployee(char *n,char *i,int s,int p); //자식클래스에서 부모클래스의                                                           //변수를 이니셜라이저를 이용해 초기화 해준다
 	void set_pay(int p);
 	int get_pay();
 	void print() const;
@@ -1004,7 +1003,7 @@ private:
 	int per_hour_pay; //시간당 임금
 	int working_hour; //일한 시간
 public:
-	HourlyEmployee(char *n,char *i,int p,int ph,int h); //자식 클래스에서 부모 클                                                              //래스의 멤버 변수를 초기                                                              //화 해준다
+	HourlyEmployee(char *n,char *i,int p,int ph,int h); //자식 클래스에서 부모 클래스의 멤버 변수를 초기화 해준다
 	void set_pay(int payhour);
 	void set_hour(int hour);
 	int get_pay();
@@ -1076,7 +1075,8 @@ private:
 	string address;
 	string phone;
 public:
-	Person(string n,string a,string p) : name(n),address(a),phone(p) //매개변수 생          {                                                               //성자로 생성                  cout<<"Person 생성자 호출"<<endl;                       //자 호출
+	Person(string n,string a,string p) : name(n),address(a),phone(p) { //매개변수 생성자로 생성자 호출
+		cout<<"Person 생성자 호출"<<endl;
         }
 	void set_name(string n) { name=n; }
 	void set_address(string a) { address=a; }
@@ -1098,7 +1098,8 @@ private:
 	int id;
 	int point;
 public:
-	Customer(string n,string a,string p,int i,int po) : Person(n,a,p),id(i),point(po)          //자식 클래스의 생성자에서 부모 클래스의 멤버 변수를 초기화 해주어야 한다 
+	//자식 클래스의 생성자에서 부모 클래스의 멤버 변수를 초기화 해주어야 한다 
+	Customer(string n,string a,string p,int i,int po) : Person(n,a,p),id(i),point(po) 
 	{
 		cout<<"Customer 생성자 호출"<<endl;
 	}
@@ -1280,8 +1281,7 @@ public:
 	//자식 클래스 복사 생성자에서는 부모 클래스의 복사 생성자를 생성해주기 위해서 이니셜라이저를 통해 명시한다
 	void set_balance(int money) { balance+=money; }
 	int get_balance() { return balance; }
-	SavingAcnt& operator=(SavingAcnt &acct) //대입연산자는 굳이 call-by-value에서는 디폴트 대입연산자가 있기에
-		//의미가 없으나 깊은 복사가 이루어지는 경우(char *name과 같은) 따로 정의해야 한다
+	SavingAcnt& operator=(SavingAcnt &acct) //대입연산자는 굳이 call-by-value에서는 디폴트 대입연산자가 있기에 의미가 없으나 깊은 복사가 이루어지는 경우(char *name과 같은) 따로 정의해야 한다
 	{
 		this->balance=acct.balance;
 		this->interest=acct.interest;
@@ -1435,8 +1435,7 @@ void main()
 		cin>>person.number;
 		if(person.number==-1)
 			break;
-		fflush(stdin); //cin을 하게되면 개행문자('\n')는 스트림에 넘어가지 않고 남게 되어 다음 출력 
-		//스티림에 영향을 준다. 따라서 fflush를 이용하여 강제로 넘긴다.
+		fflush(stdin); //cin을 하게되면 개행문자('\n')는 스트림에 넘어가지 않고 남게 되어 다음 출력 스트림에 영향을 준다. 따라서 fflush를 이용하여 강제로 넘긴다.
 		cout<<"Enter name:";
 		cin.getline(person.name,30);
 		cout<<"Enter phonenumber:";
