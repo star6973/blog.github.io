@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Studying linear algebra [Chapter 3]"
+title: "Linear Algebra [Chapter 3]"
 date: 2020-03-28 20:30:00-23:00:00
 categories: MachineLearning
 tag: MachineLearning
