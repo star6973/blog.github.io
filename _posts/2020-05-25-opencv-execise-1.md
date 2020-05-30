@@ -266,13 +266,13 @@ using namespace cv;
 using namespace std;
 
 int main() {
-	Mat			image(300, 500, CV_8UC3, Scalar(255, 255, 255));
+	Mat		image(300, 500, CV_8UC3, Scalar(255, 255, 255));
 	Point2f		center(250, 150), pts[4];
 	Size2f		size(300, 100);
-	RotatedRect	rot_rect(center, size, 20);			 // 회전사각형 선언
+	RotatedRect	rot_rect(center, size, 20);	 // 회전사각형 선언
 
 	Rect bound_rect = rot_rect.boundingRect();
-	rectangle(image, bound_rect, Scalar(0), 1);		 // 사각형 그리기
+	rectangle(image, bound_rect, Scalar(0), 1);	 // 사각형 그리기
 	circle(image, rot_rect.center, 1, Scalar(0), 2); // 원 그리기
 
 	
@@ -298,3 +298,4 @@ int main() {
 	return 0;
 }
 ```
+<img src="/assets/images/opencv/11.PNG" width="50%"><br>
