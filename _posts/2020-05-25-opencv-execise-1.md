@@ -258,6 +258,8 @@ RotatedRect 클래스
 3. boundingRect(): 회전사각형의 4개 모서리를 모두 포함하는 최소 크기의 사각형 영역을 반환
 4. circle(Mat& img, Point center, int radius, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
 
+<img src="/assets/images/opencv/10.PNG" width="50%"><br>
+
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
