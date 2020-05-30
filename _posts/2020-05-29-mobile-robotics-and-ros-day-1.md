@@ -103,9 +103,10 @@ tag: DeepLearning
         3) High level feature
             : 시맨틱한 정보들(의미있는)
 
-14. From Perception to Understanding
-    raw data        ->      features        ->      objects(주방 기구)          ->      places/situations(주방이구나)     
+14. From Perception to Understanding  
+
+        raw data      ->      features        ->      objects(주방 기구)          ->      places/situations(주방이구나)     
                                                                     
-                                         물체를 인식할 수 있으면 소통 가능 => 상황 부여 가능(서비스)  
-            < Navigation >             < Interaction >    < Servicing/Reasoning >
-              perception                 recognition
+                                                물체를 인식할 수 있으면 소통 가능   => 상황 부여 가능(서비스)  
+                < Navigation >         < Interaction >                  < Servicing/Reasoning >
+                  perception             recognition
