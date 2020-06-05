@@ -33,7 +33,7 @@ tag: DeepLearning
     - 대부분의 application의 적절한 solution
       * 2족 다리 형태의 로봇보다는 wheel 형태의 로봇이 좀 더 효율적이다!  
     - 3개의 wheels는 안정성을 보장해준다.
-    - 3개 이상의 wheels는 suspension이 필요할 수 있다(지형에 따라 하나의 wheel이 제대로 기능을 못할 경우).
+    - 3개 이상의 wheels는 suspension(스프링)이 필요할 수 있다(언덕 지형인 경우, 지면에서 붕 떠지면서 하나의 wheel이 제대로 기능을 못할 경우).
     - Four Basics Wheels Types
         1) Standard wheel
             + 일반적인 바퀴, 직진 방향만 가능
@@ -50,9 +50,70 @@ tag: DeepLearning
         4) 2개의 wheels + 1개의 sub wheels
 
     - Different Arrangements of Wheels
-  
+        1) ICC가 맞지 않으면 skidding이 생김
+        2) ecomend sterring
+
 
 3. Mobilie Robot Kinematics
+    - Kinematics: 
+    - forward kinematics
+        + 로봇의 제어를 하는 공간(joint, link), 위치와 자세를 찾는 연구(해가 하나)
+        + 
+        
+    - inverse kinematics
+        + 위치와 자세 정보가 주어지면, 거꾸로 joint, link 공간을 연구(해가 여러 개)
+        
+        
+    - Representing robot position
+        + 기준이 되는 좌표계가 필요함
+        + initial frame: {X1, Y1}
+        + robot frame: {Xr, Yr}
+        + robot pose: 기준점(x, y) + 앵글값(0), 어느 프레임으로부터 기준이 되느냐를 표시해야 함
+        + mapping between the two frames: dot은 미분을 뜻함. 기준 위치에서 로봇이 얼마나 회전되어 있는지.
+ 
+    - Holonomic systems
+        + initial frame에서 diffrential equation(로봇의 움직임을 수학적으로 모델링 -> 미분방정식 형태)이 integrable(적분이 가능한) final position
+        + 각 휠의 속도 -> differential equation이 구해짐
+        + 위의 값을 적분하면 final position을 찾을 수 있음(휠의 회전량을 누적해서)
+    
+    - Non-holonomic systems
+        + diffrential equation일 주어졌지만, not integrable인 final position을 찾을 수 없음
+        + 휠의 속도를 적분해서 final position을 찾을 수 없음(이동량은 같지만, final position이 다를 수 있음)
+        + 이동하는 함수를 시간에 따라 표현해야만 가능해짐
+        
+        
+    - Kinematics of wheel motion
+        + wheel motion model
+        
+    - Instantaneous Center of Rotation(IC/ICR/ICC, 순간적인 회전 중심)
+        + IC가 있으면 IC를 중심으로 회전을 함
+        + IC가 없으면 회전이 불가능함
+
+    - Wheel Kinematic Constraints
+        + 가정
+            a) 
+            b) 
+            c) 
+            d) 
+            e) 
+    
+    - Kinematics Model
+        + 목표: wheel speed, steering angles, steering speeds, ...의 값들의 함수를 만드는 것
+        + Forward kinematics
+            <img>
+        + Inverse Kinematics
+            <img>
+        + 
+
+
+
+
+
+
+
+
+
+
 
 
 
