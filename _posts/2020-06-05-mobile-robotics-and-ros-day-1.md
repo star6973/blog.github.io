@@ -103,11 +103,21 @@ tag: DeepLearning
             <img>
         + Inverse Kinematics
             <img>
+    
+    - Mobile Robot Locomotion
+        + Differential drive robots
+            - 두 개의 휠 축이 라인에 일치하도록 설계
+            - 가장 만들기 쉽고, 간단함
+            - 두 개의 휠의 상대적인 속도에 따라 IC의 값이 결정됨(두 휠의 상대속도가 일치하면, IC는 무한대 / 두 휠의 상대속도가 음수이면, IC가 결정)
+            - 터틀봇
+            - 
+        
         + 
 
+        + Kinematics model in the robot frame
+        + Kinematics model in the initial frame
 
-
-
+        + Omnidirectional mobile robots
 
 
 
