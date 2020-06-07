@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Welcome to star6973
+title: About Me
 theme: purple
 ---
 
