@@ -59,16 +59,16 @@ tag: Language
 
 7. 비트 관련 매크로
 
-    1) <p>#define GET_BIT(w, k) (((w) >> (k)) & 0x01)</p>
+<p> 1) #define GET_BIT(w, k) (((w) >> (k)) & 0x01)</p>
       // 변수의 w의 k번째 비트 값 반환
  
-    2) <p>#define SET_BIT_ON(w, k) ((w) |= (0x01 << (k)))</p>
+<p> 2) #define SET_BIT_ON(w, k) ((w) |= (0x01 << (k)))</p>
       // 변수의 w의 k번째 비트 값을 1로 설정
 
-    3) <p>#define SET_BIT_OFF(w, k) ((w) & ~(0x01 << (k)))</p>
+<p> 3) #define SET_BIT_OFF(w, k) ((w) & ~(0x01 << (k)))</p>
       // 변수의 w의 k번째 비트 값을 0으로 설정
 
-8. 함수 매크로 vs 함수
+8. 함수 매크로 vs 함수  
     1) 매크로 장점 : 속도가 빠르다.  
     2) 매크로 단점 : 코드의 길이가 제한이 된다.  
 
