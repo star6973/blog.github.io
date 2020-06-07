@@ -4,7 +4,6 @@ title: "C Programming [Pointer 1]"
 date: 2014-06-01 12:00:00-13:00:00
 categories: Language
 tag: Language
-use_math: true
 ---
 
 # 포인터
@@ -415,8 +414,9 @@ int main(void)
 	return 0;
 }
 ```
+<br>
 
-<응용>
+#### [응용]
 ```angular2
 #include <stdio.h>
 #include <Windows.h>
