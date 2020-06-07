@@ -152,18 +152,18 @@ tag: Language
 36. 텍스트 파일 읽기와 쓰기
     1) 문자 단위 입출력
     
-       입력(파일에서 문자를 가져옴) : fgetc(FILE *fp)  
-       출력(파일에 문자를 작성) : fputc(int c, FILE *fp)  
+        입력(파일에서 문자를 가져옴) : fgetc(FILE *fp)  
+        출력(파일에 문자를 작성) : fputc(int c, FILE *fp)  
 
     2) 문자열 단위 입출력  
         
-       입력 : fgets(char *s(문자열 저장), int n(최대 개수), FILE *fp)  
-       출력 : fputs(char *s, FILE *fp)  
+        입력 : fgets(char *s(문자열 저장), int n(최대 개수), FILE *fp)  
+        출력 : fputs(char *s, FILE *fp)  
     
     3) 형식화된 입출력  
        
-       입력 : fprintf(FILE *fp, const char *format)  
-       출력 : fscanf(FILE *fp, const char *format)   
+        입력 : fprintf(FILE *fp, const char *format)  
+        출력 : fscanf(FILE *fp, const char *format)   
 
 37. fgetc()의 반환형은 int이다.
 
@@ -268,12 +268,12 @@ tag: Language
 46. 임의 접근  
     1) 순차 접근  
          
-       모든 데이터를 파일의 처음부터 순차적으로 읽거나 기록  
-       앞부분을 읽지 않고 중간이나 마지막으로 못감  
+        모든 데이터를 파일의 처음부터 순차적으로 읽거나 기록  
+        앞부분을 읽지 않고 중간이나 마지막으로 못감  
        
     2) 임의 접근  
        
-       파일의 어느 위치에서든지 읽기와 쓰기 가능  
+        파일의 어느 위치에서든지 읽기와 쓰기 가능  
 
 47. 임의 접근의 원리
     - 파일 포인터 
