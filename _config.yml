@@ -14,7 +14,7 @@ gems: [jekyll-paginate]
 permalink:        /blog/:year/:month/:day/:title
 
 # Setup
-title:            'Welcome to star6973'
+title:            'star6973 blog'
 tagline:          
 description:      'A blog using Jekyll Metro'
 url:              'http://192.168.1.11:4000'
