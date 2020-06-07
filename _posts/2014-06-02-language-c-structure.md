@@ -4,7 +4,6 @@ title: "C Programming [Structure]"
 date: 2014-06-02 19:00:00
 categories: Language
 tag: Language
-use_math: true
 ---
 
 # 구조체
@@ -64,10 +63,10 @@ use_math: true
         (*p).number = p->number
 
 19. 다음 네 가지의 경우를 잘 이해하자!  
-	<p> 1) (*p).number : 포인터 p가 가리키는 구조체의 멤버 number</p>  
-	<p> 2) p->number(=(*p).number : 포인터 p가 가리키는 구조체의 멤버 number</p>  
-	<p> 3) *p.number(=*(p.number)) : 구조체 p의 멤버 number가 가리키는 것, 이때 number는 반드시 포인터여야 한다.</p>  
-	<p> 4) *p->number(=*(p->number)) : p가 가리키는 구조체의 멤버 number가 가리키는 내용, 이때 number는 반드시 포인터여야 한다.</p>  
+    <p>- (*p).number : 포인터 p가 가리키는 구조체의 멤버 number</p>  
+    <p>- p->number(=(*p).number : 포인터 p가 가리키는 구조체의 멤버 number</p>  
+    <p>- *p.number(=*(p.number)) : 구조체 p의 멤버 number가 가리키는 것, 이때 number는 반드시 포인터여야 한다.</p>  
+    <p>- *p->number(=*(p->number)) : p가 가리키는 구조체의 멤버 number가 가리키는 내용, 이때 number는 반드시 포인터여야 한다.</p>  
 
 20. 연결리스트
     - 자기 자신을 가리키는 포인터
