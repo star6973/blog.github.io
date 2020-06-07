@@ -63,23 +63,25 @@ tag: Language
 
 12. getchar()와 putchar()  
     1) int getchar(void); ```<stdio.h>```  
-        - 하나의 문자를 입력  
-        - 반환형이 char형이 아닌 int형인 이유: 입력의 끝(EOF) 문자를 체크하기 위해서이다.  
+	+ 하나의 문자를 입력  
+	+ 반환형이 char형이 아닌 int형인 이유: 입력의 끝(EOF) 문자를 체크하기 위해서이다.  
+	
     2) int putchar(void); ```<stdio.h>```  
-        - 하나의 문자를 출력  
+	+ 하나의 문자를 출력  
+	
     3) 둘 다 버퍼 사용(엔터키를 눌러야만이 입력을 전달한다)  
 
 13. _getch()와 _putch()  
     1) int _getch(void); ```<conio.h>```  
-        - 하나의 문자를 입력, 버퍼 사용x  
+	+ 하나의 문자를 입력, 버퍼 사용x  
     2) int _putch(void); ```<conio.h>```  
-        - 하나의 문자를 출력, 버퍼 사용x  
+	+ 하나의 문자를 출력, 버퍼 사용x  
     3) 둘 다 버퍼 사용하지 않음(글자가 입력되는 대로 전달한다)  
 
 14. gets()와 puts()  
     1) char *gets(char *buffer); ```<stdio.h>``` - 한 줄을 입력  
-        - 줄 바꿈 문자(‘\n’)를 NULL 문자로 변환하여 저장  
-        - 충분한 크기의 문자 배열을 사용하여야 한다.  
+	+ 줄 바꿈 문자(‘\n’)를 NULL 문자로 변환하여 저장  
+	+ 충분한 크기의 문자 배열을 사용하여야 한다.  
     2) int puts(const char *str); ```<stdio.h>``` - 한 줄을 출력
 
 15. 문자 검사 라이브러리 함수 ```<ctype.h>```  
@@ -105,20 +107,20 @@ tag: Language
 
 19. strcpy()와 strncpy()  
     1) char　*strcpy(char *dst, const char *src)  
-        - src가 가리키는 문자열을 dst가 가리키는 배열로 복사한다. dst가 가지고 있던 문자열은 덮어씌워져서 없어진다. NULL 문자가 나올 때까지 복사를 한다. dst >= src  
+	+ src가 가리키는 문자열을 dst가 가리키는 배열로 복사한다. dst가 가지고 있던 문자열은 덮어씌워져서 없어진다. NULL 문자가 나올 때까지 복사를 한다. dst >= src  
     2) char *strncpy(char *dst, const char *src, size_t n)  
         - src를 dst로 n개의 문자만을 복사한다.  
 
 20. strcat()과 strncat()  
     기존 문자열의 NULL 문자를 지우고 그 자리부터 시작하여 만들어진 문자열의 마지막에 NULL 문자를 삽입한다.  
     1) char *strcat(char *dst, const char *src)  
-        - src를 dst에 붙인다.  
+	+ src를 dst에 붙인다.  
     2) char *strncat(char *dst, const char *src, size_t n)  
-        - src의 n개의 문자만을 dst에 붙인다.  
+	+ src의 n개의 문자만을 dst에 붙인다.  
 
 21. char *strcmp(const char *s1, const char *s2)  
-    - 문자열 s1과 s2를 비교하여 사전적인 순서에서 s1이 앞에 있으면 음수가 반환되고, 같으면 0, 뒤에 있으면 양수가 반환된다.  
-    - 최대 n문자까지만 비교를 하고 싶다면 strncmp()함수를 이용한다.  
+	+ 문자열 s1과 s2를 비교하여 사전적인 순서에서 s1이 앞에 있으면 음수가 반환되고, 같으면 0, 뒤에 있으면 양수가 반환된다.  
+	+ 최대 n문자까지만 비교를 하고 싶다면 strncmp()함수를 이용한다.  
 
 22. 문자열 수치변환 - 출력 함수가 아니다! ```<stdio.h>```  
     1) sscanf() - 문자열 s로부터 지정된 형식으로 수치를 읽어서 변수에 저장한다.   
