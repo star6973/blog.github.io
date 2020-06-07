@@ -174,43 +174,39 @@ tag: Language
 22. 배열은 구현이 간단하고 빠르지만 크기가 정해져 있어서 삽입과 삭제가 어렵다. 연결 리스트는 동적으로 메모리를 할당하여 삽입과 삭제가 쉽지만 구현이 어렵고 오류가 난다.
 
 23. 연결 리스트가 가지고 있는 모든 노드를 한 번씩 차례대로 방문하는 연산을 순회라고 한다.
-<삽입>
-```angluar2
-NODE *insert_node(NODE *plist, NODE *pprev, DATA item)
-{
-    NODE *pnew = NULL;
 
-    if( !(pnew = (NODE *)malloc(sizeof(NODE))) )
-    {
-        printf("메모리 동적 할당 오류\n");
-        exit(1);
-    }
+        NODE *insert_node(NODE *plist, NODE *pprev, DATA item)
+        {
+        NODE *pnew = NULL;
 
-    pnew->data = data;
-    if( pprev == NULL )	// 연결 리스트의 처음에 삽입
-    {
-        pnew->link = plist;
-        plist = pnew;
-    }
-    else 		// 연결 리스트의 중간에 삽입
-    {
-        pnew->link = pprev->link;	
-        pprev->link = pnew;		
-    }
-    return plist;
-}
-```
+        if( !(pnew = (NODE *)malloc(sizeof(NODE))) )
+        {
+            printf("메모리 동적 할당 오류\n");
+            exit(1);
+        }
 
-<삭제>
-```angular2
-NODE *delete_node(NODE *plist, NODE *pprev, NODE *pcurr)
-{
-    if( pprev == NULL )
-        plist = pcurr->link;
-    else 
-        pprev->link = pcurr->link;
+        pnew->data = data;
+        if( pprev == NULL )	// 연결 리스트의 처음에 삽입
+        {
+            pnew->link = plist;
+            plist = pnew;
+        }
+        else 		// 연결 리스트의 중간에 삽입
+        {
+            pnew->link = pprev->link;
+            pprev->link = pnew;
+        }
+        return plist;
+        }
 
-    free(pcurr);
-    return plist;
-}
-```
+
+        NODE *delete_node(NODE *plist, NODE *pprev, NODE *pcurr)
+        {
+        if( pprev == NULL )
+            plist = pcurr->link;
+        else 
+            pprev->link = pcurr->link;
+
+        free(pcurr);
+        return plist;
+        }
