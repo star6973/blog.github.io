@@ -74,25 +74,25 @@ tag: Language
 
 9. 조검부 컴파일 : 어떤 조건이 만족되는 경우에만 지정된 소스 코드 블록을 컴파일 하는 것. 
 	<p> 1) #ifdef ~ #endif 사이에 있는 모든 문장들을 컴파일</P>
-	    ex1)
+	   ex1)
 
-	    #define DEBUG // DEBUG가 정의
+	   #define DEBUG // DEBUG가 정의
 
-	    int aberage(int x, int y) {
-	       #ifdef DEBUG
-		   printf("x=%d, y=%d\n", x, y);
-	       #endif
+	   int aberage(int x, int y) {
+	      #ifdef DEBUG
+		  printf("x=%d, y=%d\n", x, y);
+	      #endif
 		   return (x+y)/2;
-	    } // 색깔 표시된 부분이 컴파일 포함
+	   } // 색깔 표시된 부분이 컴파일 포함
 
-	    -> 만약 #define으로 DEBUG를 정의해주지 않으면 표시된 부분은 컴파일 포함하지 않는다.
+	   -> 만약 #define으로 DEBUG를 정의해주지 않으면 표시된 부분은 컴파일 포함하지 않는다.
 
 	<p> 2) #ifndef ~ #endif // 어떤 매크로가 정의되어 있지 않으면 저 사이의 문장이 컴파일에 포함된다.</P>
-	    ex2)
+	   ex2)
 
-	    #ifndef LIMIT // LIMIT가 정의되어 있지 않으면
-	    #define LIMIT 1000 // LIMIT을 정의해준다.
-	    #endif
+	   #ifndef LIMIT // LIMIT가 정의되어 있지 않으면
+	   #define LIMIT 1000 // LIMIT을 정의해준다.
+	   #endif
 
 	<p> 3) #undef // 매크로의 정의를 취소한다</p>
 
