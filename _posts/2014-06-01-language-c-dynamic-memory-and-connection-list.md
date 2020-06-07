@@ -166,48 +166,51 @@ tag: Language
         }
 
 19. 연결 리스트에서 다음 노드는 포인터로 가리킨다.
+
 20. 연결 리스트의 일반적인 노드는 데이터 필드와 링크 필드로 구성
+
 21. 구조체의 멤버 중에 자기 자신을 가리키는 포인터가 존재하는 구조체를 자기 참조 구조체라고 한다.
+
 22. 배열은 구현이 간단하고 빠르지만 크기가 정해져 있어서 삽입과 삭제가 어렵다. 연결 리스트는 동적으로 메모리를 할당하여 삽입과 삭제가 쉽지만 구현이 어렵고 오류가 난다.
-23. 연결 리스트가 가지고 있는 모든 노드를 한 번씩 차례대로 방문하는 연산을 순회라고 한다.  
 
-    <삽입>
-    ```angluar2
-    NODE *insert_node(NODE *plist, NODE *pprev, DATA item)
-    {
-        NODE *pnew = NULL;
-    
-        if( !(pnew = (NODE *)malloc(sizeof(NODE))) )
-        {
-            printf("메모리 동적 할당 오류\n");
-            exit(1);
-        }
-    
-        pnew->data = data;
-        if( pprev == NULL )	// 연결 리스트의 처음에 삽입
-        {
-            pnew->link = plist;
-            plist = pnew;
-        }
-        else 		// 연결 리스트의 중간에 삽입
-        {
-            pnew->link = pprev->link;	
-            pprev->link = pnew;		
-        }
-        return plist;
-    }
-    ```
+23. 연결 리스트가 가지고 있는 모든 노드를 한 번씩 차례대로 방문하는 연산을 순회라고 한다.
+<삽입>
+```angluar2
+NODE *insert_node(NODE *plist, NODE *pprev, DATA item)
+{
+    NODE *pnew = NULL;
 
-    <삭제>
-    ```angular2
-    NODE *delete_node(NODE *plist, NODE *pprev, NODE *pcurr)
+    if( !(pnew = (NODE *)malloc(sizeof(NODE))) )
     {
-        if( pprev == NULL )
-            plist = pcurr->link;
-        else 
-            pprev->link = pcurr->link;
-        
-        free(pcurr);
-        return plist;
+        printf("메모리 동적 할당 오류\n");
+        exit(1);
     }
-    ```
+
+    pnew->data = data;
+    if( pprev == NULL )	// 연결 리스트의 처음에 삽입
+    {
+        pnew->link = plist;
+        plist = pnew;
+    }
+    else 		// 연결 리스트의 중간에 삽입
+    {
+        pnew->link = pprev->link;	
+        pprev->link = pnew;		
+    }
+    return plist;
+}
+```
+
+<삭제>
+```angular2
+NODE *delete_node(NODE *plist, NODE *pprev, NODE *pcurr)
+{
+    if( pprev == NULL )
+        plist = pcurr->link;
+    else 
+        pprev->link = pcurr->link;
+
+    free(pcurr);
+    return plist;
+}
+```
