@@ -150,16 +150,16 @@ tag: Language
 36. 텍스트 파일 읽기와 쓰기
 
     1) 문자 단위 입출력  
-        - 입력(파일에서 문자를 가져옴) : fgetc(FILE *fp)  
-        - 출력(파일에 문자를 작성) : fputc(int c, FILE *fp)  
+        + 입력(파일에서 문자를 가져옴) : fgetc(FILE *fp)  
+        + 출력(파일에 문자를 작성) : fputc(int c, FILE *fp)  
 
     2) 문자열 단위 입출력  
-        - 입력 : fgets(char *s(문자열 저장), int n(최대 개수), FILE *fp)  
+        + 입력 : fgets(char *s(문자열 저장), int n(최대 개수), FILE *fp)  
         - 출력 : fputs(char *s, FILE *fp)  
     
     3) 형식화된 입출력  
-        - 입력 : fprintf(FILE *fp, const char *format)  
-        - 출력 : fscanf(FILE *fp, const char *format)   
+        + 입력 : fprintf(FILE *fp, const char *format)  
+        + 출력 : fscanf(FILE *fp, const char *format)   
 
 37. fgetc()의 반환형은 int이다.
 
@@ -229,7 +229,7 @@ tag: Language
         
         3) 이진 파일의 장점  
             + 효율성 -> 변환 과정 없으므로 시간과 공간 절약  
-            + 대량의 데이터를 한번에 기록할 때 편리함
+            + 대량의 데이터를 한번에 기록할 때 편리함  
         
         4) 이진 파일의 단점   
             + 인간이 파일의 내용을 확인하기 어려움  
@@ -275,28 +275,28 @@ tag: Language
         + 위치 표시자를 조작하는 함수는 fseek()  
 
         1) fseek(FILE *fp, long offset(거리), int origin(기준 위치))  
-            - offset은 기준 위치로부터 위치 표시자가 이동하는 거리
-            - offset이 양수이면 앞으로, 음수이면 뒤로 간다
-            - origin
-            
-                  SEEK_SET(0, 파일의 시작)
-                  SEEK_CUR(1, 현재 위치)
-                  SEEK_END(2, 파일의 끝)
+            - offset은 기준 위치로부터 위치 표시자가 이동하는 거리  
+            - offset이 양수이면 앞으로, 음수이면 뒤로 간다  
+            - origin  
+                          
+          SEEK_SET(0, 파일의 시작)
+          SEEK_CUR(1, 현재 위치)
+          SEEK_END(2, 파일의 끝)
 
-            - 성공하면 0을, 실패하면 0이 아닌 값을 반환
+          - 성공하면 0을, 실패하면 0이 아닌 값을 반환
            
-                  fseek(fp, 50L, SEEK_CUR) // 현재 위치에서 50바이트 이동
-                  fseek(fp, -20L, SEEK_END) // 파일의 끝에서 20바이트 앞으로 이동
+          fseek(fp, 50L, SEEK_CUR) // 현재 위치에서 50바이트 이동
+          fseek(fp, -20L, SEEK_END) // 파일의 끝에서 20바이트 앞으로 이동
 
         2) rewind(FILE　*fp) 
-            - 위치 표시자가 0으로 설정
-            - 파일을 읽은 다음, 다시 읽고자 할 때 사용
+            - 위치 표시자가 0으로 설정  
+            - 파일을 읽은 다음, 다시 읽고자 할 때 사용  
         
         3) ftell(FILE *fp)
-            - 현재의 위치 표시자 값을 long형으로 반환
+            - 현재의 위치 표시자 값을 long형으로 반환  
         
         4) feof(FILE *fp)
-            - 파일의 끝 
+            - 파일의 끝  
 
 48. 파일의 처음부터 순차적으로 읽거나 쓰는 방법을 순차접근이라고 한다.
 
