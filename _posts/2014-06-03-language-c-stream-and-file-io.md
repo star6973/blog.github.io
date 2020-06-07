@@ -14,23 +14,25 @@ tag: Language
 
 3. 스트림의 특징 - 버퍼를 사용(버퍼에 데이터 저장, 전송)
 
-4. 표준 입출력 스트림
-    1) stdin  표준 입력 스트림  scanf()
-    2) stdout 표준 출력 스트림  printf()
-    3) stderr 표준 오류 스트림  fprintf(stderr)
+4. 표준 입출력 스트림  
+    1) stdin  표준 입력 스트림  scanf()  
+    2) stdout 표준 출력 스트림  printf()  
+    3) stderr 표준 오류 스트림  fprintf(stderr)  
    
-5. 입출력 함수
+5. 입출력 함수  
     1) 형식이 없는 입출력(문자 형태)  
-            - 표준      :    일반  
-            - getchar() :    fgetc(File *f)  
-            - putchar() :    fputc(File *f)  
-            - gets()     :    fgets(File *f)  
-            - puts()    :     fputs(File *f)  
-
+           
+           표준       :    일반  
+           getchar() :    fgetc(File *f)  
+           putchar() :    fputc(File *f)  
+           gets()    :    fgets(File *f)  
+           puts()    :    fputs(File *f)  
+         
     2) 형식이 있는 입출력(정수, 실수)  
-            - 표준      :    일반  
-            - printf()   :    fprintf(File *f)  
-            - scanf()   :    fscanf(File *f)  
+    
+           표준       :    일반  
+           printf()  :    fprintf(File *f)  
+           scanf()   :    fscanf(File *f)  
         
 6. C에서의 모든 입력과 출력은 스트림 형식으로 처리된다.
 
