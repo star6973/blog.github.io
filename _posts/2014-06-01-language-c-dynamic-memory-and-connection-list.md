@@ -197,8 +197,6 @@ tag: Language
             return plist;
         }
 
-<br>
-
     <삭제>
     
         NODE *delete_node(NODE *plist, NODE *pprev, NODE *pcurr)
