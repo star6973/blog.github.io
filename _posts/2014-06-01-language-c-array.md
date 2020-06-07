@@ -4,7 +4,6 @@ title: "C Programming [Array]"
 date: 2014-06-01 10:00:00-12:00:00
 categories: Language
 tag: Language
-use_math: true
 ---
 
 # 배열
@@ -158,8 +157,9 @@ int main(void)
 	return 0;
 }
 ```
+<br>
 
-<응용>
+#### [응용]
 ```angular2
 #include <stdio.h>
 #include <Windows.h>
@@ -260,3 +260,4 @@ void Print(char arr[50][50], int length)
 	system("cls");
 }
 ```
+<br>
