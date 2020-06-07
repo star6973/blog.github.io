@@ -47,15 +47,19 @@
   <!-- Add background-image -->
     <script>
 
-    var backgroundImage = [];
+    // var backgroundImage = [];
 
-    backgroundImage[0]='abstract1.gif';
-    backgroundImage[1]='abstract1.gif';
-    backgroundImage[2]='abstract1.gif';
-    backgroundImage[3]='abstract1.gif';
+    // backgroundImage[0]='abstract1.gif';
+    // backgroundImage[1]='abstract1.gif';
+    // backgroundImage[2]='abstract1.gif';
+    // backgroundImage[3]='abstract1.gif';
+	   
+    var backgroundImage = 'abstract1.gif';
+    document.write("<style>body {background: url("+"/assets/images/"+backgroundImage+") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size:100% 100%; cover;color:#fff;background-color:#333;}</style>")
 
-    var random=Math.floor(Math.random()*4);
-    document.write("<style>body {background: url("+"/assets/images/"+backgroundImage[random]+") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size:100% 100%; cover;color:#fff;background-color:#333;}</style>")
+	    
+    // var random=Math.floor(Math.random()*4);
+    // document.write("<style>body {background: url("+"/assets/images/"+backgroundImage[random]+") no-repeat center center fixed;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size:100% 100%; cover;color:#fff;background-color:#333;}</style>")
 
     </script>
   <link rel="stylesheet" href="{{site.url}}/assets/css/bcg.css">
