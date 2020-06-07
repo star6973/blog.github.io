@@ -119,19 +119,17 @@ tag: Language
     1) 외부 변수 : extern
     2) 여러 소스 파일로 만드는 편이 소스를 유지, 보수, 관리하기가 편하다  
     
-            #ifndef RECT_H // 만약 RECT_H라는 기호 상수가 아직까지 정의되지
-                               않았다면 아래를 컴파일하라. 
-            #define RECT_H // 처음 컴파일 되어 실행이 되고 그 다음에 정의되어
-                               도 그냥 지나감
-            struct rect { 
-               int x, y, w, h;
-            }
-            typedef struct rect RECT;
+        #ifndef RECT_H // 만약 RECT_H라는 기호 상수가 아직까지 정의되지 않았다면 아래를 컴파일하라. 
+        #define RECT_H // 처음 컴파일 되어 실행이 되고 그 다음에 정의되어도 그냥 지나감
+        struct rect { 
+           int x, y, w, h;
+        }
+        typedef struct rect RECT;
             
-            void draw_rect(const RECT *);
-            double calc_area(const RECT *);
-            void move_rect(RECT *, int, int);
-            #endif
+        void draw_rect(const RECT *);
+        double calc_area(const RECT *);
+        void move_rect(RECT *, int, int);
+        #endif
    
 12. 비트 필드 구조체  
    + 구조체의 일종으로서 멤버들의 크기가 비트 단위로 나누어져 있는 구조체  
