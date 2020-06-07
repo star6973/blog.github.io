@@ -94,7 +94,7 @@ tag: Language
             #define LIMIT 1000 // LIMIT을 정의해준다.
             #endif
 
-    3. <p>#undef // 매크로의 정의를 취소한다</p>
+<p> 3) #undef // 매크로의 정의를 취소한다</p>
 
 10. <p>#if, #else, #endif</p>
 
