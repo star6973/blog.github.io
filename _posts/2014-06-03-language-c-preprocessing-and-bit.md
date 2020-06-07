@@ -60,13 +60,13 @@ tag: Language
 7. 비트 관련 매크로
 
 	<p> 1) #define GET_BIT(w, k) (((w) >> (k)) & 0x01)</p>
-	      // 변수의 w의 k번째 비트 값 반환
+	   // 변수의 w의 k번째 비트 값 반환
 
 	<p> 2) #define SET_BIT_ON(w, k) ((w) |= (0x01 << (k)))</p>
-	      // 변수의 w의 k번째 비트 값을 1로 설정
+	   // 변수의 w의 k번째 비트 값을 1로 설정
 
 	<p> 3) #define SET_BIT_OFF(w, k) ((w) & ~(0x01 << (k)))</p>
-	      // 변수의 w의 k번째 비트 값을 0으로 설정
+	   // 변수의 w의 k번째 비트 값을 0으로 설정
 
 8. 함수 매크로 vs 함수  
     1) 매크로 장점 : 속도가 빠르다.  
@@ -74,25 +74,25 @@ tag: Language
 
 9. 조검부 컴파일 : 어떤 조건이 만족되는 경우에만 지정된 소스 코드 블록을 컴파일 하는 것. 
 	<p> 1) #ifdef ~ #endif 사이에 있는 모든 문장들을 컴파일</P>
-		 ex1)
+	    ex1)
 
-		    #define DEBUG // DEBUG가 정의
+	    #define DEBUG // DEBUG가 정의
 
-		    int aberage(int x, int y) {
-		       #ifdef DEBUG
-			   printf("x=%d, y=%d\n", x, y);
-		       #endif
-			   return (x+y)/2;
-		    } // 색깔 표시된 부분이 컴파일 포함
+	    int aberage(int x, int y) {
+	       #ifdef DEBUG
+		   printf("x=%d, y=%d\n", x, y);
+	       #endif
+		   return (x+y)/2;
+	    } // 색깔 표시된 부분이 컴파일 포함
 
-		    -> 만약 #define으로 DEBUG를 정의해주지 않으면 표시된 부분은 컴파일 포함하지 않는다.
+	    -> 만약 #define으로 DEBUG를 정의해주지 않으면 표시된 부분은 컴파일 포함하지 않는다.
 
 	<p> 2) #ifndef ~ #endif // 어떤 매크로가 정의되어 있지 않으면 저 사이의 문장이 컴파일에 포함된다.</P>
-		 ex2)
+	    ex2)
 
-		    #ifndef LIMIT // LIMIT가 정의되어 있지 않으면
-		    #define LIMIT 1000 // LIMIT을 정의해준다.
-		    #endif
+	    #ifndef LIMIT // LIMIT가 정의되어 있지 않으면
+	    #define LIMIT 1000 // LIMIT을 정의해준다.
+	    #endif
 
 	<p> 3) #undef // 매크로의 정의를 취소한다</p>
 
