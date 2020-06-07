@@ -4,35 +4,40 @@ title: "C Programming [String]"
 date: 2014-06-02 15:00:00
 categories: Language
 tag: Language
-use_math: true
 ---
 
 # 문자열
 
 1. 문자열의 끝은 반드시 NULL 문자로 표시해주어야 한다. 
+
 2. NULL 문자의 필요성 : 정상적인 데이터와 쓰레기값을 분리하기 위해서이다. 문자열의 끝을 알아야 만이 반복을 끝낼 수 있다.
+
 3. NULL 문자 = 아스키코드 ‘\0’ = 숫자 0
+
 4. 문자 배열의 크기는 초기화 문자열의 길이보다 커야 한다. 마지막에 NULL 문자가 들어가야 하기 때문이다. 
+
 5. 문자열의 길이는 라이브러리 함수 strlen() 함수를 이용하면 알 수 있다.
+
 6. 문자열 초기화
-    1. char str[3] = { 'a', 'b', 'c', '\0' };
-    2. char str[3] = "abc";
-    3. char str[3] = "";
-    4. char str[] = "abc";
+    1) char str[3] = { 'a', 'b', 'c', '\0' };
+    2) char str[3] = "abc";
+    3) char str[3] = "";
+    4) char str[] = "abc";
  
 7. 문자열의 변경
-    1. 개별적으로 대입하는 방법
-    2. 라이브러리 함수 strcpy()를 이용하는 방법  
+    1) 개별적으로 대입하는 방법
+    2) 라이브러리 함수 strcpy()를 이용하는 방법  
         ☆ 중요 ☆ 배열의 이름은 배열을 가리키는 주소로서 변경이 불가능하다.  
 
-8. 포인터 변수 = 문자열 상수 / 문자열 배열 = 포인터 상수
-   -주소값을 나타내기 위한 방법 
-    1. int, double, char과 같은 일반 변수  
+8. 포인터 변수 = 문자열 상수 / 문자열 배열 = 포인터 상수  
+   -주소값을 나타내기 위한 방법  
+    1) int, double, char과 같은 일반 변수  
        => ＆연산자를 붙여준다 -> %d(10진 정수형), %u(부호 없는 10진 정수형), %p(16진수형)으로 표현이 가능하다.  
-    2. int *, double *, char *과 같은 포인터 변수　 
+    2) int *, double *, char *과 같은 포인터 변수　 
        => & 연산자 안붙여준다 -> %d(10진 정수형), %u(부호 없는 10진 정수형), %p(16진수형)으로 표현이 가능하다.
        
 9. 문자열 상수는 프로그램 소스 안에 포함된 문자열을 의미한다. 문자열 상수는 ‘텍스트 세그먼트(text segment)’라고 불리는 특수한 메모리 영역에 저장된다. 읽기는 가능하지만 변경할 수 없는 메모리 영역이다.
+
 10. 포인터 변수는 ‘데이터 세그먼트(data segment)’라고 불리는 영역에 저장되어 값을 변경할 수 있다.
     ex1)
     
@@ -55,57 +60,58 @@ use_math: true
         p = "GoodBye";     ---> 실행 오류
 
 11. 문자 처리 라이브러리 함수 <stdio.h> <conio.h>
+
 12. getchar()와 putchar() 
-    1. int getchar(void); <stdio.h>
+    1) int getchar(void); <stdio.h>
         - 하나의 문자를 입력  
         - 반환형이 char형이 아닌 int형인 이유: 입력의 끝(EOF) 문자를 체크하기 위해서이다.
-    2. int putchar(void); <stdio.h>  
+    2) int putchar(void); <stdio.h>  
         - 하나의 문자를 출력
-    3. 둘 다 버퍼 사용(엔터키를 눌러야만이 입력을 전달한다)
+    3) 둘 다 버퍼 사용(엔터키를 눌러야만이 입력을 전달한다)
 
 13. _getch()와 _putch()
-    1. int _getch(void); <conio.h>  
+    1) int _getch(void); <conio.h>  
         - 하나의 문자를 입력, 버퍼 사용x
-    2. int _putch(void); <conio.h>  
+    2) int _putch(void); <conio.h>  
         - 하나의 문자를 출력, 버퍼 사용x
-    3. 둘 다 버퍼 사용하지 않음(글자가 입력되는 대로 전달한다)
+    3) 둘 다 버퍼 사용하지 않음(글자가 입력되는 대로 전달한다)
 
 14. gets()와 puts()
-    1. char *gets(char *buffer); <stdio.h> - 한 줄을 입력  
+    1) char *gets(char *buffer); <stdio.h> - 한 줄을 입력  
         - 줄 바꿈 문자(‘\n’)를 NULL 문자로 변환하여 저장  
-        -  충분한 크기의 문자 배열을 사용하여야 한다.  
-    2. int puts(const char *str); <stdio.h> - 한 줄을 출력
+        - 충분한 크기의 문자 배열을 사용하여야 한다.  
+    2) int puts(const char *str); <stdio.h> - 한 줄을 출력
 
 15. 문자 검사 라이브러리 함수 <ctype.h>
-    1. isalpha(c) - c가 영문자인가?
-    2. isupper(c) - c가 대문자인가?
-    3. islower(c) - c가 소문자인가?
-    4. isdigit(c) - c가 숫자인가?
-    5. isalnum(c) - c가 영문자인가 숫자인가?
-    6. isxdigit(c) - c가 16진수의 숫자인가?
-    7. isspace(c) - c가 공백 문자인가?
-    8. ispunct(c) - c가 구두점 문자인가?
-    9. iscntrl(c) - c가 제어 문자인가?
-    10. isascii(c) - c가 아스키 코드인가?
+    1) isalpha(c) - c가 영문자인가?
+    2) isupper(c) - c가 대문자인가?
+    3) islower(c) - c가 소문자인가?
+    4) isdigit(c) - c가 숫자인가?
+    5) isalnum(c) - c가 영문자인가 숫자인가?
+    6) isxdigit(c) - c가 16진수의 숫자인가?
+    7) isspace(c) - c가 공백 문자인가?
+    8) ispunct(c) - c가 구두점 문자인가?
+    9) iscntrl(c) - c가 제어 문자인가?
+    10) isascii(c) - c가 아스키 코드인가?
 
 16. 문자 변환 라이브러리 함수 <ctype.h>
-    1. toupper(c) - c를 대문자로 바꾼다.
-    2. tolower(c) - c를 소문자로 바꾼다.
-    3. toascii(c) - c를 아스키 코드로 바꾼다.
+    1) toupper(c) - c를 대문자로 바꾼다.
+    2) tolower(c) - c를 소문자로 바꾼다.
+    3) toascii(c) - c를 아스키 코드로 바꾼다.
 
 17. 문자열 처리 라이브러리 함수 <string.h>
 18. strlen(const char *s) - 문자열 길이 계산
 19. strcpy()와 strncpy() 
-    1. char　*strcpy(char *dst, const char *src)  
+    1) char　*strcpy(char *dst, const char *src)  
         - src가 가리키는 문자열을 dst가 가리키는 배열로 복사한다. dst가 가지고 있던 문자열은 덮어씌워져서 없어진다. NULL 문자가 나올 때까지 복사를 한다. dst >= src
-    2. char *strncpy(char *dst, const char *src, size_t n)
+    2) char *strncpy(char *dst, const char *src, size_t n)
         - src를 dst로 n개의 문자만을 복사한다.
 
 20. strcat()과 strncat()  
     기존 문자열의 NULL 문자를 지우고 그 자리부터 시작하여 만들어진 문자열의 마지막에 NULL 문자를 삽입한다.
-    1. char *strcat(char *dst, const char *src)
+    1) char *strcat(char *dst, const char *src)
         - src를 dst에 붙인다.
-    2. char *strncat(char *dst, const char *src, size_t n)
+    2) char *strncat(char *dst, const char *src, size_t n)
         - src의 n개의 문자만을 dst에 붙인다. 
 
 21. char *strcmp(const char *s1, const char *s2)
@@ -113,8 +119,8 @@ use_math: true
     - 최대 n문자까지만 비교를 하고 싶다면 strncmp()함수를 이용한다.
 
 22. 문자열 수치변환 - 출력 함수가 아니다! <stdio.h>
-    1. sscanf() - 문자열 s로부터 지정된 형식으로 수치를 읽어서 변수에 저장한다. 
-    2. sprintf() - 변수의 값을 형식 지정자에 따라 문자열 형태로 문자 배열 s에 저장한다.
+    1) sscanf() - 문자열 s로부터 지정된 형식으로 수치를 읽어서 변수에 저장한다. 
+    2) sprintf() - 변수의 값을 형식 지정자에 따라 문자열 형태로 문자 배열 s에 저장한다.
         
         ex1) 
 
