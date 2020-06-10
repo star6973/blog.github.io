@@ -9,7 +9,7 @@ tag: ProblemSolving
 # [1873] 상호의 배틀필드
 > [SW Expert Academy](https://swexpertacademy.com/main/main.do){: target="_blank"}
 
-## 단순 무식 :(
+## my solution
 ```python
 def isLoc(i, j, game):
     if i < 0 or j < 0 or i >= len(game) or j >= len(game[i]):
@@ -229,7 +229,7 @@ for t in range(int(input())):
         print(''.join(g))
 ```
 
-## 멋지다..!
+## others solution
 ```python
 Y = [-1, 1, 0, 0]
 X = [0, 0, -1, 1]
