@@ -9,4 +9,4 @@ tag: MachineLearning
 # 확률과통계
 ## 챕터2. 확률 개념과 원리  
 
-[PPT_Slide](https://star6973.github.io/reveal.js/slide/확률개념과원리.html){: target="_blank"}
+[PPT_Slide](https://star6973.github.io/reveal.js/slide/확률개념과원리.html)
