@@ -7,7 +7,7 @@ tag: ProblemSolving
 ---
 
 # [1873] 상호의 배틀필드
-> [SW Expert Academy](https://swexpertacademy.com/main/main.do)
+> [SW Expert Academy](https://swexpertacademy.com/main/main.do){: target="_blank"}
 
 ## 단순 무식 :(
 ```python
