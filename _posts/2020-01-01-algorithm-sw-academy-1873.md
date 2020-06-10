@@ -1,6 +1,12 @@
+---
+layout: post
+title: SW Academy [1873]
+date: 2020-01-01 09:00:00-12:00:00
+categories: ProblemSolving
+tag: ProblemSolving
+---
 
-
-[1873] 상호의 배틀필드
+# [1873] 상호의 배틀필드
 
     상호는 전차로 시가전을 하는 것을 테마로 한 새로운 게임 “배틀 필드”를 개발하기로 했다.
     그래서 먼저 간단하게 프로토 타입 게임을 만들었다.
