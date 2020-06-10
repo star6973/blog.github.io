@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  Computer Vision Report I
+title:  Computer Vision Article 1
 date:   2020-05-25 19:00:00-22:00:00
-categories: DeepLearning
-tag: DeepLearning
+categories: Article
+tag: Article
 ---
 
 # 딥러닝 기반 객체 인식 기술 동향(ETRI)  
