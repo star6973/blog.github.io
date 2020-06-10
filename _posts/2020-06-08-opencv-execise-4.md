@@ -80,6 +80,7 @@ int main()
 	return 0;
 }
 ```
+<img src="/assets/images/opencv4/1.PNG" width="50%"><br>
 
 ## 9.2. 채널 처리 함수
 
@@ -155,6 +156,7 @@ int main()
 	return 0;
 }
 ```
+<img src="/assets/images/opencv4/2.PNG" width="50%"><br>
 
 ```angular2
 #include <opencv2/opencv.hpp>
@@ -369,3 +371,4 @@ int main()
 	return 0;
 }
 ```
+<img src="/assets/images/opencv4/3.PNG" width="50%"><br>
