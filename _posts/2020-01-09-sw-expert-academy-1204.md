@@ -7,6 +7,7 @@ tag: ProblemSolving
 ---
 
 # [1204] 최빈수 구하기
+> [SW Expert Academy](https://swexpertacademy.com/main/main.do){: target="_blank"}
 
 ## my solution
 ```python
