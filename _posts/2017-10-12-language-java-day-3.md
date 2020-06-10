@@ -13,6 +13,7 @@ use_math: true
     자바 - JFC
     
     자바의 GUI(그래픽 사용자 인터페이스)의 종류
+    
     1. AWT(Abstract Windows Toolkit) : 다른 플랫폼에서 제각각으로 나타난다
     2. SWING : 모든 플랫폼에서도 일관된 화면을 보여준다(충분히 GUI를 표현 가능함)
     
@@ -20,74 +21,80 @@ use_math: true
     - J가 붙은 이름 : 스윙에서 만드는 컴포넌트
     
     - 컨테이너 : 다른 컴포넌트들을 내부에 넣을 수 있는 컴포넌트
-     1. 최상위 컨테이너: 다른 컨테이너 안에 포함될 수 없는 컨테이너(JFrame, JDialog, JApplet을 먼저 만들어준다)
-     2. 일반 컨테이너: 다른 컨테이너 안에 포함될 수 있는 컨테이너
+    
+        1. 최상위 컨테이너: 다른 컨테이너 안에 포함될 수 없는 컨테이너(JFrame, JDialog, JApplet을 먼저 만들어준다)
+        2. 일반 컨테이너: 다른 컨테이너 안에 포함될 수 있는 컨테이너
     
     일반적으로 JFrame을 만들고 JPanel을 만든다.
     JPanel에 컴포넌트를 모두 작성, JFrame에 통째로 집어넣는다
     
     - 프레임의 속성을 설정하는 중요한 메소드
-    1. setLocation(x, y) / setBounds(x, y, width, height) / setSize(width, height) : 프레임의 위치와 크기 설정
-    2. setIconImage(IconImage) : 윈도우 시스템에 타이틀 바, 태스크 스위처에 표시할 아이콘을 알려줌
-    3. setTitle(String title) : 타이틀 바의 제목을 변경한다.
-    4. setResizable(boolean) : 사용자가 크기를 조절할 수 있는지를 설정한다.
+    
+        1. setLocation(x, y) / setBounds(x, y, width, height) / setSize(width, height) : 프레임의 위치와 크기 설정
+        2. setIconImage(IconImage) : 윈도우 시스템에 타이틀 바, 태스크 스위처에 표시할 아이콘을 알려줌
+        3. setTitle(String title) : 타이틀 바의 제목을 변경한다.
+        4. setResizable(boolean) : 사용자가 크기를 조절할 수 있는지를 설정한다.
 
     - 프레임 : 메뉴를 붙일 수 있는 윈도우
-    1. JFrame() : 타이틀이 없는 새로운 프레임
-    2. JFrame(String title) : 지정된 타이틀의 새로운 프레임 
-    3. add(Component c) : 지정된 컴포넌트를 프레임에 추가
-    4. pack() : 프레임을 크기를 추가된 컴포넌트들의 크기에 맞도록 조절
-    5. remove(Component c) : 지정된 컴포넌트를 프레임에서 제거
-    6. setDefaultCloseOperation(일반적으로 JFrame.EXIT_ON_CLOSE) : 사용자가 프레임을 닫을 때 수행되는 동작을 설정함. 
-    7. setIconImage(Icon image) : 프레임이 최소화되었을때의 아이콘 지정
-    8. setLayout(LayoutManager layout) : 프레임위에 놓이는 컴포넌트들을 배치하는 배치관리자 지정 -> 디폴트는 BorderLayout / 일반적으로 new FlowLayout()
-    9. setLocation(int x, int y) : 프레임의 x좌표와 y좌표를 지정
-       setLocationRelativeTo(null) // 중앙으로 위치
-    10. setResizable(boolean value) : 프레임의 크기 변경 허용 여부
-    11. setSize(int width, int height) : 프레임의 크기 설정
-    12. setMenuBar(JMenuBar menu) : 현재 프레임에 메뉴바를 붙임
+    
+        1. JFrame() : 타이틀이 없는 새로운 프레임
+        2. JFrame(String title) : 지정된 타이틀의 새로운 프레임 
+        3. add(Component c) : 지정된 컴포넌트를 프레임에 추가
+        4. pack() : 프레임을 크기를 추가된 컴포넌트들의 크기에 맞도록 조절
+        5. remove(Component c) : 지정된 컴포넌트를 프레임에서 제거
+        6. setDefaultCloseOperation(일반적으로 JFrame.EXIT_ON_CLOSE) : 사용자가 프레임을 닫을 때 수행되는 동작을 설정함. 
+        7. setIconImage(Icon image) : 프레임이 최소화되었을때의 아이콘 지정
+        8. setLayout(LayoutManager layout) : 프레임위에 놓이는 컴포넌트들을 배치하는 배치관리자 지정 -> 디폴트는 BorderLayout / 일반적으로 new FlowLayout()
+        9. setLocation(int x, int y) : 프레임의 x좌표와 y좌표를 지정
+           setLocationRelativeTo(null) // 중앙으로 위치
+        10. setResizable(boolean value) : 프레임의 크기 변경 허용 여부
+        11. setSize(int width, int height) : 프레임의 크기 설정
+        12. setMenuBar(JMenuBar menu) : 현재 프레임에 메뉴바를 붙임
 
     - 패널 : 컴포넌트들을 포함하고 있도록 설계된 컨테이너 중 하나
-
-    1. JPanel() : 새로운 패널을 생성
-    2. JPanel(boolean isDoubleBuffered) : 만약 매개변수가 참이면 더블 버퍼링을 사용
-    3. JPanel(LayoutManager layout) : 지정된 배치관리자를 사용하는 패널을 생성
-    4. add(Component c) : 지정된 컴포넌트를 패널에 추가
-    5. remove(Component c) : 지정된 컴포넌트를 패널에서 제거
-    6. setLayout(LayoutManager layout) : 배치관리자를 지정, 디폴트는 FlowLayout
-    7. setLocation(int x, int y) : 패널의 위치 지정
-    8. setSize(int width, int height) : 패널의 크기 지정
-    9. setToolTipText(String next) : 사용자가 마우스를 패널의 빈 곳에 올려놓으면 툴팁을 표시
+    
+        1. JPanel() : 새로운 패널을 생성
+        2. JPanel(boolean isDoubleBuffered) : 만약 매개변수가 참이면 더블 버퍼링을 사용
+        3. JPanel(LayoutManager layout) : 지정된 배치관리자를 사용하는 패널을 생성
+        4. add(Component c) : 지정된 컴포넌트를 패널에 추가
+        5. remove(Component c) : 지정된 컴포넌트를 패널에서 제거
+        6. setLayout(LayoutManager layout) : 배치관리자를 지정, 디폴트는 FlowLayout
+        7. setLocation(int x, int y) : 패널의 위치 지정
+        8. setSize(int width, int height) : 패널의 크기 지정
+        9. setToolTipText(String next) : 사용자가 마우스를 패널의 빈 곳에 올려놓으면 툴팁을 표시
 
     - 레이블 : 편집이 불가능한 텍스트를 표시하기 위한 컴포넌트
-    1. JLabel() : 새로운 레이블을 생성
-    2. JLabel(String text) : 지정된 텍스트를 표시하는 레이블을 생성
-    3. getText() : 레이블의 텍스트를 반환
-    4. setText(String text) : 레이블의 텍스트를 설정
-    5. setToolTipText(String text) : 사용자가 마우스를 레이블 위에 올려놓으면 툴팁으로 표시
-    6. setVisible(boolean value) : 레이블을 보이게 하거나 감춤
+    
+        1. JLabel() : 새로운 레이블을 생성
+        2. JLabel(String text) : 지정된 텍스트를 표시하는 레이블을 생성
+        3. getText() : 레이블의 텍스트를 반환
+        4. setText(String text) : 레이블의 텍스트를 설정
+        5. setToolTipText(String text) : 사용자가 마우스를 레이블 위에 올려놓으면 툴팁으로 표시
+        6. setVisible(boolean value) : 레이블을 보이게 하거나 감춤
 
-    - 버튼 : 사용자가 클릭했을 경우, 이벤트를 발생하여 원하는 동작을 하게 하는데 이용된다
-    1. Button() : 레이블이 없는 버튼을 생성
-    2. Button(String label) : 지정된 레이블의 버튼을 생성
-    3. getText() : 버튼의 현재 텍스트를 반환
-    4. setText(String text) : 버튼의 텍스트를 설정
-    5. doClick() : 사용자가 버튼을 누른 것처럼 이벤트를 발생
-    6. setBorderPainted(boolean value) : 버튼의 경계를 나타내거나 감춤
-    7. setContentAreaFilled(boolean value) : 버튼의 배경을 채울 것인지를 지정
-    8. setEnabled(boolean value) : 버튼을 활성화하거나 비활성화
-    9. setRolloverEnabled(boolean value) : 마우스가 버튼 위에 있으면 경계를 진하게 하는 롤오버 효과를 설정
-    10. setToolTipText(String text) : 사용자가 마우스를 버튼 위에 올려놓으면 툴팁을 표시
-    11. setVisible(boolean value) : 버튼을 보이게 하거나 감춤
+    - 버튼 : 사용자가 클릭했을 경우, 이벤트를 발생하여 원하는 동작을 하게 하는데 이용된다.
+    
+        1. Button() : 레이블이 없는 버튼을 생성
+        2. Button(String label) : 지정된 레이블의 버튼을 생성
+        3. getText() : 버튼의 현재 텍스트를 반환
+        4. setText(String text) : 버튼의 텍스트를 설정
+        5. doClick() : 사용자가 버튼을 누른 것처럼 이벤트를 발생
+        6. setBorderPainted(boolean value) : 버튼의 경계를 나타내거나 감춤
+        7. setContentAreaFilled(boolean value) : 버튼의 배경을 채울 것인지를 지정
+        8. setEnabled(boolean value) : 버튼을 활성화하거나 비활성화
+        9. setRolloverEnabled(boolean value) : 마우스가 버튼 위에 있으면 경계를 진하게 하는 롤오버 효과를 설정
+        10. setToolTipText(String text) : 사용자가 마우스를 버튼 위에 올려놓으면 툴팁을 표시
+        11. setVisible(boolean value) : 버튼을 보이게 하거나 감춤
 
-    - 텍스트 필드 : 
-    1. JTextField() : TextField를 생성
-    2. JTextField(int columns) : 지정된 칸 수를 가지고 있는 TextField를 생성
-    3. JTextField(String text) : 지정된 문자열로 초기화된 TextField를 생성
-    4. setText(String text) : 지정된 문자열을 텍스트 필드에 씀
-    5. getText() : 텍스트 필드에 입력된 문자열을 반환
-    6. setEditable(boolean) : 사용자가 텍스르틀 입력할 수 있는지 없는지를 설정하고 반환
-       boolean isEditable() ; 사용자가 텍스르틀 입력할 수 있는지 없는지를 설정하고 반환
+    - 텍스트 필드
+    
+        1. JTextField() : TextField를 생성
+        2. JTextField(int columns) : 지정된 칸 수를 가지고 있는 TextField를 생성
+        3. JTextField(String text) : 지정된 문자열로 초기화된 TextField를 생성
+        4. setText(String text) : 지정된 문자열을 텍스트 필드에 씀
+        5. getText() : 텍스트 필드에 입력된 문자열을 반환
+        6. setEditable(boolean) : 사용자가 텍스르틀 입력할 수 있는지 없는지를 설정하고 반환
+           boolean isEditable() : 사용자가 텍스르틀 입력할 수 있는지 없는지를 설정하고 반환
 
 ---
 
@@ -314,19 +321,19 @@ use_math: true
 ---
     
     배치 관리자 종류
-    1. FlowLayout(왼쪽에서 오른쪽으로 순서대로)
-    2. GridLayout(격자로 나뉘어짐)
-    3. GridBagLayout(GridLayout의 확장판)
-    4. BorderLayout(5개의 영역 - "North", "South", "West", "East", "Center")
-    5. BoxLayout(FlowLayout과 같다, x축에서 y축으로 넣을 수도 있다)
-    6. CardLayout(이벤트 핸들러를 배우고선)
+        1. FlowLayout(왼쪽에서 오른쪽으로 순서대로)
+        2. GridLayout(격자로 나뉘어짐)
+        3. GridBagLayout(GridLayout의 확장판)
+        4. BorderLayout(5개의 영역 - "North", "South", "West", "East", "Center")
+        5. BoxLayout(FlowLayout과 같다, x축에서 y축으로 넣을 수도 있다)
+        6. CardLayout(이벤트 핸들러를 배우고선)
     
     배치 관리자 설정
-    1. 생성자를 이용하는 방법
-       JPanel panel = new JPanel(new BorderLayout()); // 한 번에 만들기 때문에 이것이 가장 편하다
-    2. setLayout() 메소드 이용
-       JPanel panel = new JPanel(); // 객체 생성 후 
-       panel.setLayout(new FlowLayout()); // 배치 관리자 설정
+        1. 생성자를 이용하는 방법
+           JPanel panel = new JPanel(new BorderLayout()); // 한 번에 만들기 때문에 이것이 가장 편하다
+        2. setLayout() 메소드 이용
+           JPanel panel = new JPanel(); // 객체 생성 후 
+           panel.setLayout(new FlowLayout()); // 배치 관리자 설정
     
     크기와 정렬 힌트
     setMinimuSize(), setPreferredSize(), setMaximumSize() // 별로 사용하지 않으며 지정하기가 어렵다
@@ -584,7 +591,7 @@ use_math: true
     2. Java 2D
     
     그래픽 좌표계
-    -y축이 증가할 수록 아래로 내려감
+    - y축이 증가할 수록 아래로 내려감
 
 ---
 
@@ -713,12 +720,12 @@ use_math: true
 
     // 2단계 찡그린 얼굴
     /*
-    Event handling 순서
-    1) 컴포넌트가 어떤 event를 발생하는가(JButton -> ActionEvent 발생)
-    2) event에 따른 Listener interface를 구현하는 클래스 작성
-       (ActionEvent -> ActionListener interface)
-    3) Listener 객체 생성
-    4) 컴포넌트에 Listener 객체 등록
+        Event handling 순서
+        1) 컴포넌트가 어떤 event를 발생하는가(JButton -> ActionEvent 발생)
+        2) event에 따른 Listener interface를 구현하는 클래스 작성
+           (ActionEvent -> ActionListener interface)
+        3) Listener 객체 생성
+        4) 컴포넌트에 Listener 객체 등록
     */
     // 지금까지는 main에서 끝났지만 이제는 계속해서 대기한다(버튼을 누를 때마다 실행)
     // -> Event driven 프로그래밍
@@ -1097,10 +1104,10 @@ use_math: true
                 // Object 타입으로 반환하므로, 이것을 필요한 타입으로 형변환하여서 사용하면 된다
     
     - 이벤트 처리기
-    1. 독립적인 클래스(신경 x)
-    2. 내부 클래스(가장 많이 사용) -> 15장
-    3. 프레임 클래스(신경 x)
-    4. 무명 클래스(그 다음 사용) -> 핸드폰 어플 만들 때 많이 사용
+        1. 독립적인 클래스(신경 x)
+        2. 내부 클래스(가장 많이 사용) -> 15장
+        3. 프레임 클래스(신경 x)
+        4. 무명 클래스(그 다음 사용) -> 핸드폰 어플 만들 때 많이 사용
 
     ex) 내부 클래스 - 다른 클래스 안에 위치하는 클래스. 외부 클래스의 멤버 변수들을 자유롭게 사용할 수 있다.
     
@@ -1216,22 +1223,24 @@ use_math: true
 ---
 
     모든 컴포넌트가 지원하는 이벤트
-    1. Component - 컴포넌트의 크기나 위치가 변경되었을 경우 발생
-    2. Focus - 키보드 입력을 받을 수 있는 상태가 되었을 때, 혹은 그 반대의 경우 발생
-    3. Container - 컴포넌트가 컨테이너에 추가되거나 삭제될 때 발생
-    4. Key - 사용자가 키를 눌렀을 때 키보드 포커스를 가지고 있는 객체에서 발생
-    5. Mouse - 마우스 버튼이 클릭되었을 때, 또는 마우스가 객체의 영역으로 들어오거나 나갈 때 발생
-    6. MouseMotion - 마우스가 움직였을 때 발생
-    7. MouseWheel - 컴포넌트 위에서 마우스 휠을 움직이는 경우 발생
-    8. Window - 윈도우에 어떤 변화가 있을 때 발생(열림, 닫힘, 아이콘화 등)
+    
+        1. Component - 컴포넌트의 크기나 위치가 변경되었을 경우 발생
+        2. Focus - 키보드 입력을 받을 수 있는 상태가 되었을 때, 혹은 그 반대의 경우 발생
+        3. Container - 컴포넌트가 컨테이너에 추가되거나 삭제될 때 발생
+        4. Key - 사용자가 키를 눌렀을 때 키보드 포커스를 가지고 있는 객체에서 발생
+        5. Mouse - 마우스 버튼이 클릭되었을 때, 또는 마우스가 객체의 영역으로 들어오거나 나갈 때 발생
+        6. MouseMotion - 마우스가 움직였을 때 발생
+        7. MouseWheel - 컴포넌트 위에서 마우스 휠을 움직이는 경우 발생
+        8. Window - 윈도우에 어떤 변화가 있을 때 발생(열림, 닫힘, 아이콘화 등)
     
     일부 컴포넌트가 지원하는 이벤트
-    1. Action - 사용자가 어떤 동작을 하는 경우에 발생
-    2. Caret - 텍스트 삽입점이 이동하거나 텍스트 선택이 변경되었을 경우 발생
-    3. Change - 일반적으로 객체의 상태가 변경되었을 경우 발생
-    4. Document - 문서의 상태가 변경되는 경우 발생
-    5. Item - 선택 가능한 컴포넌트에서 사용자가 선택을 하였을 때 발생
-    6. ListSelection - 리스트나 테이블에서 선택 부분이 변경되었을 경우에 발생
+    
+        1. Action - 사용자가 어떤 동작을 하는 경우에 발생
+        2. Caret - 텍스트 삽입점이 이동하거나 텍스트 선택이 변경되었을 경우 발생
+        3. Change - 일반적으로 객체의 상태가 변경되었을 경우 발생
+        4. Document - 문서의 상태가 변경되는 경우 발생
+        5. Item - 선택 가능한 컴포넌트에서 사용자가 선택을 하였을 때 발생
+        6. ListSelection - 리스트나 테이블에서 선택 부분이 변경되었을 경우에 발생
 
     import java.awt.*;
     import java.awt.event.*;
@@ -1299,7 +1308,7 @@ use_math: true
         }
     }
 
-## 무지개 색깔 표현
+    // 무지개 색깔 표현
     
     import java.awt.*;
     import javax.swing.*;
