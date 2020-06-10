@@ -11,7 +11,7 @@ use_math: true
     
     예외 : 잘못된 코드, 부정확한 데이터, 예외적인 상황에 의하여 발생하는 오류
     
-    /*import java.util.Scanner;
+    import java.util.Scanner;
     
     public class DivideByZero {
     
@@ -29,7 +29,7 @@ use_math: true
             sc.close();
         }
     
-    }*/
+    }
 
 ---
     
@@ -101,7 +101,7 @@ use_math: true
 
 ---
 
-    /*// IOException을 처리하지 않아 compile error 발생
+    // IOException을 처리하지 않아 compile error 발생
     import java.io.PrintWriter;
     import java.io.FileWriter;
     
@@ -129,7 +129,7 @@ use_math: true
         public static void main(String[] args) {
             new FileExeption();
         }
-    }*/
+    }
     
 ---
 
@@ -182,13 +182,13 @@ use_math: true
        : 반드시 처리해야함(안하면 컴파일이 안됨) -> 검사
 
     - RuntimeException의 종류
-    1. ArithmeticException : 어떤 수를 0으로 나눌 때 발생한다.
-    2. NullPointerException : 널 객체를 참조할 때 발생한다.
-    3. ClassCastException : 적절치 못하게 클래스를 형변환하는 경우 발생한다.
-    4. NegativeArraySizeException : 배열의 크기가 음수인 경우 발생한다.
-    5. OutOfMemoryException : 사용 가능한 메모리가 없는 경우 발생한다.
-    6. NoClassDefFoundException : 원하는 클래스를 찾지 못하였을 경우 발생한다.
-    7. ArrayIndexOutOfBoundsException : 배열을 참조하는 인덱스가 잘못된 경우 발생한다.
+        1. ArithmeticException : 어떤 수를 0으로 나눌 때 발생한다.
+        2. NullPointerException : 널 객체를 참조할 때 발생한다.
+        3. ClassCastException : 적절치 못하게 클래스를 형변환하는 경우 발생한다.
+        4. NegativeArraySizeException : 배열의 크기가 음수인 경우 발생한다.
+        5. OutOfMemoryException : 사용 가능한 메모리가 없는 경우 발생한다.
+        6. NoClassDefFoundException : 원하는 클래스를 찾지 못하였을 경우 발생한다.
+        7. ArrayIndexOutOfBoundsException : 배열을 참조하는 인덱스가 잘못된 경우 발생한다.
 
     NumberException(상위 클래스) > TooSmallException(하위 클래스)
     TooSmallException이 먼저 나오고 NumberException이 나와야지 그렇지 않으면 NumberException이 에러를 다 잡아버린다                                                                                                                                                                                             
@@ -239,7 +239,7 @@ use_math: true
         }
     }
     
-    /*// Exception을 호출 함수에 전달하여 처리하는 방법
+    // Exception을 호출 함수에 전달하여 처리하는 방법
     
     public class Test {
         public static void main(String[] args) {
@@ -258,9 +258,9 @@ use_math: true
             for(int i = 0; i <= array.length; i++)
                 System.out.println(array[i] + " ");
         }
-    }*/
+    }
     
-    /*// Exception 객체를 생성하고 호출 함수에 전달, 처리하는 방법
+    // Exception 객체를 생성하고 호출 함수에 전달, 처리하는 방법
     
     public class Test {
         public static void main(String[] args) {
@@ -283,13 +283,13 @@ use_math: true
                 System.out.println(array[i] + " ");
             }
         }
-    }*/
+    }
     
     // RuntimeErrorException의 경우 throws의 구문을 사용할 수 있다
 
 ---
     
-    /*// 사용자 정의 exception class
+    // 사용자 정의 exception class
     // 함수에서 exception을 처리하는 방법
     
     import java.util.Scanner;
@@ -330,7 +330,6 @@ use_math: true
         }
     
     }
-    */
     
     // Exception을 호출 함수에 전달하여 처리하는 방법
     
@@ -371,9 +370,9 @@ use_math: true
 ---
 
     제네릭 프로그래밍
-    -다양한 타입의 객체를 동일한 클래스로 사용한다
-    -첫 번째 방법 : 일반적인 객체를 처리하려면 Object 참조 변수를 사용
-                  : Object 참조 변수는 어떤 객체이던지 참조할 수 있다
+    - 다양한 타입의 객체를 동일한 클래스로 사용한다
+    - 첫 번째 방법 : 일반적인 객체를 처리하려면 Object 참조 변수를 사용
+                 : Object 참조 변수는 어떤 객체이던지 참조할 수 있다
     
     public class Box<T> { // T : 타입 매개변수(객체 생성시 타입 지정)
         private T data;
@@ -439,14 +438,14 @@ use_math: true
 
 ---
 
-    -타입 매개 변수의 표기
-    1. K - Key
-    2. N - Number
-    3. T - Type(대체로 많이 씀)
-    4. V - Value
-    5. E - Element
+    - 타입 매개 변수의 표기
+        1. K - Key
+        2. N - Number
+        3. T - Type(대체로 많이 씀)
+        4. V - Value
+        5. E - Element
     
-    -다중 타입 매개 변수
+    - 다중 타입 매개 변수
     
     // 타입 매개변수는 여러개를 지정할 수 있다
     
@@ -494,10 +493,9 @@ use_math: true
 ---
 
     제네릭 메소드
-    -메소드에서도 타입 매개 변수를 사용하여서 제네릭 메소드를 정의할 수 있다.
-    -타입 매개 변수의 범위가 메소드 내부로 제한된다.
-    -Comparable까지는 몰라도 됨
-    
+    - 메소드에서도 타입 매개 변수를 사용하여서 제네릭 메소드를 정의할 수 있다.
+    - 타입 매개 변수의 범위가 메소드 내부로 제한된다.
+    - Comparable까지는 몰라도 됨
     
     // 일반 클래스의 메소드를 generic 메소드로 작성
     
@@ -528,12 +526,11 @@ use_math: true
 ---
 
     컬렉션
-    -자바에서 자료 구조를 구현한 클래스
-    -리스트, 스택, 큐, 집합, 해쉬 테이블
+    - 자바에서 자료 구조를 구현한 클래스
+    - 리스트, 스택, 큐, 집합, 해쉬 테이블
     
     1. Vector 클래스
     
-    /*
     // Vector 객체는 자동으로 크기 조절
     // 어떤 타입도 저장 가능하지만(raw type) generic class의 특성을 사용하기 위하여 타입을 정의한다.
     
@@ -561,8 +558,6 @@ use_math: true
             System.out.println(vc);
         }
     }
-    
-    */
     
     import java.util.Vector;
     
@@ -829,7 +824,7 @@ use_math: true
 
 ---
 
-    -우선순위 큐
+    - 우선순위 큐
     
     import java.util.PriorityQueue;
     
@@ -1053,8 +1048,8 @@ use_math: true
 
     - 스트림은 순서가 있는 데이터의 연속적인 흐름이다.
     - 스트림들은 연결될 수 있다.
-    - 입출력 스트림 : 1. 바이트 스트림 - 입/출력(8비트) (InputStream/OutputStream)
-                     2. 문자 스트림 - 입/출력 (Reader/Writer)
+    - 입출력 스트림:  1. 바이트 스트림 - 입/출력(8비트) (InputStream/OutputStream)
+                    2. 문자 스트림 - 입/출력 (Reader/Writer)
     - 바이트 스트림
     
      // File 입출력을 바이트 단위로 출력하는 경우
