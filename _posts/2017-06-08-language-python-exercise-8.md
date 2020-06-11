@@ -8,7 +8,8 @@ tag: Language
 
 ## [문제 1번] 
 #### (중복값 제거하기) 주어진 리스트에 대해서 중복값이 제거된 새로운 리스트를 반환하는 함수를 작성하시오. 다음의 함수 헤더를 사용하라.
-#### def eliminateDuplicates(lst):
+> def eliminateDuplicates(lst):
+
 #### 사용자로부터 정수 리스트를 입력받고, 위 함수를 호출하여 얻은 결과를 출력하는 테스트 프로그램을 작성하시오.
 ```python
 def eliminateDuplicates(lst):
@@ -123,7 +124,8 @@ while True: # 무한 루프를 돌린다(조건은 boolSelect의 원소들이 �
 
 ## [문제 3번]
 #### (패턴 인식: 연속된 네 개의 동일 숫자) 어떤 리스트가 동일한 네 숫자를 연속으로 갖고 있는지를 검사하는 함수를 작성하시오. 함수 헤더는 다음과 같다.
-#### def isConsecutiveFour(values):
+> def isConsecutiveFour(values):
+
 #### 사용자로부터 일련의 정수들을 입력받고, 동일한 네 숫자를 연속으로 갖고 있는지를 검사하는 테스트 프로그램을 작성하시오.
 ```python
 def isConsecutiveFour(values):
@@ -148,7 +150,8 @@ isConsecutiveFour(change_user_digit_lst)
 
 ## [문제 4번]
 #### (행렬의 주대각선 합하기) 다음 헤더를 사용하여 정수로 이루어진 n x n 행렬의 주대각선에 포함된 모든 숫자의 합을 구하는 함수를 작성하시오.
-#### def sumMajorDiagonal(m):
+> def sumMajorDiagonal(m):
+
 #### 주대각선이란 정방행렬의 왼쪽 위 모서리에서 오른쪽 아래 모서리를 가로지르는 대각선을 말한다. 4 x 4 행렬을 읽고 주대각선에 있는 모든 원소의 합계를 출력하는 프로그램을 작성하시오.
 ```python
 matrix = [] # n x n 행렬
@@ -175,7 +178,8 @@ sumMajorDiagonal(matrix)
 
 ## [문제 5번]
 #### (대수학: 행렬의 곱) 두 행렬을 곱하는 함수를 작성하시오. 함수의 헤더는 다음과 같다.
-#### def multiplyMatrix(a, b):
+> def multiplyMatrix(a, b):
+
 #### 행렬 a와 행렬 b를 곱하기 위해서, 행렬 a의 열의 개수와 행렬 b의 행의 개수가 같아야 하고 두 행렬의 원소는 동일한 또는 호환 가능한 데이터 타입이어야 한다. c를 행렬 곱의 결과라고 하자. 행렬 a의 열의 크기는 n이라고 가정한다. 각 원소 cij는 ai1 * b1j + ai2 * b2j + ... + ain * bnj 이다. 예를 들어 3 x 3 행렬 a와 b에 대한 c는 다음과 같다.
 #### 단, cij = ai1 * b1j + ai2 * b2j + ai3 * b3j 이다.
 #### 사용자로부터 두 행렬을 입력받고 두 행렬의 곱을 출력하는 예제 프로그램을 작성하시오.
