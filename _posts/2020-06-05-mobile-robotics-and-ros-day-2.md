@@ -14,10 +14,10 @@ tag: MobileRobotics
     - Mechanisms + Actuators(구동기)  
     - 가장 중요한 이슈  
         1) Stability(안정성)  
-            a) contact points의 수 -> 최소 3개 이상이라고 할 수 있지만, 조건이 필요함(무게중심을 벗어나지 않아야 한다는 것)  
-            b) center of gravity(무게중심)  
-            c) static: 움직임이 없는 안정성 / dynamic: 자연현상에 의한 안정성(관성, 중력 등..)  
-            d) inclination of terrain(경사도)  
+            - contact points의 수 -> 최소 3개 이상이라고 할 수 있지만, 조건이 필요함(무게중심을 벗어나지 않아야 한다는 것)  
+            - center of gravity(무게중심)  
+            - static: 움직임이 없는 안정성 / dynamic: 자연현상에 의한 안정성(관성, 중력 등..)  
+            - inclination of terrain(경사도)  
          
         2) Characteristics of contact(접촉 특징)  
             a) point/area contact  
