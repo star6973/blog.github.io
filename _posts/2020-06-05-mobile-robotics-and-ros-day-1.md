@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Mobile Robotics and ROS [Day 2]
-date:   2020-06-25 10:00:00-18:00:00
+date:   2020-06-05 10:00:00-18:00:00
 categories: DeepLearning
 tag: DeepLearning
 ---
