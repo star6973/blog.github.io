@@ -1,7 +1,7 @@
 ---
 layout: post
 title: SW Expert Academy [2007]
-date: 2020-04-04 15:00:00-16:00:00
+date: 2020-04-06 15:00:00-16:00:00
 categories: ProblemSolving
 tag: ProblemSolving
 ---
