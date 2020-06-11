@@ -14,20 +14,20 @@ tag: MobileRobotics
     - Mechanisms + Actuators(구동기)  
     - 가장 중요한 이슈  
         
-            1) Stability(안정성)  
-                - contact points의 수 -> 최소 3개 이상이라고 할 수 있지만, 조건이 필요함(무게중심을 벗어나지 않아야 한다는 것)  
-                - center of gravity(무게중심)  
-                - static: 움직임이 없는 안정성 / dynamic: 자연현상에 의한 안정성(관성, 중력 등..)  
-                - inclination of terrain(경사도)  
+          1) Stability(안정성)  
+            - contact points의 수 -> 최소 3개 이상이라고 할 수 있지만, 조건이 필요함(무게중심을 벗어나지 않아야 한다는 것)  
+            - center of gravity(무게중심)  
+            - static: 움직임이 없는 안정성 / dynamic: 자연현상에 의한 안정성(관성, 중력 등..)  
+            - inclination of terrain(경사도)  
 
-            2) Characteristics of contact(접촉 특징)  
-                - point/area contact  
-                - angle of contact  
-                - friction(point인지, area인지에 따라 마찰이 달라짐)  
+          2) Characteristics of contact(접촉 특징)  
+            - point/area contact  
+            - angle of contact  
+            - friction(point인지, area인지에 따라 마찰이 달라짐)  
 
-            3) Type of environment(환경의 종류)  
-                - structure  
-                - medium(매질): 공기, 물, 부드러운/딱딱한 재질의 벽  
+          3) Type of environment(환경의 종류)  
+            - structure  
+            - medium(매질): 공기, 물, 부드러운/딱딱한 재질의 벽  
 
 2. Wheels
     - 대부분의 application의 적절한 solution
@@ -37,54 +37,54 @@ tag: MobileRobotics
     
     - Four Basics Wheels Types  
     
-            1) Standard wheels  
-                - 일반적인 바퀴, 직진 방향만 가능  
-                - 이 휠은 2 자유도를 가지며 Front 또는 Reverse를 통과할 수 있다.   
-                - 휠의 중심은 로봇 섀시에 고정되어 있으며, 로봇 섀시와 휠 평면 사이의 각도는 일정하다.  
-                - 고정 휠은 일반적으로 휠이 모터에 부착되어 로봇을 운전하고 조종하는 데 사용되는 대부분의 WMR에서 볼 수 있다.  
+          1) Standard wheels  
+            - 일반적인 바퀴, 직진 방향만 가능  
+            - 이 휠은 2 자유도를 가지며 Front 또는 Reverse를 통과할 수 있다.   
+            - 휠의 중심은 로봇 섀시에 고정되어 있으며, 로봇 섀시와 휠 평면 사이의 각도는 일정하다.  
+            - 고정 휠은 일반적으로 휠이 모터에 부착되어 로봇을 운전하고 조종하는 데 사용되는 대부분의 WMR에서 볼 수 있다.  
+
+          2) Castor wheels  
+            - 보조 휠로 사용  
+            - 이 휠은 3 자유도를 가지며 휠을 제자리에 고정시키는 포크에 장착된다.  
+            - 캐스터 휠은 일반적으로 로봇의 균형을 잡는 데 사용되며 로봇을 구동하는 데는 거의 사용되지 않는다.   
+            - 2가지 종류  
+              a) centered : 휠의 수직 차축은 휠의 중심을 통과한다. 디자인은 간단하며 휠을 로봇베이스에 연결하기 위해 몇 개의 나사만 있으면 된다.  
+              b) off-centered : 수직 축은 휠 중심을 통과하지 않지만 약간 중심을 벗어난다. 일부 디자인에는 휠과 포크 사이에 스위블 조인트가 포함되어있어 360° 자유롭게 회전 할 수 있다. 이 스위블 휠의 가장 큰 단점 중 하나는 _flutter_ 이다. flutter은 휠이 지면에 닿지 않고 어떤 방향으로든 자유롭게 회전 할 때 발생한다.  
 
 
-            2) Castor wheels  
-                - 보조 휠로 사용  
-                - 이 휠은 3 자유도를 가지며 휠을 제자리에 고정시키는 포크에 장착된다.  
-                - 캐스터 휠은 일반적으로 로봇의 균형을 잡는 데 사용되며 로봇을 구동하는 데는 거의 사용되지 않는다.   
-                - 2가지 종류  
-                    a) centered : 휠의 수직 차축은 휠의 중심을 통과한다. 디자인은 간단하며 휠을 로봇베이스에 연결하기 위해 몇 개의 나사만 있으면 된다.  
-                    b) off-centered : 수직 축은 휠 중심을 통과하지 않지만 약간 중심을 벗어난다. 일부 디자인에는 휠과 포크 사이에 스위블 조인트가 포함되어있어 360° 자유롭게 회전 할 수 있다. 이 스위블 휠의 가장 큰 단점 중 하나는 _flutter_ 이다. flutter은 휠이 지면에 닿지 않고 어떤 방향으로든 자유롭게 회전 할 때 발생한다.  
+          3) Swedish wheels(=Omni wheels)  
+            - 옴니 디렉션, passive한 롤링  
+            - 이 휠은 3 자유도를 가지며 다 방향 이동이 필요한 로봇에 가장 적합하다.  
+            - 이 휠은 중앙 휠 둘레에 패시브 휠(롤러)이 부착된 일반 휠이다. 옴니 휠은 어떤 방향으로든 움직일 수 있으며, 어떤 방향으로 움직일 때 저항이 낮다.   
+            - 작은 바퀴는 작은 바퀴의 축이 큰 중심 바퀴의 축에 직각이되도록 부착되어 바퀴가 자체 축과 평행하게 회전하도록 한다.   
+            - Mecanum Wheel은 롤러가 또 다른 더 큰 휠의 원주 주위에 45° 각도로 부착되는 것을 제외하고 옴니 휠의 한 유형이다.  
 
+          4) Ball or Spherical wheels  
+            - 이 볼 휠에는 구형 금속 또는 나일론 볼(또는 단단한 구형 물질)이 홀더 안에 있다.   
+            - 공의 자유도는 360°이며 일반적으로 로봇의 균형을 잡는 데 사용된다.   
+            - 단점은 이러한 캐스터는 일반적으로 견인력이 높고 구동 휠을 밀고 지지하는 데 더 많은 힘이 필요하다는 것이고, 또한 고르지 않고 먼지가 많고 기름기가 많은 표면에는 적합하지 않다.  
 
-            3) Swedish wheels(=Omni wheels)  
-                - 옴니 디렉션, passive한 롤링  
-                - 이 휠은 3 자유도를 가지며 다 방향 이동이 필요한 로봇에 가장 적합하다.  
-                - 이 휠은 중앙 휠 둘레에 패시브 휠(롤러)이 부착된 일반 휠이다. 옴니 휠은 어떤 방향으로든 움직일 수 있으며, 어떤 방향으로 움직일 때 저항이 낮다.   
-                - 작은 바퀴는 작은 바퀴의 축이 큰 중심 바퀴의 축에 직각이되도록 부착되어 바퀴가 자체 축과 평행하게 회전하도록 한다.   
-                - Mecanum Wheel은 롤러가 또 다른 더 큰 휠의 원주 주위에 45° 각도로 부착되는 것을 제외하고 옴니 휠의 한 유형이다.  
-
-            4) Ball or Spherical wheels  
-                - 이 볼 휠에는 구형 금속 또는 나일론 볼(또는 단단한 구형 물질)이 홀더 안에 있다.   
-                - 공의 자유도는 360°이며 일반적으로 로봇의 균형을 잡는 데 사용된다.   
-                - 단점은 이러한 캐스터는 일반적으로 견인력이 높고 구동 휠을 밀고 지지하는 데 더 많은 힘이 필요하다는 것이고, 또한 고르지 않고 먼지가 많고 기름기가 많은 표면에는 적합하지 않다.  
-    
-    
     - Wheeled Robots의 특징  
-        1) Stability(안정성)  
-        2) Bigger wheels allow to overcome higher obstacles(높은 장애물 극복)  
-        3) nonholonomics  
-            + 모바일 로봇에서 Holonomics은 어느 방향으로도 움직일 수 있는 로봇을 의미하기 때문에 모션 제어가 쉽다는 장점이 있다.  
-            + 이에 반해서 대부분의 모바일 로봇은 Nonholonomics인데, 순간적으로 어떤 방향으로 움직일 수 없기 때문에 어떤 위치로 이동을 하기 위해서는 자동차를 사이드 주차하기 위해서 핸들을 여러 번 돌리는 것과 같은 과정이 필요하다.   
-            + Holonomics 시스템으로 대표적인 것은 메카넘휠과 같은 특수한 바퀴를 사용하여 어느 방향이든 이동할 수 있도록 설계된 Omnidirectional Robot을 들 수 있다.  
-            + 위치 변수와 속도 변수가 포함  
+
+          1) Stability(안정성)  
+          2) Bigger wheels allow to overcome higher obstacles(높은 장애물 극복)  
+          3) nonholonomics  
+            - 모바일 로봇에서 Holonomics은 어느 방향으로도 움직일 수 있는 로봇을 의미하기 때문에 모션 제어가 쉽다는 장점이 있다.  
+            - 이에 반해서 대부분의 모바일 로봇은 Nonholonomics인데, 순간적으로 어떤 방향으로 움직일 수 없기 때문에 어떤 위치로 이동을 하기 위해서는 자동차를 사이드 주차하기 위해서 핸들을 여러 번 돌리는 것과 같은 과정이 필요하다.   
+            - Holonomics 시스템으로 대표적인 것은 메카넘휠과 같은 특수한 바퀴를 사용하여 어느 방향이든 이동할 수 있도록 설계된 Omnidirectional Robot을 들 수 있다.  
+            - 위치 변수와 속도 변수가 포함  
             
-        4) 2개의 wheels + 1개의 sub wheels로 오류를 낮출 수 있음  
+          4) 2개의 wheels + 1개의 sub wheels로 오류를 낮출 수 있음  
 
 3. Mobilie Robot Kinematics
     - Kinematics: 신체의 움직임을 다루는 역학의 서브 필드  
-        1) forward kinematics  
-            + 로봇의 제어를 하는 공간(joint, link)  
-            + 위치와 자세를 찾는 연구(해가 하나)  
+    
+          1) forward kinematics  
+            - 로봇의 제어를 하는 공간(joint, link)  
+            - 위치와 자세를 찾는 연구(해가 하나)  
             
-        2) inverse kinematics  
-            + 위치와 자세 정보가 주어지면, 거꾸로 joint, link 공간을 연구(해가 여러 개)
+          2) inverse kinematics  
+            - 위치와 자세 정보가 주어지면, 거꾸로 joint, link 공간을 연구(해가 여러 개)
 
     - Representing robot position  
         + 기준이 되는 좌표계가 필요함  
@@ -100,7 +100,7 @@ tag: MobileRobotics
         
         <img src="/assets/images/ros2/4.PNG" width="50%"><br>
      
-     
+
     - Holonomic systems  
         + initial frame에서 diffrential equation(로봇의 움직임을 수학적으로 모델링 -> 미분방정식 형태)이 integrable(적분이 가능한) final position  
         + 각 휠의 속도 -> differential equation이 구해짐  
