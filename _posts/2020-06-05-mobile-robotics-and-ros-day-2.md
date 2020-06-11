@@ -20,13 +20,13 @@ tag: MobileRobotics
                 - inclination of terrain(경사도)  
          
         2) Characteristics of contact(접촉 특징)  
-            a) point/area contact  
-            b) angle of contact  
-            c) friction(point인지, area인지에 따라 마찰이 달라짐)  
-        
+                - point/area contact  
+                - angle of contact  
+                - friction(point인지, area인지에 따라 마찰이 달라짐)  
+
         3) Type of environment(환경의 종류)  
-            a) structure  
-            b) medium(매질): 공기, 물, 부드러운/딱딱한 재질의 벽  
+                - structure  
+                - medium(매질): 공기, 물, 부드러운/딱딱한 재질의 벽  
 
 2. Wheels
     - 대부분의 application의 적절한 solution
