@@ -2,8 +2,8 @@
 layout: post
 title:  Mobile Robotics and ROS [Day 1]
 date:   2020-05-29 10:00:00-18:00:00
-categories: DeepLearning
-tag: DeepLearning
+categories: MobileRobotics
+tag: MobileRobotics
 ---
 
 ## 충북대학교 김곤우 교수님
