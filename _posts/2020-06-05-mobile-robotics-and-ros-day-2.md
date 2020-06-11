@@ -105,15 +105,14 @@ tag: MobileRobotics
         + initial frame에서 diffrential equation(로봇의 움직임을 수학적으로 모델링 -> 미분방정식 형태)이 integrable(적분이 가능한) final position  
         + 각 휠의 속도 -> differential equation이 구해짐  
         + 위의 값을 적분하면 final position을 찾을 수 있음(휠의 회전량을 누적해서)  
-        + 각 휠의 이동 거리 측정은 로봇의 최종 위치를 계산  
-    
+        + 각 휠의 이동 거리 측정은 로봇의 최종 위치를 계산<br><br>
     
     - Non-holonomic systems  
         + diffrential equation이 주어졌지만, 적분이 불가능하여 final position을 찾을 수 없음  
         + 휠의 속도를 적분해서 final position을 찾을 수 없음(why? 이동량은 같지만, final position이 다를 수 있기 때문에)   
         + 이동하는 함수를 시간에 따라 표현해야만 가능해짐  
         
-        <img src="/assets/images/ros2/5.PNG" width="50%"><br>  
+        <img src="/assets/images/ros2/5.PNG" width="50%"><br><br>
         
         
     - Kinematics of wheel motion  
@@ -124,31 +123,31 @@ tag: MobileRobotics
             
             <img src="/assets/images/ros2/6.PNG" width="50%"><br>
             
-            <img src="/assets/images/ros2/7.PNG" width="50%"><br>
+            <img src="/assets/images/ros2/7.PNG" width="50%"><br><br>
         
         
     - Instantaneous Center of Rotation(IC/ICR/ICC, 순간적인 회전 중심)  
         1) Case 1: IC가 존재  
         
-            <img src="/assets/images/ros2/8.PNG" width="50%"><br> 
+        <img src="/assets/images/ros2/8.PNG" width="50%"><br> 
         
-            + 차량의 각 바퀴는 IC를 중심으로 회전을 한다.  
-            + IC는 각 휠의 롤 축의 교차점에 있다.  
-            + 각 바퀴의 속도는 차량의 회전과 일치한다.  
-        
-            > 𝑣𝑣1=𝑅𝑅1𝜔𝜔,𝑣𝑣2=𝑅𝑅2𝜔𝜔, 𝑣𝑣3=𝑅𝑅3𝜔𝜔
+          - 차량의 각 바퀴는 IC를 중심으로 회전을 한다.  
+          - IC는 각 휠의 롤 축의 교차점에 있다.  
+          - 각 바퀴의 속도는 차량의 회전과 일치한다.  
+
+        > 𝑣𝑣1=𝑅𝑅1𝜔𝜔,𝑣𝑣2=𝑅𝑅2𝜔𝜔, 𝑣𝑣3=𝑅𝑅3𝜔𝜔
         
         2) Case 2: IC가 없음  
         
-            <img src="/assets/images/ros2/9.PNG" width="50%"><br>
+        <img src="/assets/images/ros2/9.PNG" width="50%"><br>
     
-            + IC가 없으면 회전이 불가능함
+           - IC가 없으면 회전이 불가능함
 
         3) Case 3: IC가 존재하면서, 각 휠의 거리와 속도가 비례할 때  
         
-            <img src="/assets/images/ros2/10.PNG" width="50%"><br>
+        <img src="/assets/images/ros2/10.PNG" width="50%"><br>
     
-            > 𝑣𝑣1=𝑅𝑅1𝜔𝜔,𝑣𝑣2=𝑅𝑅2𝜔𝜔
+        > 𝑣𝑣1=𝑅𝑅1𝜔𝜔,𝑣𝑣2=𝑅𝑅2𝜔𝜔
 
 
     - Wheel Kinematic Constraints  
@@ -163,29 +162,29 @@ tag: MobileRobotics
             h) Wheels connected by rigid frame(chassis)(견고한 프레임으로 연결된 휠)  
     
         + Fixed Standard Wheel  
-            + 표준 휠은 속도의 방향 제약을 제공  
+            : 표준 휠은 속도의 방향 제약을 제공  
             
-            <img src="/assets/images/ros2/11.PNG" width="50%"><br>
+            <img src="/assets/images/ros2/11.PNG" width="50%"><br><br>
             
         + Steered Standard Wheel  
-            + 스티어링 작동으로 스티어링 가능한 표준 휠 정렬 가능  
+            : 스티어링 작동으로 스티어링 가능한 표준 휠 정렬 가능  
             
-            <img src="/assets/images/ros2/12.PNG" width="50%"><br>
+            <img src="/assets/images/ros2/12.PNG" width="50%"><br><br>
             
         + Castor Wheel 
-            + 오프셋 캐스터 휠은 연결 지점에서 두 개의 직교 선형 속도를 허용  
+            : 오프셋 캐스터 휠은 연결 지점에서 두 개의 직교 선형 속도를 허용  
             
-            <img src="/assets/images/ros2/13.PNG" width="50%"><br>
+            <img src="/assets/images/ros2/13.PNG" width="50%"><br><br>
             
         + Swedish Wheel
-            + 표준 휠에서 1개의 DOF(Degrees of Freedom, 자유도)가 추가  
+            : 표준 휠에서 1개의 DOF(Degrees of Freedom, 자유도)가 추가  
             
-            <img src="/assets/images/ros2/14.PNG" width="50%"><br>
+            <img src="/assets/images/ros2/14.PNG" width="50%"><<br><br>
             
         + Spherical Wheel
-            + 모션에 직접적인 제약이 없는 전 방향 가능  
+            : 모션에 직접적인 제약이 없는 전 방향 가능  
 
-            <img src="/assets/images/ros2/15.PNG" width="50%"><br>
+            <img src="/assets/images/ros2/15.PNG" width="50%"><br><br>
 
     - Kinematics Model
         + 목표: 휠 속도, 조향 각도, 조향 속도 및 로봇의 기하학적 파라미터 (구성 좌표)의 함수로 로봇 속도 설정
@@ -193,64 +192,69 @@ tag: MobileRobotics
             <img src="/assets/images/ros2/16.PNG" width="50%"><br>
             
         + Inverse Kinematics
-            <img src="/assets/images/ros2/17.PNG" width="50%"><br>
+            <img src="/assets/images/ros2/17.PNG" width="50%"><br><br>
     
     
     - Mobile Robot의 Locomotion  
         1) Differential drive robots  
-            - 두 개의 바퀴가 공통 축에 장착되어 라인이 일치되고, 별도의 모터로 제어  
-            - 가장 단순하지만 가장 인기있는 드라이브 메커니즘  
-            - 각 휠이 회전 운동을 나타내려면 로봇이 공통 축에있는 IC를 중심으로 회전해야 함.  
-            - IC는 두 바퀴의 상대 속도에 따라 달라짐.  
-            - 두 개의 휠의 상대적인 속도에 따라 IC의 값이 결정됨(두 휠의 상대속도가 일치하면, IC는 무한대 / 두 휠의 상대속도가 음수이면, IC가 결정)  
-            - 대표적으로 터틀봇  
+
+               - 두 개의 바퀴가 공통 축에 장착되어 라인이 일치되고, 별도의 모터로 제어                - 가장 단순하지만 가장 인기있는 드라이브 메커니즘  
+               - 각 휠이 회전 운동을 나타내려면 로봇이 공통 축에있는 IC를 중심으로 회전해야 함.  
+               - IC는 두 바퀴의 상대 속도에 따라 달라짐.  
+               - 두 개의 휠의 상대적인 속도에 따라 IC의 값이 결정됨(두 휠의 상대속도가 일치하면, IC는 무한대 / 두 휠의 상대속도가 음수이면, IC가 결정)  
+               - 대표적으로 터틀봇  
 
 
         2) Kinematics model in the robot frame  
         
-            <img src="/assets/images/ros2/18.PNG" width="50%"><br>
-        
-            <img src="/assets/images/ros2/19.PNG" width="50%"><br>
+        <img src="/assets/images/ros2/18.PNG" width="50%"><br>
+
+        <img src="/assets/images/ros2/19.PNG" width="50%"><br><br>
         
         
         3) Synchronous drive mobile robots  
-            - 각 휠은 구동 및 스티어링(조향)이 가능  
-            - 일반적인 구성: 3개의 스티어링 휠이 정삼각형의 정점에 배치  
-            - 모든 바퀴가 함께 조향되고 운전  
-            - 하나의 모터가 모든 바퀴를 같은 속도로 회전  
-            - 다른 모터는 모든 휠을 조향하여 항상 같은 방향을 가리키도록 함.  
-            - IC는 항상 무한대로, 로봇의 방향은 변경할 수 없음.  
-            - 터렛과 함께 사용되는 경우가 많음.  
-            - 기계식 체인으로 인해 휠이 잘못 정렬될 수 있음.  
+        
+               - 각 휠은 구동 및 스티어링(조향)이 가능  
+               - 일반적인 구성: 3개의 스티어링 휠이 정삼각형의 정점에 배치  
+               - 모든 바퀴가 함께 조향되고 운전  
+               - 하나의 모터가 모든 바퀴를 같은 속도로 회전  
+               - 다른 모터는 모든 휠을 조향하여 항상 같은 방향을 가리키도록 함.  
+               - IC는 항상 무한대로, 로봇의 방향은 변경할 수 없음.  
+               - 터렛과 함께 사용되는 경우가 많음.  
+               - 기계식 체인으로 인해 휠이 잘못 정렬될 수 있음.<br><br>
 
 
         4) Omnidirectional mobile robots  
-            - 3 DOF 모션 가능  
-            - inverse kinematics is significant  
-            - 설계 문제는 Nonholonomic 제약 조건 해결과 밀접한 관련이 있음.  
-            - 수동 롤러로 둘러싸인 원형 허브로 구성  
-            - 허브가 구동되고 롤러가 유휴 상태(수동)  
+        
+               - 3 DOF 모션 가능  
+               - inverse kinematics is significant  
+               - 설계 문제는 Nonholonomic 제약 조건 해결과 밀접한 관련이 있음.  
+               - 수동 롤러로 둘러싸인 원형 허브로 구성  
+               - 허브가 구동되고 롤러가 유휴 상태(수동)<br><br>
 
 
         5) Kinematics of roller wheels  
-            - 허브 회전: 롤러가 여전히 남아있는 상태에서 허브 축을 중심으로 회전(또는 롤)  
-            - 롤러 회전: 롤러가 지면 회전과 접촉하고 허브가 고정된 상태에서 허브 축 방향으로 이동  
-            - 다른 방향으로의 움직임에는 허브 회전과 롤러 회전이 조합  
+        
+               - 허브 회전: 롤러가 여전히 남아있는 상태에서 허브 축을 중심으로 회전(또는 롤)  
+               - 롤러 회전: 롤러가 지면 회전과 접촉하고 허브가 고정된 상태에서 허브 축 방향으로 이동  
+               - 다른 방향으로의 움직임에는 허브 회전과 롤러 회전이 조합  
             
-            <img src="/assets/images/ros2/20.PNG" width="50%"><br>
+        <img src="/assets/images/ros2/20.PNG" width="50%"><br><br>
              
              
         6) Three-wheeled omnidirectional mobile robot with universal wheels  
-            - 3개의 바퀴 힘으로부터의 결과 힘 벡터는 로봇의 움직임을 결정  
-            - 동작은 로봇 중심의 변환 및 로봇 중심에 대한 회전으로 분해  
             
-            <img src="/assets/images/ros2/21.PNG" width="50%"><br>
+               - 3개의 바퀴 힘으로부터의 결과 힘 벡터는 로봇의 움직임을 결정  
+               - 동작은 로봇 중심의 변환 및 로봇 중심에 대한 회전으로 분해  
+
+        <img src="/assets/images/ros2/21.PNG" width="50%"><br><br>
             
             
         7) Four-wheeled mobile robot with Swedish wheels  
-            - 결점    
-                a) 불연속 접촉으로 인한 수직 진동  
-                b) 신뢰성 문제  
-                c) 복잡한 디자인  
+
+               - 결점    
+                 a) 불연속 접촉으로 인한 수직 진동  
+                 b) 신뢰성 문제  
+                 c) 복잡한 디자인  
                 
-            <img src="/assets/images/ros2/22.PNG" width="50%"><br>
+        <img src="/assets/images/ros2/22.PNG" width="50%"><br>
