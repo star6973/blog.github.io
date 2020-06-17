@@ -43,8 +43,17 @@ tag: DeepLearning
     - RNN(Recurrent Neural Network)
       : 
 
-
-
+  3) Deep Learning: Vision
+    - Visual Learning 
+      a) Object Recognition
+      b) Style transfer
+      c) Deblurring and Denosing
+      d) Super-Resolution
+      
+  4) Deep Learning: GAN
+    - 
+  
+  
 
 
 
