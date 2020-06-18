@@ -123,10 +123,11 @@ use_math: true
 
 <img src="/assets/images/deeplearning/13.PNG" width="50%"><br>
 
-- 확률 p의 범위가 (0, 1)이라면, Odds(p)의 범위는 (0, $$\infty$$)가 된다. 이를 로그함수를 취하면 범위가 (-무한대, 무한대)가 된다. 즉, 범위가 실수 전체가 된다.
+- 확률 p의 범위가 (0, 1)이라면, Odds(p)의 범위는 (0, $$\infty$$)가 된다. 이를 로그함수를 취하면 범위가 ($$-\infty$$, $$\infty$$)가 된다. 즉, 범위가 실수 전체가 되어 분석을 하는 것이 의미가 있다.
 
 <img src="/assets/images/deeplearning/14.PNG" width="50%"><br>
 
+- 다시 위의 식을 p로 정리하면 다음과 같은 식을 얻을 수 있고, 이 식을 시그모이드라 한다.
 
 <img src="/assets/images/deeplearning/15.PNG" width="50%"><br>
 
