@@ -195,13 +195,13 @@ use_math: true
 
 - 위의 그림에서 y는 실제값을 나타내며, k는 클래스의 개수로 정의한다. $$y_j$$는 실제값 One-Hot vector의 j번째 인덱스를 의미하며, $$p_j$$는 샘플 데이터가 j번째 클래스일 확률을 나타낸다. 표기에 따라서 $$\widehat y_j$$로 표현하기도 한다.
 
-<img src="/assets/images/deeplearning/27.PNG" width="50%"><br>
+<img src="/assets/images/deeplearning/26.PNG" width="50%"><br>
 
 - c를 실제값 One-Hot vector에서 1을 가진 원소의 인덱스라고 한다면, $$p_c = 1$$은 $$\widehat y$$이 y를 정확하게 예측한 경우가 된다. 이를 식에 대입해보면 $$−1log(1) = 0$$이 되기 때문에, 결과적으로 $$\widehat y$$가 y를 정확하게 예측한 경우의 크로스 엔트로피 함수의 값은 0이 된다. 즉, $$−\sideset{_#j=1^#k}\sum(y_j)log(p_j)$$ 값을 최소화하는 방향으로 학습해야 한다.
 
 - 이제 이를 n개의 전체 데이터에 대한 평균을 구한다고 하면, 최종 비용 함수는 다음과 같다.
 
-<img src="/assets/images/deeplearning/28.PNG" width="50%"><br>
+<img src="/assets/images/deeplearning/27.PNG" width="50%"><br>
 
 - 위의 함수를 좀 더 직관적으로 살펴보면, S를 추정치(예측값)로 하고, L을 실제값으로 하여 다음과 같이 볼 수 있다.
 
