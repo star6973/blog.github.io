@@ -133,27 +133,53 @@ use_math: true
 
 <img src="/assets/images/deeplearning/14.PNG" width="50%"><br>
 
-- 다시 위의 식을 p로 정리하면 다음과 같은 식을 얻을 수 있고, 이 식을 시그모이드라 한다.
+- 다시 위의 식을 p로 정리하면 다음과 같은 함수를 얻을 수 있고, 이 함수을 시그모이드라 한다.
 
 <img src="/assets/images/deeplearning/15.PNG" width="50%"><br>
 
+- 따라서 binaray classification의 logistic model은 다음과 같다.
 
-확률  
-p
- 가 주어져 있을 때
+<img src="/assets/images/deeplearning/16.PNG" width="50%"><br>
 
-   -> 로지스틱/시그모이드 함수는 linear 모델과 다르게 제곱해서 평균해도 이쁜 곡선이 나올수가 없어서 다른 방안을 모색해야 함
+- 기존의 linear regression model에서 새로운 모델로 바뀌었으니, 당연히 그에 따른 비용함수도 새롭게 맞춰줘야 한다. 시그모이드 함수는 linear 모델과 다르게 비용함수를 구하기 위해 제곱해서 평균을 해도 분모가 더욱 커지게 되어 곡선이 나올수가 없다. 따라서 다음과 같은 비용함수를 만들어준다.
 
-  (43페이지) 로그 기반 함수 -> 엔트로피 함수
-  -> 2줄은 귀찮으니까 1줄로 만들기 위해서 y, (1-y)를 곱해줌
+<img src="/assets/images/deeplearning/17.PNG" width="50%"><br>
+
+- H(x)는 일차 방정식이고 y는 목표값으로, y와 H(x)의 값에 따라 비용이 달라진다. 아래의 그림과 같이 y와 H(x)의 값이 같을 경우에(실제값과 예측값이 정확할 때)만 cost가 0이 되고, 다를 경우에는 무한대 값이 나온다.
+
+<img src="/assets/images/deeplearning/18.PNG" width="50%"><br>
+
+<img src="/assets/images/deeplearning/19.PNG" width="50%"><br>
+
+- 이와 같은 로그 기반으로 이루어진 함수를 엔트로피 함수라고 한다. 추가적으로 설명하자면, 엔트로피는 불확실성을 나타내며, 어떤 데이터가 나올지 예측하기가 어렵다는 것이다. 즉, 엔트로피가 높다는 것은 정보가 너무 많아서 계산해야 할 확률이 더 많아지기 때문에 예측이 더욱 어려워진다는 것이다.
+
+- 예시로, 동전 던지기와 주사위 던지기가 있다고 하자. 동전 던지기에서 앞/뒷면이 나올 확률은 각각 1/2이지만, 주사위 던지기에서는 각각의 숫자가 나올 확률이 1/6이다(이론적인 확률). 이를 위와 같이 로그함수를 만들어주면, 동전의 엔트로피 값은 약 0.693, 주사위의 엔트로피 값은 약 1.79로 주사위의 엔트로피 값이 더 높다.
+
+- 이러한 엔트로피 함수를 적용한 비용함수를 좀 더 간결하게 한 줄로 표현하기 위해서 다음과 같이 쓸 수 있다.
+
+<img src="/assets/images/deeplearning/20.PNG" width="50%"><br>
+<br><br>
+
+### 3.2. Binary Classification Implementation
 
 
+<br><br>
 
-소프트맥스 분류기(멀티 분류기)
--> 바이너리 클래시피케이션을 하되, 질문을 여러번
-1) A인가 아닌가
-2) B인가 아닌가
-3) C인가 아닌가
+
+## 4. Softmax Classification
+### 4.1. Softmax Classification Theory
+
+- binary classification이 0과 1로만 분류를 했다면, softmax classification은 0, 1, 2, 3 등과 같이 다중값을 분류한다(Multinomial Classification이라고도 한다). 
+
+<img src="/assets/images/deeplearning/21.PNG" width="50%"><br>
+
+- 그렇다면 어떤 기준으로 다중 분류를 할 수 있을까? 답은 binary classification을 베이스로 하되, 질문을 여러 번하면 된다. 즉, 아래의 그림에서는 다음과 같이 여러 번 질문을 하며 모델이 학습할 수 있도록 한다.
+
+> A인가 아닌가
+> B인가 아닌가
+> C인가 아닌가
+
+
 
 B가 0.56, C가 0.99면, 시그모이드 값이 높은 것으로 결정(즉, prediction이 필요없음)
 -> 시그모이드 함수에서 나온 값에서 A가 B와 C와 얼마나 같은지는 생각할 필요 없음. 걍 A인지 아닌지만
@@ -165,13 +191,16 @@ W: 4x3, b: 3 -> 15개의 변수를 학습
 
 
 
+**※ 정리**
 
+## linear regression
+일차식(Wx + b)이 기본 모델이며, 입력값에 대한 추정치에 따른 오차를 구하기 위해 최소차승법(제곱평균)을 이용하고, 구해진 오차를 경사하강법을 통해 줄여나간다.
 
-linear regression -> 일차식(Wx + b)이 기본 모델이며, 입력값에 대한 추정치에 따른 오차를 구하기 위해 최소차승법(제곱평균)을 이용하고, 구해진 오차를 경사하강법을 통해 줄여나간다.
+## binary classification
+일차식(Wx + b)에서 단순히 직선그래프가 아니라, 기준이 바뀔 수 있다는 점을 감안하여, 시그모이드 함수로 모델을 만든다. 오차를 구하기 위해 엔트로피 함수를 만들고, 구해진 오차를 경사하강법을 통해 줄여나간다.
 
-binary classification -> 일차식(Wx + b)에서 단순히 직선그래프가 아니라, 기준이 바뀔 수 있다는 점을 감안하여, 시그모이드 함수로 모델을 만든다. 오차를 구하기 위해 엔트로피 함수를 만들고, 구해진 오차를 경사하강법을 통해 줄여나간다.
-
-softmax classification -> binary classification과 다르게 2개 이상의 값을 분류해야 함. 소프트맥스 함수로 모델을 만들고, 오차를 구하기 위해 따로 크로스 엔트로피 함수를 만든다. 이 크로스 엔트로피 함수에는 소프트 맥스 함수가 포함 -> 텐서플로우
+## softmax classification
+binary classification과 다르게 2개 이상의 값을 분류해야 함. 소프트맥스 함수로 모델을 만들고, 오차를 구하기 위해 따로 크로스 엔트로피 함수를 만든다. 이 크로스 엔트로피 함수에는 소프트 맥스 함수가 포함 -> 텐서플로우
 
 
 
