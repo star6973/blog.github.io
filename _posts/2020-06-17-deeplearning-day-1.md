@@ -8,84 +8,97 @@ tag: DeepLearning
 
 ## 고려대학교 김중헌 교수님
 ### Curriculum
-- Deep Learning Thoery and Software  
+- Basics
+- Software Installation and Examples
+- Linear Regression
+- Binary Classification
+- Softmax Classification
+- Artificial Neural Networks(ANN)
+- Convolutional Neural Networks(CNN)
+- CNN for CIFAR-10
+- Recurrent Neural Networks(RNN)
+- Generative Adversarial Networks(GAN)
 
-1. Machine Learning Overview
-  1) AI는 전 분야에 미칠 수 있는 기술
-  2) 강화학습은 지도학습/비지도학습의 단일 응답 구조와 다르게 끊임없이 응답하는 구조(바둑의 경우 한 수를 두고 끝나는 것이 아니라 계속해서 인공지능이 생각하면서 진행)
-<img>
+## 1. Basics
+### 1.1. Machine Learning Overview
+<img src="/assets/images/deeplearning/1.PNG" width="50%"><br>
 
-2. Introduction
-  <img>
+- AI는 전 분야에 미칠 수 있는 기술이기에, 계속해서 열광할 것.
+- 머신러닝은 크게 비지도 학습과 지도학습, 그리고 강화학습으로 나눌 수 있다.
+- 강화학습은 지도학습/비지도학습의 단일 응답 구조와 다르게 끊임없이 응답하는 구조(바둑과 같은 게임에 있는 AI 알고리즘은 한 수를 두고 끝나는 것이 아니라 상대방의 수를 읽고서, 다음 수를 생각하면서 진행한다.)
+
+### 1.2. Introduction
+#### 딥러닝 프로세스 과정
+
+1) 모델 만들기(껍데기) - MLP(Multi-Layer Perception), CNN, RNN, GAN, Customized
+<img src="/assets/images/deeplearning/2.PNG" width="50%"><br>
+ > input(5개의 유닛) -> 4개의 히든레이어 + 7개의 유닛 -> output(4개의 유닛)
+
+2) 훈련하기 - 입력된 데이터를 레이블링할 수 있도록
+<img src="/assets/images/deeplearning/3.PNG" width="50%"><br>
+
+3) 테스팅/추론 - 현실의 row 데이터를 테스팅하여 결과물이 유의미하도록
+<img src="/assets/images/deeplearning/4.PNG" width="50%"><br>
+
+※ 딥러닝 과정에서 발생되는 문제
+
+  **Overfitting**
+  - 2단계에서 발생되는 문제로, 데이터가 충분하지 않은 경우 발생한다.  
+  - 훈련 결과는 엄청 높게 나왔는데, 테스트 결과는 엄청 낮은 것을 과적합 문제라 한다.  
+  - 예를 들어, 침대를 팔고 싶어서 데이터를 수집하고자 하는데, 나의 잠자리 유형에만 특화된 침대만을 학습시키면 훈련은 잘 나올지 몰라도, 다른 사람들의 잠자리 유형에 맞지 않는 침대가 나올 수 있다.
+  - 더 많은 훈련 데이터가 필요하다!
+
+#### 딥러닝에서 두 가지 주요 모델(CNN, RNN)
+
+  **CNN(Convolutional Neural Network)**
+  <img src="/assets/images/deeplearning/5.jpeg" width="50%"><br>
   
-  1) How Deep Learning Works?
+  - 기존의 딥러닝은 1차원 구조만 입력이 가능하지만 많은 응용 분야에서 입력은 다차원이 필요했다. CNN은 2차원 구조(이미지), 3차원 구조(영상)을 훈련시킬 수 있다.
+  - 주로 시각 정보 학습에 사용한다.
 
-    - 딥러닝 프로세스 과정
-
-      a) 모델 만들기(껍데기) - MLP, CNN, RNN, GAN, Customized
-         > input -> 4개의 히든레이, 7개의 유닛(MLP) -> output
-
-      b) 훈련하기 -> Input: data, Output: labels
-      
-      c) 테스팅/추론
+  **RNN(Recurrent Neural Network)**
+  <img src="/assets/images/deeplearning/6.PNG" width="50%"><br>
   
-    - 딥러닝 과정에서 발생되는 문제
+  - 기존의 신경망 아키텍처에는 시간의 개념을 사용할 방법이 없었다. 이러한 시계열 데이터를 학습시킬 수 있는 모델이 주로 LSTM 및 GRU이다.
+  - 주로 시계열 정보 학습에 사용한다.
+<br><br>
 
-      a) Overfitting: 2단계에서 발생되는 문제로, 데이터가 충분하지 않은 경우 발생한다.  
-         -> 훈련 결과는 엄청 높게 나왔는데, 테스트 결과는 엄청 낮은 것
-         -> 침대를 학습시키고(나의 잠자리 유형) 팔면 망함
+## 2. Linear Regression
+### 2.1. Linear Regression Theory
 
-  2) Two major Deep Learning Models(CNN, RNN)
+- linear regression은 regression과 classification이 있다.
+- regression은 예측하는 것을 목표로, classification은 분류하는 것을 목표로 한다.
+- linear model은 흔히 직선 방정식을 생각하면 된다. 이 linear model은 통계학에서는 가설(hypothesis)이라고 부른다.  
 
-    - CNN(Convolutional Neural Network)
-      : 기존의 딥러닝은 1차원 구조만 입력이 가능했지만, CNN은 2차원 구조(이미지), 3차원 구조(영상)을 훈련시킬 수 있다.
+<img src="/assets/images/deeplearning/7.PNG" width="50%"><br>
 
-    - RNN(Recurrent Neural Network)
-      : 
+- 위의 사진과 같이 3개의 직선 중 어느 직선이 가장 좋아보일까? 아마도, 예측 측면이나 분류 측면 모두 가운데 파란색 선이 가장 좋아보인다고 할 수 있을 것이다.
+- 따라서 우리는 파란색 선과 같이 점과 직선 사이의 거리가 최소한이 되는 새로운 직선을 계속해서 만들어내야 한다.
 
-  3) Deep Learning: Vision
-    - Visual Learning 
-      a) Object Recognition
-      b) Style transfer
-      c) Deblurring and Denosing
-      d) Super-Resolution
-      
-  4) Deep Learning: GAN
-    - 
-  
-  
+<img src="/assets/images/deeplearning/8.PNG" width="50%"><br>
 
-[Linear Functions]
-1) Linear Regression
-2) Binary Classification
-3) Softmax Classification
+- 위의 사진과 같이 점과 직선 사이의 거리는 오차(cost, 비용)라고 할 수 있으며, 비용 또는 손실함수로 만들 수 있다.
 
-[Nonlinear Functions]
-1) Neural Network
-2) Convolutional NN
-3) CNN for CIFAR-10
-4) Recurrent NN
+<img src="/assets/images/deeplearning/9.PNG" width="50%"><br>
 
+- 이러한 비용함수는 실제값과 예측값의 차이를 제곱(음수가 될 수 있기 때문에, 어차피 우리는 그 차이만을 보는 것이기 때문에 제곱을 해도 상관없다.)하여 평균을 내주면 만들 수 있다.
+- 따라서 비용함수는 2차 방정식 형태의 곡선이 만들어진다.
 
+<img src="/assets/images/deeplearning/10.PNG" width="50%"><br>
 
-
-## Regression
-linear model <=> hypothesis(통계학에서는 가설)
-loss function -> 손실함수: 손실을 최대한 줄여야 함
-cost: 실제값과 모델값의 차이(오차)
--> 처음에는 길게, 나중에는 작게(기울기를 점점 작게, 기울기=0이되면 오차가 최소값이 됨)
--> Gradient Descent Method(경사하강법)
-
-어떻게 learning rate를 적용하는지? -> 계속 학습하면서 관측을 해야함
-
-
+- 고등수학을 배웠다면 쉽게 이해할 수 있겠지만, 2차 방정식을 미분하게 되면 1차 방정식의 직선이 된다. 이 직선은 gradient(기울기)라고 하며, 오차값이 된다. 따라서 우리는 오차를 최대한 줄이기 위해서 기울기가 0이 되도록 만들어야 하는데, 위의 사진과 같이 점점 기울기의 크기가 작아지도록 만드는 것을 **Gradient Descent Method(경사하강법)** 라고 한다.
+ 
+- 경사하강법 과정 중에서 기울기가 작아지도록 만들 때, 필요한 것이 learning rate이다. 한 번 학습할 때 얼마만큼 학습해야 하는지의 학습 양을 의미하며, learning rate를 적절하게 조정해줘야 모델의 학습이 잘 될 수 있다.
+- learning rate가 크다는 것은 경사하강을 할 때 step이 크다는 것이다. step이 크면 왔다갔다 하거나, 위로 튕겨 올라가버릴 수 있다. 이는 학습이 이루어지지 않으며, 쓰레기값이 나올 수 있다. 또한, 이러한 현상을 overshooting이라고 한다.
+- learning rate가 작다는 것은 경사하강을 할 때 step이 작다는 것이다. step이 작으면 너무 천천히 내려가기 때문에 시간이 다해 최저점이 아님에도 불구하고 멈추어 버린다.
+- 이러한 현상들을 피하기 위해서는 cost함수를 출력해보고 작은값으로 변화하고 있다면 learning rate를 증가시켜보면서 관측해야 한다.
 
 model
 시간 당 공부양, 족보 사용 여부 등등의 변수
 각 변수마다 가중치(weight)가 있음
 
 
-
+### 2.2. Linear Regression Implementation
 
 
 이진 분류기
