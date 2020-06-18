@@ -4,6 +4,7 @@ title:  Deep Learning [Day 1]
 date:   2020-06-17 10:00:00-19:00:00
 categories: DeepLearning
 tag: DeepLearning
+use_math: true
 ---
 
 ## 고려대학교 김중헌 교수님
@@ -26,6 +27,7 @@ tag: DeepLearning
 - AI는 전 분야에 미칠 수 있는 기술이기에, 계속해서 열광할 것.
 - 머신러닝은 크게 비지도 학습과 지도학습, 그리고 강화학습으로 나눌 수 있다.
 - 강화학습은 지도학습/비지도학습의 단일 응답 구조와 다르게 끊임없이 응답하는 구조(바둑과 같은 게임에 있는 AI 알고리즘은 한 수를 두고 끝나는 것이 아니라 상대방의 수를 읽고서, 다음 수를 생각하면서 진행한다.)
+<br><br>
 
 ### 1.2. Introduction
 #### 딥러닝 프로세스 과정
@@ -66,8 +68,7 @@ tag: DeepLearning
 ## 2. Linear Regression
 ### 2.1. Linear Regression Theory
 
-- linear regression은 regression과 classification이 있다.
-- regression은 예측하는 것을 목표로, classification은 분류하는 것을 목표로 한다.
+- regression은 예측하는 것을 목표로 한다.
 - linear model은 흔히 직선 방정식을 생각하면 된다. 이 linear model은 통계학에서는 가설(hypothesis)이라고 부른다.  
 
 <img src="/assets/images/deeplearning/7.PNG" width="50%"><br>
@@ -93,17 +94,47 @@ tag: DeepLearning
 - learning rate가 작다는 것은 경사하강을 할 때 step이 작다는 것이다. step이 작으면 너무 천천히 내려가기 때문에 시간이 다해 최저점이 아님에도 불구하고 멈추어 버린다.
 - 이러한 현상들을 피하기 위해서는 cost함수를 출력해보고 작은값으로 변화하고 있다면 learning rate를 증가시켜보면서 관측해야 한다.
 
-model
-시간 당 공부양, 족보 사용 여부 등등의 변수
-각 변수마다 가중치(weight)가 있음
+  **Multi-Variable Linear Regression**
 
+<img src="/assets/images/deeplearning/11.PNG" width="50%"><br>
+
+  - 다중 변수로 linear model을 만들기 위한 방정식과 비용함수를 만들 수 있는데, 방정식에서 더욱 깔끔하게 나타낼 수 있도록 선형대수인 행렬을 사용한다.
+<br><br>
 
 ### 2.2. Linear Regression Implementation
 
+시간 당 공부양, 족보 사용 여부 등등의 변수
+각 변수마다 가중치(weight)가 있음
 
-이진 분류기
-1) Linear regression with H(x) = Wx + b
-2) Logistic/sigmoid function(sig(t)) 기준이 바뀔 수 있다는 점을 감안하는 함수
+<br><br>
+
+## 3. Binary Classification
+### 3.1. Binary Classification Theory
+
+- classification은 분류하는 것을 목표로 한다.
+- Binary classification은 0 또는 1로만 나누어지는 것으로, 스팸 메일인지(1) 아닌지(0)와 같은 예시를 들 수 있다.
+- Binary classification은 기본적으로 Linear regression의 H(x) = Wx + b와 같은 1차 방정식을 따르면서, 0과 1의 분류를 하는 기준이 있다. 이러한 기준을 bias라고 하며, 이는 문제에 따라 바뀌기 때문에 Logistic/sigmoid function을 사용한다.
+
+<img src="/assets/images/deeplearning/12.PNG" width="50%"><br>
+
+- 그렇다면, 왜 시그모이드 함수를 사용하는지를 알아보자. 0 또는 1과 같이 데이터를 분류하기 위해선 단순 직선의 방정식은 사용하기가 어렵다. 왜냐하면, 현재 데이터의 분포에 따라 직선으로 나누었다고 하더라도, 새로운 데이터의 값이 어디에 위치하는지에 따라 또 다시 새로운 모델이 필요하기 때문이다. 따라서 계속해서 모델의 변화를 만들어주는 것이 아닌, 시그모이드 함수를 만들어서 0과 1로 분류하게 한다.
+
+- 변수가 1개인 선형 방정식은 목표가 실수값 예측이기 때문에 선형함수 y = Wx + b를 이용하여 예측한다(예측 변수의 수가 하나인 경우). 하지만 binary classification에서는 목표값이 0 또는 1이기 때문에 y = Wx + b를 이용해서 분류하는 것은 의미가 없다고 앞서 언급했다. 그래서 확률(Probability)을 이용하는데 다음과 같이 정의 된다. 
+
+<img src="/assets/images/deeplearning/13.PNG" width="50%"><br>
+
+- 확률 p의 범위가 (0, 1)이라면, Odds(p)의 범위는 (0, $$\infty$$)가 된다. 이를 로그함수를 취하면 범위가 (-무한대, 무한대)가 된다. 즉, 범위가 실수 전체가 된다.
+
+<img src="/assets/images/deeplearning/14.PNG" width="50%"><br>
+
+
+<img src="/assets/images/deeplearning/15.PNG" width="50%"><br>
+
+
+확률  
+p
+ 가 주어져 있을 때
+
    -> 로지스틱/시그모이드 함수는 linear 모델과 다르게 제곱해서 평균해도 이쁜 곡선이 나올수가 없어서 다른 방안을 모색해야 함
 
   (43페이지) 로그 기반 함수 -> 엔트로피 함수
