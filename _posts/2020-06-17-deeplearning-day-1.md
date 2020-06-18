@@ -34,17 +34,17 @@ use_math: true
 
 1) 모델 만들기(껍데기) - MLP(Multi-Layer Perception), CNN, RNN, GAN, Customized
 
-<img src="/assets/images/deeplearning/2.PNG" width="50%"><br>
+	<img src="/assets/images/deeplearning/2.PNG" width="50%"><br>
 
  > input(5개의 유닛) -> 4개의 히든레이어 + 7개의 유닛 -> output(4개의 유닛)
 
 2) 훈련하기 - 입력된 데이터를 레이블링할 수 있도록
 
-<img src="/assets/images/deeplearning/3.PNG" width="50%"><br>
+	<img src="/assets/images/deeplearning/3.PNG" width="50%"><br>
 
 3) 테스팅/추론 - 현실의 row 데이터를 테스팅하여 결과물이 유의미하도록
 
-<img src="/assets/images/deeplearning/4.PNG" width="50%"><br>
+	<img src="/assets/images/deeplearning/4.PNG" width="50%"><br>
 
 ※ 딥러닝 과정에서 발생되는 문제
 
@@ -58,14 +58,14 @@ use_math: true
 
   **CNN(Convolutional Neural Network)**
   
-  <img src="/assets/images/deeplearning/5.jpeg" width="50%"><br>
+	<img src="/assets/images/deeplearning/5.jpeg" width="50%"><br>
   
   - 기존의 딥러닝은 1차원 구조만 입력이 가능하지만 많은 응용 분야에서 입력은 다차원이 필요했다. CNN은 2차원 구조(이미지), 3차원 구조(영상)을 훈련시킬 수 있다.
   - 주로 시각 정보 학습에 사용한다.
 
   **RNN(Recurrent Neural Network)**
   
-  <img src="/assets/images/deeplearning/6.PNG" width="50%"><br>
+	<img src="/assets/images/deeplearning/6.PNG" width="50%"><br>
   
   - 기존의 신경망 아키텍처에는 시간의 개념을 사용할 방법이 없었다. 이러한 시계열 데이터를 학습시킬 수 있는 모델이 주로 LSTM 및 GRU이다.
   - 주로 시계열 정보 학습에 사용한다.
@@ -211,7 +211,23 @@ use_math: true
 
 <img src="/assets/images/deeplearning/25.PNG" width="50%"><br>
 
-- 크로스엔트로피 함수는 실제값과 예측값이 맞는 경우에는 0으로 수렴하고, 값이 틀릴경우에는 값이 커지기 때문에($$\infty$$), 실제 값과 예측 값의 차이를 줄이기 위한 엔트로피라고 할 수 있다.
+- 크로스엔트로피 함수는 실제값과 예측값이 맞는 경우에는 0으로 수렴하고, 값이 틀릴경우에는 값이 커지기 때문에($$\infty$$), 실제 값과 예측 값의 차이를 줄이기 위한 엔트로피라고 할 수 있다.<br><br>
+
+- 결국, 위에서 보았던 binary classification에서 사용된 엔트로피 함수 역시 크로스엔트로피 함수라고 할 수도 있으며, 본질적으로 softmax classification의 크로스엔트로피 함수와 동일한 수식이다.
+
+  **증명**
+  - binary classification에서 사용된 크로스엔트로피 함수식은 다음과 같다.
+
+	<img src="/assets/images/deeplearning/28.PNG" width="50%"><br>
+
+  - 위의 식에서 $$y를 y_1, y-1를 y_2$$로 치환하고, $$H(x)를 p_1, 1-H(X)를 p_2$$로 치환하면 다음과 같다.
+  
+  	<img src="/assets/images/deeplearning/29.PNG" width="50%"><br>
+
+  - 위 식은 다시 다음과 같이 만들 수 있으며, 이는 softmax 함수에서 $$k=2$$를 넣은 동일한 함수이다.
+
+	<img src="/assets/images/deeplearning/30.PNG" width="50%"><br>
+
 <br><br>
 
 ### 4.2. Softmax Classification Implementation
