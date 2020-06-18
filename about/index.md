@@ -19,27 +19,27 @@ theme: purple
 - 도메인 관련 지식
 
 [알고리즘 역량(브루트포스, 스택/큐, 이분탐색, DFS/BFS, 그리디, 동적계획법, DP)]
-- [SW Expert Academy](https://swexpertacademy.com/main/main.do)
-- [Programmers](https://programmers.co.kr/)
-- [BOJ](https://www.acmicpc.net/)
-- [Codeforces](https://codeforces.com/)
+- [SW Expert Academy](https://swexpertacademy.com/main/main.do){: target="_blank"}
+- [Programmers](https://programmers.co.kr/){: target="_blank"}
+- [BOJ](https://www.acmicpc.net/){: target="_blank"}
+- [Codeforces](https://codeforces.com/){: target="_blank"}
 
 [딥러닝 기초 과정]
-- [김성훈 교수님의 모두를 위한 딥러닝](https://www.youtube.com/playlist?list=PLlMkM4tgfjnLSOjrEJN31gZATbcj_MpUm)  
+- [김성훈 교수님의 모두를 위한 딥러닝](https://www.youtube.com/playlist?list=PLlMkM4tgfjnLSOjrEJN31gZATbcj_MpUm){: target="_blank"}  
 - 도서 : 밑바닥부터 시작하는 딥러닝  
 - 선형대수 강의
-   + [이상화 교수님의 선형대수](https://www.youtube.com/playlist?list=PLSN_PltQeOyjDGSghAf92VhdMBeaLZWR3)  
-   + [선형대수 스터디](https://github.com/kwangjunechoi7/Linear_Algebra_HS)
+   + [이상화 교수님의 선형대수](https://www.youtube.com/playlist?list=PLSN_PltQeOyjDGSghAf92VhdMBeaLZWR3){: target="_blank"}  
+   + [선형대수 스터디](https://github.com/kwangjunechoi7/Linear_Algebra_HS){: target="_blank"}
 - 확룰과통계 강의
-   + [이상철 교수님의 확률과 통계](https://www.youtube.com/channel/UCgJL39Q2O5UTY0B5na1kxHA)  
-   + [확률과통계 스터디](https://github.com/kwangjunechoi7/Statistics_HS)
+   + [이상철 교수님의 확률과 통계](https://www.youtube.com/channel/UCgJL39Q2O5UTY0B5na1kxHA){: target="_blank"}  
+   + [확률과통계 스터디](https://github.com/kwangjunechoi7/Statistics_HS){: target="_blank"}
 
 [딥러닝 심화 과정]
 - 컴퓨터 비전
-   + [Stanford University School of Engineering](https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq)
-   + [변성유님의 깃허브 블로그](https://zzsza.github.io/tag/data-cs231/)
+   + [Stanford University School of Engineering](https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq){: target="_blank"}
+   + [변성유님의 깃허브 블로그](https://zzsza.github.io/tag/data-cs231/){: target="_blank"}
 - 딥러닝  
-   + [최성준님의 논문으로 보는 딥러닝](https://www.edwith.org/deeplearningchoi)
+   + [최성준님의 논문으로 보는 딥러닝](https://www.edwith.org/deeplearningchoi){: target="_blank"}
 
 ---
 
@@ -79,11 +79,11 @@ theme: purple
 
 [논문]
 - 포트폴리오 : Reddit으로 작성
-- [논문으로 시작하는 딥러닝](https://github.com/kweonwooj/papers/issues)
-- [논문 정리법](https://github.com/kweonwooj/papers/issues)
+- [논문으로 시작하는 딥러닝](https://github.com/kweonwooj/papers/issues){: target="_blank"}
+- [논문 정리법](https://github.com/kweonwooj/papers/issues){: target="_blank"}
 
 [프로젝트]
-- [Kaggle Competition](https://kaggle-kr.tistory.com/32)
+- [Kaggle Competition](https://kaggle-kr.tistory.com/32){: target="_blank"}
 - 빅데이터 공모전 참가(기상청 빅데이터 콘테스트)
 - 국비지원 프로젝트(컴퓨터 비전)
 
