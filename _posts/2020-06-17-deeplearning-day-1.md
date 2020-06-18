@@ -193,7 +193,7 @@ use_math: true
 
 <img src="/assets/images/deeplearning/26.PNG" width="50%"><br>
 
-- 위의 그림에서 y는 실제값을 나타내며, k는 클래스의 개수로 정의한다. $$yj$$는 실제값 One-Hot vector의 j번째 인덱스를 의미하며, $$pj$$는 샘플 데이터가 j번째 클래스일 확률을 나타낸다. 표기에 따라서 $$y^j$$로 표현하기도 한다.
+- 위의 그림에서 y는 실제값을 나타내며, k는 클래스의 개수로 정의한다. $$y_j$$는 실제값 One-Hot vector의 j번째 인덱스를 의미하며, $$p_j$$는 샘플 데이터가 j번째 클래스일 확률을 나타낸다. 표기에 따라서 $$\widehat y_j$$로 표현하기도 한다.
 
 <img src="/assets/images/deeplearning/27.PNG" width="50%"><br>
 
