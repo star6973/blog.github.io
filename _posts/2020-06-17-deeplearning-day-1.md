@@ -220,13 +220,13 @@ use_math: true
 
 <center><img src="/assets/images/deeplearning/28.PNG" width="50%"></center><br>
 
-  - 위의 식에서 $$y를 y_1, y-1를 y_2$$로 치환하고, $$H(x)를 p_1, 1-H(X)를 p_2$$로 치환하면 다음과 같다.
+  - 위의 식에서 $$y 를 y_1,  y-1 를 y_2$$로 치환하고, $$H(x)를  p_1,  1-H(X)를 p_2$$로 치환하면 다음과 같다.
   
-<center><img src="/assets/images/deeplearning/29.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/29.PNG" width="30%"></center><br>
 
   - 위 식은 다시 다음과 같이 만들 수 있으며, 이는 softmax 함수에서 $$k=2$$를 넣은 동일한 함수이다.
 
-<center><img src="/assets/images/deeplearning/30.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/30.PNG" width="25%"></center><br>
 
 <br><br>
 
