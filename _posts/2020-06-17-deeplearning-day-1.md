@@ -33,13 +33,17 @@ use_math: true
 #### 딥러닝 프로세스 과정
 
 1) 모델 만들기(껍데기) - MLP(Multi-Layer Perception), CNN, RNN, GAN, Customized
+
 <img src="/assets/images/deeplearning/2.PNG" width="50%"><br>
+
  > input(5개의 유닛) -> 4개의 히든레이어 + 7개의 유닛 -> output(4개의 유닛)
 
 2) 훈련하기 - 입력된 데이터를 레이블링할 수 있도록
+
 <img src="/assets/images/deeplearning/3.PNG" width="50%"><br>
 
 3) 테스팅/추론 - 현실의 row 데이터를 테스팅하여 결과물이 유의미하도록
+
 <img src="/assets/images/deeplearning/4.PNG" width="50%"><br>
 
 ※ 딥러닝 과정에서 발생되는 문제
@@ -53,12 +57,14 @@ use_math: true
 #### 딥러닝에서 두 가지 주요 모델(CNN, RNN)
 
   **CNN(Convolutional Neural Network)**
+  
   <img src="/assets/images/deeplearning/5.jpeg" width="50%"><br>
   
   - 기존의 딥러닝은 1차원 구조만 입력이 가능하지만 많은 응용 분야에서 입력은 다차원이 필요했다. CNN은 2차원 구조(이미지), 3차원 구조(영상)을 훈련시킬 수 있다.
   - 주로 시각 정보 학습에 사용한다.
 
   **RNN(Recurrent Neural Network)**
+  
   <img src="/assets/images/deeplearning/6.PNG" width="50%"><br>
   
   - 기존의 신경망 아키텍처에는 시간의 개념을 사용할 방법이 없었다. 이러한 시계열 데이터를 학습시킬 수 있는 모델이 주로 LSTM 및 GRU이다.
