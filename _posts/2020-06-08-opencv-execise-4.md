@@ -372,3 +372,530 @@ int main()
 }
 ```
 <img src="/assets/images/opencv4/3.PNG" width="50%"><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat image = imread("../image/bit_test.jpg", IMREAD_COLOR);
+	Mat logo = imread("../image/logo.jpg", IMREAD_COLOR);
+	CV_Assert(image.data && logo.data);			// 예외처리
+	Mat logo_th, masks[5], background, foreground, dst;		// 결과 행렬
+	
+	threshold(logo, logo_th, 70, 255, THRESH_BINARY); // 로고 영상 이진화
+	split(logo_th, masks);						// 로고영상 채널 분리
+	
+//	imshow("image", image);
+	// 로고를 3개의 컬러로 분리
+//	imshow("masks[0]", masks[0]); // blue
+//	imshow("masks[1]", masks[1]); // green
+//	imshow("masks[2]", masks[2]); // red
+//	imshow("logo", logo);
+	
+	// 흰색 글자는 RGB가 모두 가지고 있기 때문에 어느 영역에서든 포함
+	bitwise_or(masks[0], masks[1], masks[3]);	// 전경통과 마스크(blue 컬러와 green 컬러의 합)
+//	imshow("masks[3] - 1", masks[3]);
+	
+	bitwise_or(masks[2], masks[3], masks[3]);   // 마스크(blue 컬러와 green 컬러의 합에서 다시 한 번 더 red 컬러의 합)
+	imshow("masks[3] - 2", masks[3]);
+
+	bitwise_not(masks[3], masks[4]);			// 배경통과 마스크(모든 컬러의 반전)
+	imshow("masks[4]", masks[4]);
+	
+	Point center1 = image.size() / 2;			// 영상 중심좌표
+	Point center2 = logo.size() / 2;;			// 로고 중심좌표
+	Point start = center1 - center2;
+	
+	Rect roi(start.x, start.y, logo.cols, logo.rows);
+//	Rect roi(start, logo.size());
+
+	//비트곱과 마스킹을 이용한 관심 영역의 복사
+	bitwise_and(logo, logo, foreground, masks[3]); // 컬러가 True인 경우만 출력
+	bitwise_and(image(roi), image(roi), background, masks[4]);
+
+	imshow("foreground", foreground);
+	imshow("background", background);
+
+	// 로고 전경과 원본 배경의 합성
+	bitwise_or(foreground, background, dst);
+	imshow("dst", dst);
+
+	// 합성 영상을 image 관심영역에 복사
+	add(background, foreground, dst);
+	dst.copyTo(image(roi));
+	imshow("image", image);
+
+	waitKey();
+	return 0;
+}
+*/
+
+/*
+
+	심화 실습
+	컬러 영상 파일을 입력 받아서 RGB의 3개 채널을 분리하고, 각 채널을 컬러영상을 윈도우에 표기
+	
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat image = imread("../image/logo.jpg", 1);
+	// zero는 아무것도 없는 빈 채널
+	Mat bgr[3], blue_img, red_img, green_img, zero(image.size(), CV_8U, Scalar(0));
+	split(image, bgr);
+
+	imshow("bgr[0]", bgr[0]);
+	imshow("bgr[1]", bgr[1]);
+	imshow("bgr[2]", bgr[2]);
+
+	Mat b_ch[] = { bgr[0], zero, zero }; // blue 컬러만 1, 나머지는 0
+	Mat g_ch[] = { zero, bgr[1], zero }; // green 컬러만 1, 나머지는 0
+	Mat r_ch[] = { zero, zero, bgr[2] }; // red 컬러만 1, 나머지는 0
+
+	merge(b_ch, 3,blue_img);
+	merge(g_ch, 3, green_img);
+	merge(r_ch, 3, red_img);
+
+	imshow("image", image), imshow("blue_img", blue_img);
+	imshow("green_img", green_img), imshow("red_img", red_img);
+	waitKey();
+}
+*/
+
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat image1 = imread("../image/abs_test1.jpg", 0);
+	Mat image2 = imread("../image/abs_test2.jpg", 0);
+	CV_Assert(image1.data && image2.data);
+
+	Mat dif_img, abs_dif1, abs_dif2;
+
+	image1.convertTo(image1, CV_16S);
+	image2.convertTo(image2, CV_16S);
+	subtract(image1, image2, dif_img); // 감산
+
+	Rect roi(10, 10, 7, 3);
+	cout << "[dif_img] = " << endl << dif_img(roi) << endl;
+
+	abs_dif1 = abs(dif_img);
+
+	image1.convertTo(image1, CV_8U);
+	image2.convertTo(image2, CV_8U);
+	dif_img.convertTo(dif_img, CV_8U);
+	abs_dif1.convertTo(abs_dif1, CV_8U);
+
+	absdiff(image1, image2, abs_dif2);
+
+	cout << "[dif_img] = " << endl << dif_img(roi) << endl << endl;
+	cout << "[abs_dif1] = " << endl << abs_dif1(roi) << endl;
+	cout << "[abs_dif2] = " << endl << abs_dif2(roi) << endl;
+
+	imshow("image1", image1);
+	imshow("image2", image2);
+	imshow("dif_img", dif_img);
+	imshow("abs_dif1", abs_dif1);
+	imshow("abs_dif2", abs_dif2);
+	waitKey();
+	return 0;
+
+}
+*/
+
+/*
+	
+	9.2. 원소의 최소값과 최대값
+
+	void min() / max(): 두 입력 행렬을 원소 간 비교하여 작은값을 출력 행렬로 반환한다.
+		- InputArray src1, InputArray src2: 두 개의 입력 배열
+		- OutputArray dst: 계산 결과 출력 배열(행렬 및 벡터)
+		- Mat& dst: 계산 결과 출력 행렬
+
+	MatExpr min() / max(): 행렬의 원소와 스칼라를 비교하여 작은값을 출력 행렬로 반환한다.
+		- Mat& a: 첫 번째 행렬
+		- double s: 스칼라값
+
+	void manMaxIdx(): 전체 배열에서 최솟값과 최댓값인 원소의 위치와 그 값을 반환한다.
+		- InputArray src: 단일채널 입력 배열
+		- double* minVal, double* maxVal: 최솟값과 최대값 원소의 값 반환
+		- int* minIdx, int* maxIdx: 최솟값과 최댓값 원소의 위치를 배열로 반환
+		- InputArray mask: 연산 마스크
+
+	void minMaxLoc(): 전체 배열에서 최댓값과 최솟값을 갖는 원소의 위치와 그 값을 반환한다. 위치를 Point형으로 반환한다.
+		- Point* minLoc: 최솟값인 원소의 위치를 Point 객체로 반환
+		- Point* maxLoc: 최댓값인 원소의 위치를 Point 객체로 반환
+
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	uchar data[] = {
+		10, 200, 5, 7, 9,
+		15, 35, 60, 80, 170,
+		100, 2, 55, 37, 70
+	};
+	Mat  m1(3, 5, CV_8U, data);
+	Mat  m2(3, 5, CV_8U, Scalar(50));
+	Mat  m_min, m_max;						// 최소값 행렬, 최대값 행렬
+	double minVal, maxVal;
+	int    minIdx[2] = {}, maxIdx[2] = {};	// 최소값 좌표, 최대값 좌표
+	Point  minLoc, maxLoc;
+
+	min(m1, 30, m_min);						// 두 행렬 원소간 최소값 저장
+	max(m1, m2, m_max);						// 두 행렬 최대값 계산
+	minMaxIdx(m1, &minVal, &maxVal, minIdx, maxIdx);
+	minMaxLoc(m1, 0, 0, &minLoc, &maxLoc);
+
+	cout << "[m1] = " << endl << m1 << endl << endl;
+	cout << "[m_min] = " << endl << m_min << endl;
+	cout << "[m_max] = " << endl << m_max << endl << endl;
+
+	cout << "m1 행렬 원소 최소값 : " << minVal << endl;
+	cout << "    최소값 좌표 : " << minIdx[1] << ", " << minIdx[0] << endl;
+
+	cout << "m1 행렬 원소 최대값 : " << maxVal << endl;
+	cout << "    최대값 좌표 : " << maxIdx[1] << ", " << maxIdx[0] << endl << endl;
+
+	cout << "m1 행렬 최소값 좌표: " << minLoc << endl;
+	cout << "m1 행렬 최대값 좌표 " << maxLoc << endl;
+	return 0;
+}
+*/
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat image = imread("../image/minMax.jpg", IMREAD_GRAYSCALE);
+
+	double minVal, maxVal;
+	minMaxIdx(image, &minVal, &maxVal);
+
+	double ratio = (maxVal - minVal) / 255.0;
+	Mat dst = (image - minVal) / ratio; // 영상에서 숫자를 적용해줌으로써 밝기값이 변해짐
+
+	// (x - min) * 255 / (max - min)
+	// x = min이면, 0 x 255 = 0
+	// x = max이면, 1 x 255 = 255로 늘어남
+
+	cout << "최소값  = " << minVal << endl;
+	cout << "최대값  = " << maxVal << endl;
+
+	imshow("image", image);
+	imshow("dst", dst);
+	waitKey();
+	return 0;
+}
+*/
+
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat image = imread("../image/sum_test.jpg", 1);
+	CV_Assert(image.data);
+
+	Mat  mask(image.size(), CV_8U, Scalar(0));
+	mask(Rect(20, 40, 70, 70)).setTo(255);
+
+	Scalar sum_value = sum(image); // BGR 채널별로 합
+	Scalar mean_value1 = mean(image); // BGR 채널별로 평균
+	Scalar mean_value2 = mean(image, mask);// 마스크 1 영역만 평균 계산
+
+	cout << "[sum_value] = " << sum_value << endl;
+	cout << "[mean_value1] = " << mean_value1 << endl;
+	cout << "[mean_value2] = " << mean_value2 << endl << endl;
+
+	Mat mean, stddev;
+	meanStdDev(image, mean, stddev);
+	cout << "[mean] = " << mean << endl;
+	cout << "[stddev] = " << stddev << endl << endl;
+
+	meanStdDev(image, mean, stddev, mask);
+	cout << "[mean] = " << mean << endl;
+	cout << "[stddev] = " << stddev << endl;
+
+	imshow("image", image), imshow("mask", mask);
+	waitKey();
+	return 0;
+}
+*/
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int main()
+{
+	Mat_<uchar> m1(3, 5);
+	m1 << 21, 15, 10, 9, 14,
+		6, 10, 15, 9, 7,
+		7, 12, 8, 14, 1;
+
+	Mat  m_sort1, m_sort2, m_sort3;
+
+	cv::sort(m1, m_sort1, SORT_EVERY_ROW); // 행으로 오름차순
+	cv::sort(m1, m_sort2, SORT_EVERY_ROW + SORT_DESCENDING); // 행으로 내림차순
+	cv::sort(m1, m_sort3, SORT_EVERY_COLUMN); // 열로 오름차순
+
+	cout << "[m1] = " << endl << m1 << endl << endl;
+	cout << "[m_sort1] = " << endl << m_sort1 << endl << endl;
+	cout << "[m_sort2] = " << endl << m_sort2 << endl << endl;
+	cout << "[m_sort3] = " << endl << m_sort3 << endl;
+	return 0;
+}
+*/
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int main()
+{
+	Mat_<uchar> m1(3, 5);
+	m1 << 21, 15, 10, 9, 14,
+		6, 10, 15, 9, 7,
+		7, 12, 8, 14, 1;
+
+	Mat  m_sort_idx1, m_sort_idx2, m_sort_idx3;
+
+	sortIdx(m1, m_sort_idx1, SORT_EVERY_ROW);
+	sortIdx(m1, m_sort_idx2, SORT_EVERY_COLUMN);
+
+	cout << "[m1] = " << endl << m1 << endl << endl;
+	cout << "[m_sort_idx1] = " << endl << m_sort_idx1 << endl << endl;
+	cout << "[m_sort_idx2] = " << endl << m_sort_idx2 << endl << endl;
+
+	return 0;
+}
+*/
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Matx<ushort, 5, 4>  pts; // 1, 2열은 앞점, 3, 4열은 뒷점
+	Mat_<int> sizes, sort_idx;
+	vector<Rect> rects;
+	randn(pts, Scalar(200), Scalar(100)); // 평균 200, 표준편차 100인 랜덤값
+
+	cout << "----------------------------------------" << endl;
+	cout << "      랜덤 사각형 정보 " << endl;
+	cout << "----------------------------------------" << endl;
+	for (int i = 0; i < pts.rows; i++)
+	{
+		Point pt1(pts(i, 0), pts(i, 1));	// 사각형 시작좌표
+		Point pt2(pts(i, 2), pts(i, 3));	// 사각형 종료좌표
+		rects.push_back(Rect(pt1, pt2));	// 벡터 저장
+
+		sizes.push_back(rects[i].area());	// 사각형 크기 저장
+		cout << format("rects[%d] = ", i) << rects[i] << endl;
+	}
+
+	// 정렬 후, 정렬 원소의 원본 좌표 반환(열 단위의 오름차순 정렬 후 원본 좌표 반환)
+	// sizes의 값을 열 방향으로 오름차순 정렬 후, sort_idx에 저장
+	sortIdx(sizes, sort_idx, SORT_EVERY_COLUMN);
+
+	cout << sort_idx << endl;
+
+	cout << endl << " 크기순 정렬 사각형 정보 \t크기" << endl;
+	cout << "----------------------------------------" << endl;
+	for (int i = 0; i < rects.size(); i++) {
+		int idx = sort_idx(i);
+
+		cout << rects[idx] << "\t" << sizes(idx) << endl;
+	}
+	cout << "----------------------------------------" << endl;
+	return 0;
+}
+*/
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int main()
+{
+	Mat_<float> m1(3, 5);
+	m1 << 11, 2, 3, 4, 10,
+		6, 10, 15, 9, 7,
+		7, 12, 8, 14, 1;
+
+	Mat  m_reduce1, m_reduce2, m_reduce3, m_reduce4;
+
+	reduce(m1, m_reduce1, 0, REDUCE_SUM);	// 열방향(0) 합
+	reduce(m1, m_reduce2, 1, REDUCE_AVG);	// 행방향(1) 평균
+	reduce(m1, m_reduce3, 0, REDUCE_MAX);	// 열방향(0) 최대값
+	reduce(m1, m_reduce4, 1, REDUCE_MIN);	// 행방향(1) 최소값
+
+	cout << "[m1] = " << endl << m1 << endl << endl;
+
+	cout << "[m_reduce_sum] = " << m_reduce1 << endl;
+	cout << "[m_reduce_avg] = " << m_reduce2.t() << endl << endl;
+	cout << "[m_reduce_max] = " << m_reduce3 << endl;
+	cout << "[m_reduce_min] = " << m_reduce4.t() << endl;
+	return 0;
+}
+*/
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Matx23f src1(1, 2, 3, 4, 5, 1);
+	Matx23f src2(5, 4, 2, 3, 2, 1);
+	Matx32f src3(5, 4, 2, 3, 2, 1);
+	Mat dst1, dst2, dst3;
+	double alpha = 1.0, beta = 1.0;
+
+	// 행렬 곱 수행
+	gemm(src1, src2, alpha, Mat(), beta, dst1);
+	gemm(src1, src2, alpha, noArray(), beta, dst2);
+	gemm(src1, src3, alpha, noArray(), beta, dst3);
+
+	// 콘솔창에 출력
+	cout << "[src1] = " << endl << src1 << endl;
+	cout << "[src2] = " << endl << src2 << endl;
+	cout << "[src3] = " << endl << src3 << endl << endl;
+
+	cout << "[dst1] = " << endl << dst1 << endl;
+	cout << "[dst2] = " << endl << dst2 << endl;
+	cout << "[dst3] = " << endl << dst3 << endl;
+	return 0;
+}
+*/
+
+/*
+
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int main()
+{
+	vector<Point> rect_pt1, rect_pt2;
+	rect_pt1.push_back(Point(200, 50));
+	rect_pt1.push_back(Point(400, 50));
+	rect_pt1.push_back(Point(400, 250));
+	rect_pt1.push_back(Point(200, 250));
+
+	float theta = 20 * CV_PI / 180;
+	Matx22f m(cos(theta), -sin(theta), sin(theta), cos(theta));
+
+	transform(rect_pt1, rect_pt2, m);
+
+	Mat image(400, 500, CV_8UC3, Scalar(255, 255, 255));
+	for (int i = 0; i < 4; i++)
+	{
+		line(image, rect_pt1[i], rect_pt1[(i + 1) % 4], Scalar(0, 0, 0), 1);
+		line(image, rect_pt2[i], rect_pt2[(i + 1) % 4], Scalar(255, 0, 0), 2);
+		cout << "rect_pt1[" + to_string(i) + "]=" << rect_pt1[i] << "\t";
+		cout << "rect_pt2[" + to_string(i) + "]=" << rect_pt2[i] << "\t";
+	}
+	imshow("image", image);
+	waitKey();
+	return 0;
+}
+*/
+
+/*
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int main()
+{
+	vector<Point3f> rect_pt1, rect_pt2;
+	rect_pt1.push_back(Point3f(200, 50, 1)), rect_pt1.push_back(Point3f(400, 50, 1));
+	rect_pt1.push_back(Point3f(400, 250, 1)), rect_pt1.push_back(Point3f(200, 250, 1));
+
+	// 회전 변환 행렬 : 3x3 행렬(호모지어스 코디네이트)
+	float theta = 45 * CV_PI / 180;
+	Matx33f m;
+	m << cos(theta), -sin(theta), 0,
+		sin(theta), cos(theta), 0,
+		0, 0, 1;
+
+	// 평행이동 행렬
+	Mat t1 = Mat::eye(3, 3, CV_32F);					// 평행이동
+	Mat t2 = Mat::eye(3, 3, CV_32F);					// 역평행이동
+
+	Point3f delta = (rect_pt1[2] - rect_pt1[0]) / 2.0f;
+	Point3f center = rect_pt1[0] + delta;
+
+	// 원점으로 기준을 보내기 위해서
+	t1.at<float>(0, 2) = center.x;
+	t1.at<float>(1, 2) = center.y;
+	t2.at<float>(0, 2) = -center.x; // 원점으로
+	t2.at<float>(1, 2) = -center.y; // 원점으로
+
+	Mat m2 = t1 * (Mat)m * t2;								// 중심점 좌표 계산									
+
+	transform(rect_pt1, rect_pt2, m2);
+
+	Mat image(400, 500, CV_8UC3, Scalar(255, 255, 255));
+	for (int i = 0; i < 4; i++)
+	{
+		Point pt1(rect_pt1[i].x, rect_pt1[i].y);
+		Point pt2(rect_pt1[(i + 1) % 4].x, rect_pt1[(i + 1) % 4].y);
+		Point pt3(rect_pt2[i].x, rect_pt2[i].y);
+		Point pt4(rect_pt2[(i + 1) % 4].x, rect_pt2[(i + 1) % 4].y);
+
+		line(image, pt1, pt2, Scalar(0, 0, 0), 2);
+		line(image, pt3, pt4, Scalar(255, 0, 0), 2);
+		cout << "rect_pt1[" + to_string(i) + "]=" << rect_pt1[i] << "\t";
+		cout << "rect_pt2[" + to_string(i) + "]=" << rect_pt2[i] << endl;
+	}
+	imshow("image", image);
+	waitKey();
+	return 0;
+}
+*/
