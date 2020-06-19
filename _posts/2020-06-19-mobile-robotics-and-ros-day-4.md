@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  Mobile Robotics and ROS [Day 2]
-date:   2020-06-05 10:00:00-18:00:00
+title:  Mobile Robotics and ROS [Day 4]
+date:   2020-06-19 10:00:00-19:00:00
 categories: MobileRobotics
 tag: MobileRobotics
 ---
