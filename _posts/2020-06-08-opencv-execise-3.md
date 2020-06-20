@@ -6,7 +6,8 @@ categories: OpenCV
 tag: OpenCV
 ---
 
-## 7.1. 이미지 파일 처리
+## 4. 사용자 인터페이스 및 I/O 처리 및 실습
+### 4.1. 이미지 파일 처리
 
     Mat imread(const string& filename, int flags=1)
         - filename: 로드되는 영상 파일 이름
@@ -113,7 +114,7 @@ int main()
 ```
 
 
-## 7.2. 행렬을 영상 파일로 저장 - I
+### 4.2. 행렬을 영상 파일로 저장 - I
 
     cv::imwrite(): 확장자명으로 영상파일을 쉽게 저장
         - IMWRITE_JPEG_QUALITY: JPG 파일 화질, 높은 값일 수록 화질이 좋음
@@ -143,7 +144,7 @@ int main()
 }
 ```
 
-## 7.2. 행렬을 영상 파일로 저장 - II
+### 4.2. 행렬을 영상 파일로 저장 - II
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -172,7 +173,7 @@ int main()
 	return 0;
 }
 ```
-## 7.3. 비디오 처리
+### 4.3. 비디오 처리
 
     비디오 파일 - 본질적으로 대용량이기에 압축이 필요
     
@@ -279,7 +280,7 @@ int main()
 }
 ```
 
-## 7.4. 카메라 속성 설정하기
+### 4.4. 카메라 속성 설정하기
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -345,7 +346,7 @@ int main()
 }
 ```
 
-## 7.5. 카메라 프레임 동영상 파일 저장
+### 4.5. 카메라 프레임 동영상 파일 저장
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -389,7 +390,7 @@ int main()
 }
 ```
 
-## 7.6. 비디오 파일 읽기
+### 4.6. 비디오 파일 읽기
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -432,7 +433,7 @@ int main()
 }
 ```
 
-## 8.1. FileStorage 클래스
+### 4.7. FileStorage 클래스
 
     FileStorage(): 생성자
     bool open()
@@ -456,7 +457,7 @@ int main()
         - size_t len: 저장할 원소의 개수
 
 
-## 8.2. FileNode 클래스
+### 4.8. FileNode 클래스
 
     FileNode()
         - CvFileStorage* fs: 파일 저장 구조에 대한 포인터
@@ -498,7 +499,7 @@ int main()
         - _TP& value: 파일 스토리지로부터 읽은 데이터
         - vector<_Tp>& vec: 파일 스토리지로부터 읽은 벡터 데이터
 
-## 8.3. XML/YAML 파일 저장
+### 4.9. XML/YAML 파일 저장
 - 스트림 연산자(<<) 이용
 
 ```angular2
@@ -537,7 +538,7 @@ int main()
 }
 ```
 
-## 8.4. XML/YAML 파일 읽기
+### 4.10. XML/YAML 파일 읽기
 - 스트림 연산자(>>) 이용
 
 ```angular2
@@ -647,7 +648,7 @@ int main()
 }
 ```
 
-## 심화 실습 1
+### 4.11. 심화 실습 1
 인터넷 등에서 네 개 칼라 영사의 jpg 파일을 구해서 XML 문서를 만들어서 각 파일명들을 시퀀스 노드로 저장하는 코드로 작성
 ```angular2
 #include <opencv2/opencv.hpp>
@@ -672,7 +673,7 @@ int main()
 }
 ```
 
-## 심화 실습 2
+### 4.12. 심화 실습 2
 
 심화 실습 #1에서 생성된 XML 문서를 읽어서 4가지 컬러 영상의 영상들의 채널별 화소평균과 표준편차를 계산하여 XML 형식으로 저장하는 코드를 작성하시오.
 ```angular2
