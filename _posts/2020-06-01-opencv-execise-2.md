@@ -6,7 +6,9 @@ categories: OpenCV
 tag: OpenCV
 ---
 
-## 2.1. Mat 클래스
+## 3. OpenCV의 기본 자료 구조 및 실습[2]
+
+### 3.8. Mat 클래스
 - 단일 채널 혹은 다중 채널의 값
 - 실수나 복소수로 구성된 벡터
 - 명암도 영상이나 컬러 영상 데이터
@@ -89,7 +91,7 @@ void main() {
 }
 ```
 
-## 2.2. Mat_ 클래스
+## 3.9. Mat_ 클래스
 
 ```angular2
 #include <opencv2/opencv.hpp>
@@ -118,7 +120,7 @@ int main()
 }
 ```
 
-## 2.3. Matx 클래스
+## 3.10. Matx 클래스
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -165,7 +167,7 @@ int  main()
 }
 ```
 
-## 2.4. Mat 클래스의 다양한 속성
+## 3.11. Mat 클래스의 다양한 속성
 
     Mat::dims			// 차원 수
     Mat::rows			// 행의 개수
@@ -217,7 +219,7 @@ int main()
 }
 ```
 
-## 2.5. Mat 클래스의 할당 연산자(=)
+## 3.12. Mat 클래스의 할당 연산자(=)
 
     m1 = m2
     
@@ -255,7 +257,7 @@ int main()
 }
 ```
 
-## 2.6. Mat 클래스의 크기 및 형태 변경 - I
+## 3.13. Mat 클래스의 크기 및 형태 변경 - I
 
     resize(): 행의 개수를 기준으로 기존 행렬의 크기를 변경한다.
               기존 행렬의 개수보다 size가 작으면 하단 행을 제거하고, 크면 하단 행을 추가한다.
@@ -289,7 +291,7 @@ int main()
 ```
 
 
-## 2.6. Mat 클래스의 크기 및 형태 변경 - II
+## 3.14. Mat 클래스의 크기 및 형태 변경 - II
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -321,7 +323,7 @@ int main()
 }
 ```
 
-## 2.7. Mat 복사 및 자료형 변환
+## 3.15. Mat 복사 및 자료형 변환
 
     영상처리, 컴퓨터 비전 응용 시 원본 행렬 복사가 빈번히 발생한다.
     
@@ -366,7 +368,7 @@ int main()
 }
 ```
 
-## 3.1. vector 클래스
+## 3.16. vector 클래스
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -402,7 +404,7 @@ int main() {
 }
 ```
 
-## 3.2. vector 클래스의 사용 - I
+## 3.17. vector 클래스의 사용 - I
 
     1. 벡터 원소 접근 - 배열처럼 첨자 연산자([]) 이용
     2. 벡터 할당된 용량 확인 - vector::capacity()
@@ -450,7 +452,7 @@ int main()
 }
 ```
 
-## 3.2. vector 클래스의 사용 - II
+## 3.18. vector 클래스의 사용 - II
 ```angular2
 #include <opencv2/opencv.hpp>
 #include <time.h>
@@ -476,7 +478,7 @@ int main()
 }
 ```
 
-## 4.1. Mat의 원소 추가 및 삭제
+## 3.19. Mat의 원소 추가 및 삭제
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -539,7 +541,7 @@ int main()
 }
 ```
 
-## 4.2. Mat 행렬의 메모리 해제
+## 3.20. Mat 행렬의 메모리 해제
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -584,7 +586,7 @@ int main()
 }
 ```
 
-## 4.3. 행렬 연산 함수
+## 3.21. 행렬 연산 함수
 
     Mat cross(): 두 개의 3-원소 벡터들의 외적
     double dot(): 두 벡터의 내적
@@ -630,7 +632,7 @@ int main() {
 }
 ```
 
-## 5.1. saturate_cast <_Tp>
+## 3.22. saturate_cast <_Tp>
 
     표와 산술(saturation arithmetics) 연산
     
@@ -666,7 +668,7 @@ int main()
 }
 ```
 
-## 5.2. 예외처리 매크로
+## 3.23. 예외처리 매크로
 
     CV_Assert()	: 실행시간에 조건을 체크하는 매크로, 조건이 false가 되면 예외발생
         - condition: 체크하려는 조건
@@ -733,7 +735,7 @@ int main()
 }
 ```
 
-## 6.1. 윈도우 창 제어
+## 3.24. 윈도우 창 제어
 
     - namedWindow(): 윈도우의 이름을 설정하고, 해당 이름으로 윈도우를 생성한다.
       * flag
@@ -793,7 +795,7 @@ int main()
 }
 ```
 
-## 6.2. 키보드 이벤트 제어
+## 3.25. 키보드 이벤트 제어
 
     waitKey(): delay(ms) 시간만큼 키 입력 대기하고, 키 이벤트 발생하면 해당 키 값을 반환한다.
 
@@ -834,7 +836,7 @@ int main() {
 }
 ```
 
-## 6.3. 마우스 이벤트 제어
+## 3.26. 마우스 이벤트 제어
 
     콜백 함수 - 개발자가 함수를 호출하는 것이 아니라, 
               어떤 이벤트가 발생하거나 특정 시점에 도달했을 때 시스템에서 개발자가 등록한 함수를 호출하는 방식
@@ -919,7 +921,7 @@ int main() {
 ```
 <img src="/assets/images/opencv2/1.PNG" width="50%"><br>
 
-## 6.4. 트랙바 이벤트 제어 - I
+## 3.27. 트랙바 이벤트 제어 - I
 
     - 트랙바: 일정한 범위 내에서 특정한 값을 선택하고자 할 때, 사용하는 일종의 스크롤 바
     - createTrackbar(): 트랙바를 생성하고, 그것을 지정된 윈도우 창에 추가하는 함수
@@ -959,7 +961,7 @@ int main()
 <img src="/assets/images/opencv2/2-2.PNG" width="50%"><br>
 <img src="/assets/images/opencv2/2-3.PNG" width="50%"><br>
 
-## 6.4. 트랙바 이벤트 제어 - II
+## 3.28. 트랙바 이벤트 제어 - II
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -1053,7 +1055,7 @@ int main() {
 }
 ```
 
-## 6.5. 직선 및 사각형 그리기
+## 3.29. 직선 및 사각형 그리기
 
     - 에일리어싱: 계단 현상(샘플링을 제대로 추출하지 못했을 때 발생하는 영향)
     - 안티에일리어싱: 계단 현상을 감소시키기 위해, 중간값을 추가
@@ -1108,7 +1110,7 @@ int main()
 ```
 <img src="/assets/images/opencv2/3.PNG" width="50%"><br>
 
-## 6.6. 글자 쓰기
+## 3.30. 글자 쓰기
 
     - putText(Mat& img, const string& text, Point org, int fontFace, double fontScale,
               Scalar color, int thickness=1, int lineType=8, bool bottomLeftOrigin=false)
@@ -1145,7 +1147,7 @@ int main()
 ```
 <img src="/assets/images/opencv2/4.PNG" width="50%"><br>
 
-## 6.7. 원 그리기
+## 3.31. 원 그리기
 
     - circle(Mat& img, Point center, int radius, const Scalar& color, int thickness=1, int lineType=8, int shift=0)
       1) Mat& img				: 원을 그릴 대상 행렬
@@ -1185,7 +1187,7 @@ int main()
 ```
 <img src="/assets/images/opencv2/5.PNG" width="50%"><br>
 
-## 6.8. 타원 그리기
+## 3.32. 타원 그리기
 
     - ellipse(Mat& img, Point center, Size axes, double angle, double startAngle, double endAngle,
               const Scalar& color, int thickness=1, int lineType=8, int shift=0)
