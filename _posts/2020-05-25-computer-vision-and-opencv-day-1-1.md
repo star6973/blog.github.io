@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Computer Vision and OpenCV [Day 1]
+title:  Computer Vision and OpenCV [Day 1_1]
 date:   2020-05-25 10:30:00-13:00:00
 categories: OpenCV
 tag: OpenCV
