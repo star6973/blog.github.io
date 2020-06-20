@@ -2,8 +2,8 @@
 layout: post
 title: "Probability and Statistics [Chapter 5]"
 date: 2020-06-20 21:00:00-22:00:00
-categories: MachineLearning
-tag: MachineLearning
+categories: Statistics
+tag: Statistics
 ---
 
 # 확률과통계
