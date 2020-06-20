@@ -1,12 +1,13 @@
 ---
 layout: post
-title: OpenCV Exercise 4
+title: Computer Vision and OpenCV [Day 4]
 date: 2020-06-08 15:00:00-19:00:00
 categories: OpenCV
 tag: OpenCV
 ---
 
-## 9.1. 기본 배열 처리 함수
+## 5. 행렬 이론 및 실습
+### 5.1. 기본 배열 처리 함수
 
     컬러 영상
     - 파란색(B), 녹색(G), 빨간색(R)의 각기 독립적인 2차원 정보
@@ -82,7 +83,7 @@ int main()
 ```
 <img src="/assets/images/opencv4/1.PNG" width="50%"><br>
 
-## 9.2. 채널 처리 함수
+### 5.2. 채널 처리 함수
 
     void merge(): 여러 개의 단일채널 배열로 다중 채널의 배열을 합성한다.
         - Mat* mv: 합성될 입력 배열 혹은 벡터, 합성될 단일채널 배열들의 크기와 깊이가 동일해야 함
@@ -132,7 +133,7 @@ int main()
 }
 ```
 
-## 실습
+### 5.3. 실습
 컬러 영상 파일에서 채널 분리하기
 
 ```angular2
@@ -197,7 +198,7 @@ int main()
 }
 ```
 
-## 10.1. 사칙연산
+### 5.4. 사칙연산
 
     void add(): 두 개의 배열이나 배열과 스칼라의 각 원소 간 합을 계산한다.
                 입력 인수 src1, src2 중 하나는 스칼라값일 수 있다.
@@ -264,7 +265,7 @@ int main()
 }
 ```
 
-## 10.2. 지수 로그 루트 관련 함수
+### 5.5. 지수 로그 루트 관련 함수
 
     void exp(): 모든 배열 원소의 지수를 계산한다.
         - InputArray src: 입력 배열
@@ -322,7 +323,7 @@ int main()
 }
 ```
 
-## 10.3. 논리(비트) 연산
+### 5.6. 논리(비트) 연산
 	
 	NOT: 각 자릿수의 값을 반대로 바꾸는 연산
 	OR: 두 값의 각 자릿수를 비교해, 둘 중 하나라도 1이 있다면 1, 아니면 0
@@ -373,35 +374,7 @@ int main()
 ```
 <img src="/assets/images/opencv4/3.PNG" width="50%"><br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -458,13 +431,14 @@ int main()
 	waitKey();
 	return 0;
 }
-*/
+```
 
-/*
-
-	심화 실습
-	컬러 영상 파일을 입력 받아서 RGB의 3개 채널을 분리하고, 각 채널을 컬러영상을 윈도우에 표기
+### 5.7. 심화 실습
 	
+	컬러 영상 파일(logo.jpg)을 입력 받아서 RGB의 3개 채널을 분리하고, 각 채널의 컬러영상을 윈도우에 표기
+	즉, Red 채널은 빨간색으로, Green 채널은 초록색으로, Blue 채널은 파란색으로 표현
+
+```cython	
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -491,10 +465,21 @@ int main()
 	imshow("green_img", green_img), imshow("red_img", red_img);
 	waitKey();
 }
-*/
+```
 
+### 5.8. 원소의 절댓값
+    
+    MatExpr abs(): 행렬의 각 원소에 대한 절댓값을 계산하여 수식을 위한 행렬인 MatExprr 객체로 반환한다.
+    void absdiff(): 두 배열간 각 원소 간(per-element) 차분의 절댓값을 계산한다. src1, src2 중 하나는 스칼라값이 될 수 있다.
+        - InputArray src1: 두 번째 입력 배열
+        - InputArray src2: 첫 번째 입력 배열
+        - OutputArray dst: 계산된 결과 출력 배열
 
-/*
+    void convertScaleAbs(): 입력 배열의 각 원소에 alpha만큼 배열을 곱하고 beta만큼 더한 후에 절댓값을 계산한 결과를 8비트 자료형으로 변환한다.
+        - double alpha: 입력 배열의 각 원소에 곱해지는 스케일 벡터
+        - double beta: 스케일된 값에 더해지는 델타 옵션
+
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -533,13 +518,10 @@ int main()
 	imshow("abs_dif2", abs_dif2);
 	waitKey();
 	return 0;
-
 }
-*/
+```
 
-/*
-	
-	9.2. 원소의 최소값과 최대값
+### 5.9. 원소의 최소값과 최대값
 
 	void min() / max(): 두 입력 행렬을 원소 간 비교하여 작은값을 출력 행렬로 반환한다.
 		- InputArray src1, InputArray src2: 두 개의 입력 배열
@@ -560,6 +542,7 @@ int main()
 		- Point* minLoc: 최솟값인 원소의 위치를 Point 객체로 반환
 		- Point* maxLoc: 최댓값인 원소의 위치를 Point 객체로 반환
 
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -596,9 +579,14 @@ int main()
 	cout << "m1 행렬 최대값 좌표 " << maxLoc << endl;
 	return 0;
 }
-*/
+```
 
-/*
+### 5.10. 심화 실습1
+
+    영상 파일을 읽어서 최소값/최대값 계산하기 -> 영상 개선
+    최소값은 0으로 변환, 최대값은 255로 변환
+
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -624,10 +612,52 @@ int main()
 	waitKey();
 	return 0;
 }
-*/
+```
 
+### 5.11. 통계 관련 함수
 
-/*
+    Scalar sum(): 배열의 각 채널 별로 원소들의 합 N을 계산하여 스칼라값으로 반환한다.
+        - InputArray src: 1개에서 4개 채널을 갖는 입력 배열(행렬 or 벡터)
+        
+    Scalar mean(): 배열의 각 채널별로 원소들의 평균을 계산하여 스칼라값으로 반환한다.
+        - InputArray src: 1개에서 4개 채널을 갖는 입력 배열
+        - InputArray mask: 연산 마스크 - 마스크가 0이 아닌 좌표만 연산 수행
+    
+    void meanStdDev(): 배열 원소들의 평균과 표준편차를 계산한다.
+        - InputArray src: 1개에서 4개 채널을 갖는 입력 배열
+        - OutputArray mean: 계산된 평균이 반환되는 출력 인수, CV_64F형으로 반환
+        - OutputArray stddev: 계산된 표준편차가 반환되는 출력 인수, CV_64F형으로 반환
+        - InputArray mask: 연산 마스크 - 마스크가 0이 아닌 좌표만 연산 수행
+
+    int countNonZero(): 0이 아닌 배열 원소를 개수 N을 반환한다.
+    void reduce(): 행렬을 열방향 혹은 행방향으로 옵션상수의 연산을 수행하여 벡터로 감축한다.
+        - InputArray src: 2차원 입력 배열(CV_32F, CV_64F 타입만 수행 가능)
+        - OutputArray dst: 출력 벡터, 감소방향과 타입은 dim, dtype 인수에 따라 정해짐
+        - int dim: 행렬이 감축될 때 차원 감소 인덱스
+            1) 0: 1행으로 감축
+            2) 1: 1열로 감축
+    
+        - int rtype: 감축 연산 종류
+            1) REDUCE_SUM(0): 행렬의 모든 행(열)들을 합한다.
+            2) REDUCE_AVG(1): 행렬의 모든 행(열)들을 평균한다.
+            3) REDUCE_MAX(3): 행렬의 모든 행(열)들의 최댓값을 구한다.
+            4) REDUCE_MIN(4): 행렬의 모든 행(열)들의 최솟값을 구한다.
+        
+        - int dtype: 감소된 벡터의 자료형
+        
+    void sort(): 행렬의 각 행 혹은 각 열의 방향으로 정렬한다.
+        - InputArray src: 단일채널 입력 배열
+        - OutputArray dst: 정렬된 출력 배열
+        - int flags: 연산 플래그 - 다음의 상수를 조합해서 정렬 방식 구성
+            1) SORT_EVERY_ROW(0): 각 행을 독립적으로 정렬
+            2) SORT_EVERY_COLUMN(1): 각 열을 독립적으로 정렬
+            3) SORT_ASCENDING(0): 오츰차순으로 정렬
+            4) SORT_DESCENDING(16): 내림차순으로 정렬
+        
+    void sortIdx(): 행렬의 각 행 혹은 각 열로 정렬한다. 출력 배열(dst)에 정렬된 원소의 인덱스들을 저장한다.
+                    인수는 sort()와 동일하다.
+
+```cython                    
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -660,9 +690,9 @@ int main()
 	waitKey();
 	return 0;
 }
-*/
+```
 
-/*
+```cython 
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -686,9 +716,9 @@ int main()
 	cout << "[m_sort3] = " << endl << m_sort3 << endl;
 	return 0;
 }
-*/
+```
 
-/*
+```cython 
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -711,9 +741,9 @@ int main()
 
 	return 0;
 }
-*/
+```
 
-/*
+```cython 
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -753,9 +783,9 @@ int main()
 	cout << "----------------------------------------" << endl;
 	return 0;
 }
-*/
+```
 
-/*
+```cython 
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -782,9 +812,32 @@ int main()
 	cout << "[m_reduce_min] = " << m_reduce4.t() << endl;
 	return 0;
 }
-*/
+```
 
-/*
+### 5.12. 행렬 연산 함수
+
+    void gemm(): 일반화된 행렬 곱셈을 수행한다.
+        - InputArray src1, src2: 행렬 곱을 위한 두 입력 행렬(CV_32/CV_64F 타입 2채널까지 가능)
+        - double alpha: 행렬 곱에 대한 가중치
+        - InputArray src3: 행렬 곱에 더해지는 델타 행렬
+        - double beta: src3 행렬에 곱해지는 가중치
+        - OutputArray dst: 출력 행렬
+        - int flags: 연산 플래그, 옵션을 조합하여 입력 행렬들을 전치
+            1) GEMM_1_T(1): src1을 전치
+            2) GEMM_2_T(2): src2을 전치
+            3) GEMM_3_T(4): src3을 전치
+    
+    - void transform(): 입력 배열의 모든 원소에 행렬 변환을 수행한다.
+        - InputArray src: 변환 행렬 m의 열수만큼 채널을 갖는 입력 배열
+        - OutputArray dst: src와 같은 크기와 깊이의 출력 배열, 채널 수는 m.rows개
+        - InputArray m: 2x2 혹은 3x3 부동소수점 변환 행렬
+        
+    - void perspectiveTransform(): 입력 벡터들에 대해서 투명(perspective) 변환 m을 수행한다.
+        - InputArray src: 좌표로 변환될 2채널 혹은 3채널의 부동소수점 배열
+        - OutputArray dst: src와 같은 크기와 타입의 출력 배열
+        - InputArray m: 3x3 혹은 4x4 부동소수점 투영 변환 행렬
+
+```cython 
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -811,10 +864,9 @@ int main()
 	cout << "[dst3] = " << endl << dst3 << endl;
 	return 0;
 }
-*/
+```
 
-/*
-
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -844,9 +896,20 @@ int main()
 	waitKey();
 	return 0;
 }
-*/
+```
 
-/*
+### 5.13. 심화 실습2
+
+    사각형 회전하기 예제를 확장하여 그 사각형의 중심점을 기준으로 45도 회전
+
+    1) 원점으로 평행이동
+    2) 회전변환
+    3) 역 평행이동
+    
+    -> 세 번의 변환은 각 변환 행렬의 곱으로 나타낼 수 있다.
+    -> 전체 변환 행렬 = 이동변환행렬(3) x 회전변환행렬(2) x 이동변환행렬(1)
+
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -898,4 +961,4 @@ int main()
 	waitKey();
 	return 0;
 }
-*/
+```
