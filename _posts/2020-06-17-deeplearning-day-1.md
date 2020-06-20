@@ -226,7 +226,7 @@ use_math: true
 
   - 위 식은 다시 다음과 같이 만들 수 있으며, 이는 softmax 함수에서 $$k=2$$를 넣은 동일한 함수이다.
 
-<center><img src="/assets/images/deeplearning/30.PNG" width="25%"></center><br>
+<center><img src="/assets/images/deeplearning/30.PNG" width="20%"></center><br>
 
 <br><br>
 
