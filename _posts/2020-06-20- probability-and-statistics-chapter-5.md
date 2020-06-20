@@ -9,4 +9,4 @@ tag: MachineLearning
 # 확률과통계
 ## 챕터5. 표집분포와 통계적추론  
 
-[PPT_Slide](https://star6973.github.io/reveal.js/slide/표집분포와 통계적추론.html)
+[PPT_Slide](https://star6973.github.io/reveal.js/slide/표집분포와통계적추론.html)
