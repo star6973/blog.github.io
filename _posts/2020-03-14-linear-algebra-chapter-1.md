@@ -2,8 +2,8 @@
 layout: post
 title: "Linear Algebra [Chapter 1]"
 date: 2020-03-14 18:00:30-22:00:00
-categories: MachineLearning
-tag: MachineLearning
+categories: Statistics
+tag: Statistics
 use_math: true
 ---
 
