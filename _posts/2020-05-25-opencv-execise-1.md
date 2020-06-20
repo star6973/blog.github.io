@@ -6,6 +6,8 @@ categories: OpenCV
 tag: OpenCV
 ---
 
+# OpenCV 개요 및 실습
+
 OpenCV 설치 후 제대로 설치되었는지 아래 코드를 통해 확인  
 ```angular2
 #include <opencv2/highgui.hpp>
