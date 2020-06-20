@@ -6,7 +6,7 @@ categories: OpenCV
 tag: OpenCV
 ---
 
-# OpenCV 개요 및 실습
+## 2. OpenCV의 기본 자료 구조 및 실습
 
 OpenCV 설치 후 제대로 설치되었는지 아래 코드를 통해 확인  
 ```angular2
@@ -23,7 +23,7 @@ cv::waitKey(0);
 위의 사진처럼 나오면 ok
 <br><br>
 
-## 1.1. Point_ 클래스
+### 1.1. Point_ 클래스
 - 가로와 세로 위치를 2차원 좌표로 나타내기 위한 템플릿 클래스
 - 자료형 간결 표현 제공 - Point2와 문자 'i', 'f', 'd' 문자 조합
 
@@ -57,7 +57,7 @@ cv::waitKey(0);
   }
 ```
 
-## 1.2. Point3_ 클래스
+### 1.2. Point3_ 클래스
 - 3차원 자료를 나타내기 위한 자료형
 - 간결 표현 방식 지원 - Point3와 'i', 'f', 'd' 문자 조합
 
@@ -88,7 +88,7 @@ return 0;
 }
 ```
 
-## 1.3. Size_ 클래스
+### 1.3. Size_ 클래스
 - 이미지나 사각형의 크기를 규정하는 템플릿 클래스
 - 멤버변수 width, height
 
@@ -123,7 +123,7 @@ return 0;
 }
 ```
 
-## 1.4. Rect_ 클래스
+### 1.4. Rect_ 클래스
 - 2차원의 사각형 정보를 나타내기 위한 템플릿 클래스
 
 ```angular2
@@ -161,7 +161,7 @@ return 0;
 }
 ```
 
-## 1.5. Vec 클래스
+### 1.5. Vec 클래스
 - 원소 개수가 작은 숫자 벡터를 위한 템플릿 클래스  
 - Vec<TP, 2> ==> Point_ 클래스로 형변환 가능  
   Vec<TP, 3> ==> Point3_ 클래스로 형변환 가능  
@@ -220,7 +220,7 @@ return 0;
 }
 ```
 
-## 1.6. Scalar_ 클래스
+### 1.6. Scalar_ 클래스
 - Vec 클래스 중에서 Vec<Tp, 4>에서 파생된 템플릿 클래스
 - 특별히 화소의 값을 정하기 위한 자료형으로 정의(RGBA)
 
@@ -252,7 +252,7 @@ cout << "green2 = " << green2 << endl;
 }
 ```
 
-## 1.7. RotatedRect 클래스
+### 1.7. RotatedRect 클래스
 - 회전된 사각형을 나타내기 위한 클래스
 - RotatedRect(const Point2f& center, const Size2f& size, float angle)
   + Poin2f& center: 회전의 중심점
