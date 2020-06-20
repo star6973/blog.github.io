@@ -78,17 +78,17 @@ tag: OpenCV
 
 ### 1.4. 아날로그 영상 -> 디지털 영상  
    - 샘플링(sampling) : 무한한 연속된 값을 일정한 해상도에 따라 유한개의 화소수만큼 입력값을 취하는 과정(동등한 공간의 크기로 데이터를 획득)  
-<img src="/assets/images/opencv/2.PNG" width="50%"><br>
-<img src="/assets/images/opencv/3.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv/2.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv/3.PNG" width="50%"></center><br>
    - 이미지 샘플링이란, 배열 형태로 존재하는 이미지 센서를 통해 각 cell에 주사되는 빛 에너지 양을 전압으로 변환하여 저장하는 것을 의미한다.
    
    - 양자화(quantization) : 제한된 비트수로 화소값을 나타내려 밝기 값을 정수화시키는 과정(수치값을 할당) -> 비트 수가 적어질 수록, 단일 색이 사용됨(예를 들어, 1비트면 0, 1로 표현되고, 2비트면, 00, 01, 10, 11, ...)  
-<img src="/assets/images/opencv/4.PNG" width="50%"><br>
-<img src="/assets/images/opencv/5.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv/4.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv/5.PNG" width="50%"></center><br>
    - 이미지 양자화란, 각 cell에서 변환한 전압값을 일정한 주기의 기준값에서 가장 근접한 디지털값으로 매칭시키는 과정을 의미한다.
 
 ### 1.5. 양자화의 영향을 줄여주기 위한 방법  
-<img src="/assets/images/opencv/6.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv/6.PNG" width="50%"></center><br>
 
 - 이미지 양자화는 다양한 레벨로 구성할 수 있다. 즉, 전압값을 양자화할 때 몇 개의 간격으로 잘라서 디지털값으로 매칭 시킬지를 결정하는 것이다. 위의 그림과 같이 양자화의 비트 수를 조절하는 데, 4bit의 경우 4단계로 쪼개서 밝기값을 표현하는 것이다.
 
@@ -100,10 +100,10 @@ tag: OpenCV
       + Random dither : 난수(noise)를 더해서, 빈 부분을 채워주는 것  
       + Ordered dither : 미리 정의된 값들(행렬)을 더해서, 빈 부분을 채워주는 것. 이 알고리즘은 표시된 픽셀에 임계값 맵(지수 행렬 또는 바이어 매트릭스)을 적용하여 색상 수를 줄이고 축소된 팔레트의 사용 가능한 색상 항목에서 원래 색상의 거리에 따라 일부 픽셀의 색상이 변경됨.  
       + Error diffusion dither : 오류 확산은 양자화 잔류물이 아직 처리되지 않은 인접 픽셀로 분포되는 반 자동화의 한 유형. 멀티 레벨 이미지를 바이너리 이미지로 변환하는 것이 주된 용도.  
-<img src="/assets/images/opencv/8.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv/8.PNG" width="50%"></center><br>
       
    2) Classical Halftoning : 하프톤은 잡지에 인쇄된 사진을 크게 확대해서 볼 때처럼 이미지를 CMYK 4채널의 망점으로 만들어주는 필터로, 픽셀을 점들로 표현하여 컬러의 효과를 살린다.  
-<img src="/assets/images/opencv/7.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv/7.PNG" width="50%"></center><br>
 
 ### 1.6. 디지털 영상의 표현과 영상처리  
    - M x N 크기 디지털 영상  
