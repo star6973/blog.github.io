@@ -918,7 +918,7 @@ int main() {
 
 }
 ```
-<img src="/assets/images/opencv2/1.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv2/1.PNG" width="50%"></center><br>
 
 ## 3.27. 트랙바 이벤트 제어 - I
 
@@ -956,9 +956,9 @@ int main()
   return 0;
 }
 ```
-<img src="/assets/images/opencv2/2-1.PNG" width="50%"><br>
-<img src="/assets/images/opencv2/2-2.PNG" width="50%"><br>
-<img src="/assets/images/opencv2/2-3.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv2/2-1.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv2/2-2.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv2/2-3.PNG" width="50%"></center><br>
 
 ## 3.28. 트랙바 이벤트 제어 - II
 ```angular2
@@ -1107,7 +1107,7 @@ int main()
   return 0;
 }
 ```
-<img src="/assets/images/opencv2/3.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv2/3.PNG" width="50%"></center><br>
 
 ## 3.30. 글자 쓰기
 
@@ -1144,7 +1144,7 @@ int main()
   return 0;
 }
 ```
-<img src="/assets/images/opencv2/4.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv2/4.PNG" width="50%"></center><br>
 
 ## 3.31. 원 그리기
 
@@ -1184,7 +1184,7 @@ int main()
   return 0;
 }
 ```
-<img src="/assets/images/opencv2/5.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv2/5.PNG" width="50%"></center><br>
 
 ## 3.32. 타원 그리기
 
@@ -1222,7 +1222,7 @@ int main()
   return 0;
 }
 ```
-<img src="/assets/images/opencv2/6.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv2/6.PNG" width="50%"></center><br>
 
 ## 과제
 오른쪽 클릭할 때마다 사각형, 왼쪽 클릭할 때마다 원을 그리기
