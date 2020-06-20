@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  OpenCV Exercise 2
+title:  Computer Vision and OpenCV [Day 2]
 date:   2020-06-01 09:00:00-18:00:00
 categories: OpenCV
 tag: OpenCV
