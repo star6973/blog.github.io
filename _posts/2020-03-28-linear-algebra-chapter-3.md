@@ -2,8 +2,8 @@
 layout: post
 title: "Linear Algebra [Chapter 3]"
 date: 2020-03-28 20:30:00-23:00:00
-categories: MachineLearning
-tag: MachineLearning
+categories: Statistics
+tag: Statistics
 ---
 
 # 선형대수학
