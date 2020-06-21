@@ -81,7 +81,7 @@ int main()
 	return 0;
 }
 ```
-<img src="/assets/images/opencv4/1.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv4/1.PNG" width="50%"></center><br>
 
 ### 5.2. 채널 처리 함수
 
@@ -157,7 +157,7 @@ int main()
 	return 0;
 }
 ```
-<img src="/assets/images/opencv4/2.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv4/2.PNG" width="50%"></center><br>
 
 ```angular2
 #include <opencv2/opencv.hpp>
@@ -372,7 +372,7 @@ int main()
 	return 0;
 }
 ```
-<img src="/assets/images/opencv4/3.PNG" width="50%"><br>
+<center><img src="/assets/images/opencv4/3.PNG" width="50%"></center><br>
 
 ```cython
 #include <opencv2/opencv.hpp>
@@ -432,11 +432,16 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv4/4.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/5.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/6.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/7.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/8.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/9.PNG" width="50%"></center><br>
 
-### 5.7. 심화 실습
-	
-	컬러 영상 파일(logo.jpg)을 입력 받아서 RGB의 3개 채널을 분리하고, 각 채널의 컬러영상을 윈도우에 표기
-	즉, Red 채널은 빨간색으로, Green 채널은 초록색으로, Blue 채널은 파란색으로 표현
+### 5.7. 심화 실습 1
+컬러 영상 파일(logo.jpg)을 입력 받아서 RGB의 3개 채널을 분리하고, 각 채널의 컬러영상을 윈도우에 표기  
+즉, Red 채널은 빨간색으로, Green 채널은 초록색으로, Blue 채널은 파란색으로 표현  
 
 ```cython	
 #include <opencv2/opencv.hpp>
@@ -466,6 +471,8 @@ int main()
 	waitKey();
 }
 ```
+<center><img src="/assets/images/opencv4/10.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/11.PNG" width="50%"></center><br>
 
 ### 5.8. 원소의 절댓값
     
@@ -520,6 +527,9 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv4/12.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/13.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv4/14.PNG" width="50%"></center><br><br>
 
 ### 5.9. 원소의 최소값과 최대값
 
@@ -581,10 +591,9 @@ int main()
 }
 ```
 
-### 5.10. 심화 실습1
-
-    영상 파일을 읽어서 최소값/최대값 계산하기 -> 영상 개선
-    최소값은 0으로 변환, 최대값은 255로 변환
+### 5.10. 심화 실습 2
+영상 파일을 읽어서 최소값/최대값 계산하기 -> 영상 개선  
+최소값은 0으로 변환, 최대값은 255로 변환  
 
 ```cython
 #include <opencv2/opencv.hpp>
@@ -613,6 +622,7 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv4/15.PNG" width="50%"></center><br>
 
 ### 5.11. 통계 관련 함수
 
@@ -865,7 +875,9 @@ int main()
 	return 0;
 }
 ```
+<br><br>
 
+4개의 좌표로 사각형을 그리고, 사각형 회전하기
 ```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -897,17 +909,17 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv4/16.PNG" width="50%"></center><br>
 
-### 5.13. 심화 실습2
+### 5.13. 심화 실습 3
+사각형 회전하기 예제를 확장하여 그 사각형의 중심점을 기준으로 45도 회전  
 
-    사각형 회전하기 예제를 확장하여 그 사각형의 중심점을 기준으로 45도 회전
+1) 원점으로 평행이동  
+2) 회전변환  
+3) 역 평행이동  
 
-    1) 원점으로 평행이동
-    2) 회전변환
-    3) 역 평행이동
-    
-    -> 세 번의 변환은 각 변환 행렬의 곱으로 나타낼 수 있다.
-    -> 전체 변환 행렬 = 이동변환행렬(3) x 회전변환행렬(2) x 이동변환행렬(1)
+-> 세 번의 변환은 각 변환 행렬의 곱으로 나타낼 수 있다.  
+-> 전체 변환 행렬 = 이동변환행렬(3) x 회전변환행렬(2) x 이동변환행렬(1)  
 
 ```cython
 #include <opencv2/opencv.hpp>
@@ -940,7 +952,7 @@ int main()
 	t2.at<float>(0, 2) = -center.x; // 원점으로
 	t2.at<float>(1, 2) = -center.y; // 원점으로
 
-	Mat m2 = t1 * (Mat)m * t2;								// 중심점 좌표 계산									
+	Mat m2 = t1 * (Mat)m * t2;								// 중심점 좌표 계산
 
 	transform(rect_pt1, rect_pt2, m2);
 
@@ -962,3 +974,4 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv4/17.PNG" width="50%"></center><br>
