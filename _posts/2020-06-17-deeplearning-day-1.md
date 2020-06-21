@@ -109,9 +109,75 @@ use_math: true
 
 ### 2.2. Linear Regression Implementation
 
-시간 당 공부양, 족보 사용 여부 등등의 변수
-각 변수마다 가중치(weight)가 있음
+## *Tensorflow*  
+(1, 1)일 때는 10, (2, 2)일 때는 20, (3, 3)일 때는 30, (4, 4)일 때는?
+```python
+import tensorflow as tf
 
+x_data = [[1, 1], [2, 2], [3, 3]]
+y_data = [[10], [20], [30]]
+
+# placeholder: 공간확보(예약)
+X = tf.placeholder(tf.float32, shape=[None, 2])
+Y = tf.placeholder(tf.float32, shape=[None, 1])
+
+# y = Wx + b
+W = tf.Variable(tf.random_normal([2, 1])) # 가중치. Variable: 변수 생성, random_normal: [2, 1] 모양의 정규분포를 가지는 난수 생성
+b = tf.Variable(tf.random_normal([1])) # 기준
+
+model = tf.matmul(X, W) + b # Wx + b라는 행렬식
+cost = tf.reduce_mean(tf.square(model - Y)) # 오차(최소제곱법)
+train = tf.train.GradientDescentOptimizer(0.01).minimize(cost) # 비용함수를 줄이기 위한 경사하강법
+
+# tensorflow는 session을 항상 만들어줘야 한다.
+with tf.Session() as sess:
+  sess.run(tf.global_variables_initializer())
+
+  # Training
+  for step in range(2001):
+    c, W_, b_, _ = sess.run([cost, W, b, train], feed_dict={X: x_data, Y: y_data}) # train 결과값은 빈 값이므로, _ 형태로 변수를 만들어준다.
+    print(step, c, W_, b_)
+
+  # Testing
+  # (4, 4)일 때를 알고 싶으니까
+  print(sess.run(model, feed_dict={X: [[4, 4]]}))
+```
+<center><img src="/assets/images/deeplearning/linear/1.PNG" width="50%"></center><br>
+
+## *Keras*
+1일 때는 1, 2일 때는 2, 3일 때는 3, 4일 때는?
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from keras.models import Sequential
+from keras.layers import Dense
+
+x_data = np.array([[1], [2], [3]])
+y_data = np.array([[1], [2], [3]])
+
+# Model, Cost, Train
+model = Sequential()
+# 첫 번째 인자: 레이어 수(여기서는 output layer 1개)
+# input_dim: 입력되는 차원 수. [[1]] -> 1차원, [[1, 2]] -> 2차원
+# activation: 활성함수
+# 1) linear: 디폴트값, 입력 뉴런과 가중치로 계산된 결과값이 그대로 출력됨
+# 2) relu: 이미지에서 주로 사용
+# 3) sigmoid: binary classification에서 주로 사용
+# 4) softmax: softmax classification에서 주로 사용
+model.add(Dense(1, input_dim=1, activation=None))
+model.compile(loss='mse', optimizer='adam')
+model.fit(x_data, y_data, epochs=1000, verbose=1)
+model.summary()
+
+print(model.get_weights())
+print(model.predict(np.array([[4]])))
+
+plt.scatter(x_data, y_data)
+plt.plot(x_data, y_data)
+plt.grid(True)
+plt.show()
+```
+<center><img src="/assets/images/deeplearning/linear/2.PNG" width="50%"></center><br>
 <br><br>
 
 ## 3. Binary Classification
@@ -162,9 +228,128 @@ use_math: true
 
 ### 3.2. Binary Classification Implementation
 
+## *Tensorflow*
+(1, 2), (2, 3), (3, 1)은 0, (4, 3), (5, 3), (6, 2)는 1로 나뉘었을 때, 모델의 정확도는?
+```python
+import numpy as np
+import tensorflow as tf
 
+x_data = np.array([[1, 2], [2, 3], [3, 1], [4, 3], [5, 3], [6, 2]])
+y_data = np.array([[0], [0], [0], [1], [1], [1]])
+
+X = tf.placeholder(tf.float32, shape=[None, 2])
+Y = tf.placeholder(tf.float32, shape=[None, 1])
+
+W = tf.Variable(tf.random_normal([2, 1]))
+b = tf.Variable(tf.random_normal([1]))
+
+# Model, Cost, Train
+model = tf.sigmoid(tf.add(tf.matmul(X, W), b))
+cost = tf.reduce_mean((-1) * Y * tf.log(model) + (-1) * (1-Y) * tf.log(1-model))
+train = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+
+prediction = tf.cast(model > 0.5, dtype=tf.float32) # model의 값이 0.5보다 크면 참값이 되어 1을, 작으면 거짓값이 되어 0을 반환
+accuracy = tf.reduce_mean(tf.cast(tf.equal(prediction, Y), dtype=tf.float32))
+
+with tf.Session() as sess:
+  sess.run(tf.global_variables_initializer())
+
+  # Training
+  for step in range(10001):
+    cost_val, train_val = sess.run([cost, train], feed_dict={X: x_data, Y: y_data})
+    print(step, cost_val)
+
+  # Testing
+  h, c, a = sess.run([model, prediction, accuracy], feed_dict={X: x_data, Y: y_data})
+  print("\nModel: ", h, "\nCorrect: ", c, "\nAccuracy: ", a)
+```
+<center><img src="/assets/images/deeplearning/binary/1.PNG" width="50%"></center><br>
+
+당뇨병 환자들의 csv 파일을 읽고 분류해보자.
+```python
+import numpy as np
+import tensorflow as tf
+
+xy = np.loadtxt('data-diabetes.csv', delimiter=',', dtype=np.float32)
+x_data = xy[:, 0:-1] # 마지막 열 제외하고 나머지 열의 모든 행 가져오기
+y_data = xy[:, [-1]] # 마지막 열의 모든 행 가져오기
+
+X = tf.placeholder(dtype=tf.float32, shape=[None, x_data.shape[1]])
+Y = tf.placeholder(dtype=tf.float32, shape=[None, 1])
+
+W = tf.Variable(tf.random_normal([x_data.shape[1], 1]))
+b = tf.Variable(tf.random_normal([1]))
+
+# Model, Cost, Train
+model = tf.sigmoid(tf.add(tf.matmul(X, W), b))
+cost = tf.reduce_mean((-1) * Y * tf.log(model) + (-1) * (1-Y) * tf.log(1-model))
+train = tf.train.GradientDescentOptimizer(0.01).minimize(cost)
+
+prediction = tf.cast(model > 0.5, dtype=tf.float32)
+accuracy = tf.reduce_mean(tf.cast(tf.equal(prediction, Y), dtype=tf.float32))
+
+with tf.Session() as sess:
+  sess.run(tf.global_variables_initializer())
+
+  # Training
+  for step in range(100001):
+    c, _ = sess.run([cost, train], feed_dict={X: x_data, Y: y_data})
+    print(step, c)
+
+  # Testing
+  h, c, a = sess.run([model, prediction, accuracy], feed_dict={X: x_data, Y: y_data})
+  print("\nHypothesis: ", h, "\nCorrect (Y): ", c, "\nAccuracy: ", a)
+```
+<center><img src="/assets/images/deeplearning/binary/2.PNG" width="50%"></center><br>
+
+## *Keras*
+(1, 2), (2, 3), (3, 1)은 0, (4, 3), (5, 3), (6, 2)는 1로 나뉘었을 때, 모델의 정확도는?
+```python
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense
+
+x_data = np.array([[1, 2], [2, 3], [3, 1], [4, 3], [5, 3], [6, 2]])
+y_data = np.array([[0], [0], [0], [1], [1], [1]])
+
+# Model, Cost, Train
+model = Sequential()
+model.add(Dense(1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy'])
+model.fit(x_data, y_data, epochs=10000, verbose=1)
+model.summary()
+
+print(model.get_weights())
+print(model.predict(x_data))
+```
+<center><img src="/assets/images/deeplearning/binary/3.PNG" width="50%"></center><br>
+
+x_data의 분류를 해봤을 때, 앞에 3개는 0.5보다 작고, 뒤에 3개는 0.5보다 큰 것을 확인할 수 있다.
+<br>
+---
+
+당뇨병 환자들의 csv 파일을 읽고 분류해보자.
+```python
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense
+
+xy = np.loadtxt('data-diabetes.csv', delimiter=',', dtype=np.float32)
+x_data = xy[:, 0:-1]
+y_data = xy[:, [-1]]
+
+# Model, Cost, Train
+model = Sequential()
+model.add(Dense(1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy'])
+model.fit(x_data, y_data, epochs=1000, verbose=1)
+model.summary()
+
+print(model.get_weights())
+print(model.predict(x_data))
+```
+<center><img src="/assets/images/deeplearning/binary/4.PNG" width="50%"></center><br>
 <br><br>
-
 
 ## 4. Softmax Classification
 ### 4.1. Softmax Classification Theory
@@ -232,8 +417,68 @@ use_math: true
 
 ### 4.2. Softmax Classification Implementation
 
-W: 4x3, b: 3 -> 15개의 변수를 학습
+## *Tensorflow*
+입력되는 벡터값에 대해서 [0, 0, 1], [0, 1, 0], [1, 0, 0]의 3가지로 분류하기.
+```python
+import tensorflow as tf
 
+x_data = [[1, 2, 1, 1], [2, 1, 3, 2], [3, 1, 3, 4], [4, 1, 5, 5], [1, 7, 5, 5], [1, 2, 5, 6], [1, 6, 6, 6], [1, 7, 7, 7]]
+y_data = [[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 0], [1, 0, 0], [1, 0, 0]]
+
+X = tf.placeholder(tf.float32, shape=[None, 4]) # shape의 행이 None인 이유는 train 데이터와 test 데이터의 행의 개수가 다르기 때문에. 열은 같으므로 4로 고정
+Y = tf.placeholder(tf.float32, shape=[None, 3])
+
+# W: 4x3, b: 3 -> 총 15개의 변수를 학습
+W = tf.Variable(tf.random_normal([4, 3]))
+b = tf.Variable(tf.random_normal([3]))
+
+# model을 softmax하기 전으로 나눈 이유는 cost 함수를 구하는 함수에서 이미 softmax가 포함되어 있기 때문에
+model_LC = tf.add(tf.matmul(X, W), b)
+model = tf.nn.softmax(model_LC)
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=model_LC, labels=Y))
+train = tf.train.GradientDescentOptimizer(0.1).minimize(cost)
+
+with tf.Session() as sess:
+  sess.run(tf.global_variables_initializer())
+
+  # Training
+  for step in range(2001):
+    c, _ = sess.run([cost, train], feed_dict={X: x_data, Y: y_data})
+    print(sess, c)
+
+  # Testing
+  test1 = sess.run(model, feed_dict={X: [[1, 11, 7, 9]]})
+  print(test1, sess.run(tf.argmax(test1, 1))) # test1 모델의 열을 기준으로 가장 큰 값의 좌표값(2차원 배열이기 때문에 1을 사용할 수 있음)
+```
+<center><img src="/assets/images/deeplearning/softmax/1.PNG" width="50%"></center><br>
+
+## *Keras*
+
+    * Keras Tip
+    1. Linear Regression - loss: mse
+    2. Binary Classification - activation: sigmoid, loss: binary_crossentropy
+    3. Softmax Classification - activation: softmax, loss: categorical_crossentropy
+
+```python
+import numpy as np
+from keras.models import Sequential
+from keras.layers import Dense
+
+x_data = np.array([[1, 2, 1, 1], [2, 1, 3, 2], [3, 1, 3, 4], [4, 1, 5, 5], [1, 7, 5, 5], [1, 2, 5, 6], [1, 6, 6, 6], [1, 7, 7, 7]])
+y_data = np.array([[0, 0, 1], [0, 0, 1], [0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 0], [1, 0, 0], [1, 0, 0]])
+
+# Model, Cost, Train
+model = Sequential()
+model.add(Dense(3, activation='softmax')) # 3개의 유닛([0, 0, 1], [0, 1, 0], [1, 0, 0])을 가진 출력층
+model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+model.fit(x_data, y_data, epochs=10000, verbose=1)
+model.summary()
+
+y_predict = model.predict(np.array([[1, 11, 7, 9]]))
+print(y_predict)
+print("argmax: ", np.argmax(y_predict))
+```
+<center><img src="/assets/images/deeplearning/softmax/2.PNG" width="50%"></center><br>
 <br><br>
 
 **※ 정리**
