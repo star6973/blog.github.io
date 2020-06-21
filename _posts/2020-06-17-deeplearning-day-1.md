@@ -451,7 +451,7 @@ with tf.Session() as sess:
   test1 = sess.run(model, feed_dict={X: [[1, 11, 7, 9]]})
   print(test1, sess.run(tf.argmax(test1, 1))) # test1 모델의 열을 기준으로 가장 큰 값의 좌표값(2차원 배열이기 때문에 1을 사용할 수 있음)
 ```
-<center><img src="/assets/images/deeplearning/softmax/1.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/softmax/1.PNG" width="100%"></center><br>
 
 ## *Keras*
 
