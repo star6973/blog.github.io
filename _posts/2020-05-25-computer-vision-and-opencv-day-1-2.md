@@ -19,7 +19,9 @@ cv::imshow("영상보기", image);
 cv::waitKey(0);
 }
 ```
-<img src="/assets/images/opencv/9.PNG" width="50%"><br>
+
+<center><img src="/assets/images/opencv/9.PNG" width="50%"></center><br>
+
 위의 사진처럼 나오면 ok
 <br><br>
 
