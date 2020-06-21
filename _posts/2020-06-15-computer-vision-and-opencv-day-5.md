@@ -1,11 +1,23 @@
 ---
 layout: post
-title: OpenCV Exercise 5
+title: Computer Vision and OpenCV [Day 5]
 date: 2020-06-15 10:00:00-19:00:00
 categories: OpenCV
 tag: OpenCV
 ---
 
+## 6. 픽셀 기반 처리 이론 및 실습
+- 영상처리
+    + 2차원 데이터에 대한 행렬 연산
+    + 2차원 데이터의 원소의 값을 개발자가 원하는 방향으로 변경하는 것
+    + 영상의 화소 접근 및 그 값의 수정 필수
+
+- OpenCV API
+    + Mat 클래스 제공
+      : 영상 파일을 데이터로 저장 및 처리 가능
+    + Mat 클래스의 내부 메소드들 제공
+      : 영상 데이터에 대한 다양한 연산 가능
+    
 /*
 #include <opencv2/opencv.hpp>
 using namespace cv;
