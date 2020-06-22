@@ -672,3 +672,177 @@ int main()
 <center><img src="/assets/images/opencv5/10.PNG" width="50%"></center><br>
 <center><img src="/assets/images/opencv5/11.PNG" width="50%"></center><br>
 <center><img src="/assets/images/opencv5/12.PNG" width="50%"></center><br>
+
+### 6.13. RGB 컬러공간, CMY(K) 컬러공간
+
+    1) 컬러 공간(color space)
+       - 색 표시계의 모든 색들을 색 공간에서 3차원 좌표에서 표현한 것
+       - 공간상의 좌표로 표현
+         : 어떤 컬러와 다른 컬러들과의 관계를 표현하는 논리적인 방법 제공
+    
+    2) RGB 컬러공간
+       - 빛의 삼원색
+       - OpenCV에서 컬러의 채널 순서: Blue, Green, Red 순서
+
+    3) CMY(K) 컬러공간
+       - 청록색, 자홍색, 노랑색
+       - 색의 3원색(감산 혼합)
+       - RGB 컬러와 보색 관계
+		 
+		 C = 255 - R
+		 M = 255 - G
+		 Y = 255 - B
+
+       - 순수한 검은색을 출력하기 위해서는 검은색 채널을 따로 분리해야 함
+       
+       		 black = min(Cyan, Magenta, Yellow)
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat BGR_img = imread("../image/color_model.jpg", IMREAD_COLOR);
+	CV_Assert(BGR_img.data);
+
+	Scalar  white(255, 255, 255); // 흰색
+	Mat  CMY_img = white - BGR_img; // CMY를 구하기 위해선 255(white)에서 RGB를 빼기
+	Mat  CMY_arr[3];
+
+	// 채널 분리
+	split(CMY_img, CMY_arr);
+
+	imshow("BGR_img", BGR_img);
+	imshow("CMY_img", CMY_img);
+	imshow("Yellow", CMY_arr[0]);
+	imshow("Magenta", CMY_arr[1]);
+	imshow("Cyan", CMY_arr[2]);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv5/13.PNG" width="50%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat BGR_img = imread("../image/color_model.jpg", IMREAD_COLOR);
+	CV_Assert(BGR_img.data);
+
+	Scalar white(255, 255, 255);
+	Mat CMY_img = white - BGR_img;
+	Mat CMY_arr[3];
+	split(CMY_img, CMY_arr);
+
+	Mat black;
+	min(CMY_arr[0], CMY_arr[1], black); // CMY에서 가장 작은 값들로 black을 구함
+	min(black, CMY_arr[2], black);
+
+	CMY_arr[0] = CMY_arr[0] - black; // black을 빼주면서 CMY값을 고정
+	CMY_arr[1] = CMY_arr[1] - black;
+	CMY_arr[2] = CMY_arr[2] - black;
+
+	imshow("black", black);
+	imshow("Yellow", CMY_arr[0]);
+	imshow("Magenta", CMY_arr[1]);
+	imshow("Cyan", CMY_arr[2]);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv5/14.PNG" width="50%"></center><br>
+
+### 6.14. HSI 컬러공간
+
+    - 인간의 색인지에 기반을 둔 색상 모델
+    - 색상(Hue), 채도(Saturation), 명도(Intensity)
+    - 색상: 색의 종류. 원판의 0~360도까지 회전. OpenCV에서는 0~180(180인 이유는 OpenCV 이미지 변수들은 8bit로 설정되어서 최대 255까지만 표현할 수 있기 때문에 2로 나눈 값으로 설정한다)
+    - 채도: 색의 선명도. 가장 선명한 상태를 100%. OpenCV에서는 0~255
+    - 명도: 색의 밝기. 가장 밝은 상태를 100%. OpenCV에서는 0~255
+       
+      * RGB -> HSI
+        : RGB 이미지에서 색 정보를 검출하기 위해서는 R, G, B 세 가지 속성을 모두 참고해야 한다.
+	  하지만 HSV 이미지에서는 H가 일정한 범위를 갖는 순수한 색 정보를 가지고 있기 때문에 RGB 이미지보다 쉽게 색을 분류할 수 있다.
+	  
+<center><img src="/assets/images/opencv5/17.PNG" width="50%"></center><br>
+       
+      * HSI -> RGB
+
+<center><img src="/assets/images/opencv5/18.PNG" width="50%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void bgr2hsi(Mat img, Mat& hsv) // RGB -> HSI
+{
+	hsv = Mat(img.size(), CV_32FC3);		// HSI 행렬 - 3채널, float형
+
+	for (int i = 0; i < img.rows; i++) {
+		for (int j = 0; j < img.cols; j++)
+		{
+			float B = img.at<Vec3b>(i, j)[0]; // blue 화소값
+			float G = img.at<Vec3b>(i, j)[1]; // green 화소값
+			float R = img.at<Vec3b>(i, j)[2]; // red 화소값
+
+			float s = 1 - 3*min(R, min(G, B))/(R + G + B); // 채도(이 라인에서는 saturation이 0~1사이의 값이 나오기 때문에 8번째 뒤에 코드에서 255를 곱해줌)
+			float v = (R + G + B) / 3.0f; // 명도
+
+			float tmp1 = ((R - G) + (R - B)) / 2;
+			float tmp2 = sqrt((R - G) * (R - B) + (G - B) * (G - B));
+			float angle = (float)acos(tmp1 / tmp2) * (180.f / CV_PI);
+			float h = (B <= G) ? angle : 360 - angle; // 색상
+
+			hsv.at<Vec3f>(i, j) = Vec3f(h / 2, s * 255, v); // Hue를 2로 나눈다.
+		}
+	}
+	hsv.convertTo(hsv, CV_8U);
+}
+
+int main()
+{
+	Mat BGR_img = imread("../image/color_space.jpg", IMREAD_COLOR);
+	CV_Assert(BGR_img.data);
+
+	Mat HSI_img, HSV_img, hsi[3], hsv[3];
+
+	bgr2hsi(BGR_img, HSI_img);
+	cvtColor(BGR_img, HSV_img, CV_BGR2HSV);
+	split(HSI_img, hsi);
+	split(HSV_img, hsv);
+
+	imshow("BGR_img", BGR_img);
+	imshow("Hue", hsi[0]); // 사용자 정의함수 이용 
+	imshow("Saturation", hsi[1]);
+	imshow("Intensity", hsi[2]);
+	imshow("OpenCV_Hue", hsv[0]); // OpenCV 제공함수 이용
+	imshow("OpenCV_Saturation", hsv[1]);
+	imshow("OpenCV_Value", hsv[2]);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv5/15.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv5/16.PNG" width="50%"></center><br>
+
+### 6.15. 기타 컬러공간
+
+
+
+
+
+
+
+### 6.16. Binarization(Thresholding)
+
+
+
+
+
+
+
