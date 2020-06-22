@@ -888,8 +888,17 @@ int main()
 
 ### 6.16. Binarization(Thresholding) & 심화 실습 1: Hue thresholding
 
-    Binarization
-    - 
+    1) Binarization
+       - 영상 이진화는 한 픽셀당 8비트 기준으로 0~255값을 갖는 이미지를 주어진 임계값을 기준으로 임계값 이하는 0, 초과는 1로 변환해주는 작업이다.
+       - 영상 이진화를 하는 이유는 영상 처리와 인식의 계산을 빠르게 하기 위함이다.
+       - 원본 영상을 그레이 영상으로 변환한 후, threshold값을 이용하여 배경과 물체를 분리해낸다.
+
+    2) threshold
+       - InputArray src: 입력 이미지. 그레이 스케일 이미지다.
+       - OutputArray dst: 출력 이미지. 원본 이미지와 같은 크기를 갖는다.
+       - double thresh: threshold 값
+       - double maxval: 입력 이미지의 픽셀값이 threshold보다 클 경우, 결과 이미지의 픽셀값은 maxval이 된다. threshold보다 작을 경우에는 0이 된다.
+       - int type: thresholding type
 
 ```cython
 #include <opencv2/opencv.hpp>
