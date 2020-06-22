@@ -832,17 +832,119 @@ int main()
 
 ### 6.15. 기타 컬러공간
 
+    1) YCbCr 컬러공간
+       - 영상 시스템에서 사용되는 색공간의 일종
+       - Y: 휘도 성분, Cb Cr: 색차 성분
+       - 인간의 시각은 밝기에는 민감하지만, 색상에는 덜 민감
+         : 색차 신호(Cr, Cb)를 Y 성분보다 낮은 해상도로 구성
+	 : 인간의 시각에서 화질의 큰 저하없이 영상 데이터 용량 감소
+       - RGB -> YCbCr
 
+<center><img src="/assets/images/opencv5/19.PNG" width="50%"></center><br>
 
+    2) YUV 컬러공간
+       - TV 방송 규격에서 사용하는 컬러 표현 방식
+       - PAL 방식의 아날로그 비디오를 위해 개발
+       - 디지털 비디오에서도 유럽의 비디오 표준으로 사용
+       - RGB -> YUV
 
+<center><img src="/assets/images/opencv5/20.PNG" width="50%"></center><br>
 
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat BGR_img = imread("../image/color_space.jpg", 1);
+	CV_Assert(BGR_img.data);
 
+	Mat YCC_img, YUV_img, Lab_img, Gray_img;
+	cvtColor(BGR_img, Gray_img, CV_BGR2GRAY);
+	cvtColor(BGR_img, YCC_img, CV_BGR2YCrCb);
+	cvtColor(BGR_img, YUV_img, CV_BGR2YUV);
+	cvtColor(BGR_img, Lab_img, CV_BGR2Lab);
 
-### 6.16. Binarization(Thresholding)
+	Mat YCC_arr[3], YUV_arr[3], Lab_arr[3];
+	split(YCC_img, YCC_arr);
+	split(YUV_img, YUV_arr);
+	split(Lab_img, Lab_arr);
 
+	imshow("BGR_img", BGR_img), imshow("Gray_img", Gray_img);
+	imshow("YCC_arr[0]-Y", YCC_arr[0]), imshow("YCC_arr[1]-Cr", YCC_arr[1]);
+	imshow("YCC_arr[2]-Cb", YCC_arr[2]), imshow("YUV_arr[0]-Y", YUV_arr[0]);
+	imshow("YUV_arr[1]-U", YUV_arr[1]), imshow("YUV_arr[2]-V", YUV_arr[2]);
+	imshow("Lab_arr[0]-L", Lab_arr[0]), imshow("Lab_arr[1]-a", Lab_arr[1]);
+	imshow("Lab_arr[2]-b", Lab_arr[2]);
+	waitKey(0);
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv5/21.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv5/22.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv5/23.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv5/24.PNG" width="50%"></center><br>
+<br><br>
 
+### 6.16. Binarization(Thresholding) & 심화 실습 1: Hue thresholding
 
+    Binarization
+    - 
 
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+Range th(50, 100);	// 트랙바로 선택할 범위 변수
+Mat hue;			// 색상 채널 전역 변수지정
 
+void onThreshold(int value, void* userdata)
+{
+	Mat result = Mat(hue.size(), CV_8U, Scalar(0));
 
+	// 선택 범위에 이진화 수행(hue값이 범위내에 들어오면 255, 아니면 0)
+	for (int i = 0; i < result.rows; i++) {
+		for (int j = 0; j < result.cols; j++) {
+			
+			if (th.start <= hue.at<uchar>(i, j) && hue.at<uchar>(i, j) < th.end) {
+				result.at<uchar>(i, j) = 255;
+			}
+			else {
+				result.at<uchar>(i, j) = 0;
+			}
+		}
+	}
+	
+	imshow("result", result);
+}
 
+int main()
+{
+	Mat BGR_img = imread("../image/FIJI_test_color.jpg", 1);// 컬러 영상 로드
+	CV_Assert(BGR_img.data);
+
+	Mat HSV, hsv[3];
+	cvtColor(BGR_img, HSV, CV_BGR2HSV);	// 컬러 공간 변환
+	split(HSV, hsv); // 채널 분리
+	hsv[0].copyTo(hue);	// hue 행렬에 색상 채널 복사
+
+	namedWindow("result", WINDOW_AUTOSIZE);
+	createTrackbar("Hue_th1", "result", &th.start, 255, onThreshold);	// 트랙바 등록
+	createTrackbar("Hue_th2", "result", &th.end, 255, onThreshold);
+
+	onThreshold(0, 0); // 이진화 수행
+	imshow("BGR_img", BGR_img);
+	waitKey(0);
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv5/25.PNG" width="50%"></center><br>
+
+### 6.17. 심화 실습 2
+영상 파일을 읽어 들여서 HSV 컬러 공간으로 변환하고, Hue와 Saturtion 채널을 합성해서 2차원 히스토그램을 구하시오. 그리고 2차원 히스토그램의 Hue와 Saturation을 2개 축으로 구성하고, 빈도값을 밝기로 표현해서 2차원 그래프로 그리시오.  
+
+<center><img src="/assets/images/opencv5/26.PNG" width="50%"></center><br>
+
+```cython
+
+```
