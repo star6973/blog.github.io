@@ -1023,5 +1023,3 @@ int main()
 }
 ```
 <center><img src="/assets/images/opencv5/27.PNG" width="50%"></center><br>
-
-
