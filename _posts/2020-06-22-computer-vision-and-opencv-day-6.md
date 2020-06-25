@@ -152,7 +152,7 @@ use_math: true
             노이즈 제거를 위한 블리링 작업이라고도 하는, 스무딩 작업을 수행한다.
             -> 영상을 부드럽게 만들기
 
-<center><img src="/assets/images/opencv6/19.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv6/19.png" width="50%"></center><br>
        
           <2단계> 그래디언트 계산(크기 & 방향)
           
