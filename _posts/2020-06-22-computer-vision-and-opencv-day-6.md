@@ -78,7 +78,7 @@ use_math: true
         : 가로 방향으로 미분한다는 것은 y좌표는 고정한 상태에서 x축 방향으로만 미분 근사를 계산한다는 것 -> x축 방향으로의 편미분(partial derivative)
         : 세로 방향으로 미분한다는 것 -> y축 방향으로의 편미분
         
-        <center><img src="/assets/images/opencv6/10.PNG" width="50%"></center><br>
+          <center><img src="/assets/images/opencv6/10.PNG" width="50%"></center><br>
 
     + 중앙 차분에 의한 미분 근사 마스크(x축 방향으로의 편미분, y축 방향으로의 편미분)
         <center><img src="/assets/images/opencv6/11.PNG" width="50%"></center><br>
@@ -153,8 +153,8 @@ use_math: true
             노이즈 제거를 위한 블리링 작업이라고도 하는, 스무딩 작업을 수행한다.
             -> 영상을 부드럽게 만들기
 
-<center><img src="/assets/images/opencv6/19.png" width="50%"></center><br>
-
+<center><img src="/assets/images/opencv6/19.PNG" width="50%"></center><br>
+       
           <2단계> 그래디언트 계산(크기 & 방향)
           
             소벨 마스크를 이용해 회선을 수행한다. 이미지의 강도가 급격하게 변하는 부분이 윤곽선이기 때문에, 미분을 통해 엣지를 검출한다.
@@ -237,3 +237,593 @@ use_math: true
      : 영상의 픽셀값과는 *뚜렷하게 다른* 픽셀값에 의한 잡음
      
 <center><img src="/assets/images/opencv6/28.PNG" width="50%"></center><br><br><br>
+
+## 7.2. 영역 기반 처리 실습
+### 7.2.1. 블러링
+
+    1) 블러링 현상
+       - 디지털 카메라로 사진 찍을 때, 초점이 맞지 않으면 -> 사진이 흐려짐
+       - 이러한 현상을 이용해서 영상의 디테일한 부분을 제거하는 아웃 포거싱 기법
+    
+    2) 블러링(blurring)
+       : 영상에서 화소값이 급격하게 변하는 부분들을 감소시켜 점진적으로 변하게 함으로써 영상이 전체적으로 부드러운 느낌이 나게 하는 기술
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void filter(Mat img, Mat& dst, Mat mask)		// 회선 수행 함수
+{
+	dst = Mat(img.size(), CV_32F, Scalar(0));			// 회선 결과 저장 행렬
+	Point h_m = mask.size() / 2;						// 마스크 중심 좌표(마스크의 사이즈를 2로 나누면)
+
+	for (int i = h_m.y; i < img.rows - h_m.y; i++) {		// 입력 행렬 반복 순회
+		for (int j = h_m.x; j < img.cols - h_m.x; j++)
+		{
+			float sum = 0;
+			for (int u = 0; u < mask.rows; u++) {	// 마스크 원소 순회
+				for (int v = 0; v < mask.cols; v++)
+				{
+					// 마스크의 위치가 계속 변하는 것만큼 이미지의 위치 역시 계속 바뀌어야 함
+					int y = i + u - h_m.y;
+					int x = j + v - h_m.x;
+					sum += (img.at<uchar>(y, x) * mask.at<float>(u, v));	// 회선 수식
+				}
+			}
+			dst.at<float>(i, j) = sum; // 회선 누적값 출력화소 저장
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/filter_blur.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);						// 영상파일 예외 처리
+
+	// 마스크 필터
+	float data[] = {							// 사프닝 마스크 원소 지정
+		1 / 9.f, 1 / 9.f, 1 / 9.f,
+		1 / 9.f, 1 / 9.f, 1 / 9.f,
+		1 / 9.f, 1 / 9.f, 1 / 9.f,
+	};
+
+	Mat mask(3, 3, CV_32F, data);			// 마스크 행렬 선언
+	Mat blur;
+	filter(image, blur, mask);				// 회선 수행
+	blur.convertTo(blur, CV_8U);		// 자료형 변환
+
+	imshow("image", image);
+	imshow("blur", blur);				// 결과 행렬 윈도우에 표시
+
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/30.PNG" width="50%"></center><br>
+
+### 7.2.2. 실습 1
+9 x 9 블러링 mask를 적용한 소스코드를 작성하시오.
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void filter(Mat img, Mat& dst, Mat mask)		// 회선 수행 함수
+{
+	dst = Mat(img.size(), CV_32F, Scalar(0));			// 회선 결과 저장 행렬
+	Point h_m = mask.size() / 2;						// 마스크 중심 좌표(마스크의 사이즈를 2로 나누면)
+
+	for (int i = h_m.y; i < img.rows - h_m.y; i++) {		// 입력 행렬 반복 순회
+		for (int j = h_m.x; j < img.cols - h_m.x; j++)
+		{
+			float sum = 0;
+			for (int u = 0; u < mask.rows; u++) {	// 마스크 원소 순회
+				for (int v = 0; v < mask.cols; v++)
+				{
+					// 마스크의 위치가 계속 변하는 것만큼 이미지의 위치 역시 계속 바뀌어야 함
+					int y = i + u - h_m.y;
+					int x = j + v - h_m.x;
+					sum += (img.at<uchar>(y, x) * mask.at<float>(u, v));	// 회선 수식
+				}
+			}
+			dst.at<float>(i, j) = sum;				// 회선 누적값 출력화소 저장
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/filter_blur.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);						// 영상파일 예외 처리
+
+	// 마스크 필터
+	float data[] = {							// 사프닝 마스크 원소 지정
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+		1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f, 1 / 81.f,
+	};
+
+	Mat mask(9, 9, CV_32F, data);			// 마스크 행렬 선언
+	Mat blur;
+	filter(image, blur, mask);				// 회선 수행
+	blur.convertTo(blur, CV_8U);		// 자료형 변환
+
+	imshow("image", image);
+	imshow("blur", blur);				// 결과 행렬 윈도우에 표시
+
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/31.PNG" width="50%"></center><br>
+
+### 7.2.3. 샤프닝
+
+    1) 샤프닝(sharpening)
+       - 출력화소에서 이웃 화소끼리 차이를 크게해서 날카로운 느낌이 나게 만드는 것
+       - 영상의 세세한 부분을 강조할 수 있으며, 경계 부분에서 명암대비가 증가되는 효과
+       
+    2) 샤프닝 마스크
+       - 마스크 원소들의 값 차이가 커지도록 구성
+       - 마스크 원소 전체합이 1이 되어야 입력영상 밝기가 손실없이 출력영상 밝기로 유지
+       - 만약 넘어가면, 배수가 되어 사이즈가 커지게 됨
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void filter(Mat img, Mat& dst, Mat mask)		// 회선 수행 함수
+{
+	dst = Mat(img.size(), CV_32F, Scalar(0));			// 회선 결과 저장 행렬
+	Point h_m = mask.size() / 2;							// 마스크 중심 좌표	
+
+	for (int i = h_m.y; i < img.rows - h_m.y; i++) {		// 입력 행렬 반복 순회
+		for (int j = h_m.x; j < img.cols - h_m.x; j++)
+		{
+			float sum = 0;
+			for (int u = 0; u < mask.rows; u++) {	// 마스크 원소 순회
+				for (int v = 0; v < mask.cols; v++)
+				{
+					int y = i + u - h_m.y;
+					int x = j + v - h_m.x;
+					sum += mask.at<float>(u, v) * img.at<uchar>(y, x);	// 회선 수식
+				}
+			}
+			dst.at<float>(i, j) = sum;				// 회선 누적값 출력화소 저장
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/filter_sharpen.jpg", CV_LOAD_IMAGE_GRAYSCALE);
+	CV_Assert(image.data);
+
+	// 상하좌우만 샤프닝
+	float data1[] = {
+		0, -1, 0,
+		-1, 5, -1,
+		0, -1, 0,
+	};
+	// 대각선까지 모두 샤프닝
+	float data2[] = {
+		-1, -1, -1,
+		-1, 9, -1,
+		-1, -1, -1,
+	};
+
+	Mat mask1(3, 3, CV_32F, data1);
+	Mat mask2(3, 3, CV_32F, data2);
+	Mat sharpen1, sharpen2;
+	filter(image, sharpen1, mask1);
+	filter(image, sharpen2, mask2);
+	sharpen1.convertTo(sharpen1, CV_8U);
+	sharpen2.convertTo(sharpen2, CV_8U);
+
+	imshow("sharpen1", sharpen1);
+	imshow("sharpen2", sharpen2);
+	imshow("image", image);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/32.PNG" width="50%"></center><br>
+
+### 7.2.4. 차분 연산을 통해 엣지 검출
+
+    유사 연산자 출력화소 = max(자신의 위치 - 마스크 위치)
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void homogenOp(Mat img, Mat& dst, int mask_size)
+{
+	dst = Mat(img.size(), CV_8U, Scalar(0));
+	Point h_m(mask_size / 2, mask_size / 2);
+
+	for (int i = h_m.y; i < img.rows - h_m.y; i++) {
+		for (int j = h_m.x; j < img.cols - h_m.x; j++)
+		{
+			uchar max = 0;
+			for (int u = 0; u < mask_size; u++) {
+				for (int v = 0; v < mask_size; v++)
+				{
+					// 나를 나타내는 변수: i, j
+					// 나를 기준으로 한 주변의 변수
+					int y = i + u - h_m.y;
+					int x = j + v - h_m.x;
+
+					// 나와 주변의 값을 차분한 것의 절댓값 중 가장 큰 것을 찾기
+					uchar difference = abs(img.at<uchar>(i, j) - img.at<uchar>(y, x));
+
+					if (difference > max) max = difference;
+				}
+			}
+			dst.at<uchar>(i, j) = max;
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/edge_test.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	Mat edge;
+	homogenOp(image, edge, 3);
+
+	imshow("image", image);
+	imshow("edge-homogenOp", edge);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/33.PNG" width="50%"></center><br>
+
+### 7.2.5. 1차 미분 마스크
+
+    1) 미분
+       - 함수의 순간 변화율을 구하는 계산 과정을 의미
+       - 엣지가 화소의 밝기가 급격히 변하는 부분이기 때문에 함수의 변화율을 취하는 미분 연산을 이용해서 엣지 검출 가능
+    
+    2) 밝기의 변화율을 검출하는 방법
+       - 밝기에 대한 기울기(gradient)를 계산
+
+    3) 로버츠(Roberts) 마스크
+       - 대각선 방향으로 1과 -1을 배치하여 구성
+
+<center><img src="/assets/images/opencv6/34_1.PNG" width="50%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void filter(Mat img, Mat& dst, Mat mask)
+{
+	dst = Mat(img.size(), CV_32F, Scalar(0));
+	Point h_m = mask.size() / 2;
+
+	for (int i = h_m.y; i < img.rows - h_m.y; i++) {
+		for (int j = h_m.x; j < img.cols - h_m.x; j++)
+		{
+			float sum = 0;
+			for (int u = 0; u < mask.rows; u++) {
+				for (int v = 0; v < mask.cols; v++)
+				{
+					int y = i + u - h_m.y;
+					int x = j + v - h_m.x;
+					sum += img.at<uchar>(y, x) * mask.at<float>(u, v);
+				}
+			}
+			dst.at<float>(i, j) = sum;
+		}
+	}
+}
+
+void differential(Mat image, Mat& dst, float data1[], float data2[])
+{
+	Mat dst1, dst2;
+	Mat mask1(3, 3, CV_32F, data1);			// 입력 인수로 마스크 행렬 초기화
+	Mat mask2(3, 3, CV_32F, data2);
+
+	filter(image, dst1, mask1);					// 사용자 정의 회선 함수
+	filter(image, dst2, mask2);
+
+	// 회선 결과 두 행렬의 크기 계산
+	magnitude(dst1, dst2, dst);
+
+	dst1 = abs(dst1);							// 회선 결과 음수 원소를 양수화	
+	dst2 = abs(dst2);
+
+	dst.convertTo(dst, CV_8U);
+	dst1.convertTo(dst1, CV_8U);				// 윈도우 표시 위한 형변환
+	dst2.convertTo(dst2, CV_8U);
+	imshow("dst1", dst1);
+	imshow("dst2", dst2);
+}
+
+int main()
+{
+	Mat image = imread("../image/edge_test1.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	float data1[] = {
+		-1, 0, 0,
+		0, 1, 0,
+		0, 0, 0
+	};
+	float data2[] = {
+		0, 0, -1,
+		0, 1, 0,
+		0, 0, 0
+	};
+
+	Mat dst;
+	differential(image, dst, data1, data2); // 두 방향의 회선 수행 및 크기 계산
+
+	imshow("image", image);
+	imshow("로버츠 에지", dst);
+	waitKey();
+	return 0;
+}
+```  
+<center><img src="/assets/images/opencv6/34.PNG" width="50%"></center><br>
+
+    4) 프리윗(Prewitt) 마스크
+       - 로버츠 마스크의 단점을 보완하기 위해 고안
+       - 수직 마스크: 원소의 배치가 수직 방향으로 구성, 엣지의 방향도 수직
+       - 수평 마스크: 원소의 배치가 수평 방향으로 구성, 엣지의 방향도 수평
+
+<center><img src="/assets/images/opencv6/35_1.PNG" width="50%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void differential(Mat image, Mat& dst, float data1[], float data2[])
+{
+	Mat dst1, mask1(3, 3, CV_32F, data1);
+	Mat dst2, mask2(3, 3, CV_32F, data2);
+
+	filter2D(image, dst1, CV_32F, mask1);		// OpenCV 제공 회선 함수
+	filter2D(image, dst2, CV_32F, mask2);
+	magnitude(dst1, dst2, dst);
+	dst.convertTo(dst, CV_8U);
+
+	convertScaleAbs(dst1, dst1);				// 절대값 및 형변환 동시 수행 함수
+	convertScaleAbs(dst2, dst2);
+	imshow("dst1 - 수직 마스크", dst1);						// 윈도우 행렬 표시
+	imshow("dst2 - 수평 마스크", dst2);
+
+}
+
+int main()
+{
+	Mat image = imread("../image/edge_test1.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	float data1[] = {
+		-1, 0, 1,
+		-1, 0, 1,
+		-1, 0, 1,
+
+	};
+	float data2[] = {
+		-1, -1, -1,
+		0, 0, 0, 
+		1, 1, 1,
+	};
+
+	Mat dst;
+	differential(image, dst, data1, data2);
+
+	imshow("image", image);
+	imshow("프리윗 에지", dst);
+	waitKey();
+	return 0;
+}
+```       
+<center><img src="/assets/images/opencv6/35.PNG" width="50%"></center><br>
+
+    5) 소벨(Sobel) 마스크
+       - 프리윗 마스크와 유사, 중심화소의 차분에 대한 비중을 2배 키운 것
+       - 수직, 수평 방향의 엣지를 검출한다.
+
+<center><img src="/assets/images/opencv6/36_1.PNG" width="50%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void differential(Mat image, Mat& dst, float data1[], float data2[])
+{
+	Mat dst1, mask1(3, 3, CV_32F, data1);
+	Mat dst2, mask2(3, 3, CV_32F, data2);
+
+	filter2D(image, dst1, CV_32F, mask1);		// OpenCV 제공 회선 함수
+	filter2D(image, dst2, CV_32F, mask2);
+	magnitude(dst1, dst2, dst);
+	dst.convertTo(dst, CV_8U);
+
+	convertScaleAbs(dst1, dst1);				// 절대값 및 형변환 동시 수행 함수
+	convertScaleAbs(dst2, dst2);
+	imshow("dst1 - 수직 마스크", dst1);						// 윈도우 행렬 표시
+	imshow("dst2 - 수평 마스크", dst2);
+}
+
+int main()
+{
+	Mat image = imread("../image/edge_test1.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	float data1[] = {
+		-1, 0, 1,
+		-2, 0, 2,
+		-1, 0, 1
+	};
+	float data2[] = {
+		-1, -2, -1,
+		0, 0, 0,
+		1, 2, 1
+	};
+
+	Mat dst, dst3, dst4;
+	differential(image, dst, data1, data2);	// 두 방향 소벨 회선 및 크기 계산
+
+	// OpenCV 제공 소벨 에지 계산
+	Sobel(image, dst3, CV_32F, 1, 0, 3);		// x방향 미분 - 수직 마스크
+	Sobel(image, dst4, CV_32F, 0, 1, 3);		// y방향 미분 - 수평 마스크
+	convertScaleAbs(dst3, dst3);				// 절대값 및 uchar 형변환
+	convertScaleAbs(dst4, dst4);
+
+	imshow("image", image), imshow("소벨에지", dst);
+	imshow("dst3-수직_OpenCV", dst3), imshow("dst4-수평_OpenCV", dst4);
+
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/36.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv6/37.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv6/38.PNG" width="50%"></center><br>
+
+ 
+### 7.2.6. 2차 미분 마스크
+
+    1) 라플라시안 엣지 검출
+       - 모든 방향의 엣지를 검출
+
+<center><img src="/assets/images/opencv6/39_1.PNG" width="50%"></center><br>
+       
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int main()
+{
+	Mat image = imread("../image/laplacian_test.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	short data1[] = {
+		0, 1, 0,
+		1, -4, 1,
+		0, 1, 0
+	};
+	short data2[] = {
+		-1, -1, -1,
+		-1, 8, -1,
+		-1, -1, -1
+	};
+
+	Mat dst1, dst2, dst3;
+	Mat mask4(3, 3, CV_16S, data1);
+	Mat mask8(3, 3, CV_16S, data2);
+
+	// filter2D를 이용한 라플라시안 수행
+	filter2D(image, dst1, CV_32F, mask4);
+	filter2D(image, dst2, CV_32F, mask8);
+	Laplacian(image, dst3, CV_16S, 1);
+
+	// 절댓값 및 uchar형 변환
+	// 음수이면 화면이 깨짐 -> 항상 양수를 해줘야 함
+	convertScaleAbs(dst1, dst1);
+	convertScaleAbs(dst2, dst2);
+	convertScaleAbs(dst3, dst3);
+
+	imshow("image", image);
+	imshow("filter2D_4방향", dst1);
+	imshow("filter2D_8방향", dst2);
+	imshow("Laplacian_OpenCV", dst3);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/39.PNG" width="50%"></center><br>
+
+    2) LoG(Laplacian of Gaussian)
+       - 라플라시안은 잡음에 민감하다는 단점이 있다.
+       - 먼저 가우시안 잡음 필터링을 통해 잡음을 제거한 후 라플라시안을 수행하면, 잡음에 강한 엣지 검출이 가능해진다.
+
+<center><img src="/assets/images/opencv6/40_1.PNG" width="50%"></center><br>
+
+    3) DoG(Difference of Gaussian)
+       - 단순한 방법의 2차 미분 계산 방식이다.
+       - 가우시안 스무딩 필터링의 차이를 이용해서 엣지를 검출하는 방법이다.
+
+<center><img src="/assets/images/opencv6/40_2.PNG" width="50%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+// LOG 마스크 생성 함수
+Mat getLoGmask(Size size, double sigma)
+{
+	double ratio = 1 / (CV_PI * pow(sigma, 4.0));
+	int center = size.height / 2;
+	Mat dst(size, CV_64F);
+
+	for (int i = 0; i < size.height; i++) {
+		for (int j = 0; j < size.width; j++)
+		{
+			// 주의(마스크의 가운데 값을 빼고 제곱)
+			int x2 = (j - center) * (j - center);
+			int y2 = (i - center) * (i - center);
+
+			double value = (x2 + y2) / (2 * sigma * sigma);
+			dst.at<double>(i, j) = -ratio * (1 - value) * exp(-value);
+		}
+	}
+
+	// 전체 계수의 합이 1이 되도록
+	double scale = (center * 10 / ratio);
+	return dst * scale;
+}
+
+int main()
+{
+	Mat image = imread("../image/laplacian_test.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	double sigma = 1.4;
+	Mat LoG_mask = getLoGmask(Size(9, 9), sigma);
+
+	cout << LoG_mask << endl;
+	cout << sum(LoG_mask) << endl;
+
+	Mat dst1, dst2, dst3, dst4, gaus_img;
+	filter2D(image, dst1, -1, LoG_mask);
+	GaussianBlur(image, gaus_img, Size(9, 9), sigma, sigma);
+	Laplacian(gaus_img, dst2, -1, 5);
+
+	GaussianBlur(image, dst3, Size(1, 1), 0.0);
+	GaussianBlur(image, dst4, Size(9, 9), 1.6);
+	Mat dst_DoG = dst3 - dst4; // 가우시안 스케일이 다른 필터 2개를 서로 빼면 DoG
+
+	normalize(dst_DoG, dst_DoG, 0, 255, CV_MINMAX);
+
+	imshow("image", image);
+	imshow("dst1 - LoG_filter2D", dst1);
+	imshow("dst2 - LOG_OpenCV", dst2);
+	imshow("dst_DoG - DOG_OpenCV", dst_DoG);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/40.PNG" width="50%"></center><br>
