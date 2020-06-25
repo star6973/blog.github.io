@@ -78,7 +78,7 @@ use_math: true
         : 가로 방향으로 미분한다는 것은 y좌표는 고정한 상태에서 x축 방향으로만 미분 근사를 계산한다는 것 -> x축 방향으로의 편미분(partial derivative)
         : 세로 방향으로 미분한다는 것 -> y축 방향으로의 편미분
         
-          <center><img src="/assets/images/opencv6/10.PNG" width="50%"></center><br>
+        <center><img src="/assets/images/opencv6/10.PNG" width="50%"></center><br>
 
     + 중앙 차분에 의한 미분 근사 마스크(x축 방향으로의 편미분, y축 방향으로의 편미분)
         <center><img src="/assets/images/opencv6/11.PNG" width="50%"></center><br>
