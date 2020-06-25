@@ -78,7 +78,7 @@ use_math: true
         + 가로 방향으로 미분한다는 것은 y좌표는 고정한 상태에서 x축 방향으로만 미분 근사를 계산한다는 것 -> x축 방향으로의 편미분(partial derivative)
         + 세로 방향으로 미분한다는 것 -> y축 방향으로의 편미분
         
-          <center><img src="/assets/images/opencv6/10.PNG" width="50%"></center><br>
+        <center><img src="/assets/images/opencv6/10.PNG" width="50%"></center><br>
 
     + 중앙 차분에 의한 미분 근사 마스크(x축 방향으로의 편미분, y축 방향으로의 편미분)
         <center><img src="/assets/images/opencv6/11.PNG" width="50%"></center><br>
@@ -87,7 +87,7 @@ use_math: true
     + 2차원 공간에서 정의된 영상에서 경계를 검출하려면 x축 방향과 y축 방향의 편미분을 모두 사용해야 한다.
 	+ 그래디언트(Gradient)를 이용한다.
           
-          <center><img src="/assets/images/opencv6/7.PNG" width="50%"></center><br>
+	<center><img src="/assets/images/opencv6/7.PNG" width="50%"></center><br>
 
 	+ 그래디언트는 벡터이기 때문에 크기(magnitude)와 방향(phase) 성분으로 표현할 수 있다.
         + 그래디언트 벡터의 방향은 변화율이 큰 방향을 나타내고, 벡터의 크기는 변화율의 세기를 나타내는 척도이다.
@@ -120,7 +120,6 @@ use_math: true
 
 <center><img src="/assets/images/opencv6/16_1.PNG" width="50%"></center><br>  
 <center><img src="/assets/images/opencv6/16.PNG" width="50%"></center><br>
-<br>
 <center><img src="/assets/images/opencv6/17.PNG" width="50%"></center><br>
 
     2) 2차 미분 마스크 방식
@@ -200,7 +199,7 @@ use_math: true
          : 각 필터 뱅크에 대한 반응 벡터를 k-means 클러스터링으로 군집화한다.
          : 각 클러스터의 중심을 texture primitives로 명명한다.
 
-<center><img src="/assets/images/opencv6/24.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv6/24.PNG" width="100%"></center><br>
 
 ### 7.1.6. 영상의 선명화(Sharpening)
 - 블러링의 반대 개념으로 초점이 잘 맞은 사진처럼 객체의 윤곽이 뚜렷하게 구분되는 영상을 의미한다.
