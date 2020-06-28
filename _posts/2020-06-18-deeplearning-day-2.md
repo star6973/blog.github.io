@@ -75,7 +75,7 @@ use_math: true
             <center><img src="/assets/images/deeplearning/36.PNG" width="50%"></center><br>
             <center><img src="/assets/images/deeplearning/37.PNG" width="50%"></center><br>
 
-            > XOR 게이트는 직선이 아닌 곡선, 비선형 영역으로 분리하면 구현이 가능하다.
+        + XOR 게이트는 직선이 아닌 곡선, 비선형 영역으로 분리하면 구현이 가능하다.
 <br><br>
 
 3. 다층 퍼셉트론(Multilayer Perceptron, MLP)
@@ -105,13 +105,13 @@ use_math: true
 
 6. 활성화 함수(Activation Function)
 
-       1) 선형/비선형 함수
-          : 선형 함수는 출력이 입력의 상수배만큼 변하는 직선을 그리는 함수이고, 비선형 함수는 직선 1개로는 그릴 수 없는 함수이다.
-          : 인공신경망의 성능을 높이기 위해서는 은닉층을 추가해야 하는데, 활성화 함수를 선형 함수를 사용하게 되면 은닉층을 쌓을 수 없게 된다.
-            예를 들어 f(x) = Wx라 할 때, 은닉층을 2개 추가한다고 하면 출력층을 포함해서 y(x) = f(f(f(x)))가 되며 이는 선형적인 구조임을 알 수 있다.
-            즉, 선형 함수로 은닉층을 추가하더라도, 1회 추가한 것과 차이를 줄 수 없다.
-          : 그렇다고 선형 함수를 사용한 층이 의미가 없다는 것은 아니다. 학습 가능한 가중치가 추가로 생긴다는 점에서 분명히 의미가 있다.
-          : 활성화 함수를 사용하는 일반적인 은닉층을 선형층과 대비되는 표현을 사용하면 비선형층이다.
+   1) 선형/비선형 함수
+      : 선형 함수는 출력이 입력의 상수배만큼 변하는 직선을 그리는 함수이고, 비선형 함수는 직선 1개로는 그릴 수 없는 함수이다.
+      : 인공신경망의 성능을 높이기 위해서는 은닉층을 추가해야 하는데, 활성화 함수를 선형 함수를 사용하게 되면 은닉층을 쌓을 수 없게 된다.
+        예를 들어 f(x) = Wx라 할 때, 은닉층을 2개 추가한다고 하면 출력층을 포함해서 y(x) = f(f(f(x)))가 되며 이는 선형적인 구조임을 알 수 있다.
+        즉, 선형 함수로 은닉층을 추가하더라도, 1회 추가한 것과 차이를 줄 수 없다.
+      : 그렇다고 선형 함수를 사용한 층이 의미가 없다는 것은 아니다. 학습 가능한 가중치가 추가로 생긴다는 점에서 분명히 의미가 있다.
+      : 활성화 함수를 사용하는 일반적인 은닉층을 선형층과 대비되는 표현을 사용하면 비선형층이다.
 
        2) 시그모이드 함수
           : 일반적인 인공신경망의 학습 과정은, 우선 입력에 대해서 순전파(forward propagaion) 연산을 하고, 그리고 순전파 연산을 하고 나온
@@ -161,12 +161,12 @@ use_math: true
     - 오차가 클수록 손실 함수의 값은 크고, 오차가 작을수록 손실 함수의 값은 작아진다.
     - 회귀에서는 평균 제곱 오차(MSE), 분류에서는 크로스 엔트로피(Cross-Entropy)를 주로 사용한다.
     
-       1) MSE(Mean Squared Error)
-          : 오차 제곱 평균을 의미하며, 연속형 변수를 예측할 때 사용한다.
+          1) MSE(Mean Squared Error)
+             : 오차 제곱 평균을 의미하며, 연속형 변수를 예측할 때 사용한다.
 
-       2) 크로스 엔트로피(Cross-Entropy)
-          : 낮은 확률로 예측해서 맞추거나, 높은 확률로 예측해서 틀리는 경우 손실이 더 크다.
-          : 이진 분류의 경우 binary_crossentropy를 사용하며, 다중 클래스 분류의 경우 categorical_crossentropy를 사용한다.
+          2) 크로스 엔트로피(Cross-Entropy)
+             : 낮은 확률로 예측해서 맞추거나, 높은 확률로 예측해서 틀리는 경우 손실이 더 크다.
+             : 이진 분류의 경우 binary_crossentropy를 사용하며, 다중 클래스 분류의 경우 categorical_crossentropy를 사용한다.
 <br><br>
 
 8. 옵티마이저(Optimizer)
@@ -177,9 +177,9 @@ use_math: true
     - 배치(Batch)는 가중치 등의 매개변수의 값을 조정하기 위해 사용하는 데이터의 양을 말한다.
     - 전체 데이터를 가지고 매개변수의 값을 조정할 수도 있고, 정해준 양의 데이터만 가지고도 매개변수의 값을 조장할 수 있다.
 
-    <center><img src="/assets/images/deeplearning/63.PNG" width="50%"></center><br>
-    <center><img src="/assets/images/deeplearning/48.png" width="50%"></center><br>
-    <center><img src="/assets/images/deeplearning/64.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/63.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/48.png" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/64.PNG" width="50%"></center><br>
     
        1) 경사 하강법(Gradient Descent)
           : 경사 하강법은 1차 근사값 발견용 최적화 알고리즘으로, 함수의 기울기를 구하여 기울기가 낮은쪽으로 계속 이동시켜서 극값에 이를 때까지 반복시키는 것이다.
