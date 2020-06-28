@@ -76,7 +76,6 @@ use_math: true
             <center><img src="/assets/images/deeplearning/37.PNG" width="50%"></center><br>
 
             > XOR 게이트는 직선이 아닌 곡선, 비선형 영역으로 분리하면 구현이 가능하다.
-
 <br><br>
 
 3. 다층 퍼셉트론(Multilayer Perceptron, MLP)
@@ -88,7 +87,6 @@ use_math: true
     - Multilayer perceptron은 단층 perceptron과 유사한 구조를 가지고 있지만 중간층과 각 unit의 입출력 특성을 비선형으로 함으로써 네트워크의 능력을 향상시켜 단층 퍼셉트론의 여러 가지 단점들을 극복했다. 
     - Multilayer perceptron은 층의 갯수가 증가할수록 perceptron이 형성하는 결정 구역의 특성은 더욱 고급화된다. 
     - 이와 같이 은닉층이 2개 이상인 신경망을 심층 신경망(Deep Neural Network, DNN)이라고 한다.
-
 <br><br>
 
 4. 순방향 신경망(Feed-Forward Neural Network, FFNN)
@@ -104,7 +102,6 @@ use_math: true
     - 다층 퍼셉트론의 은닉층과 출력층에 있는 모든 뉴런은 이전 층의 모든 뉴련과 연결되어 있다.
     - 이와 같이 어떤 층의 모든 뉴런이 이전 층의 모든 뉴런과 연결되어 있는 층을 전결합층이라 하며, 모든 은닉층과 출력층이 전결합층이다.
     - 밀집층(Dense layer)이라고도 한다.
-
 <br><br>
 
 6. 활성화 함수(Activation Function)
@@ -158,7 +155,6 @@ use_math: true
             문제에 사용된다면, 소프트맥스 함수는 다중 클래스 분류(Multiclass Classification) 문제에서 주로 사용된다.
     
     <center><img src="/assets/images/deeplearning/46.PNG" width="50%"></center><br>
-
 <br><br>
 
 7. 손실 함수(Loss function)
@@ -172,19 +168,18 @@ use_math: true
        2) 크로스 엔트로피(Cross-Entropy)
           : 낮은 확률로 예측해서 맞추거나, 높은 확률로 예측해서 틀리는 경우 손실이 더 크다.
           : 이진 분류의 경우 binary_crossentropy를 사용하며, 다중 클래스 분류의 경우 categorical_crossentropy를 사용한다.
-
 <br><br>
 
 8. 옵티마이저(Optimizer)
 
-<center><img src="/assets/images/deeplearning/47.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/47.png" width="50%"></center><br>
 
     - 손실 함수의 값을 줄여나가면서 학습하는 방법은 어떤 옵티마이저를 사용하느냐에 따라 달라진다.
     - 배치(Batch)는 가중치 등의 매개변수의 값을 조정하기 위해 사용하는 데이터의 양을 말한다.
     - 전체 데이터를 가지고 매개변수의 값을 조정할 수도 있고, 정해준 양의 데이터만 가지고도 매개변수의 값을 조장할 수 있다.
 
     <center><img src="/assets/images/deeplearning/63.PNG" width="50%"></center><br>
-    <center><img src="/assets/images/deeplearning/48.PNG" width="50%"></center><br>
+    <center><img src="/assets/images/deeplearning/48.png" width="50%"></center><br>
     <center><img src="/assets/images/deeplearning/64.PNG" width="50%"></center><br>
     
        1) 경사 하강법(Gradient Descent)
@@ -259,7 +254,7 @@ use_math: true
           : 각 매개변수에 서로 다른 학습률(learning rate)을 적용한다.
           : 변화가 많은 매개변수는 학습률이 작게 설정되고, 변화가 적은 매개변수는 학습률을 높게 설정한다.
 
-   <center><img src="/assets/images/deeplearning/52.PNG" width="50%"></center><br>    
+   <center><img src="/assets/images/deeplearning/52.png" width="50%"></center><br>    
    <center><img src="/assets/images/deeplearning/55.PNG" width="50%"></center><br>
           
           : Adagrad는 위에 있는 iteration(t)이 증가하면서 learning rate가 작아진다는 문제가 있다.
