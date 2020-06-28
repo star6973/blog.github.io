@@ -125,6 +125,7 @@ use_math: true
 
     <center><img src="/assets/images/deeplearning/41.PNG" width="50%"></center><br>          
     <center><img src="/assets/images/deeplearning/42.PNG" width="50%"></center><br>
+<br><br>
 
    3) 하이퍼볼릭탄젠트 함수(Hyperbolic tangent function)
       - 하이퍼볼릭탄젠트 함수는 입력값을 -1과 1 사이의 값으로 변환한다.
@@ -132,6 +133,7 @@ use_math: true
       - 따라서 기울기 소실 현상이 적은 편이다.
 
     <center><img src="/assets/images/deeplearning/43.PNG" width="50%"></center><br>
+<br><br>
 
    4) 렐루 함수(ReLU)
       - 가장 많이 사용되고 있는 함수
@@ -141,6 +143,7 @@ use_math: true
       - 문제는 입력값이 음수이면 기울기가 0이 되기 때문에, 이 뉴런은 다시 회생이 불가능하다. 이 문제를 죽은 렐루(dying ReLU)라고 한다.
 
     <center><img src="/assets/images/deeplearning/44.PNG" width="50%"></center><br>
+<br><br>
 
    5) 리키 렐루(Leaky ReLU)
       - 죽은 렐루를 보완하기 위한 함수
@@ -148,6 +151,7 @@ use_math: true
       - f(x) = max(ax, x)로 간단하다. a는 하이퍼파라미터로 Leaky 정도를 결정하며 일반적으로 0.01의 값을 가진다.
 
     <center><img src="/assets/images/deeplearning/45.PNG" width="50%"></center><br>
+<br><br>
 
    6) 소프트맥스 함수(Softmax function)
       - 분류 문제에서 자주 사용되는 함수
@@ -162,21 +166,21 @@ use_math: true
     - 오차가 클수록 손실 함수의 값은 크고, 오차가 작을수록 손실 함수의 값은 작아진다.
     - 회귀에서는 평균 제곱 오차(MSE), 분류에서는 크로스 엔트로피(Cross-Entropy)를 주로 사용한다.
     
-  1) MSE(Mean Squared Error)
-     - 오차 제곱 평균을 의미하며, 연속형 변수를 예측할 때 사용한다.
+      1) MSE(Mean Squared Error)
+         - 오차 제곱 평균을 의미하며, 연속형 변수를 예측할 때 사용한다.
 
-  2) 크로스 엔트로피(Cross-Entropy)
-     - 낮은 확률로 예측해서 맞추거나, 높은 확률로 예측해서 틀리는 경우 손실이 더 크다.
-     - 이진 분류의 경우 binary_crossentropy를 사용하며, 다중 클래스 분류의 경우 categorical_crossentropy를 사용한다.
+      2) 크로스 엔트로피(Cross-Entropy)
+         - 낮은 확률로 예측해서 맞추거나, 높은 확률로 예측해서 틀리는 경우 손실이 더 크다.
+         - 이진 분류의 경우 binary_crossentropy를 사용하며, 다중 클래스 분류의 경우 categorical_crossentropy를 사용한다.
 <br><br>
 
 8. 옵티마이저(Optimizer)
 
 <center><img src="/assets/images/deeplearning/47.png" width="50%"></center><br>
 
-    - 손실 함수의 값을 줄여나가면서 학습하는 방법은 어떤 옵티마이저를 사용하느냐에 따라 달라진다.
-    - 배치(Batch)는 가중치 등의 매개변수의 값을 조정하기 위해 사용하는 데이터의 양을 말한다.
-    - 전체 데이터를 가지고 매개변수의 값을 조정할 수도 있고, 정해준 양의 데이터만 가지고도 매개변수의 값을 조장할 수 있다.
+- 손실 함수의 값을 줄여나가면서 학습하는 방법은 어떤 옵티마이저를 사용하느냐에 따라 달라진다.
+- 배치(Batch)는 가중치 등의 매개변수의 값을 조정하기 위해 사용하는 데이터의 양을 말한다.
+- 전체 데이터를 가지고 매개변수의 값을 조정할 수도 있고, 정해준 양의 데이터만 가지고도 매개변수의 값을 조장할 수 있다.
 
 <center><img src="/assets/images/deeplearning/63.PNG" width="50%"></center><br>
 <center><img src="/assets/images/deeplearning/48.png" width="50%"></center><br>
