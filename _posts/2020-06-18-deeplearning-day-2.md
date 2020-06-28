@@ -185,7 +185,9 @@ use_math: true
 <center><img src="/assets/images/deeplearning/63.PNG" width="50%"></center><br>
 <center><img src="/assets/images/deeplearning/48.png" width="50%"></center><br>
 <center><img src="/assets/images/deeplearning/64.PNG" width="80%"></center><br>
-    
+
+- 종류
+
    1) 경사 하강법(Gradient Descent)
       - 경사 하강법은 1차 근사값 발견용 최적화 알고리즘으로, 함수의 기울기를 구하여 기울기가 낮은쪽으로 계속 이동시켜서 극값에 이를 때까지 반복시키는 것이다.
       - 최적화할 함수 f(x)에 대해, 먼저 시작점 X0를 정한다. 현재 X(i)가 주어질 때, 그 다음으로 이동할 점인 X(i+1)은 다음과 같다.
