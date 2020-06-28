@@ -95,7 +95,6 @@ use_math: true
 
         <center><img src="/assets/images/deeplearning/39.PNG" width="50%"></center><br>
         <center><img src="/assets/images/deeplearning/40.PNG" width="50%"></center><br>
-
 <br><br>
 
 5. 전결합층(Fully-connected layer, FC, Dense layer)
