@@ -177,7 +177,7 @@ use_math: true
 
 8. 옵티마이저(Optimizer)
 
-    <center><img src="/assets/images/deeplearning/47.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/47.PNG" width="50%"></center><br>
 
     - 손실 함수의 값을 줄여나가면서 학습하는 방법은 어떤 옵티마이저를 사용하느냐에 따라 달라진다.
     - 배치(Batch)는 가중치 등의 매개변수의 값을 조정하기 위해 사용하는 데이터의 양을 말한다.
@@ -194,7 +194,7 @@ use_math: true
             즉, learning rate가 작으면 학습 속도가 느리지만 시간이 다 되어 덜 끝날 수도 있고, learning rate가 크면 속도가 빠르지만 제대로 학습을 못할 수도 있다.
           
    <center><img src="/assets/images/deeplearning/49.PNG" width="50%"></center><br>
-   <center><img src="/assets/images/deeplearning/50.PNG" width="50%"></center><br>
+   <center><img src="/assets/images/deeplearning/50.PNG" width="50%"></center><br><br><br>
    
           1-1) 배치 경사 하강법(Batch Gradient Descent)
                - 배치 경사 하강법은 옵티마이저 중 하나로 오차를 구할 때 전체 데이터를 고려한다.
@@ -203,11 +203,15 @@ use_math: true
 
    > model.fit(X_train, y_train, batch_size=len(trainX))
 
+<br><br>
+
           1-2) 확률적 경사 하강법(Stochastic Gradient Descent)
                - 기존의 경사 하강법의 시간이 오래 걸리는 단점을 보완하기 위해, 매개변수 값을 조정 시 전체 데이터가 아니라 랜덤으로 선택한 하나의 데이터에 대해서만 계산한다.
                - 매개변수의 변경폭이 불안정하고, 배치 경사 하강법보다 정확도가 낮을 수 있지만, 속도는 빠르다.
 
    > model.fit(X_train, y_train, batch_size=1)
+
+<br><br>
 
           1-3) 미니 배치 경사 하강법(Mini-Batch Gradient Descent)
                - 정해진 양에 대해서만 계산하여 매개변수의 값을 조정하는 경사 하강법
@@ -216,6 +220,8 @@ use_math: true
                - 가장 많이 사용되는 경사 하강법이다.
 
    > model.fit(X_train, y_train, batch_size=32) #32를 배치 크기로 하였을 경우
+
+<br><br>
 
        2) 모멘텀(Momentum)
           : 모멘텀은 관성이라는 물리학의 법칙을 응용한 방법
@@ -232,7 +238,9 @@ use_math: true
           : 이전 gradient들의 영향력을 매 업데이트마다 r(momentum)배씩 감소시킨다.
 
    > keras.optimizers.SGD(lr=0.01, momentum=0.9)
-          
+
+<br><br>
+
        3) NAG(Nesterov accelerated gradient)
           : 모멘텀을 사용한 SGD에서 관성의 성질에 따라 글로벌 미니멈을 향해 앞으로 나아가는 것은 굉장히 좋지만,
             밑면에 다다랐을 때쯤 앞에 압정이 있는 것을 발견하더라도 관성 때문에 앞으로 나아가다가 박혀버리는 꼴이 발생할 수 있다.
@@ -240,7 +248,7 @@ use_math: true
           : 현재의 위치에서 미래의 위치를 계산하기 위해 목적함수의 theta를 아래와 같이 변경해준다.
           : 따라서 Momentum 방식의 빠른 이동에 대한 장점을 가지면서, 적절한 시점에 멈추면서 동작하여 더욱 효과적으로 이동한다.
    
-   <center><img src="/assets/images/deeplearning/53.PNG" width="50%"></center><br>
+   <center><img src="/assets/images/deeplearning/53.PNG" width="50%"></center><br><br><br>
               
        4) Adagrad
           : 지금까지의 방법은 모든 파라미터에 대해 같은 learning rate를 적용한다는 점이다. 하지만, 동일한 학습률을 적용하는 것은 비효율적이다.
@@ -257,7 +265,9 @@ use_math: true
           : Adagrad는 위에 있는 iteration(t)이 증가하면서 learning rate가 작아진다는 문제가 있다.
       
    > keras.optimizers.Adagrad(lr=0.01, epsilon=1e-6)
-   
+
+<br><br>
+
        5) Adadelta
           : Adadelta는 Adagrad의 learning rate의 소실 문제를 해결하기 위한 알고리즘이다.
           : 이전의 모든 gradient의 정보를 저장하는 것이 아니라, 이전의 크기 w(window)개의 gradient의 정보만을 저장한다.
@@ -268,6 +278,8 @@ use_math: true
 
    > keras.optimizers.Adadelta(lr=1.0, rho=0.95, epsilon=None, decay=0.0)
 
+<br><br>
+
        6) RMSprop
           : RMSprop 역시 Adagrad의 learning rate의 소실 문제를 해결하기 위한 알고리즘이다.
           : 일반적으로 순환 신경망(RNN)에서 자주 사용된다.
@@ -277,6 +289,8 @@ use_math: true
 
    > keras.optimizers.RMSprop(lr=0.001, rho=0.9, epsilon=None, decay=0.0)
 
+<br><br>
+
        7) Adam(Adaptive Moment Estimation)
           : Adam은 RMSprop와 Momentum을 합친 듯한 방법으로, 방향과 학습률 모두를 잡기 위한 방법이다.
           : 각 파라미터마다 다른 크기의 업데이트를 적용한다.
@@ -285,7 +299,9 @@ use_math: true
    <center><img src="/assets/images/deeplearning/60.PNG" width="50%"></center><br>
 
    > keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0, amsgrad=False)
-       
+
+<br><br>
+
        8) AdaMax
           : Adam에서의 가중치 업데이트에 대한 규칙은 현재와 과거의 gradient를 개별적으로 보고 있다.
           : 이를 표준화 시키면 다음과 같은데, 이는 p가 커질수록 불안정해진다.
@@ -298,7 +314,9 @@ use_math: true
    <center><img src="/assets/images/deeplearning/62.PNG" width="50%"></center><br>
    
    > keras.optimizers.Adamax(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, decay=0.0)
-       
+
+<br><br>
+
        9) NAdam(Nesterov-accelerated Adaptive Momentum Adam)
           : NAdam은 NAG와 Adam을 섞은 방법이다.
           : Adam에서 momentum 대신에 NAG를 사용하여, 미래의 momentum을 사용한 효과를 가진다.
@@ -306,3 +324,6 @@ use_math: true
    <center><img src="/assets/images/deeplearning/66.PNG" width="50%"></center><br>
    
    > keras.optimizers.Nadam(lr=0.002, beta_1=0.9, beta_2=0.999, epsilon=None, schedule_decay=0.004)
+
+<br><br>
+
