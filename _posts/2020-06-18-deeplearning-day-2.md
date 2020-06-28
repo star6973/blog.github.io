@@ -213,10 +213,10 @@ use_math: true
 <br><br>
 
   1-3) 미니 배치 경사 하강법(Mini-Batch Gradient Descent)  
-    - 정해진 양에 대해서만 계산하여 매개변수의 값을 조정하는 경사 하강법  
-    - batch_size 인자를 넘겨 mini batch 사이즈를 결정하고, mini batch 사이즈의 데이터마다 손실 함수를 만들어 gradient를 계산하여 파라미터를 업데이트한다.  
-    - 전체 데이터를 계산하는 것보다 빠르며, SGD보다 안정적임.  
-    - 가장 많이 사용되는 경사 하강법이다.  
+        - 정해진 양에 대해서만 계산하여 매개변수의 값을 조정하는 경사 하강법  
+        - batch_size 인자를 넘겨 mini batch 사이즈를 결정하고, mini batch 사이즈의 데이터마다 손실 함수를 만들어 gradient를 계산하여 파라미터를 업데이트한다.  
+        - 전체 데이터를 계산하는 것보다 빠르며, SGD보다 안정적임.  
+        - 가장 많이 사용되는 경사 하강법이다.  
 
 > model.fit(X_train, y_train, batch_size=32) #32를 배치 크기로 하였을 경우
 
