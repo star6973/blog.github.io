@@ -86,3 +86,246 @@ use_math: true
 <center><img src="/assets/images/deeplearning/75.PNG" width="50%"></center><br>
 
 ### 6.2. CNN Implementation
+MNIST 데이터 분류하기
+
+## *Tensorflow*
+##
+```python
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets('MNIST_data/', one_hot=True)
+
+import tensorflow as tf
+import time
+
+training_epochs = 15
+batch_size = 100
+
+X = tf.placeholder(tf.float32, [None, 784]) # MNIST의 이미지 사이즈는 28x28 = 784
+Y = tf.placeholder(tf.float32, [None, 10]) # 라벨링은 0~9까지의 10개
+X_img = tf.reshape(X, [-1, 28, 28, 1]) # 전체 사이즈(-1)를 받을 수 있도록, 28x28사이즈로, 1채널(흑백 이미지이므로, 컬러 이미지는 3채널로 변경)
+
+# Convolution Layer 1
+W1 = tf.Variable(tf.random_normal([3, 3, 1, 32], stddev=0.01)) # 하나의 이미지(1)를 3x3 사이즈의 32개 필터로 설정
+CL1 = tf.nn.conv2d(X_img, W1, strides=[1, 1, 1, 1], padding='SAME') # stride에서 맨 앞과 맨 뒤는 의미가 없고, 1x1 간격으로 계산한다, padding에서 SAME은 패딩을 해준다 / VALID는 패딩을 안해준다의 뜻이다.
+CL1 = tf.nn.relu(CL1) # convolution layer의 마지막에는 항상 relu 함수를 사용
+
+# Pooling Layer 1
+PL1 = tf.nn.max_pool(CL1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME') # 마찬가지로 ksize 역시 맨 앞과 맨 뒤는 의미가 없다. 2x2의 max pooling을 사용하여 반으로 나눈다는 뜻이다. ksize만큼 strides도 써준다.
+
+# Convolution Layer 2
+W2 = tf.Variable(tf.random_normal([3, 3, 32, 64], stddev=0.01)) # 32개의 이미지(32)를 3x3 사이즈의 64개 필터로 설정(0.01 표준편차는 0~9까지라는 것을 알기 때문)
+CL2 = tf.nn.conv2d(PL1, W2, strides=[1, 1, 1, 1], padding='SAME')
+CL2 = tf.nn.relu(CL2)
+
+# Pooling Layer 2
+PL2 = tf.nn.max_pool(CL2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+
+# Fully Connected Layer
+L_flat = tf.reshape(PL2, [-1, 7*7*64]) # 처음 이미지의 사이즈는 28x28이었지만, Conv 1을 통과하면서 pooling 1에 의해서 반으로 줄어들고(14x14), 다시 Conv 2를 통과하면서 pooling 2에 의해서 반으로 줄어듦(7x7)
+W3 = tf.Variable(tf.random_normal([7*7*64, 10], stddev=0.01))
+b3 = tf.Variable(tf.random_normal([10]))
+
+# # 더 간결하게
+# # Convolution Layer1
+# CL1 = tf.layers.conv2d(inputs=X_img, filters=32, kernel_size=[3, 3], padding='SAME', strides=1, activation=tf.nn.relu)
+# # Pooling Layer1
+# PL1 = tf.layers.max_pooling2d(inputs=CL1, pool_size=[2, 2], padding='SAME', strides=2)
+# Convolution Layer2
+# CL2 = tf.layers.conv2d(inputs=PL1, filters=64, kernel_size=[3, 3], padding='SAME', strides=1, activation=tf.nn.relu)
+# # Pooling Layer2
+# PL2 = tf.layers.max_pooling2d(inputs=CL2, pool_size=[2, 2], padding='SAME', strides=2)
+# # Fully Connected (FC) Layer
+# L_flat = tf.reshape(PL2, [-1, 7*7*64])
+# W3 = tf.Variable(tf.random_normal([7*7*64, 10], stddev=0.01))
+# b3 = tf.Variable(tf.random_normal([10]))
+
+# Model, Cost, Train
+model_LC = tf.add(tf.matmul(L_flat, W3), b3)
+model = tf.nn.softmax(model_LC)
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=model_LC, labels=Y))
+train = tf.train.AdamOptimizer(0.01).minimize(cost)
+
+# Accuracy
+accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(model, 1), tf.argmax(Y, 1)), tf.float32))
+
+# Session
+with tf.Session() as sess:
+  sess.run(tf.global_variables_initializer())
+
+  # Training
+  t1 = time.time()
+  for epoch in range(training_epochs):
+    total_batch = int(mnist.train.num_examples / batch_size)
+    for i in range(total_batch):
+      train_images, train_labels = mnist.train.next_batch(batch_size)
+      c, _ = sess.run([cost, train], feed_dict={X: train_images, Y: train_labels})
+
+      if i % 10 == 0:
+        print('epoch: ', epoch, ', batch number: ', i)
+
+  t2 = time.time()
+
+  # Testing
+  print('Training Time (Seconds): ', t2 - t1)
+  print('Accuracy: ', sess.run(accuracy, feed_dict={X: mnist.test.images, Y: mnist.test.labels}))
+```
+<center><img src="/assets/images/cnn/1.PNG" width="50%"></center><br>
+
+## *Keras*
+```python
+from keras.utils import np_utils
+from keras.datasets import mnist
+from keras.models import Sequential
+from keras.layers import Conv2D, pooling, Flatten, Dense
+
+# MNIST data
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+print(train_images.shape, train_labels.shape, test_images.shape, test_labels.shape)
+
+train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('float32')/255.0
+test_images = test_images.reshape(test_images.shape[0], 28, 28, 1).astype('float32')/255.0
+train_labels = np_utils.to_categorical(train_labels)
+test_labels = np_utils.to_categorical(test_labels)
+
+# Model
+model = Sequential()
+model.add(Conv2D(32, (3, 3), padding='same', strides=(1, 1), activation='relu', input_shape=(28, 28, 1)))
+print(model.output_shape)
+
+model.add(pooling.MaxPooling2D(pool_size=(2, 2)))
+print(model.output_shape)
+
+model.add(Conv2D(64, (3, 3), padding='same', strides=(1, 1), activation='relu'))
+print(model.output_shape)
+
+model.add(pooling.MaxPooling2D(pool_size=(2, 2)))
+print(model.output_shape)
+
+model.add(Flatten())
+model.add(Dense(10, activation='softmax'))
+model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+
+# Training
+model.fit(train_images, train_labels, epochs=5, batch_size=100, verbose=1)
+# Testing
+_, accuracy = model.evaluate(test_images, test_labels)
+print('Accuracy ', accuracy)
+model.summary()
+```
+<center><img src="/assets/images/cnn/2.PNG" width="50%"></center><br>
+<br><br>
+
+CIFAR-10 데이터 분류하기
+<center><img src="/assets/images/cnn/2_1.PNG" width="50%"></center><br>
+
+## *Tensorflow*
+```python
+from keras.utils import np_utils
+from keras.datasets import cifar10
+import tensorflow as tf
+import time
+
+(train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
+train_labels = np_utils.to_categorical(train_labels)
+test_labels = np_utils.to_categorical(test_labels)
+
+training_epochs = 15
+batch_size = 100
+
+X = tf.placeholder(tf.float32, [None, 32, 32, 3])
+Y = tf.placeholder(tf.float32, [None, 10])
+X_img = tf.reshape(X, [-1, 32, 32, 3])
+
+# Convolution Layer 1
+W1 = tf.Variable(tf.random_normal([3, 3, 3, 32], stddev=0.01))
+CL1 = tf.nn.conv2d(X_img, W1, strides=[1, 1, 1, 1], padding='SAME')
+CL1 = tf.nn.relu(CL1)
+
+# Pooling Layer 1
+PL1 = tf.nn.max_pool(CL1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+
+# Convolution Layer 2
+W2 = tf.Variable(tf.random_normal([3, 3, 32, 64], stddev=0.01))
+CL2 = tf.nn.conv2d(PL1, W2, strides=[1, 1, 1, 1], padding='SAME')
+CL2 = tf.nn.relu(CL2)
+
+# Pooling Layer 2
+PL2 = tf.nn.max_pool(CL2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+
+# Fully Connected Layer
+L_flat = tf.reshape(PL2, [-1, 8*8*64])
+W3 = tf.Variable(tf.random_normal([8*8*64, 10], stddev=0.01))
+b3 = tf.Variable(tf.random_normal([10]))
+
+# Model, Cost, Train
+model_LC = tf.matmul(L_flat, W3) + b3
+model = tf.nn.softmax(model_LC)
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=model_LC, labels=Y))
+train = tf.train.AdamOptimizer(0.01).minimize(cost)
+
+# Accuracy
+accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(model, 1), tf.argmax(Y, 1)), tf.float32))
+
+# Session
+with tf.Session() as sess:
+  sess.run(tf.global_variables_initializer())
+
+  # Training
+  t1 = time.time()
+  for epoch in range(training_epochs):
+    total_batch = int(train_images.shape[0] / batch_size)
+    for i in range(total_batch):
+      batch_train_images = train_images[i*batch_size : (i+1)*batch_size]
+      batch_train_labels = train_labels[i*batch_size : (i+1)*batch_size]
+      c, _ = sess.run([cost, train], feed_dict={X: batch_train_images, Y: batch_train_labels})
+
+      if i % 10 == 0:
+        print('epoch: ', epoch, ', batch number: ', i)
+
+  t2 = time.time()
+  
+  # Testing
+  print('Training Time (Seconds): ', t2 - t1)
+
+  total_batch = int(test_images.shape[0] / batch_size)
+  for i in range(total_batch):
+    batch_test_images = test_images[i*batch_size : (i+1)*batch_size]
+    batch_test_labels = test_labels[i*batch_size : (i+1)*batch_size]
+
+  print('Accuracy: ', sess.run(accurcay, feed_dict={X: batch_test_images, Y: batch_test_labels}))
+```
+> CIFAR-10 Dataset은 현재 노트북으로 실행 불가능
+
+## *Keras*
+```python
+# 138p에 6번 7번 사이에 train_images test_images 255로 나눈 것 추가
+from keras.utils import np_utils
+from keras.datasets import cifar10
+from keras.models import Sequential
+from keras.layers import Conv2D, pooling, Flatten, Dense
+
+(train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
+print(train_images.shape, train_labels.shape, test_images.shape, test_labels.shape)
+
+# mnist 데이터와는 다르게 cifar10 데이터는 이미 shape에 3채널이 있기 때문에 reshpae을 할 필요는 없다
+# 0과 1로 변환하여야 하기 때문에 255로 나눈다
+train_images = train_images.reshape(train_images.shape[0], 32, 32, 3).astype('float32') / 255.0
+test_images = test_images.reshape(test_images.shape[0], 32, 32, 3).astype('float32') / 255.0
+
+train_labels = np_utils.to_categorical(train_labels)
+test_labels = np_utils.to_categorical(test_labels)
+
+model = Sequential()
+model.add(conv2D(32, (3, 3), padding='same', strides=(1, 1), activation='relu', input_shape=(32, 32, 3)))
+model.add(pooling.MaxPooling2D(pool_size=(2, 2)))
+model.add(conv2D(64, (3, 3), padding='same', strides=(1, 1), activation='relu'))
+model.add(pooling.MaxPooling2D(pool_size=(2, 2)))
+model.add(Flatten())
+model.add(Dense(10, activation='softmax'))
+model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+
+model.fit(train_images, train_labels, epochs=5, batch_size=100, verbose=1)
+_, accuracy = model.evaluate(test_images, test_labels)
+print('Accuracy: ', accuracy)
+model.summary()
+```
