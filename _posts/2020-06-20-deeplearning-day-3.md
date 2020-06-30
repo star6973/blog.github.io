@@ -169,7 +169,7 @@ with tf.Session() as sess:
   print('Training Time (Seconds): ', t2 - t1)
   print('Accuracy: ', sess.run(accuracy, feed_dict={X: mnist.test.images, Y: mnist.test.labels}))
 ```
-<center><img src="/assets/images/cnn/1.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/cnn/1.PNG" width="50%"></center><br>
 
 ## *Keras*
 ```python
@@ -212,11 +212,11 @@ _, accuracy = model.evaluate(test_images, test_labels)
 print('Accuracy ', accuracy)
 model.summary()
 ```
-<center><img src="/assets/images/cnn/2.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/cnn/2.PNG" width="50%"></center><br>
 <br><br>
 
 CIFAR-10 데이터 분류하기
-<center><img src="/assets/images/cnn/2_1.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/cnn/2_1.PNG" width="50%"></center><br>
 
 ## *Tensorflow*
 ```python
