@@ -441,7 +441,7 @@ _, accuracy = model.evaluate(test_images, test_labels)
 print('Accuracy: ', accuracy)
 model.summary() # epoch: 훈련 반복 횟수
 ```
-> dense_1: param -> 784 * 256 + 256(파라미터 업데이트) = 200,960‬
-> dense_2: param -> 256 * 256 + 256 = 65,792‬
+> dense_1: param -> 784 * 256 + 256(파라미터 업데이트) = 200,960‬  
+> dense_2: param -> 256 * 256 + 256 = 65,792‬  
 
 <center><img src="/assets/images/deeplearning/ann/2.PNG" width="50%"></center><br>
