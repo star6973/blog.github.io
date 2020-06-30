@@ -326,3 +326,122 @@ use_math: true
 
 <br><br>
 
+### 5.2. ANN Implement
+MNIST 데이터 분류하기
+
+## *Tensorflow*
+```python
+# MNIST
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets("data_MNIST", one_hot=True)
+
+import tensorflow as tf
+import time
+
+# batch_size : 쪼개서 넣기
+# 5000번을 128개 데이터씩 훈련하려면 60만개가 필요하지만, 55000개밖에 없으므로, cost 값이 확 떨어진 경우에 반복적으로 훈련을 실행함
+num_steps = 5000
+batch_size = 128
+nH1 = 256 # 히든 레이어의 유닛을 늘린다는 것은 기준을 세부적으로 더 좁혀주는 것(구체적으로)
+nH2 = 256
+nH3 = 256
+
+# 조심! 들어오는 사이즈만큼은 히든레이어를 만들어야 한다. 그렇지 않으면 나중에 output layer에서 더 적게 나오게 되어 압축 효과가 생긴다.
+X = tf.placeholder("float", [None, 784])
+Y = tf.placeholder("float", [None, 10])
+
+# cost function -> 크면 큰대로 살릴 수 있도록 해야 히든레이어를 계속 쌓을 수 있지, 그렇지 않고 1로 제한두면 나머지 값은 사라져버린다.
+# 다만 너무 많이 히든레이어를 만들면, 계속해서 시그모이드 함수를 사용하면서 0과 1의 사이로만 출력이 이루어지면서 출력값이 사라지는 문제가 발생한다.
+# 따라서 활성화를 시키면 받은만큼 보내는 activation 함수인 'ReLU'를 사용한다.
+def mlp_LC(img):
+  HL1 = tf.nn.relu(tf.add(tf.matmul(img, W['HL1']), b['HL1']))
+  HL2 = tf.nn.relu(tf.add(tf.matmul(HL1, W['HL2']), b['HL2']))
+  HL3 = tf.nn.relu(tf.add(tf.matmul(HL2, W['HL3']), b['HL3']))
+  Out = tf.matmul(HL3, W['Out']) + b['Out']
+  return Out
+
+# 가중치
+W = {
+    'HL1': tf.Variable(tf.random_normal([784, nH1])),
+    'HL2': tf.Variable(tf.random_normal([nH1, nH2])),
+    'HL3': tf.Variable(tf.random_normal([nH2, nH3])),
+    'Out': tf.Variable(tf.random_normal([nH3, 10]))
+}
+
+# 바이어스(유닛)
+b = {
+    'HL1': tf.Variable(tf.random_normal([nH1])),
+    'HL2': tf.Variable(tf.random_normal([nH2])),
+    'HL3': tf.Variable(tf.random_normal([nH3])),
+    'Out': tf.Variable(tf.random_normal([10]))
+}
+
+# Model, Cost, Train
+model_LC = mlp_LC(X)
+model = tf.nn.softmax(model_LC)
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(logits=model_LC, labels=Y))
+train = tf.train.AdamOptimizer(0.01).minimize(cost) # AdamOptimizer -> 이미지를 다룰 때 많이 사용됨
+
+# Accuracy
+accuracy = tf.reduce_mean(tf.cast(tf.equal(tf.argmax(model, 1), tf.argmax(Y, 1)), tf.float32))
+
+# Session
+with tf.Session() as sess:
+  sess.run(tf.global_variables_initializer())
+  # Train
+  t1 = time.time()
+  for step in range(1, num_steps+1):
+    train_images, train_labels = mnist.train.next_batch(batch_size)
+    sess.run(train, feed_dict={X: train_images, Y: train_labels})
+    if step % 500 == 0:
+      print(step)
+
+    t2 = time.time()
+    print("Training Time (seconds): ", t2 - t1)
+    print("Testing Accuracy: ", sess.run(accuracy, feed_dict={X: mnist.test.images, Y: mnist.test.labels}))
+```
+<center><img src="/assets/images/deeplearning/ann/1.PNG" width="50%"></center><br>
+
+## *Keras*
+```python
+from keras.utils import np_utils
+from keras.datasets import mnist
+from keras.models import Sequential
+from keras.layers import Dense
+
+# MNIST
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+print(train_images.shape, train_labels.shape, test_images.shape, test_labels.shape)
+
+# MNIST 훈련 데이터는 총 60,000개로, 28x28픽셀(784)의 이미지로 구성되어 있다.
+# 흑백 이미지는 채널이 1개라 reshape를 할 필요가 없지만, 컬러 이미지로 학습시키기 위해선 채널이 3개가 필요하기 때문에 reshape가 필요하다.
+# RGB의 값은 0부터 255까지 있는데, 이를 0~1 사이의 값으로 normalize 해주기 위해 255로 나눈다.
+train_images = train_images.reshape(train_images.shape[0], 784).astype('float32')/255.0
+test_images = test_images.reshape(test_images.shape[0], 784).astype('float32')/255.0
+
+# labels 데이터는 0~9까지의 숫자로 이루어져있으며, 이를 [0, 0, 0, 0, ..., 1]과 같은 원핫 벡터로 변환해줘야 한다.
+# 하지만, keras에 있는 labels은 원핫 벡터가 아니라 그냥 1,2,3 이런식으로 들어오기 때문에 레이블링이 필요하다. -> to_categorical
+train_labels = np_utils.to_categorical(train_labels) # One-Hot Encoding
+test_labels = np_utils.to_categorical(test_labels)
+
+# Model
+model = Sequential()
+model.add(Dense(256, activation='relu')) # units=256, activation='relu'
+model.add(Dense(256, activation='relu'))
+model.add(Dense(256, activation='relu'))
+model.add(Dense(10, activation='softmax'))
+model.compile(loss='categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
+
+# Training
+model.fit(train_images, train_labels, epochs=5, batch_size=32, verbose=1)
+
+# Testing
+_, accuracy = model.evaluate(test_images, test_labels)
+
+print('Accuracy: ', accuracy)
+model.summary() # epoch: 훈련 반복 횟수
+```
+> dense_1: param -> 784 * 256 + 256(파라미터 업데이트) = 200,960‬
+> dense_2: param -> 256 * 256 + 256 = 65,792‬
+
+<center><img src="/assets/images/deeplearning/ann/2.PNG" width="50%"></center><br>
