@@ -326,7 +326,7 @@ use_math: true
 
 <br><br>
 
-### 5.2. ANN Implement
+### 5.2. ANN Implementation
 MNIST 데이터 분류하기
 
 ## *Tensorflow*
