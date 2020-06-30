@@ -71,7 +71,7 @@ use_math: true
        - 예를 들어 6x6 이미지의 1만큼의 패딩을 준다는 것은 6x6 이미지의 외곽을 1 픽셀만큼 더 크게 만드는 것으로, 이미지의 사이즈는 8x8이 된다.
          이를 3x3 필터로 합성곱을 해주어도 그대로 6x6 이미지의 크기를 유지할 수 있다.
        
-    <center><img src="/assets/images/deeplearning/73.PNG" width="50%"></center><br>
+    <center><img src="/assets/images/deeplearning/73.png" width="50%"></center><br>
     
     5) 풀링(Pooling)
        - 풀링은 CNN의 구성 중 2단계에 해당하는 layer로, convolution layer의 출력 데이터(feature map, activation map)를 입력으로 받아서 크기를 줄이거나 특정 데이터를 강조하는 용도로 사용한다.
@@ -79,8 +79,10 @@ use_math: true
        - 정사각 행렬의 특정 영역 안에 값의 최댓값/평균값/최솟값을 구하는 방식으로 동작한다.
        - pooling layer는 convolution layer에 비해 학습 파라미터가 없으며, 행렬의 크기가 감소한다는 특징이 있다.
        
-    <center><img src="/assets/images/deeplearning/74.PNG" width="50%"></center><br>       
+    <center><img src="/assets/images/deeplearning/74.png" width="50%"></center><br>       
 
 3. CNN 구성
 
 <center><img src="/assets/images/deeplearning/75.PNG" width="50%"></center><br>
+
+### 6.2. CNN Implementation
