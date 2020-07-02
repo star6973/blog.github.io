@@ -128,7 +128,7 @@ with tf.Session() as sess:
     result_str = [idx2char[c] for c in np.squeeze(result)] # squeeze: 1차원 배열로 축소
     print(i, ", loss: ", l, ", prediction: ", "".join(result_str))
 ```
-<center><img src="/assets/images/deeplearning/rnn/1.PNG" width="50%"></center><br>
+<center><img src="/assets/images/deeplearning/rnn/1.PNG" width="100%"></center><br>
 
 ## *Keras*
 ```python
@@ -168,24 +168,4 @@ plt.show()
 ### 8.1. GAN Theory
 
 Generator 모델은 입력값이 없으므로 아무 의미없는 랜덤값으로 신경망을 만듦.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
