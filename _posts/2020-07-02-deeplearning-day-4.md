@@ -64,7 +64,9 @@ use_math: true
     - many to many: 번역(단어들 -> 단어들)
 
 ### 7.2. RNN Implement
-'hihello'를 학습시키기
+어떤 글자가 주어졌을 때, 다음 글자를 예측하는 character-level-model 만들기.
+ex) 'hihello'
+<center><img src="/assets/images/deeplearning/rnn/1_2.PNG" width="100%"></center><br>
 
 ## *Tensorflow*
 ```python
