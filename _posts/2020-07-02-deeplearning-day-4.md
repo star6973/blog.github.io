@@ -36,14 +36,21 @@ use_math: true
         + 하이퍼볼릭탄젠트(tanh) 함수는? []()<br><br>
     - RNN 수식
         <center><img src="/assets/images/deeplearning/78.PNG" width="50%"></center><br>
+        
         + 현재 시점 t에서의 은닉 상태값을 $$h_t$$라고 하면, 은닉층의 메모리 셀은 $$h_t$$를 계산하기 위해 총 2개의 가중치를 갖는다.
         + 하나는 입력층에서 입력값을 위한 가중치 $$W_x$$이고, 다른 하나는 이전 시점 t-1의 은닉 상태값인 $$h_(t-1)$$을 위한 가중치 $$W_h$$이다.
         + 이를 식으로 표현하면 다음과 같다.
+        
         <center><img src="/assets/images/deeplearning/79.PNG" width="50%"></center><br>
+        
         + RNN은 은닉층 연산을 벡터와 행렬 연산으로 이해할 수 있다. 자연어 처리에서 RNN의 입력 $$x_i$$는 대부분의 경우에서 단어 벡터로 간주할 수 있는데, 단어 벡터의 차원을 d라고 하고, 은닉 상태의 크기를 $$D_h$$라고 하였을 때 각 벡터와 행렬의 크기는 다음과 같다.
+        
         <center><img src="/assets/images/deeplearning/80.PNG" width="25%"></center><br>
+        
         + 배치 크기가 1이고, d와 $$D_h$$ 두 값 모두를 4로 가정하면, RNN의 은닉층 연산은 다음과 같다.
+        
         <center><img src="/assets/images/deeplearning/81.PNG" width="80%"></center><br>
+        
         + 각각의 가중치 $$W_x, W_h, W_y$$의 값은 모든 시점에서 값을 동일하게 공유하지만, 은닉층이 2개 이상일 경우 은닉층의 2개의 가중치는 서로 다르다.
         + 출력층의 결과값인 $$y_t$$를 계산하기 위한 활성화 함수는 상황에 따라 달라진다. 이진분류의 경우 시그모이드 함수를, 다중 클래스 분류의 경우 소프트맥스 함수를 사용한다.<br><br>
 
