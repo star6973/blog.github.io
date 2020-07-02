@@ -52,17 +52,14 @@ use_math: true
        - CNN에서는 filter를 kernel과 같은 의미이다(OpenCV에서는 mask)
        - 필터는 일반적으로 정사각 행렬로 정의되며, 입력 데이터를 지정된 간격으로 순회하며 채널별로 합성곱을 하고 모든 채널의 합성곱의 합을 feature map으로 만든다.
        - 지정된 간격으로 필터를 순회하는 간격을 *Stride*라고 한다. Stride를 사용하면 정보는 조금 잃더라도 빠르게 학습이 가능하기 때문에, 대용량 데이터의 경우 자주 사용된다.
+       - 입력 데이터가 여러 채널을 갖을 경우(컬러 이미지, 영상) 필터는 각각의 채널을 순회하며 합성곱을 계산하고, 채널별 feature map을 만든다.
+       - 그리고 각 채널의 feature map을 합산하여 최종 feature map을 반환한다.
+       - 계산된 결과로 만들어진 *feature map*은 *activation map*이라고도 하며, convolution layer의 최종 출력 결과물이다(다음 단계는 pooling).
 
     <center><img src="/assets/images/deeplearning/70.png" width="50%"></center><br>
     <center><img src="/assets/images/deeplearning/71.jpg" width="50%"></center><br>
-
-       - 입력 데이터가 여러 채널을 갖을 경우(컬러 이미지, 영상) 필터는 각각의 채널을 순회하며 합성곱을 계산하고, 채널별 feature map을 만든다.
-       - 그리고 각 채널의 feature map을 합산하여 최종 feature map을 반환한다.
-
     <center><img src="/assets/images/deeplearning/72.jpg" width="50%"></center><br>
-   
-       - 계산된 결과로 만들어진 *feature map*은 *activation map*이라고도 하며, convolution layer의 최종 출력 결과물이다(다음 단계는 pooling).
-
+    
     4) 패딩(Padding)
        - OpenCV에서 mask 필터를 적용하면 이전의 이미지보다 압축된다는 것을 알 수 있다.
        - 마찬가지로 convolution layer에서 filter와 stride를 적용하면서 feature map의 크기는 입력 데이터보다 작다.
