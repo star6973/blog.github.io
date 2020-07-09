@@ -860,14 +860,14 @@ int main()
        - 기울기 방향에 따른 화소 선택
 
 <center><img src="/assets/images/opencv6/41.PNG" width="50%"></center><br>
-<center><img src="/assets/images/opencv6/42.PNG" width="50%"></center><br>       
+<center><img src="/assets/images/opencv6/42.PNG" width="50%"></center><br>
        
     4) 이력 임계값 방법(hysteresis thresholding)
        - 두 개의 임계값을 사용해 엣지 이력 추적으로 엣지 결정
        - 각 화소에서 높은 임계값보다 크면 엣지 추적 시작
          -> 추적이 시작되면 추적하지 않은 이웃 화소로 낮은 임계값보다 큰 화소를 엣지로 결정한다.
 
-<center><img src="/assets/images/opencv6/43.PNG" width="50%"></center><br>     
+<center><img src="/assets/images/opencv6/43.PNG" width="50%"></center><br>
 
 ```cython
 #include <opencv2/opencv.hpp>
