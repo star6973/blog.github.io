@@ -1,3 +1,4 @@
+
 ---
 layout: post
 title: Computer Vision and OpenCV [Day 6]
@@ -1000,7 +1001,7 @@ int main()
     
 <center><img src="/assets/images/opencv6/45.PNG" width="50%"></center><br>
 
-```python
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -1045,7 +1046,7 @@ int main()
 
 ### 7.2.9. 평균값 필터링
 
-```python
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -1096,7 +1097,7 @@ int main()
 
 ### 7.2.10. 미디언 필터링
 
-```python
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -1157,7 +1158,7 @@ int main()
 
 ### 7.2.11. 가우시안 스무딩 필터링
 
-```python
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -1213,7 +1214,7 @@ int main()
 
 ### 7.2.12. 심화 실습 - 블러링 & 캐니 엣지
 
-```python
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
