@@ -1,3 +1,4 @@
+
 ---
 layout: post
 title: Computer Vision and OpenCV [Day 6]
@@ -831,3 +832,418 @@ int main()
 }
 ```
 <center><img src="/assets/images/opencv6/40.PNG" width="50%"></center><br>
+
+### 7.2.7. 캐니 엣지 검출
+
+    캐니 엣지 검출
+    
+        - 잡음은 다른 부분과 경계를 이루는 경우가 많다.
+        - 대부분의 엣지 검출 방법이 이 잡음들을 엣지로 검출한다.
+        - 이러한 문제를 보완하는 방법 중 하나가 캐니 엣지 검출 기법이다.
+        - 케니 엣지 검출 알고리즘 순서
+          1단계. 블러링을 통한 노이즈 제거(가우시안 블러링)
+          2단계. 화소 기울기(gradient)의 강도와 방향 검출(소벨 마스크)
+          3단계. 비최대치 억제(non-maximum suppression)
+          4단계. 이력 임계값(hysteresis threshold)으로 엣지 결정
+          
+    1) 블러링
+       - 5x5 크기의 가우시안 필터 적용
+       - 불필요한 잡음 제거
+       - 필터 크기는 변경 가능
+       
+    2) 화소 기울기(gradient) 검출
+       - 가로 방향과 세로 방향의 소벨 마스크로 회선 적용
+       - 회선화된 행렬로 화소 기울기의 크기(magnitude)와 방향(direction) 계산
+       - 기울기 방향은 4개의 방향(0, 45, 90, 135)으로 근사하여 단순화
+       
+    3) 비최대치 억제(non-maximum suppression)
+       - 기울기 방향과 엣지의 방향은 수직
+       - 기울기 방향에 따른 화소 선택
+
+<center><img src="/assets/images/opencv6/41.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv6/42.PNG" width="50%"></center><br>       
+       
+    4) 이력 임계값 방법(hysteresis thresholding)
+       - 두 개의 임계값을 사용해 엣지 이력 추적으로 엣지 결정
+       - 각 화소에서 높은 임계값보다 크면 엣지 추적 시작
+         -> 추적이 시작되면 추적하지 않은 이웃 화소로 낮은 임계값보다 큰 화소를 엣지로 결정한다.
+
+<center><img src="/assets/images/opencv6/43.PNG" width="50%"></center><br>     
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+// 기울기 방향(0도, 45도, 90도, 135도)
+// 기울기 방향과 엣지의 방향은 수직
+void calc_direct(Mat Gy, Mat Gx, Mat& direct)
+{
+	direct.create(Gy.size(), CV_8U);
+
+	for (int i = 0; i < direct.rows; i++) {
+		for (int j = 0; j < direct.cols; j++) {
+			float gx = Gx.at<float>(i, j);
+			float gy = Gy.at<float>(i, j);
+			int theat = int(fastAtan2(gy, gx) / 45); // dy/dx 미분
+			direct.at<uchar>(i, j) = theat % 4; // 0도: 0, 45도: 1, 90도: 2, 135도: 3
+		}
+	}
+}
+
+void supp_nonMax(Mat sobel, Mat  direct, Mat& dst)		// 비최대값 억제
+{
+	dst = Mat(sobel.size(), CV_32F, Scalar(0));
+
+	// i가 행방향(세로) - y, j가 열방향(가로) - x
+	for (int i = 1; i < sobel.rows - 1; i++) {
+		for (int j = 1; j < sobel.cols - 1; j++)
+		{
+			int   dir = direct.at<uchar>(i, j);				// 기울기 값
+			float v1, v2;
+			if (dir == 0) {			// 기울기 방향 0도 방향
+				v1 = sobel.at<float>(i, j-1); // 왼쪽 벡터
+				v2 = sobel.at<float>(i, j+1); // 오른쪽 벡터
+			}
+			else if (dir == 1) {		// 기울기 방향 45도
+				v1 = sobel.at<float>(i+1, j+1);
+				v2 = sobel.at<float>(i-1, j-1);
+			}
+			else if (dir == 2) {		// 기울기 방향 90도
+				v1 = sobel.at<float>(i-1, j);
+				v2 = sobel.at<float>(i+1, j);
+			}
+			else if (dir == 3) {		// 기울기 방향 135도
+				v1 = sobel.at<float>(i+1, j-1);
+				v2 = sobel.at<float>(i-1, j+1);
+			}
+
+			// 현재 자신의 위치
+			float center = sobel.at<float>(i, j);
+			// 나의 소벨값이 주변보다 크면 나의 소벨을 출력, 주변보다 작다면 0으로 출력
+			dst.at<float>(i, j) = (center > v1 && center > v2) ? center : 0;
+			// non-maximum을 통과하면서 필요없는 sobel은 0으로 만들어주면서 dst로 4단계에서 사용
+		}
+	}
+}
+
+void trace(Mat max_so, Mat& pos_ck, Mat& hy_img, Point pt, int low)
+{
+	// 영상의 범위가 벗어나가면 재귀함수 탈출
+	Rect rect(Point(0, 0), pos_ck.size());
+	if (!rect.contains(pt)) return;			// 추적화소의 영상 범위 확인 
+
+	if (pos_ck.at<uchar>(pt) == 0 && max_so.at<float>(pt) > low)
+	{
+		pos_ck.at<uchar>(pt) = 1;			// 추적 완료 좌표
+		hy_img.at<uchar>(pt) = 255;			// 에지 지정
+
+		// 추적 재귀 함수(주변 8방향을 다시 한 번 조사)
+		trace(max_so, pos_ck, hy_img, pt + Point(-1, -1), low);
+		trace(max_so, pos_ck, hy_img, pt + Point(0, -1), low);
+		trace(max_so, pos_ck, hy_img, pt + Point(+1, -1), low);
+		trace(max_so, pos_ck, hy_img, pt + Point(-1, 0), low);
+
+		trace(max_so, pos_ck, hy_img, pt + Point(+1, 0), low);
+		trace(max_so, pos_ck, hy_img, pt + Point(-1, +1), low);
+		trace(max_so, pos_ck, hy_img, pt + Point(0, +1), low);
+		trace(max_so, pos_ck, hy_img, pt + Point(+1, +1), low);
+	}
+}
+
+void  hysteresis_th(Mat max_so, Mat& hy_img, int low, int high)
+{
+	Mat pos_ck(max_so.size(), CV_8U, Scalar(0));
+	hy_img = Mat(max_so.size(), CV_8U, Scalar(0));
+
+	for (int i = 0; i < max_so.rows; i++) {
+		for (int j = 0; j < max_so.cols; j++)
+		{
+			// max sobel의 값이 높은 임계값(high)보다 크면 추적 시작
+			if (max_so.at<float>(i, j) > high)
+				// 추적하면 추적하지 않은 이웃 화소로 낮은 임계값보다 큰 화소를 에지로 결정
+				trace(max_so, pos_ck, hy_img, Point(j, i), low);
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/cannay_tset.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	Mat gau_img, Gx, Gy, direct, sobel, max_sobel, hy_img, canny;
+
+	GaussianBlur(image, gau_img, Size(5, 5), 0.3); // 1단계. 가우시안 블러링
+	Sobel(gau_img, Gx, CV_32F, 1, 0, 3); // 2단계. 소벨 마스크 - X축
+	Sobel(gau_img, Gy, CV_32F, 0, 1, 3); // 2단계. 소벨 마스크 - Y축
+	sobel = abs(Gx) + abs(Gy);
+	// magnitude(Gx, Gy, sobel);
+
+	calc_direct(Gy, Gx, direct); // 3단계. 비최대치 억제 - 그래디언트 방향을 찾기
+	supp_nonMax(sobel, direct, max_sobel); // 3단계. 비최대치 억제
+	hysteresis_th(max_sobel, hy_img, 100, 150); // 4단계. 이력 임계값 방법(최소 100, 최대 150)
+
+	Canny(image, canny, 100, 150);
+
+	imshow("image", image);
+	imshow("canny", hy_img);
+	imshow("OpenCV_canny", canny);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv6/44.PNG" width="50%"></center><br>
+
+### 7.2.8. 최댓값/최솟값 필터링
+
+    입력 영상의 해당 화소(중심화소)에서 마스크로 씌워진 영역의 입력화소들을 가져와서 그 중에 최댓값/최솟값을 출력화소로 결정하는 방법
+    
+<center><img src="/assets/images/opencv6/45.PNG" width="50%"></center><br>
+
+```python
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void minMaxFilter(Mat img, Mat& dst, int size, int flag = 1)
+{
+	dst = Mat(img.size(), CV_8U, Scalar(0));
+	Size msize(size, size);
+	Point h_m = msize / 2;
+
+	// 마스크의 가장 자리를 빼면서 범위가 벗어나지 않도록
+	for (int i = h_m.y; i < img.rows - h_m.y; i++) {			// 입력 영상 조회
+		for (int j = h_m.x; j < img.cols - h_m.x; j++)
+		{
+			Point start = Point(j, i) - h_m; // 시작위치: 현재 방문한 점으로부터 마스크의 전체의 반만큼 빼준다.
+			Rect roi(start, msize); // 마스크 사각형 영역
+			Mat mask = img(roi); // 마스크 영역 참조
+
+			double minVal, maxVal;
+			minMaxLoc(mask, &minVal, &maxVal); // 마스크 영역의 최소값, 최대값
+			dst.at<uchar>(i, j) = (flag) ? maxVal : minVal;
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/min_max.jpg", 0);
+	CV_Assert(image.data);
+
+	Mat min_img, max_img;
+	minMaxFilter(image, min_img, 5, 0);		// 5x5 마스크 최소값 필터링
+	minMaxFilter(image, max_img, 5, 1);		// 5x5 마스크 최대값 필터링
+
+	imshow("image", image);
+	imshow("minFilter_img", min_img);
+	imshow("maxFilter_img", max_img);
+	waitKey();
+	return 0;
+}
+```
+
+### 7.2.9. 평균값 필터링
+
+```python
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+// 평균값 필터링 
+void averageFilter(Mat img, Mat& dst, int size)
+{
+	dst = Mat(img.size(), CV_8U, Scalar(0));
+
+	// 영상의 이미지를 처음부터 시작 -> 마스크의 범위가 벗어날 수 있음
+	for (int i = 0; i < img.rows; i++) {
+		for (int j = 0; j < img.cols; j++)
+		{
+			Point pt1 = Point(j - size / 2, i - size / 2); // 마스크의 시작위치
+			Point pt2 = pt1 + (Point)Size(size, size); // 마스크의 종료위치
+
+			// 좌표 예외처리
+			if (pt1.x < 0) { pt1.x = 0; } // 0보다 작으면 0
+			if (pt1.y < 0) { pt1.y = 0; } // 0보다 작으면 0
+			if (pt2.x > img.cols) { pt2.x = img.cols; } // 너비보다 크면 너비값
+			if (pt2.y > img.rows) { pt2.y = img.rows; } // 높이보다 크면 높이값
+
+			// 시작위치와 종료위치로 마스크 사각형 선언
+			Rect mask_rect(pt1, pt2); // pt1과 pt2의 넓이가 자동 계산
+			Mat  mask = img(mask_rect);
+			dst.at<uchar>(i, j) = (uchar)mean(mask)[0];
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/avg_filter.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(image.data);
+
+	Mat avg_img, blur_img, box_img;
+	averageFilter(image, avg_img, 5);
+	blur(image, blur_img, Size(5, 5));
+	boxFilter(image, box_img, -1, Size(5, 5));
+
+	imshow("image", image);
+	imshow("avg_Filter_img", avg_img);
+	imshow("blur_img", blur_img);
+	imshow("box_img", box_img);
+	waitKey();
+	return 0;
+}
+```
+
+### 7.2.10. 미디언 필터링
+
+```python
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void medianFilter(Mat img, Mat& dst, int size)
+{
+	dst = Mat(img.size(), CV_8U, Scalar(0));
+	Size msize(size, size);
+	Point h_m = msize / 2;
+
+	for (int i = h_m.y; i < img.rows - h_m.y; i++) {
+		for (int j = h_m.x; j < img.cols - h_m.x; j++)
+		{
+			// 입력 영상 내 마스크 영역 시작 위치
+			Point start = Point(j, i) - h_m;
+			// 마스크 사각형
+			Rect roi(start, msize);
+
+			Mat mask, sort_m;
+			// 마스크 영역 참조 및 복사
+			img(roi).copyTo(mask);
+
+			// 1행으로 행렬 변환
+			Mat one_row = mask.reshape(1, 1);
+
+			// 행단위 정렬 수행
+			cv::sort(one_row, sort_m, CV_SORT_EVERY_ROW);
+
+			// 중간 위치 찾기
+			int medium = (int)(one_row.total() / 2);
+
+			// 중간값 출력 화소 저장
+			dst.at<uchar>(i, j) = sort_m.at<uchar>(medium);
+
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/median_test.jpg", IMREAD_COLOR);
+	CV_Assert(image.data);
+
+	Mat gray, med_img1, med_img2;
+	cvtColor(image, gray, CV_BGR2GRAY);
+
+	medianFilter(gray, med_img1, 5); // 사용자 정의 함수
+	medianBlur(gray, med_img2, 5); // OpenCV 제공 함수
+
+	imshow("gray", gray);
+	imshow("median-User", med_img1);
+	imshow("median-OpenCV", med_img2);
+
+	waitKey();
+	return 0;
+}
+```
+
+### 7.2.11. 가우시안 스무딩 필터링
+
+```python
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+#include <time.h>
+
+Mat getGaussianMask(Size size, double sigmaX, double sigmaY)
+{
+	double ratio = 1 / (sigmaX * sigmaY * CV_PI);
+	double sigmaX2 = 2 * sigmaX * sigmaX;
+	double sigmaY2 = 2 * sigmaY * sigmaY;
+
+	Point center = size / 2;
+	Mat mask(size, CV_64F);
+
+	for (int i = 0; i < size.height; i++) {
+		for (int j = 0; j < size.width; j++)
+		{
+			mask.at<double>(i, j) = ratio * exp(-(pow(j - center.x, 2) / sigmaX2 + pow(i - center.y, 2) / sigmaY2));
+		}
+	}
+	return (mask / sum(mask)[0]);
+}
+
+int main()
+{
+	Mat image = imread("../image/smoothing.jpg", 0);
+	CV_Assert(image.data);
+
+	// 가우시안 마스크
+	Size  size(5, 29);
+	double sigmaX = 0.3 * ((size.width - 1) * 0.5 - 1) + 0.8; // 가로방향 표준편차
+	double sigmaY = 0.3 * ((size.height - 1) * 0.5 - 1) + 0.8; // 세로방향 표준편차
+
+	Mat gauss_img1, gauss_img2, gauss_img3;
+	Mat gaussian_2d = getGaussianMask(size, sigmaX, sigmaY); // 2차원 가우시안 마스크 생성
+	Mat gaussian_1dX = getGaussianKernel(size.width, -1, CV_64F); // 1차원 가우시안 마스크 생성 - x방향
+	Mat gaussian_1dY = getGaussianKernel(size.height, -1, CV_64F); // 1차원 가우시안 마스크 생성 - y방향
+
+	GaussianBlur(image, gauss_img2, size, sigmaX, sigmaY); // 가우시안 블러링
+	sepFilter2D(image, gauss_img3, -1, gaussian_1dX, gaussian_1dY); // 1차원 가우시안 마스크로 setFilter2D() 함수에 적용
+	filter2D(image, gauss_img1, -1, gaussian_2d); // 2차원 가우시안 마스크로 filter2D() 함수에 적용
+
+	imshow("image", image);
+	imshow("사용자 생성 마스크 적용", gauss_img1);
+	imshow("가우시안 블러링 적용 ", gauss_img2);
+	imshow("가우시안 계수로 마스크 생성", gauss_img3);
+
+	waitKey();
+	return 0;
+}
+```
+
+### 7.2.12. 심화 실습 - 블러링 & 캐니 엣지
+
+```python
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int th = 50;						// 캐니 에지 낮은 임계값
+Mat image, gray, edge;
+
+void onTrackbar(int, void*)	// 트렉바 콜백 함수
+{
+	GaussianBlur(gray, edge, Size(3, 3), 0.7);	// 가우시안 블러링
+	Canny(edge, edge, th, 2*th, 3); // 캐니에지 수행(임계값 2개)
+
+	Mat color_edge;
+	image.copyTo(color_edge, edge);		// 에지 영역만 복사(원래 영상에서 에지만 가져옴)
+	imshow("원본", image);
+	imshow("컬러 에지", color_edge);
+}
+
+int main()
+{
+	image = imread("../image/FIJI_test_color.jpg", 1);		// 컬러 영상 로드
+	CV_Assert(image.data);								// 예외 처리
+	cvtColor(image, gray, COLOR_BGR2GRAY);				// 명암도 변환
+
+	namedWindow("컬러 에지", 1);
+	createTrackbar("Canny th", "컬러 에지", &th, 100, onTrackbar);
+	onTrackbar(th, 0);	// 트랙바 함수 호출
+
+	waitKey(0);
+	return 0;
+}
+```
