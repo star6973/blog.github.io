@@ -1042,6 +1042,8 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv6/46.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv6/46_2.PNG" width="50%"></center><br>
 
 ### 7.2.9. 평균값 필터링
 
@@ -1093,6 +1095,7 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv6/47.PNG" width="50%"></center><br>
 
 ### 7.2.10. 미디언 필터링
 
@@ -1154,6 +1157,7 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv6/48.PNG" width="50%"></center><br>
 
 ### 7.2.11. 가우시안 스무딩 필터링
 
@@ -1210,6 +1214,7 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv6/49.PNG" width="50%"></center><br>
 
 ### 7.2.12. 심화 실습 - 블러링 & 캐니 엣지
 
@@ -1246,3 +1251,4 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv6/50.PNG" width="50%"></center><br>
