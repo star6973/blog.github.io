@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: Computer Vision and OpenCV [Day 7]
