@@ -7,6 +7,6 @@ tag: Statistics
 ---
 
 # 확률과통계
-## 챕터7. 분산분석(analysis of variance, ANOVA)
+## 챕터7. 분산분석(analysis of variance, ANOVA)  
 
 [PPT_Slide](https://star6973.github.io/reveal.js/slide/분산분석.html)
