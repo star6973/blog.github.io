@@ -27,7 +27,7 @@ use_math: true
 
 	4방향보다 8방향 마스크가 더 침식이 됨
 
-```python
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -97,7 +97,7 @@ int main()
 
 ### 8.1.3. 팽창 연산
 
-```python
+```cython
 // 내부 잡음이 채워지면서 사라지지만, 외부의 얇은 잡음은 더 확대가 됨
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -162,7 +162,7 @@ int main()
 
 ### 8.1.4. 열림 연산과 닫힘 연산
 
-``` python
+```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -257,7 +257,7 @@ int main()
 
 ### 8.1.5. 모폴로지(morphology) 심화 예제
 
-```python
+```cython
 // 팽창 후 침식
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -352,7 +352,7 @@ int main()
 
 ### 8.1.6. 연습문제: Connected Component Labeling
 
-```python
+```cython
 // 흑백으로 바꾸기, 가우시안 블러, threshold로 쳐내기, 열림 연산으로 노이즈 제거
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -407,7 +407,7 @@ int main() {
 
 ### 8.1.7. Otsu's Thresholding
 
-```python
+```cython
 // 임계값 이상은 물체, 미만은 배경으로
 // 모든 밝기값에 대해서 forground, background로 나누서 분산을 각각 구해서 제일 작은 값의 T값을 threshold로 출력한다.
 #include <opencv2/opencv.hpp>
