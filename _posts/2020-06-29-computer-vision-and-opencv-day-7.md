@@ -93,7 +93,7 @@ int main()
 	return 0;
 }
 ```
-<center><img src="/assets/images/opencv7/1.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv7/1_1.PNG" width="50%"></center><br>
 
 ### 8.1.3. 팽창 연산
 
