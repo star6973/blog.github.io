@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Computer Vision and OpenCV [Day 7]
-date: 2020-06-29 10:00:00-19:00:00
+title: Computer Vision and OpenCV [Day 8]
+date: 2020-07-06 10:00:00-19:00:00
 categories: OpenCV
 tag: OpenCV
 use_math: true
