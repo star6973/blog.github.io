@@ -10,8 +10,16 @@ use_math: true
 # 8. 영역 기반 처리 이론 및 실습 2
 ## 8.1. 영역 기반 처리 실습
 ### 8.1.1. 모폴로지(morphology)
-
-
+- 모폴로지 연산은 영상 내부 객체의 형태와 구조를 분석하고 처리하는 기법
+- 그레이스케일 영상과 이진 영상에 모두 적용이 가능하지만, 주로 이진화된 영상에서 객체의 모양을 변형하는 용도로 사용
+- 주로 이진 영상에서 객체의 모양을 단순화시키거나 잡음을 제거하는 용도
+- 종류
+    + 침식
+    	+ 객체 영역의 외곽을 골고루 깎아 내는 연산으로 전체적으로 객체 영역은 축소되고 배경은 확대됨
+        + 구조 요소를 영상 전체에 대해 스캔하면서, 구조 요소가 객체 영역 내부에 완전히 포함될 경우 고정점 위치 픽셀을 255로 설정
+    + 팽창 - 객체 외곽을 확대하는 연산으로 객체 영역은 확대되고, 배경은 축소됨
+        + 구조 요소를 영상 전체에 대해 이동하면서, 구조 요소와 객체 영역이 한 픽셀이라도 만날 경우 고정점 위치 픽셀을 255로 설정
+- 구조 요소는 원소값이 0 또는 1로 구성된 CV_8UC1 타입의 Mat 행렬로 표현된다.
 
 ### 8.1.2. 침식 연산
 
@@ -93,7 +101,7 @@ int main()
 	return 0;
 }
 ```
-
+<center><img src = "/assets/images/opencv7/1.PNG" width="50%"></center><br>
 
 ### 8.1.3. 팽창 연산
 
@@ -159,6 +167,7 @@ int main()
 	return 0;
 }
 ```
+<center><img src = "/assets/images/opencv7/2.PNG" width="50%"></center><br>
 
 ### 8.1.4. 열림 연산과 닫힘 연산
 
@@ -253,7 +262,7 @@ int main()
 	return 0;
 }
 ```
-
+<center><img src = "/assets/images/opencv7/3.PNG" width="50%"></center><br>
 
 ### 8.1.5. 모폴로지(morphology) 심화 예제
 
@@ -348,7 +357,7 @@ int main()
 	return 0;
 }
 ```
-
+<center><img src = "/assets/images/opencv7/4.PNG" width="50%"></center><br>
 
 ### 8.1.6. 연습문제: Connected Component Labeling
 
@@ -403,7 +412,7 @@ int main() {
 
 }
 ```
-
+<center><img src = "/assets/images/opencv7/5.PNG" width="50%"></center><br>
 
 ### 8.1.7. Otsu's Thresholding
 
@@ -528,3 +537,4 @@ int main() {
 
 }
 ```
+<center><img src = "/assets/images/opencv7/6.PNG" width="50%"></center><br>
