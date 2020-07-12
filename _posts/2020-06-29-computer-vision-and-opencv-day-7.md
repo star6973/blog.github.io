@@ -17,24 +17,16 @@ use_math: true
     + 침식
     	+ 객체 영역의 외곽을 골고루 깎아 내는 연산으로 전체적으로 객체 영역은 축소되고 배경은 확대됨
         + 구조 요소를 영상 전체에 대해 스캔하면서, 구조 요소가 객체 영역 내부에 완전히 포함될 경우 고정점 위치 픽셀을 255로 설정
+	+ 원래 영상에서 껍데기를 떼어내는 것, 아주 얇은 정보들(잡음일 경우가 많음)이 사라짐 -> 잡음 제거 효과
+	+ 입력은 0과 1만, 하나라도 0이면 0을 출력
+	+ 내부 잡음이 더 커질 수도 있는 단점이 있다.
+	+ 4방향보다 8방향 마스크가 더 침식이 됨
     + 팽창 - 객체 외곽을 확대하는 연산으로 객체 영역은 확대되고, 배경은 축소됨
         + 구조 요소를 영상 전체에 대해 이동하면서, 구조 요소와 객체 영역이 한 픽셀이라도 만날 경우 고정점 위치 픽셀을 255로 설정
+	+ 내부 잡음이 채워지면서 사라지지만, 외부의 얇은 잡음은 더 확대가 됨
 - 구조 요소는 원소값이 0 또는 1로 구성된 CV_8UC1 타입의 Mat 행렬로 표현된다.
 
 ### 8.1.2. 침식 연산
-
-	침식 연산
-
-	원래 영상에서 껍데기를 떼어내는 것
-	아주 얇은 정보들(잡음일 경우가 많음)이 사라짐 -> 잡음 제거 효과
-
-	입력은 0과 1만
-	하나라도 0이면 0을 출력
-
-	내부 잡음이 더 커질 수도 있는 단점이 있다.
-
-	4방향보다 8방향 마스크가 더 침식이 됨
-
 ```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -106,7 +98,6 @@ int main()
 ### 8.1.3. 팽창 연산
 
 ```cython
-// 내부 잡음이 채워지면서 사라지지만, 외부의 얇은 잡음은 더 확대가 됨
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -412,7 +403,7 @@ int main() {
 
 }
 ```
-<center><img src = "/assets/images/opencv7/5.PNG" width="50%"></center><br>
+<center><img src = "/assets/images/opencv7/5.PNG" width="100%"></center><br>
 
 ### 8.1.7. Otsu's Thresholding
 
@@ -422,6 +413,8 @@ int main() {
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
+
+String	title = "Coins";
 
 void  calc_Histo(const Mat& image, Mat& hist, int bins, int range_max = 256)
 {
@@ -437,7 +430,7 @@ void draw_histo(Mat hist, Mat& hist_img, Size size = Size(256, 200))
 {
 	hist_img = Mat(size, CV_8U, Scalar(255));
 	float  bin = (float)hist_img.cols / hist.rows;
-	normalize(hist, hist, 0, size.height, NORM_MINMAX); // 히스토그램의 최소/최대 사이즈를 정해주기
+	normalize(hist, hist, 0, size.height, NORM_MINMAX);
 
 	for (int i = 0; i < hist.rows; i++)
 	{
@@ -447,94 +440,83 @@ void draw_histo(Mat hist, Mat& hist_img, Size size = Size(256, 200))
 		Point2f pt2(end_x, hist.at <float>(i));
 
 		if (pt2.y > 0)
-			rectangle(hist_img, pt1, pt2, Scalar(i), -1);
+			rectangle(hist_img, pt1, pt2, Scalar(0), -1);
 	}
 	flip(hist_img, hist_img, 0);
 }
 
-int main() {
-
-	// 1. 이미지 불러오기
+int main()
+{
 	Mat image = imread("../image/coins.jpg", 1);
 	CV_Assert(image.data);
 
-	Mat kernel(5, 5, CV_8UC1, Scalar(1));
+	Mat gray, th_img;
+	cvtColor(image, gray, CV_BGR2GRAY);				// 명암도 변환 
+	GaussianBlur(gray, gray, Size(5, 5), 2, 2);				// 블러링
 
-	// 2. 흑백 영상
-	Mat gray;
-	cvtColor(image, gray, CV_BGR2GRAY);
-
-	// 3. 가우시안 블러 처리
-	Mat blur;
-	GaussianBlur(gray, blur, Size(9, 9), 3.5);
-
-	// Otsu's Thresholding
+	// 433draw_histogram.cpp
 	Mat hist, hist_img;
-	calc_Histo(blur, hist, 256);
+	calc_Histo(gray, hist, 256);
 	draw_histo(hist, hist_img);
+
 	imshow("hist_img", hist_img);
+	imshow("gray_image", gray);
 
-	int Otsu_thres = 0;
-	double inter_class_variance = 0;
+	// otsu's thresholding
+	int iTH, i, j, iMinTH = -1;
+	float ave, sum, varBG, varOB, Wb, Wf, fMin = 10000;
+	for (iTH = 0; iTH <= 255; iTH++)
+	{
+		// background < iTH
+		sum = 0;		ave = 0;	varBG = 0;
+		for (i = 0; i < iTH; i++)
+		{
+			ave += i * hist.at<float>(i);
+			sum += hist.at<float>(i);
+		}
+		ave = ave / (float)sum;
+		Wb = sum / (float)(gray.rows * gray.cols);
+		for (i = 0; i < iTH; i++)
+			varBG += (i - ave) * (i - ave) * hist.at<float>(i);
+		varBG = varBG / (float)sum;
 
-	for (int o_thres = 0; o_thres < 256; o_thres++) {
-		int alpha = 0, beta = 0;
-		int sum1 = 0, sum2 = 0;
-		double mul1 = 0, mul2 = 0;
+		// object >= iTH
+		sum = 0;		ave = 0;	varOB = 0;
+		for (i = iTH; i <= 255; i++)
+		{
+			ave += i * hist.at<float>(i);
+			sum += hist.at<float>(i);
+		}
+		ave = ave / (float)sum;
+		Wf = sum / (float)(gray.rows * gray.cols);
+		for (i = iTH; i <= 255; i++)
+			varOB += (i - ave) * (i - ave) * hist.at<float>(i);
+		varOB = varOB / (float)sum;
 
-		for (int i = 0; i < o_thres; i++)
-			sum1 += calcBinary[i];
+		//		cout << varBG << '\t' << Wb << '\t' << varOB << '\t' << Wf << '\n';
 
-		sum2 = dst.rows * dst.cols - sum1;
-
-
-		alpha = (double)sum1 / (double)calcBinary.size();
-		beta = (double)sum2 / (double)calcBinary.size();
-
-		// calc average
-		for (int m = 0; m < o_thres; m++)
-			mul1 += (double)(m * calcBinary[m]) / (double)sum1;
-
-		for (int m = o_thres; m < 256; m++)
-			mul2 += (double)(m * calcBinary[m]) / (double)sum2;
-
-		// calc variance
-		for (int v = 0; v < o_thres; v++)
-			var1 += (double)(pow((v - mul1, 2) * calcBinary[v]) / (double)sum1);
-
-		for (int v = o_thres; v < 256; v++)
-			var2 += (double)(pow((v - mul2, 2) * calcBinary[v]) / (double)sum2);
-
+		if (fMin > (Wf * varOB + Wb * varBG))
+		{
+			fMin = Wf * varOB + Wb * varBG;
+			iMinTH = iTH;
+		}
 	}
 
-	// 4. threshold 처리
-	Mat thresh;
-	threshold(blur, thresh, 70, 255, THRESH_BINARY);
+	cout << iMinTH << '\n';
 
-	// 5. 열림 연산
-	Mat morph;
-	morphologyEx(thresh, morph, MORPH_OPEN, kernel);
-
+	threshold(gray, th_img, iMinTH, 255, THRESH_BINARY); // 이진화
+	// threshold(gray, th_img, 130, 255, THRESH_BINARY | THRESH_OTSU); // 이진화
+	morphologyEx(th_img, th_img, MORPH_OPEN, Mat());// , Point(-1, -1), 1);  // 열림연산
+	Mat labels = Mat(th_img.size(), CV_32S);
+	int iCC = connectedComponents(th_img, labels, 8, CV_32S);
+	cout << iCC - 1 << '\n';
+	labels.convertTo(labels, CV_8U);
+	labels = labels * 10;
 	imshow("image", image);
-	imshow("gray", gray);
-	imshow("blur", blur);
-	imshow("thresh", thresh);
-	imshow("morph", morph);
-
-	// 5. connectedComponents를 이용해 동전 개수 세기
-	Mat labelImage(morph.size(), CV_32S);
-	int nLabels = connectedComponents(morph, labelImage, 8);
-	cout << nLabels << endl;
-
-	// 6. 라벨링된 이미지를 각기 다른 컬러로 보여주기
-	labelImage.convertTo(labelImage, CV_8U);
-	labelImage = labelImage * 10;
-
-	imshow("labelImage", labelImage);
-
+	imshow(title, th_img);
+	imshow("labels", labels);
 	waitKey();
 	return 0;
-
 }
 ```
-<center><img src = "/assets/images/opencv7/6.PNG" width="50%"></center><br>
+<center><img src = "/assets/images/opencv7/6.PNG" width="70%"></center><br>
