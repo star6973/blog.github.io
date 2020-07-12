@@ -14,16 +14,19 @@ use_math: true
 - 그레이스케일 영상과 이진 영상에 모두 적용이 가능하지만, 주로 이진화된 영상에서 객체의 모양을 변형하는 용도로 사용
 - 주로 이진 영상에서 객체의 모양을 단순화시키거나 잡음을 제거하는 용도
 - 종류
-    + 침식
-    	+ 객체 영역의 외곽을 골고루 깎아 내는 연산으로 전체적으로 객체 영역은 축소되고 배경은 확대됨
-        + 구조 요소를 영상 전체에 대해 스캔하면서, 구조 요소가 객체 영역 내부에 완전히 포함될 경우 고정점 위치 픽셀을 255로 설정
+    1) 침식  
+	+ 객체 영역의 외곽을 골고루 깎아 내는 연산으로 전체적으로 객체 영역은 축소되고 배경은 확대됨
+	+ 구조 요소를 영상 전체에 대해 스캔하면서, 구조 요소가 객체 영역 내부에 완전히 포함될 경우 고정점 위치 픽셀을 255로 설정
 	+ 원래 영상에서 껍데기를 떼어내는 것, 아주 얇은 정보들(잡음일 경우가 많음)이 사라짐 -> 잡음 제거 효과
 	+ 입력은 0과 1만, 하나라도 0이면 0을 출력
 	+ 내부 잡음이 더 커질 수도 있는 단점이 있다.
 	+ 4방향보다 8방향 마스크가 더 침식이 됨
-    + 팽창 - 객체 외곽을 확대하는 연산으로 객체 영역은 확대되고, 배경은 축소됨
+	
+    2) 팽창  
+    	+ 객체 외곽을 확대하는 연산으로 객체 영역은 확대되고, 배경은 축소됨
         + 구조 요소를 영상 전체에 대해 이동하면서, 구조 요소와 객체 영역이 한 픽셀이라도 만날 경우 고정점 위치 픽셀을 255로 설정
 	+ 내부 잡음이 채워지면서 사라지지만, 외부의 얇은 잡음은 더 확대가 됨
+
 - 구조 요소는 원소값이 0 또는 1로 구성된 CV_8UC1 타입의 Mat 행렬로 표현된다.
 
 ### 8.1.2. 침식 연산
@@ -93,7 +96,7 @@ int main()
 	return 0;
 }
 ```
-<center><img src="/assets/images/opencv7/1_1.PNG" width="50%"></center><br>
+<center><img src="/assets/images/opencv7/1_1.PNG" width="100%"></center><br>
 
 ### 8.1.3. 팽창 연산
 
@@ -158,7 +161,7 @@ int main()
 	return 0;
 }
 ```
-<center><img src = "/assets/images/opencv7/2.PNG" width="50%"></center><br>
+<center><img src = "/assets/images/opencv7/2.PNG" width="100%"></center><br>
 
 ### 8.1.4. 열림 연산과 닫힘 연산
 
@@ -253,7 +256,7 @@ int main()
 	return 0;
 }
 ```
-<center><img src = "/assets/images/opencv7/3.PNG" width="50%"></center><br>
+<center><img src = "/assets/images/opencv7/3.PNG" width="100%"></center><br>
 
 ### 8.1.5. 모폴로지(morphology) 심화 예제
 
@@ -348,7 +351,7 @@ int main()
 	return 0;
 }
 ```
-<center><img src = "/assets/images/opencv7/4.PNG" width="50%"></center><br>
+<center><img src = "/assets/images/opencv7/4.PNG" width="100%"></center><br>
 
 ### 8.1.6. 연습문제: Connected Component Labeling
 
@@ -519,4 +522,4 @@ int main()
 	return 0;
 }
 ```
-<center><img src = "/assets/images/opencv7/6.PNG" width="70%"></center><br>
+<center><img src = "/assets/images/opencv7/6.PNG" width="100%"></center><br>
