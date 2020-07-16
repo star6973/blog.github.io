@@ -21,7 +21,7 @@ use_math: true
     - 보간법
         + 영상을 기하학적 변환을 할 때, 원본 영상의 아무런 정보를 받지 못하는 픽셀이 생길 수 있다.  
           예를 들어, 다음 사진과 같이 확대를 하게 될 때, 확대 후 출력 픽셀에 빈 곳이 많이 생김을 알 수 있다.
-	<center><img src="/assets/images/opencv8/1.PNG" width="100%"></center><br>
+     <center><img src="/assets/images/opencv8/1.PNG" width="100%"></center><br>
           
         + 이러한 방법을 순방향 매핑(forward mapping)이라고 하며, 이 방법은 생성한 결과 영상에 빈 공간이 생기는 문제점이 있다.
         + 따라서 순방향 매핑의 문제점을 해결하기 위해 일반적으로 역방향 매핑(backward mapping) 방법을 사용한다.
