@@ -106,7 +106,7 @@ use_math: true
         + 출력 영상의 크기는 회전 각도에 따라 다르다.
 
         <center><img src="/assets/images/opencv8/11_2.PNG" width="50%"></center><br>
-        <center><img src="/assets/images/opencv8/12.png" width="50%"></center><br>
+        <center><img src="/assets/images/opencv8/12.png" width="100%"></center><br>
 
 3. 이동
     - 이동 변환된 결과 영상은 원본 영상의 크기의 바깥으로 빠져나가는 픽셀들은 보이지 않게 될 것이기 때문에, 새로 생겨난 빈 공간들은 그레이스케일 값을 0으로 설정해준다.    
@@ -126,7 +126,7 @@ use_math: true
     <center><img src="/assets/images/opencv8/14.jpg" width="50%"></center><br>
     <center><img src="/assets/images/opencv8/14_1.PNG" width="50%"></center><br>
 
-5. 정리
+5. 정리  
     1) 확대  
         - 확대는 할수록 화질이 저하되는 현상이 나탐남(초점이 낮아짐, 계단현상).  
         - 해결방법: 출력 영상 크기를 정하고, 거꾸로 어디서부터 오는지를 역방향으로 처리 -> 확대됨을 가정하고, 거꾸로 원본 픽셀을 참조해서 사상(역방향 사상)  
