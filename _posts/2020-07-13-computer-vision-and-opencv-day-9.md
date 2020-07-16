@@ -122,8 +122,8 @@ use_math: true
 <center><img src="/assets/images/opencv9/18.jpg" width="70%"></center><br>
 
 - 주파수 공간에서의 필터링은 다음과 같은 수식이다.
-    <center><img src="/assets/images/opencv9/19.PNG" width="70%"></center><br>
-    
+    	<center><img src="/assets/images/opencv9/19.PNG" width="70%"></center><br>
+	
 	+ F(u, v)는 입력 영상이 이산 푸리에 변환되어 생성된 함수이다.
 	+ H(u, v)는 필터 함수이다.
 	+ G(u, v)는 필터링된 결과함수이다.
@@ -138,13 +138,13 @@ use_math: true
 	+ 고주파에 해당하는 위치의 함숫값만을 남기고 나머지 부분의 함숫값을 모두 0으로 만든다.
 
 - 저역 통과 필터와 고역 통과 필터의 수식
-<center><img src="/assets/images/opencv9/20.jpg" width="70%"></center><br>
+	<center><img src="/assets/images/opencv9/20.jpg" width="70%"></center><br>
 
 	+ $$D_0$$값은 임의의 양수값으로 차단 주파수(cutoff frequency)라고 부르며, 이는 저역 통과 필터 및 고역 통과 필터에서 걸러낼 주파수 성분의 양을 결정하는 값이다.
 	+ 저역 통과 필터는 $$H_1(u, v)$$로, $$D_0$$값이 작아지면 적은 양의 저주파 성분만을 통과시키며, $$D_0$$값이 커지면 많은 양의 저주파 성분을 통과시킨다.
 
 - 저역 통과 필터와 고역 통과 필터 결과 영상  
-<center><img src="/assets/images/opencv9/21.PNG" width="70%"></center><br>
+	<center><img src="/assets/images/opencv9/21.PNG" width="70%"></center><br>
 
 	+ (a)는 원본 영상, (b)와 (c)는 차단 주파수가 각각 16, 32인 저역 통과 핕터링 결과 영상
 	+ (d)와 (e)는 차단 주파수가 각각 16, 32인 고역 통과 필터링 결과 영상
