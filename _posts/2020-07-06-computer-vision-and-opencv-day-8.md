@@ -21,19 +21,20 @@ use_math: true
     - 보간법
         + 영상을 기하학적 변환을 할 때, 원본 영상의 아무런 정보를 받지 못하는 픽셀이 생길 수 있다.  
           예를 들어, 다음 사진과 같이 확대를 하게 될 때, 확대 후 출력 픽셀에 빈 곳이 많이 생김을 알 수 있다.
-      <center><img src="/assets/images/opencv8/1.PNG" width="100%"></center><br>
+          
+        <center><img src="/assets/images/opencv8/1.jpg" width="100%"></center><br>
           
         + 이러한 방법을 순방향 매핑(forward mapping)이라고 하며, 이 방법은 생성한 결과 영상에 빈 공간이 생기는 문제점이 있다.
         + 따라서 순방향 매핑의 문제점을 해결하기 위해 일반적으로 역방향 매핑(backward mapping) 방법을 사용한다.
         + 역방향 매핑에서는 목적영상의 각각의 픽셀에 대하여 대응되는 입력영상의 픽셀 위치를 찾아 그 위치에서의 픽셀값을 참조한다.
           역방향 매핑을 구현할 때에는 목적영상의 전체 크기만큼의 for 루프를 반복한다. 즉, 역방향 매핑으로 크기 변환을 수행하려면 목적영상의 픽셀좌표가 입력영상의 어느 위치에 해당하는 지를 계산해야 한다.
 
-      <center><img src="/assets/images/opencv8/1_1.PNG" width="100%"></center><br>
+        <center><img src="/assets/images/opencv8/1_1.PNG" width="jpg%"></center><br>
 
         + 위 수식에서 X, Y, X', Y'은 픽셀의 좌표이기 때문에 정수이다. 하지만, $$X'/S_x$$와 $$Y'/S_y$$의 계산 결과는 실수형이기 때문에, 원본 영상의 어느 좌표의 픽셀값을 참조할 것인지에 대한 결정이 필요하다.
           예를 들어, 다음 사진과 같이 목적영상의 (1, 1) 위치의 픽셀은 입력영상의 (0.5, 0.5) 위치에 해당하기 때문에, 이를 (0, 0)으로 간주해야 할지, (1, 1)로 간주해야 할지를 결정해야 한다.
           
-      <center><img src="/assets/images/opencv8/1_2.PNG" width="100%"></center><br>
+        <center><img src="/assets/images/opencv8/1_2.PNG" width="jpg%"></center><br>
           
         + 이와 같이 영상의 기하학적 변환을 수행하는 경우에는 실수 좌표 상에서의 픽셀값을 결정해야 하는 경우가 발생하며, 이때 주변 픽셀값들을 이용해 원하는 위치의 값을 추정하는 방법을 보간법(interpolation)이라고 한다.
         + 보간법에는 최근접 이웃 보간법(nearest neighbor interpolation), 양선형 보간법(bilinear interpolation), 3차 회선 보간법(cubic convolution interpolation) 등이 있다.
@@ -58,16 +59,16 @@ use_math: true
               양선형 보간법에서는 총 3번의 선형 보간을 수행한다. 먼저, (i, j)와 (i+1, j) 사이에서의 픽셀값 x를 구한다.
               그리고 (i, j+1)와 (i+1, j+1) 사이에서의 픽셀값 y를 구한다. 마지막으로 앞에서 구한 x와 y를 이용하여 최종 픽셀값 z를 구하며, z값을 목적영상의 픽셀값으로 사용한다.
               
-          <center><img src="/assets/images/opencv8/4.PNG" width="100%"></center><br>
-          <center><img src="/assets/images/opencv8/5.PNG" width="100%"></center><br>
-          <center><img src="/assets/images/opencv8/6.PNG" width="100%"></center><br>
-          <center><img src="/assets/images/opencv8/7.PNG" width="100%"></center><br>
+            <center><img src="/assets/images/opencv8/4.jpg" width="100%"></center><br>
+            <center><img src="/assets/images/opencv8/5.jpg" width="100%"></center><br>
+            <center><img src="/assets/images/opencv8/6.jpg" width="100%"></center><br>
+            <center><img src="/assets/images/opencv8/7.jpg" width="100%"></center><br>
             
             + z는 다음과 같은 비례법칙을 이용해 계산이 가능하다.
             
-          <center><img src="/assets/images/opencv8/8.PNG" width="50%"></center><br>
-          <center><img src="/assets/images/opencv8/8_1.PNG" width="50%"></center><br>
-          <center><img src="/assets/images/opencv8/8_2.PNG" width="50%"></center><br>
+            <center><img src="/assets/images/opencv8/8.PNG" width="100%"></center><br>
+            <center><img src="/assets/images/opencv8/8_1.PNG" width="100%"></center><br>
+            <center><img src="/assets/images/opencv8/8_2.PNG" width="100%"></center><br>
 
     - 축소: 서브 샘플링 방식(축소 배율만큼 건너뛰면서 픽셀값을 취하는 방법)
     - 축소의 단점: 영상의 상세한 세부항목을 상실 -> 블러링을 통해 극복 가능.
