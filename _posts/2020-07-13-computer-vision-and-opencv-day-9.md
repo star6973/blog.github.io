@@ -77,11 +77,10 @@ use_math: true
         - 이러한 선형성은 입력 신호 f(x, y)를 여러 개의 간단한 형태의 함수 조합으로 분리되고, 각 함수를 이산 푸리에 변환한 후 다시 더해줌으로써 원본 함수의 이산 푸리에 변환을 생성할 수 있다.  
 
     2) 이동변환  
-        <center><img src="/assets/images/opencv9/8.PNG" width="70%"></center><br>
+       <center><img src="/assets/images/opencv9/8.PNG" width="70%"></center><br>
         - 영상의 이동변환이 이산 푸리에 결과에서 푸리에 스펙트럼은 동일하고, 위상에만 영향을 준다는 것을 의미한다.  
-        
-        <center><img src="/assets/images/opencv9/9.PNG" width="70%"></center><br>
-        - 이와 반대로 주파수 공간에서의 이동변환이 원본 영상의 값에 미치는 영향은 위와 같다.  
+        - 이와 반대로 주파수 공간에서의 이동변환이 원본 영상의 값에 미치는 영향은 아래와 같다.  
+       <center><img src="/assets/images/opencv9/9.PNG" width="70%"></center><br>
         
     3) 크기변환  
         <center><img src="/assets/images/opencv9/10.jpg" width="70%"></center><br>
