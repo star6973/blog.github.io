@@ -29,7 +29,7 @@ use_math: true
         + 역방향 매핑에서는 목적영상의 각각의 픽셀에 대하여 대응되는 입력영상의 픽셀 위치를 찾아 그 위치에서의 픽셀값을 참조한다.
           역방향 매핑을 구현할 때에는 목적영상의 전체 크기만큼의 for 루프를 반복한다. 즉, 역방향 매핑으로 크기 변환을 수행하려면 목적영상의 픽셀좌표가 입력영상의 어느 위치에 해당하는 지를 계산해야 한다.
 
-        <center><img src="/assets/images/opencv8/1_1.jpg" width="50%"></center><br>
+        <center><img src="/assets/images/opencv8/1_1.jpg" width="30%"></center><br>
 
         + 위 수식에서 X, Y, X', Y'은 픽셀의 좌표이기 때문에 정수이다. 하지만, $$X'/S_x$$와 $$Y'/S_y$$의 계산 결과는 실수형이기 때문에, 원본 영상의 어느 좌표의 픽셀값을 참조할 것인지에 대한 결정이 필요하다.
           예를 들어, 다음 사진과 같이 목적영상의 (1, 1) 위치의 픽셀은 입력영상의 (0.5, 0.5) 위치에 해당하기 때문에, 이를 (0, 0)으로 간주해야 할지, (1, 1)로 간주해야 할지를 결정해야 한다.
@@ -106,7 +106,7 @@ use_math: true
         + 출력 영상의 크기는 회전 각도에 따라 다르다.
 
         <center><img src="/assets/images/opencv8/11_2.PNG" width="50%"></center><br>
-        <center><img src="/assets/images/opencv8/12.PNG" width="50%"></center><br>
+        <center><img src="/assets/images/opencv8/12.png" width="50%"></center><br>
 
 3. 이동
     - 이동 변환된 결과 영상은 원본 영상의 크기의 바깥으로 빠져나가는 픽셀들은 보이지 않게 될 것이기 때문에, 새로 생겨난 빈 공간들은 그레이스케일 값을 0으로 설정해준다.    
