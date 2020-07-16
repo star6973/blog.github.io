@@ -487,7 +487,7 @@ uchar bilinear_value(Mat img, double x, double y)
 
 	//2차 보간
 	int P = M1 + (int)cvRound(beta * (M2 - M1));
-	return  saturate_cast<uchar>(P);
+	return saturate_cast<uchar>(P);
 }
 
 void rotation(Mat img, Mat& dst, double dgree, Point pt) // pt 좌표 기준 회전 변환
@@ -575,3 +575,445 @@ int main()
 }
 ```
 <center><img src="/assets/images/opencv8/19.PNG" width="100%"></center><br>
+
+### 9.2.8. 행렬 연산을 통한 기하학 변환 - 어파인 변환 1
+- 이동과 같은 기하학 변환은 덧셈 연산이기 때문에 알고리즘 처리가 느리다.
+- 이를 행렬의 곱으로 표현하여 더욱 빠른 연산이 가능하도록 할 수 있는데, 어파인 변환 수식은 각 변환 행렬을 곱으로 구성 가능하다.
+
+<center><img src="/assets/images/opencv8/20.PNG" width="100%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+uchar bilinear_value(Mat img, double x, double y)
+{
+	if (x >= img.cols - 1)  x--;
+	if (y >= img.rows - 1)  y--;
+
+	// 4개 화소 가져옴
+	Point pt((int)x, (int)y);
+	int A = img.at<uchar>(pt);
+	int B = img.at<uchar>(pt + Point(0, 1));
+	int C = img.at<uchar>(pt + Point(1, 0));
+	int D = img.at<uchar>(pt + Point(1, 1));
+
+	//1차 보간
+	double alpha = y - pt.y;
+	double beta = x - pt.x;
+	int M1 = A + (int)cvRound(alpha * (B - A));
+	int M2 = C + (int)cvRound(alpha * (D - C));
+
+	//2차 보간
+	int P = M1 + (int)cvRound(beta * (M2 - M1));
+	return saturate_cast<uchar>(P);
+}
+
+void affine_transform(Mat img, Mat& dst, Mat map, Size size)
+{
+	dst = Mat(img.size(), img.type(), Scalar(0));
+	Rect rect(Point(0, 0), img.size()); // 역사상을 위해, 원위치에 있는지 확인
+
+	Mat inv_map;
+	invertAffineTransform(map, inv_map); // 역방향 사상을 위해, 어파인 변환의 역행렬 계산
+
+	// 역방향 사상
+	for (int i = 0; i < dst.rows; i++) {
+		for (int j = 0; j < dst.cols; j++)
+		{
+			/*
+				우리는 검은색 값이 파란색쪽으로 변환되길 원하지만,
+				~~ 이유로 역방향 사상을 통해 구하는 것이 더 좋다.
+				따라서 파란색 입장에서 보았을 때, 자신이 변환 전, 검은색이 변환 후이므로
+				(x, y, 1)가 변환전, (a, a2, a3)는 변환 행렬, (x', y')은 변환 후 값이 된다.				
+			*/
+
+			// 호모지니어스 코디네이트
+			Point3d ji(j, i, 1); // 어파인 변환 후 행렬
+			Mat xy = inv_map * (Mat)ji; // xy는 원영상의 행렬
+			Point2d pt = (Point2d)xy;
+			// pt가 xy(원영상)에 포함되는 지 확인
+			if (rect.contains(pt)) {
+				dst.at<uchar>(i, j) = bilinear_value(img, pt.x, pt.y);
+			}
+		}
+	}
+}
+
+int main()
+{
+	Mat image = imread("../image/affine_test3.jpg", 0);
+	CV_Assert(!image.empty());
+
+	Point2f pt1[3] = { Point2f(10, 200), Point2f(200, 150), Point2f(280, 280) };
+	Point2f pt2[3] = { Point2f(10, 10) , Point2f(250, 10) , Point2f(280, 280) };
+
+	Point center(200, 100);
+	double  angle = 30.0;
+	double  scale = 1;
+
+	Mat aff_map = getAffineTransform(pt1, pt2); // 어파인 변환 행렬 반환
+	Mat rot_map = getRotationMatrix2D(center, angle, scale); // 회전 변환과 크기 변경을 수행할 수 있는 어파인 행렬 반환
+
+	Mat dst1, dst2, dst3, dst4;
+    // 사용자 정의 함수
+	affine_transform(image, dst1, aff_map, image.size());
+	affine_transform(image, dst2, rot_map, image.size());
+    
+    // opencv 제공함수
+	warpAffine(image, dst3, aff_map, image.size(), INTER_LINEAR);
+	warpAffine(image, dst4, rot_map, image.size(), INTER_LINEAR);
+
+	cvtColor(image, image, CV_GRAY2BGR);
+	cvtColor(dst1, dst1, CV_GRAY2BGR);
+
+	for (int i = 0; i < 3; i++) {
+		circle(image, pt1[i], 3, Scalar(0, 0, 255), 2);
+		circle(dst1, pt2[i], 3, Scalar(0, 0, 255), 2);
+	}
+
+	imshow("image", image);
+	imshow("dst1-어파인", dst1), imshow("dst2-어파인 회전", dst2);
+	imshow("dst3-어파인_OpenCV", dst3), imshow("dst4-어파인 -회전_OpenCV", dst4);
+
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv8/21.PNG" width="100%"></center><br>
+
+### 9.2.9. 행렬 연산을 통한 기하학 변환 - 어파인 변환 2
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+uchar bilinear_value(Mat img, double x, double y)
+{
+	if (x >= img.cols - 1)  x--;
+	if (y >= img.rows - 1)  y--;
+
+	// 4개 화소 가져옴
+	Point pt((int)x, (int)y);
+	int A = img.at<uchar>(pt);
+	int B = img.at<uchar>(pt + Point(0, 1));
+	int C = img.at<uchar>(pt + Point(1, 0));
+	int D = img.at<uchar>(pt + Point(1, 1));
+
+	//1차 보간
+	double alpha = y - pt.y;
+	double beta = x - pt.x;
+	int M1 = A + (int)cvRound(alpha * (B - A));
+	int M2 = C + (int)cvRound(alpha * (D - C));
+
+	//2차 보간
+	int P = M1 + (int)cvRound(beta * (M2 - M1));
+	return saturate_cast<uchar>(P);
+}
+
+
+void affine_transform(Mat img, Mat& dst, Mat map, Size size)
+{
+	dst = Mat(img.size(), img.type(), Scalar(0));
+	Rect rect(Point(0, 0), img.size());
+
+	Mat  inv_map;
+	invertAffineTransform(map, inv_map);
+
+	for (int i = 0; i < size.height; i++) {
+		for (int j = 0; j < size.width; j++)
+		{
+			Point3d ji(j, i, 1);
+			Mat xy = inv_map * (Mat)ji;
+			Point2d pt = (Point2d)xy;
+
+			if (rect.contains(pt))
+				dst.at<uchar>(i, j) = bilinear_value(img, pt.x, pt.y);
+		}
+	}
+}
+
+// 복합 변환(회전, 평행이동, 크기변경)
+Mat getAffineMap(Point2d center, double dgree, double fx = 1, double fy = 1, Point2d translate = Point(0, 0))
+{
+	Mat rot_map = Mat::eye(3, 3, CV_64F);
+	Mat center_trans = Mat::eye(3, 3, CV_64F);
+	Mat org_trans = Mat::eye(3, 3, CV_64F);
+	Mat scale_map = Mat::eye(3, 3, CV_64F); // 크기 변경 행렬
+	Mat trans_map = Mat::eye(3, 3, CV_64F); // 평행이동 행렬
+
+	double radian = dgree / 180 * CV_PI;
+	rot_map.at<double>(0, 0) = cos(radian);
+	rot_map.at<double>(0, 1) = sin(radian);
+	rot_map.at<double>(1, 0) = -sin(radian);
+	rot_map.at<double>(1, 1) = cos(radian);
+
+	center_trans.at<double>(0, 2) = center.x; // 회전 중심으로 이동
+	center_trans.at<double>(1, 2) = center.y;
+	org_trans.at<double>(0, 2) = -center.x; // 원점으로 이동
+	org_trans.at<double>(1, 2) = -center.y;
+
+	scale_map.at<double>(0, 0) = fx;
+	scale_map.at<double>(1, 1) = fy;
+	trans_map.at<double>(0, 2) = translate.x;
+	trans_map.at<double>(1, 2) = translate.y;
+
+	Mat ret_map = center_trans * rot_map * trans_map * scale_map * org_trans;
+//	Mat ret_map = center_trans * rot_map * scale_map * trans_map * org_trans ;
+
+	ret_map.resize(2);
+	return ret_map;
+}
+
+int main()
+{
+	Mat image = imread("../image/affine_test5.jpg", 0);
+	CV_Assert(!image.empty());
+
+	Point center = image.size() / 2, tr(100, 0);
+	double  angle = 30.0;
+	Mat dst1, dst2, dst3, dst4;
+
+	Mat aff_map1 = getAffineMap(center, angle);
+	Mat aff_map2 = getAffineMap(Point2d(0, 0), 0, 2.0, 1.5);
+	Mat aff_map3 = getAffineMap(center, angle, 0.7, 0.7);
+	Mat aff_map4 = getAffineMap(center, angle, 0.7, 0.7, tr);
+
+	warpAffine(image, dst1, aff_map1, image.size());
+	warpAffine(image, dst2, aff_map2, image.size());
+	affine_transform(image, dst3, aff_map3, image.size());
+	affine_transform(image, dst4, aff_map4, image.size());
+
+	imshow("image", image);
+	imshow("dst1-회전만", dst1);
+	imshow("dst2-크기변경만", dst2);
+	imshow("dst3-회전+크기변경", dst3);
+	imshow("dst4-회전+크기변경+평행이동", dst4);
+
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv8/22.PNG" width="100%"></center><br>
+
+### 9.2.10. 실습
+OpenCV에서 제공하는 함수 중에 영상을 좌우 혹은 상하로 뒤집는 cv::flip() 함수가 있다. cv::warpAffine() 함수를 이용하여 동일하게 뒤집기를 수행하도록 하는 어파인 변환 행렬을 구성하여 전체 프로그램을 완성하시오.
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+int main()
+{
+	Mat image = imread("../image/filp_test.jpg", 0);
+	CV_Assert(image.data);
+
+	// 상하 뒤집기
+	Matx23d flip_map1;
+	flip_map1 << 1, 0, 0,
+		  		 0, -1, image.rows;
+
+	// 좌우 뒤집기
+	Matx23d flip_map2;
+	flip_map2 << -1, 0, image.cols,
+				 0, 1, 0;
+
+	// 상하좌우 뒤집기
+	Matx23d flip_map3;
+	flip_map3 << -1, 0, image.cols,
+				 0, -1, image.rows;
+
+	Mat dst1, dst2, dst3;
+	warpAffine(image, dst1, flip_map1, image.size());
+	warpAffine(image, dst2, flip_map2, image.size());
+	warpAffine(image, dst3, flip_map3, image.size());
+
+	imshow("실습", image), imshow("dst1 - 상하뒤집기", dst1);
+	imshow("dst2 - 좌우뒤집기", dst2), imshow("dst3 - 상하좌우뒤집기", dst3);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv8/23.PNG" width="100%"></center><br>
+
+### 9.2.11. 원근 투시(투영) 변환
+- 원근 투시 변환(perspective projection transformation): 원근법을 영상 좌표계에서 표현하는 것
+- 3차원 실세계 좌표를 투영 스크린상의 2차원 좌표로 표현할 수 있도록 변환해주는 것
+- 동차 좌표계(homogeneous coordinates)
+    + 모든 항의 차수가 동일하기 때문에 붙여진 이름으로서 n차원의 투영공간을 n+1개의 좌표로 나타내는 좌표계이다.
+    + 직교 좌표인 (x, y)를 (x, y, 1)로 표현한다. 일반화하면 0이 아닌 상수 w에 대해 (x, y)를 (wx, wy, w)로 표현한다.
+    + 상수 w가 무한히 많기 때문에 (x, y)에 대한 동차 좌표 표현은 무한히 많이 존재한다.
+    + 동차 좌표계에서 한 점(wx, wy, w)을 직교 좌표로 나타내면, 각 원소를 w로 나누어서 (x/w, y/w)가 된다.
+
+> cv::getPerspectiveTransform() -> 입력영상에서 4개의 좌표와 이 점들이 이동한 결과영상의 좌표 네 개를 입력으로 받아 3x3 투시 변환 행렬을 반환
+> cv::warpPerspactive() -> 3x3 투시 변환 행렬을 가지고 있을 때, 영상을 투시 변환한 결과영상을 생성
+> cv::transform() -> 입력영상의 4개 좌표와 원근 행렬을 인수로 입력하면 원근 변환된 좌표를 반환
+
+```cython
+// 트럼프 카드 영상에서 사용자가 마우스로 카드 모서리 좌표를 선택하면(시계 방향) 해당 카드를 반듯한 직사각형 형태로 투시 변환하여 영상 출력하기
+#include <opencv2/opencv.hpp>
+using namespace std;
+using namespace cv;
+
+Mat src;
+Point2f srcQuad[4], dstQuad[4];
+
+void on_mouse(int event, int x, int y, int flags, void* userdata) {
+	static int cnt = 0;
+
+	if (event == EVENT_LBUTTONDOWN) {
+		if (cnt < 4) {
+			srcQuad[cnt++] = Point2f(x, y);
+			circle(src, Point(x, y), 5, Scalar(0, 0, 255), -1);
+			imshow("src", src);
+
+			if (cnt == 4) {
+				int w = 200, h = 300;
+
+				dstQuad[0] = Point2f(0, 0);
+				dstQuad[1] = Point2f(w - 1, 0);
+				dstQuad[2] = Point2f(w - 1, h - 1);
+				dstQuad[3] = Point2f(0, h - 1);
+
+				Mat pers = getPerspectiveTransform(srcQuad, dstQuad);
+
+				Mat dst;
+				warpPerspective(src, dst, pers, Size(w, h));
+
+				imshow("dst", dst);
+			}
+		}
+	}
+}
+
+int main(void) {
+	src = imread("../image/card.bmp");
+	CV_Assert(src.data);
+
+	namedWindow("src");
+	setMouseCallback("src", on_mouse);
+
+	imshow("src", src);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv8/24.PNG" width="100%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+int main()
+{
+	Mat image = imread("../image/perspective_test.jpg", IMREAD_COLOR);
+	CV_Assert(image.data);
+
+	// 원본 영상 좌표 4개
+	Point2f pts1[4] = {
+		Point2f(90, 170) , Point2f(300, 120),
+		Point2f(90, 285), Point2f(300, 320)
+	};
+	// 목적 영상 좌표 4개
+	Point2f pts2[4] = {
+		Point2f(60, 120), Point2f(340, 110),
+		Point2f(60, 280), Point2f(340, 280)
+	};
+
+	Mat dst(image.size(), CV_8UC1);
+	// 4개 좌표쌍을 이용해 원근 변환 행렬 계산
+	Mat perspect_map = getPerspectiveTransform(pts1, pts2);
+	// 원근 변환 행렬로 원근 변환 수행
+	warpPerspective(image, dst, perspect_map, image.size(), INTER_CUBIC);
+
+	// 3차원 좌표로 동차좌표 표현
+	vector<Point3f> pts3, pts4;
+	for (int i = 0; i < 4; i++) {
+		pts3.push_back(Point3f(pts1[i].x, pts1[i].y, 1)); // 원본좌표 -> 동차좌표 저장
+	}
+
+	transform(pts3, pts4, perspect_map);
+	cout << "[perspect_map] = " << endl << perspect_map << endl << endl;
+
+	imshow("image ", image);
+	imshow("dst - 왜곡 보정", dst);
+	waitKey();
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv8/25.PNG" width="100%"></center><br>
+
+### 9.2.12. 원근 투시(투영) 변환 심화 예제
+마우스 드래그로 선택된 영역에 원근 변환 제거하기
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+// 전역 변수 설정
+Point2f  pts[4], small(10, 10);							// 4개 좌표 및 좌표 사각형 크기
+Mat image;												// 입력 영상 
+
+void draw_rect(Mat image)								// 4개 좌표 잇는 사각형 그리기
+{
+	Rect img_rect(Point(0, 0), image.size());			// 입력영상 크기 사각형
+	for (int i = 0; i < 4; i++)
+	{
+		Rect rect(pts[i] - small, pts[i] + small);		// 좌표 사각형
+		rect &= img_rect;								// 교차 영역 계산
+		image(rect) += Scalar(70, 70, 70);				// 사각형 영역 밝게 하기
+		line(image, pts[i], pts[(i + 1) % 4], Scalar(255, 0, 255), 1);
+		rectangle(image, rect, Scalar(255, 255, 0), 1);	// 좌표 사각형 그리기
+	}
+	imshow("select rect", image);
+}
+
+void warp(Mat image)									// 원근 변환 수행 함수
+{
+	Point2f dst_pts[4] = {								// 목적 영상 4개 좌표
+		Point2f(0, 0), Point2f(350, 0),
+		Point2f(350, 350), Point2f(0, 350)
+	};
+	Mat dst;
+	Mat perspect_mat = getPerspectiveTransform(pts, dst_pts);		// 원근변환 행렬 계산
+	warpPerspective(image, dst, perspect_mat, Size(350, 350), INTER_CUBIC);
+	imshow("왜곡보정", dst);
+}
+
+void  onMouse(int event, int x, int y, int flags, void*)	// 마우스 이벤트 제어
+{
+	Point curr_pt(x, y);									// 현재 클릭 좌표
+	static int check = -1;								// 마우스 선택 좌표번호
+
+	if (event == EVENT_LBUTTONDOWN) {		// 마우스 좌 버튼 
+		for (int i = 0; i < 4; i++)
+		{
+			// 위에 있는 사각형은 선까지 연결해서 있는 사각형, 이건 따로 선언
+			Rect rect(pts[i] - small, pts[i] + small);
+			if (rect.contains(curr_pt)) check = i;
+		}
+	}
+	if (event == EVENT_LBUTTONUP)
+		check = -1;									// 선택 좌표번호 초기화
+
+	if (check >= 0) {									// 좌표 사각형 선택시	
+		pts[check] = curr_pt;							// 클릭 좌표를 선택 좌표에 저장
+		draw_rect(image.clone());						// 4개 좌표 연결 사각형 그리기
+		warp(image.clone());							// 원근 변환 수행
+	}
+}
+
+int main()
+{
+	image = imread("../image/perspective_test.jpg", 1);
+	CV_Assert(image.data);
+
+	pts[0] = Point2f(100, 100), pts[1] = Point2f(300, 100);	// 4개 좌표 초기화
+	pts[2] = Point2f(300, 300), pts[3] = Point2f(100, 300);
+	draw_rect(image.clone());									// 좌표 사각형 그리기
+	setMouseCallback("select rect", onMouse, 0);				// 콜백 함수 등록
+	waitKey(0);
+	return 0;
+}
+```
+<center><img src="/assets/images/opencv8/26.PNG" width="100%"></center><br>
