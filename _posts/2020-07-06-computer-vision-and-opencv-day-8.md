@@ -14,7 +14,8 @@ use_math: true
 ### 9.1.1. 기하학적 처리란?
 - 임의의 기하학적 변환에 의하여 화소들의 위치를 변경하는 처리
 - 크기 변환(확대/축소), 회전, 이동, 대칭
-1. 크기 변환(확대/축소)
+
+### 9.1.2. 크기 변환(확대/축소)
     - 영상 인식 시스템은 정해진 크기의 영상만을 입력받기 때문에 영상을 해당 크기에 맞게 변경하여 입력으로 전달해야 함.
     - 복잡한 알고리즘을 수행하기에 앞서 연산 시간을 단축하기 위하여 입력 영상의 크기를 줄여서 사용하는 경우
     - 확대의 단점: 확대된 영상에 계단 현상이 발생하여, 영상이 매끄럽지 않을 수 있음. -> 역방향 사상과 양선형 보간법을 통해 극복 가능.
@@ -76,7 +77,7 @@ use_math: true
     <center><img src="/assets/images/opencv8/9.PNG" width="100%"></center><br>
     <center><img src="/assets/images/opencv8/9_1.PNG" width="100%"></center><br>
 
-2. 회전
+### 9.1.3. 회전
     - 원점을 중심으로 점 $$(X_source, Y_source)$$를 반시계 방향으로 $$\theta$$만큼 회전한 점 $$(X_dest, Y_dest)$$
 
     <center><img src="/assets/images/opencv8/10.PNG" width="100%"></center><br>
@@ -108,14 +109,14 @@ use_math: true
         <center><img src="/assets/images/opencv8/11_2.PNG" width="50%"></center><br>
         <center><img src="/assets/images/opencv8/12.png" width="100%"></center><br>
 
-3. 이동
+### 9.1.4. 이동
     - 이동 변환된 결과 영상은 원본 영상의 크기의 바깥으로 빠져나가는 픽셀들은 보이지 않게 될 것이기 때문에, 새로 생겨난 빈 공간들은 그레이스케일 값을 0으로 설정해준다.    
 
     <center><img src="/assets/images/opencv8/15.jpg" width="30%"></center><br>
     <center><img src="/assets/images/opencv8/15_1.jpg" width="30%"></center><br>
     <center><img src="/assets/images/opencv8/15_2.jpg" width="30%"></center><br>
 
-4. 대칭
+### 9.1.5. 대칭
     - 좌우 대칭 변환의 결과 영상은 그 크기가 입력 영상의 크기와 동일하다.
 
     <center><img src="/assets/images/opencv8/13.jpg" width="50%"></center><br>
@@ -126,7 +127,7 @@ use_math: true
     <center><img src="/assets/images/opencv8/14.jpg" width="50%"></center><br>
     <center><img src="/assets/images/opencv8/14_1.PNG" width="50%"></center><br>
 
-5. 정리  
+### 9.1.6. 정리  
     1) 확대  
         - 확대는 할수록 화질이 저하되는 현상이 나탐남(초점이 낮아짐, 계단현상).  
         - 해결방법: 출력 영상 크기를 정하고, 거꾸로 어디서부터 오는지를 역방향으로 처리 -> 확대됨을 가정하고, 거꾸로 원본 픽셀을 참조해서 사상(역방향 사상)  
