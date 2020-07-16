@@ -13,7 +13,7 @@ use_math: true
 ## 9.1. 2D/3D 기하학 처리 이론
 ### 9.1.1. 기하학적 처리란?
 - 임의의 기하학적 변환에 의하여 화소들의 위치를 변경하는 처리
-- 크기 변환(확대/축소), 회전, 이동, 대칭, 어파인  
+- 크기 변환(확대/축소), 회전, 이동, 대칭
 1. 크기 변환(확대/축소)
     - 영상 인식 시스템은 정해진 크기의 영상만을 입력받기 때문에 영상을 해당 크기에 맞게 변경하여 입력으로 전달해야 함.
     - 복잡한 알고리즘을 수행하기에 앞서 연산 시간을 단축하기 위하여 입력 영상의 크기를 줄여서 사용하는 경우
@@ -78,38 +78,67 @@ use_math: true
 
 2. 회전
     - 원점을 중심으로 점 $$(X_source, Y_source)$$를 반시계 방향으로 $$\theta$$만큼 회전한 점 $$(X_dest, Y_dest)$$
+
     <center><img src="/assets/images/opencv8/10.PNG" width="100%"></center><br>
+
     - 고려사항 1
         + 순방향 사상을 이용한 회전 -> 출력 영상에서 픽셀값을 할당받지 못한 빈 곳이 발생할 수 있음.
+
         <center><img src="/assets/images/opencv8/10_1.PNG" width="100%"></center><br>
     
         + 역방향 사상을 이용하여 극복 가능.
         + 원점을 중심으로 $$(X_dest, Y_dest)$$를 시계 방향으로 $$\theta$$만큼 회전한 점이 $$(X_source, Y_source)$$가 됨.
+
         <center><img src="/assets/images/opencv8/10_2.PNG" width="100%"></center><br>
 
     - 고려사항 2
         + 회전의 중심이 원점을 기준으로 하면 목적영상에서 잘리는 부분이 발생할 수 있음.
+
         <center><img src="/assets/images/opencv8/11.PNG" width="100%"></center><br>
+
         + 영상의 중심점$$(C_x, C_y)$$을 기준으로 한 회전으로 극복 가능.
+
         <center><img src="/assets/images/opencv8/11_1.PNG" width="100%"></center><br>
     
     - 고려사항 3
         + 입력 영상과 출력 영상의 크기를 같게하면 출력 영상에서 잘려나가는 부분이 발생할 수 있음.
         + 출력 영상의 크기를 미리 계산하여 역방향 사상을 적용해야 함.
         + 출력 영상의 크기는 회전 각도에 따라 다르다.
+
         <center><img src="/assets/images/opencv8/11_2.PNG" width="100%"></center><br>
         <center><img src="/assets/images/opencv8/12.PNG" width="100%"></center><br>
 
 3. 이동
+    - 이동 변환된 결과 영상은 원본 영상의 크기의 바깥으로 빠져나가는 픽셀들은 보이지 않게 될 것이기 때문에, 새로 생겨난 빈 공간들은 그레이스케일 값을 0으로 설정해준다.    
+
+    <center><img src="/assets/images/opencv8/15.PNG" width="100%"></center><br>
+    <center><img src="/assets/images/opencv8/15_1.PNG" width="100%"></center><br>
+    <center><img src="/assets/images/opencv8/15_2.PNG" width="100%"></center><br>
 
 4. 대칭
+    - 좌우 대칭 변환의 결과 영상은 그 크기가 입력 영상의 크기와 동일하다.
 
+    <center><img src="/assets/images/opencv8/13.PNG" width="100%"></center><br>
+    <center><img src="/assets/images/opencv8/13_1.PNG" width="100%"></center><br>
 
-5. 어파인
+    - 상하 대칭 변환의 결과 영상 역시 그 크기가 입력 영상의 크기와 동일하다.
 
+    <center><img src="/assets/images/opencv8/14.PNG" width="100%"></center><br>
+    <center><img src="/assets/images/opencv8/14_1.PNG" width="100%"></center><br>
 
+5. 정리
+    1) 확대  
+        - 확대는 할수록 화질이 저하되는 현상이 나탐남(초점이 낮아짐, 계단현상).  
+        - 해결방법: 출력 영상 크기를 정하고, 거꾸로 어디서부터 오는지를 역방향으로 처리 -> 확대됨을 가정하고, 거꾸로 원본 픽셀을 참조해서 사상(역방향 사상)  
 
+    2) 축소  
+        - 축소는 축소 배율만큼 픽셀이 건너뛰어지는 것이므로 할수록 얇은 경계가 소실됨(세부 항목 상실).  
+        - 해결방법: 서브 샘플링 전에 blurring 처리 후 평균값으로 소실 부분을 대치 -> 공간주파수(단위 공간당 변화율)가 높을수록 샘플링 주파수도 높아야 소실이 되지 않는다. 즉, blurring을 통해 공간주파수가 낮아지면서 소실이 덜 된다.  
 
+    3) 회전  
+        - 순방향 사상을 이용한 회전을 사용하면 출력영상에서 픽셀값을 할당받지 못한 빈 곳이 발생함.  
+        - 해결방법: 영상의 중심점을 기준으로 회전을 한다. 모든 점들을 중심으로 보내고, 다시 원상 복구를 해주는 역방향 사상이 필요.  
+<br><br>
 
 ## 9.2. 2D/3D 기하학 처리 실습
 ### 9.2.1. 사상
