@@ -142,15 +142,9 @@ use_math: true
 
 ## 9.2. 2D/3D 기하학 처리 실습
 ### 9.2.1. 사상
-
 ### 9.2.2. 크기 변경(확대/축소)
 ```angular2
 // 순방향 사상
-/*
-
-	확대는 300*400 - 240*300의 차이만큼 누락됨
-
-
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -189,19 +183,10 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv8/15.PNG" width="100%"></center><br>
 
 ### 9.2.3. 최근접 이웃 보간법
 ```angular2
-
-	목적영상을 만드는 과정에서 홀이 되어 할당받지 못하는 화소들의 값을 찾을 때,
-	목적영상의 화소에 가장 가깝게 이웃한 입력영상의 화소값을 가져오는 방법
-
-	최근방 이웃 보간법Nearest neighbor interpolation은 가장 가까운 위치에 있는 픽셀의 값을 참조하는 방법이다. 
-	예를 들어 역방향 매핑 시 원본 영상의 참조 좌표가 (50.2, 32.8)로 계산되었다면, 
-	이 위치에서 가장 가까운 정수 좌표인 (50, 33)의 픽셀 값을 그대로 사용하는 방식이다. 
-	최근방 이웃 보간법의 장점은 구현하기가 쉽고 동작이 빠르다는 점이다. 
-	그러나 이 방법을 이용하여 확대된 결과 영상은 픽셀 값이 급격하게 변화하는 것 같은 계단 현상(또는 블록 현상)이 나타날 수 있다는 단점이 있다.
-
 #include <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
@@ -256,7 +241,6 @@ int main()
 	return 0;
 }
 ```
-
 
 ### 9.2.4. 양선형 보간법
 
@@ -335,9 +319,9 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv8/16.PNG" width="100%"></center><br>
 
 ### 9.2.5. 평행이동
-
 ```angular2
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -347,12 +331,6 @@ void translation(Mat img, Mat& dst, Point pt)				// 평행이동 함수
 {
 	Rect rect(Point(0, 0), img.size());						// 입력영상 범위 사각형
 	dst = Mat(img.size(), img.type(), Scalar(0));
-
-	// 역방향 사상
-
-		x = x' - dx
-		y = y' - dy
-
 
 	for (int i = 0; i < dst.rows; i++) {
 		for (int j = 0; j < dst.cols; j++) {		
@@ -383,7 +361,7 @@ int main()
 	return 0;
 }
 ```
-
+<center><img src="/assets/images/opencv8/17.PNG" width="100%"></center><br>
 
 ### 9.2.6. 회전
 
@@ -480,10 +458,9 @@ int main()
 	return 0;
 }
 ```
-
+<center><img src="/assets/images/opencv8/18.PNG" width="100%"></center><br>
 
 ### 9.2.7. 회전 심화 예제
-
 ```cython
 #include <opencv2/opencv.hpp>
 using namespace cv;
@@ -597,3 +574,4 @@ int main()
 	return 0;
 }
 ```
+<center><img src="/assets/images/opencv8/19.PNG" width="100%"></center><br>
