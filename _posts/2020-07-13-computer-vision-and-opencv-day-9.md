@@ -70,7 +70,7 @@ use_math: true
     + 스펙트럼의 피크 영역을 지운 후 푸리에 역변환(Inverse Fourier Transform)을 하면 다음과 같은 결과가 나타날 수 있다.
     <center><img src="/assets/images/opencv9/6.png" width="70%"></center><br>
 
-- 푸리에 변환의 성질
+- 푸리에 변환의 성질  
     1) 선형성  
         <center><img src="/assets/images/opencv9/7.PNG" width="70%"></center><br>
         - 위의 식과 같이 $$(f_1(x, y))$$와 $$(f_2(x, y))$$의 덧셈 조합으로 표현될 경우, 이 함수의 푸리에 변환은 두 함수를 따로 푸리에 변환하여 더한 것과 같다.  
