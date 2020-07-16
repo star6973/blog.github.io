@@ -98,22 +98,22 @@ use_math: true
 
         + 영상의 중심점$$(C_x, C_y)$$을 기준으로 한 회전으로 극복 가능.
 
-        <center><img src="/assets/images/opencv8/11_1.PNG" width="100%"></center><br>
-    
+        <center><img src="/assets/images/opencv8/11_1.png" width="100%"></center><br>
+
     - 고려사항 3
         + 입력 영상과 출력 영상의 크기를 같게하면 출력 영상에서 잘려나가는 부분이 발생할 수 있음.
         + 출력 영상의 크기를 미리 계산하여 역방향 사상을 적용해야 함.
         + 출력 영상의 크기는 회전 각도에 따라 다르다.
 
-        <center><img src="/assets/images/opencv8/11_2.PNG" width="100%"></center><br>
-        <center><img src="/assets/images/opencv8/12.png" width="100%"></center><br>
+        <center><img src="/assets/images/opencv8/11_2.PNG" width="50%"></center><br>
+        <center><img src="/assets/images/opencv8/12.PNG" width="50%"></center><br>
 
 3. 이동
     - 이동 변환된 결과 영상은 원본 영상의 크기의 바깥으로 빠져나가는 픽셀들은 보이지 않게 될 것이기 때문에, 새로 생겨난 빈 공간들은 그레이스케일 값을 0으로 설정해준다.    
 
-    <center><img src="/assets/images/opencv8/15.jpg" width="50%"></center><br>
-    <center><img src="/assets/images/opencv8/15_1.jpg" width="50%"></center><br>
-    <center><img src="/assets/images/opencv8/15_2.jpg" width="50%"></center><br>
+    <center><img src="/assets/images/opencv8/15.jpg" width="30%"></center><br>
+    <center><img src="/assets/images/opencv8/15_1.jpg" width="30%"></center><br>
+    <center><img src="/assets/images/opencv8/15_2.jpg" width="30%"></center><br>
 
 4. 대칭
     - 좌우 대칭 변환의 결과 영상은 그 크기가 입력 영상의 크기와 동일하다.
