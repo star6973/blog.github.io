@@ -35,7 +35,7 @@ use_math: true
   <center><img src="/assets/images/opencv8/1_2.jpg" width="70%"></center><br>
 
     + 이와 같이 영상의 기하학적 변환을 수행하는 경우에는 실수 좌표 상에서의 픽셀값을 결정해야 하는 경우가 발생하며, 이때 주변 픽셀값들을 이용해 원하는 위치의 값을 추정하는 방법을 보간법(interpolation)이라고 한다.
-    + 보간법에는 최근접 이웃 보간법(nearest neighbor interpolation), 양선형 보간법(bilinear interpolation), 3차 회선 보간법(cubic convolution interpolation) 등이 있다.
+    + 보간법에는 최근접 이웃 보간법(nearest neighbor interpolation), 양선형 보간법(bilinear interpolation), 3차 회선 보간법(cubic convolution interpolation) 등이 있다.<br><br>
 
 	1) 최근접 이웃 보간법  
 		- 목적 영상의 화소에 가장 가깝게 이웃한 입력영상의 화소값을 가져오는 방법  
@@ -45,10 +45,10 @@ use_math: true
   <center><img src="/assets/images/opencv8/2.PNG" width="100%"></center><br>
   <center><img src="/assets/images/opencv8/2_1.PNG" width="50%"></center><br>
 
-	2) 양선형 보간법
-    		- 최근접 이웃 보간법의 계단 현상을 보완할 수 있는 방법으로 중첩의 원리(superposition principle)이 적용되었다.
-    		- 두 개의 화소값을 알고 있을 때 그 값으로 직선을 그리면, 직선의 선상에 위치한 중간화소값은 수식을 통해 계산이 가능하다.
-    		- 즉, 인접한 네 개의 픽셀값을 이용해 실수 좌표 상의 픽셀값을 계산하는 방법이다.
+	2) 양선형 보간법  
+    		- 최근접 이웃 보간법의 계단 현상을 보완할 수 있는 방법으로 중첩의 원리(superposition principle)이 적용되었다.  
+    		- 두 개의 화소값을 알고 있을 때 그 값으로 직선을 그리면, 직선의 선상에 위치한 중간화소값은 수식을 통해 계산이 가능하다.  
+    		- 즉, 인접한 네 개의 픽셀값을 이용해 실수 좌표 상의 픽셀값을 계산하는 방법이다.  
 
   <center><img src="/assets/images/opencv8/3.PNG" width="100%"></center><br>
 
