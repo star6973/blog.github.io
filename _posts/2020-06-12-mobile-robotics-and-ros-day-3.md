@@ -79,21 +79,21 @@ tag: MobileRobotics
                Visual ranging packages, Object tracking packages
 
 3. Characterizing Sensor Performance
-    - Basic sensor response ratings(기본적인 센서 반응 지표)
-        1) Dynamic range: 물리량들의 변화를 측정 가능
-        2) Range: upper limit ~ lower limit
-        3) Resolution(분해능): 값들 사이의 가장 최소한의 차이
-        4) Linearity: 인풋 대비 아웃풋이 선형적으로 변하는지 비선형적으로 변하는지
-        5) Bandwidth or Frequency: 센서의 스피드 측정
-        6) Sensitivity: 민감도 측정
-        7) Error / Accuracy(실제값과 얼마나 차이가 있는지, 목표물에 맞았는지 틀렸는지)
-           - systemic error(deterministic): 시스템이 가지고 있는 에러 -> 충분히 보정 가능
-           - random error(non-deterministic): 예측이 안되는 노이즈와 같은 에러 -> 확률과 통계로 모델링
+    - Basic sensor response ratings(기본적인 센서 반응 지표)  
+        1) Dynamic range: 물리량들의 변화를 측정 가능  
+        2) Range: upper limit ~ lower limit  
+        3) Resolution(분해능): 값들 사이의 가장 최소한의 차이  
+        4) Linearity: 인풋 대비 아웃풋이 선형적으로 변하는지 비선형적으로 변하는지  
+        5) Bandwidth or Frequency: 센서의 스피드 측정  
+        6) Sensitivity: 민감도 측정  
+        7) Error / Accuracy(실제값과 얼마나 차이가 있는지, 목표물에 맞았는지 틀렸는지)  
+           - systemic error(deterministic): 시스템이 가지고 있는 에러 -> 충분히 보정 가능  
+           - random error(non-deterministic): 예측이 안되는 노이즈와 같은 에러 -> 확률과 통계로 모델링  
 
-        8) Precision(얼마나 정밀하게 측정, 목표물에 몇 번이나 맞았는지) 
-
-4. Sensors
-    1) Encoders
+        8) Precision(얼마나 정밀하게 측정, 목표물에 몇 번이나 맞았는지)   
+   
+4. Sensors  
+    1) Encoders  
     
         [개념]  
         
@@ -120,7 +120,7 @@ tag: MobileRobotics
             - Incremental Encoder  
               : 절대 위치보다는 휠의 스피드를 측정  
         
-    2) Heading sensors
+    2) Heading sensors  
     
         [개념]  
         
@@ -161,9 +161,9 @@ tag: MobileRobotics
             [3] IMU    
                 - gyro나 accelerometers를 사용해 자세, 상대적 속도, 위치 등을 추정해주는 통합적인 센서
     
-        <center><img src="/assets/images/ros3/1.png" width="50%"><br></center>
+      <center><img src="/assets/images/ros3/1.png" width="50%"><br></center>
     
-    3) Absolute Position Sensors
+    3) Absolute Position Sensors  
     
         - Ground-based Active and Passive Beacons
                 
@@ -183,15 +183,16 @@ tag: MobileRobotics
             
         - GPS(Global Positioning System)
     
-    4) Range sensors
-        - 보낸 신호를 다시 받을 때까지를 측정하여 거리 추정(round-trip)
-        - localization, environment modeling
-        - Ultrasonic sensors: sound를 기반으로, 강한 음파를 발생시킴
-        <center><img src="/assets/images/ros3/2.PNG" width="50%"><br></center>
+    4) Range sensors  
+        - 보낸 신호를 다시 받을 때까지를 측정하여 거리 추정(round-trip)  
+        - localization, environment modeling  
+        - Ultrasonic sensors: sound를 기반으로, 강한 음파를 발생시킴  
+          
+          <center><img src="/assets/images/ros3/2.PNG" width="50%"><br></center>
 
         - ToF(Time of Flight Camera) 범위 센서의 품질은 다음 요소들에 의해 달라진다.  
             * 여기서 ToF란, 공장 자동화, 로봇 공학 및 물류 등의 분야에서는 3D 이미지 데이터가 2D 데이터를 효과적으로 보완할 수 있는 애플리케이션이 사용되는 경우가 많다. TOF(Time-of-Flight) 카메라는 2D 데이터뿐 아니라 필요한 깊이 데이터도 제공한다.  
-            * 3D 카메라의 한 종류로, 적외선이 물체를 향해 비상(flight)하는 시간(프로젝션 + 반사시간)을 측정하여 거리로 환산한다.
+            * 3D 카메라의 한 종류로, 적외선이 물체를 향해 비상(flight)하는 시간(프로젝션 + 반사시간)을 측정하여 거리로 환산한다.  
 
             1) 반사 된 신호의 정확한 도착 시간에 대한 불확실성  
             2) 카메라 측정시 부정확 함 (레이저 범위 센서)  
@@ -287,10 +288,10 @@ tag: MobileRobotics
                          FMCW에서는 계산량과 광학이 훨씬 단순하다. 그렇지만 처프 생성으로 복잡함은 가중된다.
                                             
             - 2D Lidar
-            <center><img src="/assets/images/ros3/6.PNG" width="50%"><br></center>
+          <center><img src="/assets/images/ros3/6.PNG" width="50%"><br></center>
             
             - 3D Lidar
-            <center><img src="/assets/images/ros3/7.PNG" width="50%"><br></center>
+          <center><img src="/assets/images/ros3/7.PNG" width="50%"><br></center>
     
         3) Triangluation Ranging
             - 원리
@@ -300,10 +301,10 @@ tag: MobileRobotics
                     삼각측량법은 측량, 항해, 측정, 천체측량학, 로켓 공학 등에 쓰이며, 무기(대포 등)의 방향 설정에도 쓰인다.
                     삼각측량은, 기준이 되는 한 변만 거리를 측정하고 나머지는 각만 측정하여 측점들의 위치를 계산하기 때문에, 멀리 떨어져 있는 점이라도 망원경으로 시준만 가능하다면 지형이나 거리에 제약에 관계 없이 측량을 할 수 있다는 장점이 있다.
             
-            <center><img src="/assets/images/ros3/8.png" width="50%"><br></center>
+          <center><img src="/assets/images/ros3/8.png" width="50%"><br></center>
 
             - Laser Triangulation(1D)
-            <center><img src="/assets/images/ros3/9.PNG" width="50%"><br></center>
+          <center><img src="/assets/images/ros3/9.PNG" width="50%"><br></center>
 
             - Structued Light(vision, 2/3D)
-            <center><img src="/assets/images/ros3/10.PNG" width="50%"><br></center>
+          <center><img src="/assets/images/ros3/10.PNG" width="50%"><br></center>
