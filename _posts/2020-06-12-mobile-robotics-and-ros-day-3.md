@@ -281,11 +281,11 @@ tag: MobileRobotics
                          지금까지의 방식들은 협광 펄스를 이용한 ToF에 기반한 것들이지만, FMCW는 가간섭성 방식을 이용해 짧은 처프의 주파수 변조 레이저 광을 만들어낸다. 되돌아온 처프의 위상과 주파수를 측정하면 시스템이 거리와 속도를 둘 다 측정할 수 있다.
                          FMCW에서는 계산량과 광학이 훨씬 단순하다. 그렇지만 처프 생성으로 복잡함은 가중된다.
                                             
-            - 2D Lidar
-            <center><img src="/assets/images/ros3/6.PNG" width="50%"><br></center>
+        - 2D Lidar
+        <center><img src="/assets/images/ros3/6.PNG" width="50%"><br></center>
 
-            - 3D Lidar
-            <center><img src="/assets/images/ros3/7.PNG" width="50%"><br></center>
+        - 3D Lidar
+        <center><img src="/assets/images/ros3/7.PNG" width="50%"><br></center>
     
         3) Triangluation Ranging
             - 원리
