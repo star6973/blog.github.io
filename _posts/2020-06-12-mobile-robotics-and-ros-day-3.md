@@ -186,7 +186,7 @@ tag: MobileRobotics
     - 보낸 신호를 다시 받을 때까지를 측정하여 거리 추정(round-trip)  
     - localization, environment modeling  
     - Ultrasonic sensors: sound를 기반으로, 강한 음파를 발생시킴  
-  <center><img src="/assets/images/ros3/2.PNG" width="50%"><br></center>  
+        <center><img src="/assets/images/ros3/2.PNG" width="50%"><br></center>
     - ToF(Time of Flight Camera) 범위 센서의 품질은 다음 요소들에 의해 달라진다.  
         * 여기서 ToF란, 공장 자동화, 로봇 공학 및 물류 등의 분야에서는 3D 이미지 데이터가 2D 데이터를 효과적으로 보완할 수 있는 애플리케이션이 사용되는 경우가 많다. TOF(Time-of-Flight) 카메라는 2D 데이터뿐 아니라 필요한 깊이 데이터도 제공한다.  
         * 3D 카메라의 한 종류로, 적외선이 물체를 향해 비상(flight)하는 시간(프로젝션 + 반사시간)을 측정하여 거리로 환산한다.  
