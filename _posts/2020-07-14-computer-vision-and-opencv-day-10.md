@@ -49,50 +49,50 @@ use_math: true
             - 각 픽셀 V(x, y)에 대하여 각각의 제어선 $$L_i$$와의 수직 교차점의 위치를 구한다.  
             - V(x, y)에서 제어선 $$L_i$$에 내린 수선의 점 $$C(x_c, y_c)$$와 $$P(x_i, y_i)$$ 사이의 거리를 u라 하면, u의 길이는 다음과 같다.  
                 
-            <center><img src="/assets/images/opencv10/9.PNG" width="70%"></center><br>
+	  <center><img src="/assets/images/opencv10/9.PNG" width="70%"></center><br>
 
             - u의 값은 수직 교차점의 위치에 따라 다음과 같은 범위의 값을 가진다.  
             
-            <center><img src="/assets/images/opencv10/10.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/10.PNG" width="70%"></center><br>
             
         2) 제어선으로부터의 수직 변휘 계산  
             - 출력 영상의 픽셀 V(x, y)에 대하여 각각의 제어선 $$L_i$$로부터의 수직 변위를 구한다.  
             
-            <center><img src="/assets/images/opencv10/11.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/11.PNG" width="70%"></center><br>
             
             - 변위 h의 값은 다음과 같은 범위를 가진다.  
             
-            <center><img src="/assets/images/opencv10/12.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/12.PNG" width="70%"></center><br>
             
             - 변위의 절대값은 수직 교차점과 픽셀 사이의 거리가 된다. 변위의 절대값이 아닌 제어선과 픽셀의 위치를 알기 위해서 변위를 구할 때, 절대값을 사용하지 않는다.  
             
-            <center><img src="/assets/images/opencv10/13.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/13.PNG" width="70%"></center><br>
 
         3) 입력 영상에서의 대응 픽셀 위치 계산  
 
             - 출력 영상의 각 픽셀 V(x, y)에 대해 각각의 제어선 $$L_i$$와의 수직 교차점의 위치 u와 수직 변위 h를 구한 다음, u와 h값을 이용하여 출력 영상의 V(x, y)에 대응되는 입력 영상의 픽셀 V'(x', y')을 찾는다.  
             - 출력 영상의 제어선 $$L_i$$에 대응되는 입력 영상에서의 제어선 $$L_i'$$의 양 끝점 좌표를 $$(x_i', y_i')과 (x_(i+1)', y_(i+1)')$$이라고 하면 V'(x', y')은 다음 식과 같다.  
 
-            <center><img src="/assets/images/opencv10/14.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/14.PNG" width="70%"></center><br>
         
         4) 픽셀과 제어선 사이의 거리 계산  
         
-            <center><img src="/assets/images/opencv10/15.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/15.PNG" width="70%"></center><br>
         
         5) 제어선의 가중치 계산  
         
             - a, b, p의 상수값은 일반적으로 각각 0.001, 2.0, 0.75를 사용한다.  
-            <center><img src="/assets/images/opencv10/16.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/16.PNG" width="70%"></center><br>
         
         6) 입력 영상의 대응 픽셀과의 변위 누적  
         
             - 각 제어선 $$L_i$$에 대해 출력 영상의 픽셀 V(x, y)에 대응되는 입력 영상의 픽셀 V'(x', y')을 구하고, 가중치 weight을 구한 다음에 다음 식과 같이 V와 V'사이의 변위와 가중치의 곱을 계산하여 t_x, t_y 변수에 누적한다.
-            <center><img src="/assets/images/opencv10/17.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/17.PNG" width="70%"></center><br>
         
         7) 입력 영상의 대응 픽셀 위치 계산
 
             - 각 제어선에 대해 출력 영상의 픽셀 V(x, y)에 대응되는 입력 영상의 픽셀의 변위값을 구하여 이들의 합 $$(t_x, t_y)$$를 계산한 다음에는 다음 식에 의해 V(x, y)에 대응되는 입력 영상의 픽셀 V(X, Y)의 위치를 계산한다.
-            <center><img src="/assets/images/opencv10/18.PNG" width="70%"></center><br>
+          <center><img src="/assets/images/opencv10/18.PNG" width="70%"></center><br>
 <br><br>
 
 ### 11.1.2. 영상 모핑(Morphing)
