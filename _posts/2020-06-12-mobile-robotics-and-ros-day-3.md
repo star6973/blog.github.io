@@ -161,60 +161,59 @@ tag: MobileRobotics
             [3] IMU    
                 - gyro나 accelerometers를 사용해 자세, 상대적 속도, 위치 등을 추정해주는 통합적인 센서
     
-      <center><img src="/assets/images/ros3/1.png" width="50%"><br></center>
+      <center><img src="/assets/images/ros3/1.png" width="100%"><br></center>
     
     3) Absolute Position Sensors  
-    
-        - Ground-based Active and Passive Beacons
+    - Ground-based Active and Passive Beacons
                 
-                비콘: 표식
-                정확히 아는 위치에 비콘이 장착되고, 정보가 입력
-                triangulation - 정확히 알고있는 비콘까지의 거리와 각도를 알면 사용자의 위치를 알 수 있음
-                trilateration - 거리만으로 위치를 추정(하나의 비콘은 같은 거리에 대해 원으로, 다른 비콘이 같은 거리에 대해 원으로 -> 교점 발생)
-    
-                QR code
-                UWB(Ultra Wide Bandwith): 넓은 대역폭, 아주 초단파 신호를 쏘고 받는 데까지의 시간으로 거리 측정
-                RFID: 태그를 읽으면서 거리 측정
-                Laser Reflector: 산업용 로봇, 반사판을 부착시켜서 반사되어 측정되는 거리를 추정
+            비콘: 표식
+            정확히 아는 위치에 비콘이 장착되고, 정보가 입력
+            triangulation - 정확히 알고있는 비콘까지의 거리와 각도를 알면 사용자의 위치를 알 수 있음
+            trilateration - 거리만으로 위치를 추정(하나의 비콘은 같은 거리에 대해 원으로, 다른 비콘이 같은 거리에 대해 원으로 -> 교점 발생)
 
-        - Motion Capture System
+            QR code
+            UWB(Ultra Wide Bandwith): 넓은 대역폭, 아주 초단파 신호를 쏘고 받는 데까지의 시간으로 거리 측정
+            RFID: 태그를 읽으면서 거리 측정
+            Laser Reflector: 산업용 로봇, 반사판을 부착시켜서 반사되어 측정되는 거리를 추정
+
+    - Motion Capture System
         
-                아바타 모션 캡처 장비
+            아바타 모션 캡처 장비
             
-        - GPS(Global Positioning System)
+    - GPS(Global Positioning System)
     
     4) Range sensors  
-        - 보낸 신호를 다시 받을 때까지를 측정하여 거리 추정(round-trip)  
-        - localization, environment modeling  
-        - Ultrasonic sensors: sound를 기반으로, 강한 음파를 발생시킴  
-          
-          <center><img src="/assets/images/ros3/2.PNG" width="50%"><br></center>
+    - 보낸 신호를 다시 받을 때까지를 측정하여 거리 추정(round-trip)  
+    - localization, environment modeling  
+    - Ultrasonic sensors: sound를 기반으로, 강한 음파를 발생시킴  
+  <center><img src="/assets/images/ros3/2.PNG" width="50%"><br></center>
 
-        - ToF(Time of Flight Camera) 범위 센서의 품질은 다음 요소들에 의해 달라진다.  
-            * 여기서 ToF란, 공장 자동화, 로봇 공학 및 물류 등의 분야에서는 3D 이미지 데이터가 2D 데이터를 효과적으로 보완할 수 있는 애플리케이션이 사용되는 경우가 많다. TOF(Time-of-Flight) 카메라는 2D 데이터뿐 아니라 필요한 깊이 데이터도 제공한다.  
-            * 3D 카메라의 한 종류로, 적외선이 물체를 향해 비상(flight)하는 시간(프로젝션 + 반사시간)을 측정하여 거리로 환산한다.  
+    - ToF(Time of Flight Camera) 범위 센서의 품질은 다음 요소들에 의해 달라진다.  
+        * 여기서 ToF란, 공장 자동화, 로봇 공학 및 물류 등의 분야에서는 3D 이미지 데이터가 2D 데이터를 효과적으로 보완할 수 있는 애플리케이션이 사용되는 경우가 많다. TOF(Time-of-Flight) 카메라는 2D 데이터뿐 아니라 필요한 깊이 데이터도 제공한다.  
+        * 3D 카메라의 한 종류로, 적외선이 물체를 향해 비상(flight)하는 시간(프로젝션 + 반사시간)을 측정하여 거리로 환산한다.  
 
-            1) 반사 된 신호의 정확한 도착 시간에 대한 불확실성  
-            2) 카메라 측정시 부정확 함 (레이저 범위 센서)  
-            3) 투과빔의 개방 각도 (초음파 범위 센서)  
-            4) 대상과의 상호 작용 (표면, 정반사)  
-            5) 전파 속도의 변화  
-            6) 모바일 로봇 및 대상의 속도 (정지 상태가 아닌 경우)  
-        
-        1) Ultrasonic Sensor(time of flight, sound)  
+        1) 반사 된 신호의 정확한 도착 시간에 대한 불확실성  
+        2) 카메라 측정시 부정확 함 (레이저 범위 센서)  
+        3) 투과빔의 개방 각도 (초음파 범위 센서)  
+        4) 대상과의 상호 작용 (표면, 정반사)  
+        5) 전파 속도의 변화  
+        6) 모바일 로봇 및 대상의 속도 (정지 상태가 아닌 경우)  
+
+    - 종류
+        a) Ultrasonic Sensor(time of flight, sound)  
             - Sonar  
             - Time-of-Flight(ToF)  
-            <center><img src="/assets/images/ros3/3.PNG" width="50%"><br></center>
+    <center><img src="/assets/images/ros3/3.PNG" width="50%"><br></center>
         
             - Problem  
                 a) 넓은 원뿔 모양의 빔 (각도의 불확실성)  
                 b) 사운드 에너지의 대부분을 흡수하는 부드러운 표면  
                 c) 소리의 방향에 직각이 되는 표면에 정반사 
-            <center><img src="/assets/images/ros3/4.PNG" width="50%"><br></center>
+    <center><img src="/assets/images/ros3/4.PNG" width="50%"><br></center>
         
-        2) Laser Range Sensor(time of flight, electromagnetic)  
+        b) Laser Range Sensor(time of flight, electromagnetic)  
             - Lidar(Light Detection And Ranging)  
-            <center><img src="/assets/images/ros3/5.PNG" width="50%"><br></center>
+    <center><img src="/assets/images/ros3/5.PNG" width="50%"><br></center>
                 
                   LiDAR, 종종 LADAR, ToF, 레이저 스캐너, 레이저 레이더 등으로 불리기도 하는 이것은 물체를 감지해 거리를 맵핑하는 센싱 방식이다.
                   광학 펄스로 목표물을 비춘 후 반사된 반송 신호의 특징을 측정한다. 광학-펄스의 폭은 몇 나노초부터 몇 마이크로초까지 변동할 수 있다.
@@ -287,11 +286,11 @@ tag: MobileRobotics
                          지금까지의 방식들은 협광 펄스를 이용한 ToF에 기반한 것들이지만, FMCW는 가간섭성 방식을 이용해 짧은 처프의 주파수 변조 레이저 광을 만들어낸다. 되돌아온 처프의 위상과 주파수를 측정하면 시스템이 거리와 속도를 둘 다 측정할 수 있다.
                          FMCW에서는 계산량과 광학이 훨씬 단순하다. 그렇지만 처프 생성으로 복잡함은 가중된다.
                                             
-            - 2D Lidar
-          <center><img src="/assets/images/ros3/6.PNG" width="50%"><br></center>
-            
-            - 3D Lidar
-          <center><img src="/assets/images/ros3/7.PNG" width="50%"><br></center>
+        - 2D Lidar
+      <center><img src="/assets/images/ros3/6.PNG" width="50%"><br></center>
+
+        - 3D Lidar
+      <center><img src="/assets/images/ros3/7.PNG" width="50%"><br></center>
     
         3) Triangluation Ranging
             - 원리
