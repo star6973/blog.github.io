@@ -161,7 +161,7 @@ tag: MobileRobotics
             [3] IMU    
                 - gyro나 accelerometers를 사용해 자세, 상대적 속도, 위치 등을 추정해주는 통합적인 센서
     
-        <img src="/assets/images/ros3/1.png" width="50%"><br>
+        <center><img src="/assets/images/ros3/1.png" width="50%"><br></center>
     
     3) Absolute Position Sensors
     
@@ -187,7 +187,7 @@ tag: MobileRobotics
         - 보낸 신호를 다시 받을 때까지를 측정하여 거리 추정(round-trip)
         - localization, environment modeling
         - Ultrasonic sensors: sound를 기반으로, 강한 음파를 발생시킴
-        <img src="/assets/images/ros3/2.PNG" width="50%"><br>
+        <center><img src="/assets/images/ros3/2.PNG" width="50%"><br></center>
 
         - ToF(Time of Flight Camera) 범위 센서의 품질은 다음 요소들에 의해 달라진다.  
             * 여기서 ToF란, 공장 자동화, 로봇 공학 및 물류 등의 분야에서는 3D 이미지 데이터가 2D 데이터를 효과적으로 보완할 수 있는 애플리케이션이 사용되는 경우가 많다. TOF(Time-of-Flight) 카메라는 2D 데이터뿐 아니라 필요한 깊이 데이터도 제공한다.  
@@ -203,17 +203,17 @@ tag: MobileRobotics
         1) Ultrasonic Sensor(time of flight, sound)  
             - Sonar  
             - Time-of-Flight(ToF)  
-            <img src="/assets/images/ros3/3.PNG" width="50%"><br>
+            <center><img src="/assets/images/ros3/3.PNG" width="50%"><br></center>
         
             - Problem  
                 a) 넓은 원뿔 모양의 빔 (각도의 불확실성)  
                 b) 사운드 에너지의 대부분을 흡수하는 부드러운 표면  
                 c) 소리의 방향에 직각이 되는 표면에 정반사 
-            <img src="/assets/images/ros3/4.PNG" width="50%"><br>
+            <center><img src="/assets/images/ros3/4.PNG" width="50%"><br></center>
         
         2) Laser Range Sensor(time of flight, electromagnetic)  
             - Lidar(Light Detection And Ranging)  
-            <img src="/assets/images/ros3/5.PNG" width="50%"><br>
+            <center><img src="/assets/images/ros3/5.PNG" width="50%"><br></center>
                 
                   LiDAR, 종종 LADAR, ToF, 레이저 스캐너, 레이저 레이더 등으로 불리기도 하는 이것은 물체를 감지해 거리를 맵핑하는 센싱 방식이다.
                   광학 펄스로 목표물을 비춘 후 반사된 반송 신호의 특징을 측정한다. 광학-펄스의 폭은 몇 나노초부터 몇 마이크로초까지 변동할 수 있다.
@@ -287,10 +287,10 @@ tag: MobileRobotics
                          FMCW에서는 계산량과 광학이 훨씬 단순하다. 그렇지만 처프 생성으로 복잡함은 가중된다.
                                             
             - 2D Lidar
-            <img src="/assets/images/ros3/6.PNG" width="50%"><br>
+            <center><img src="/assets/images/ros3/6.PNG" width="50%"><br></center>
             
             - 3D Lidar
-            <img src="/assets/images/ros3/7.PNG" width="50%"><br>
+            <center><img src="/assets/images/ros3/7.PNG" width="50%"><br></center>
     
         3) Triangluation Ranging
             - 원리
@@ -300,10 +300,10 @@ tag: MobileRobotics
                     삼각측량법은 측량, 항해, 측정, 천체측량학, 로켓 공학 등에 쓰이며, 무기(대포 등)의 방향 설정에도 쓰인다.
                     삼각측량은, 기준이 되는 한 변만 거리를 측정하고 나머지는 각만 측정하여 측점들의 위치를 계산하기 때문에, 멀리 떨어져 있는 점이라도 망원경으로 시준만 가능하다면 지형이나 거리에 제약에 관계 없이 측량을 할 수 있다는 장점이 있다.
             
-            <img src="/assets/images/ros3/8.png" width="50%"><br>
+            <center><img src="/assets/images/ros3/8.png" width="50%"><br></center>
 
             - Laser Triangulation(1D)
-            <img src="/assets/images/ros3/9.PNG" width="50%"><br>
+            <center><img src="/assets/images/ros3/9.PNG" width="50%"><br></center>
 
             - Structued Light(vision, 2/3D)
-            <img src="/assets/images/ros3/10.PNG" width="50%"><br>
+            <center><img src="/assets/images/ros3/10.PNG" width="50%"><br></center>
