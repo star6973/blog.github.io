@@ -306,4 +306,4 @@ tag: MobileRobotics
             <img src="/assets/images/ros3/9.PNG" width="50%"><br>
 
             - Structued Light(vision, 2/3D)
-            <img src="/assets/images/ros3/19.PNG" width="50%"><br>
+            <img src="/assets/images/ros3/10.PNG" width="50%"><br>
