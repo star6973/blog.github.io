@@ -295,10 +295,10 @@ tag: MobileRobotics
                     삼각측량법은 측량, 항해, 측정, 천체측량학, 로켓 공학 등에 쓰이며, 무기(대포 등)의 방향 설정에도 쓰인다.
                     삼각측량은, 기준이 되는 한 변만 거리를 측정하고 나머지는 각만 측정하여 측점들의 위치를 계산하기 때문에, 멀리 떨어져 있는 점이라도 망원경으로 시준만 가능하다면 지형이나 거리에 제약에 관계 없이 측량을 할 수 있다는 장점이 있다.
             
-          <center><img src="/assets/images/ros3/8.png" width="50%"><br></center>
+      <center><img src="/assets/images/ros3/8.png" width="50%"><br></center>
 
-            - Laser Triangulation(1D)
-          <center><img src="/assets/images/ros3/9.PNG" width="50%"><br></center>
+        - Laser Triangulation(1D)
+      <center><img src="/assets/images/ros3/9.PNG" width="50%"><br></center>
 
-            - Structued Light(vision, 2/3D)
-          <center><img src="/assets/images/ros3/10.PNG" width="50%"><br></center>
+        - Structued Light(vision, 2/3D)
+      <center><img src="/assets/images/ros3/10.PNG" width="50%"><br></center>
