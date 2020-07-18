@@ -39,7 +39,7 @@ use_math: true
     <center><img src="/assets/images/opencv10/6.PNG" width="70%"></center><br>
     
     + 만약 픽셀이 제어선 외부에 있지만 제어선과 가깝다고 가중치를 많이 주게되면, 영향을 이상하게 받을 수 있기 때문이다.
-    <center><img src="/assets/images/opencv10/7.PNG" width="70%"></center><br>
+    <center><img src="/assets/images/opencv10/7.png" width="70%"></center><br>
 
 - 제어선이 여러 개인 경우의 출력 영상의 각 픽셀에 대한 입력 영상의 대응 픽셀을 구하는 warping() 함수의 알고리즘
     <center><img src="/assets/images/opencv10/8.PNG" width="70%"></center><br>
