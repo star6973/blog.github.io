@@ -110,7 +110,7 @@ tag: MobileRobotics
             2) 어떤 점들이 어떤 선에 포함되어 있는지?  
             3) 선 위에 점이 주어졌을 때, 어떻게 선의 파라미터들을 계산할 수 있는지?  
             
-        + 다음 알고리즘들은 위의 의문점을 해결해 줄 것이다.
+        + 다음 알고리즘들은 위의 의문점을 해결해 줄 것이다.  
             1) split-and-merge 방법   
                - 라인을 유지하는 포인트를 찾아서 그룹핑   
                - 포인트셋이 주어지면 split(가장 멀리 떨어진 포인트를 찾기, 그 라인을 기준으로 split)  
@@ -129,7 +129,6 @@ tag: MobileRobotics
                <center><img src="/assets/images/ros5/14.PNG" width="100%"><br></center>
                <center><img src="/assets/images/ros5/15.PNG" width="100%"><br></center>
                <center><img src="/assets/images/ros5/16.PNG" width="100%"><br></center>
-               
                - RANSAC은 글자 그대로 무작위로 샘플 데이터들을 뽑은 다음에 최대로 컨센서스(일치)가 형성된 데이터를 선택한다는 의미이다.  
                - 최소자승법은 데이터들과의 잔차를 최소화하도록 모델을 찾지만, RANSAC은 가장 많은 수의 데이터들로부터 일치하는 모델을 선택하는 방법이다.  
                - 결국, 최소자승법과 RANSAC은 무엇을 기준으로 파라미터를 찾는가의 차이이다. 따라서, RANSAC의 기준을 사용하면 관측 데이터에 outlier가 많더라도 데이터 근사가 가능하다는 것이다.  
