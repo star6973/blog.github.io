@@ -97,15 +97,15 @@ tag: MobileRobotics
     <center><img src="/assets/images/ros5/10.PNG" width="100%"><br></center>
 
 - Jacobin Matrix
-    + 로봇의 움직임을 고려하면 가장 중요한 주제가 기준좌표(reference frame) 변환이다. 사람은 (x, y, z)로 이루어진 직교좌표계(cartesian coordinate)로 바라보기를 원하지만, 로봇은 극좌표계(polar coordinate)로 명령을 내려주길 바란다.
-    + 이러한 인간과 로봇의 좌표계를 이어주는 역할을 하는 것이 바로, 자코비안이다.
-    + Joint space(로봇의 움직임)을 Task space(3차원 공간의 움직임)으로의 변환을 만들어주고자 필요하다.
-    + Jacobian은 복잡하게 얽혀있는 식을 미분을 통해 linear approximation시킴으로써 간단한 근사 선형식으로 만들어준다.
-    + 간단히 말해서, 다변수 함수일 때의 미분값이다.
+    + 로봇의 움직임을 고려하면 가장 중요한 주제가 기준좌표(reference frame) 변환이다. 사람은 (x, y, z)로 이루어진 직교좌표계(cartesian coordinate)로 바라보기를 원하지만, 로봇은 극좌표계(polar coordinate)로 명령을 내려주길 바란다.  
+    + 이러한 인간과 로봇의 좌표계를 이어주는 역할을 하는 것이 바로, 자코비안이다.  
+    + Joint space(로봇의 움직임)을 Task space(3차원 공간의 움직임)으로의 변환을 만들어주고자 필요하다.  
+    + Jacobian은 복잡하게 얽혀있는 식을 미분을 통해 linear approximation시킴으로써 간단한 근사 선형식으로 만들어준다.  
+    + 간단히 말해서, 다변수 함수일 때의 미분값이다.   
 
-- Line Extraction from a point cloud
-    + point cloud로부터 라인을 어떻게 찾을 것인가?
-        + 3가지의 의문점이 있다.
+- Line Extraction from a point cloud  
+    + point cloud로부터 라인을 어떻게 찾을 것인가?  
+        + 3가지의 의문점이 있다.  
             1) 얼마나 많은 선들이 있는지?  
             2) 어떤 점들이 어떤 선에 포함되어 있는지?  
             3) 선 위에 점이 주어졌을 때, 어떻게 선의 파라미터들을 계산할 수 있는지?  
