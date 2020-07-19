@@ -87,7 +87,7 @@ tag: MobileRobotics
 
 - 위치 x에 따라 측정되는 z에 대한 확률값: p(z|x)
 - Beam-based Sensor Model
-    <center><img src="/assets/images/ros6/11.PNG" width="100%"><br></center>
+<center><img src="/assets/images/ros6/11.PNG" width="100%"><br></center>
     + P(z|x, m) - m은 map, 지도상에서 ray로부터 얻어지는 measurement를 가져오면서 실제값과 얼마나 차이가 나는 지를 확인
     + measuremet는 측정값이기 때문에 noise가 있다고 가정할 수 밖에 없기 때문에, 가우시안으로 noise를 잡는다.
     + 불확실한 장애물이 있게 된 경우에도 불확실성이 증가
