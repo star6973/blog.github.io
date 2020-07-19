@@ -88,11 +88,11 @@ use_math: true
     + 핀홀 카메라 모델에서 이러한 변환 관계는 다음과 같다.
     <center><img src="/assets/images/ros4/10.PNG" width="100%"><br></center>
    
-    + (X, Y, Z)는 월드 좌표계 상의 3D 점의 좌표, [R|t]는 월드 좌표계를 카메라 좌표계로 변환시키기 위한 회전/이동변환 행렬이며, A는 intrinsic camera matrix이다.
+    + (X, Y, Z)는 월드 좌표계 상의 3D 점의 좌표, $$[R|t]$$는 월드 좌표계를 카메라 좌표계로 변환시키기 위한 회전/이동변환 행렬이며, A는 intrinsic camera matrix이다.
     <center><img src="/assets/images/ros4/9.PNG" width="100%"><br></center>
 
     + 수직적으로 보면 캘리브레이션은 위와 같은 3차원 공간좌표와 2차원 영상좌표 사이의 변환관계 또는 변환관계를 설명하는 파라미터를 찾는 과정이다.
-    + 위의 수식에서 [R|t]를 카메라 외부 파라미터, A를 내부 파라미터라고 하며, 둘을 합쳐서 camera matrix 또는 projection matrix라고 한다.
+    + 위의 수식에서 $$[R|t]$$를 카메라 외부 파라미터, A를 내부 파라미터라고 하며, 둘을 합쳐서 camera matrix 또는 projection matrix라고 한다.
 
 - 카메라 내부 파라미터(Intrinsic Parameters)
     + 초점거리(focal length)
@@ -149,11 +149,11 @@ use_math: true
         + 가까운 물체는 더 큰 차이를 나타내며, 맵은 disparity가 작을수록 어둡고, disparity가 클수록 밝다(카메라로부터 거리가 가깝다).
         <center><img src="/assets/images/ros4/15.PNG" width="100%"><br></center>
     
-    + Correspondence Problem 
-        + 왼쪽과 오른쪽 이미지가 어떻게 같은가가 중요
+    + Correspondence Problem  
+        + 왼쪽과 오른쪽 이미지가 어떻게 같은가가 중요  
             1) Normalized Cross-Correlation(NCC)  
-               - template matching이란 입력으로 들어온 source image에서 원하는 template을 찾는 것을 말하는데, template image와 같은 사이즈의 window를 가지고 source image의 모든 subimage들과 비교하면서 유사도가 가장 높은 부분을 찾는다.  
-               - 그리고 이러한 크기가 같은 두 이미지 유사도를 구하는 방법 중 하나가 NCC이다.  
+               - template matching이란 입력으로 들어온 source image에서 원하는 template을 찾는 것을 말하는데, template image와 같은 사이즈의 window를 가지고 source image의 모든 subimage들과 비교하면서 유사도가 가장 높은 부분을 찾는다.   
+               - 그리고 이러한 크기가 같은 두 이미지 유사도를 구하는 방법 중 하나가 NCC이다.   
 
             2) Sum of Squared Differences(SSD)  
                - SSD의 가장 잘 알려진 예는 표준편차(standard deviation)이다.  
@@ -192,7 +192,7 @@ use_math: true
        - 엣지 성분이 주로 추출  
     
 - spatial filter(공간상의 필터링)
-    + $$S_xy$$는 점 (x, y)를 중심으로 이미지의 이웃 픽셀의 영역으로, 필터링은 출력 이미지의 대응되는 픽셀의 새로운 값을 만들어내는 것이다.
+    + $$S_(xy)$$는 점 (x, y)를 중심으로 이미지의 이웃 픽셀의 영역으로, 필터링은 출력 이미지의 대응되는 픽셀의 새로운 값을 만들어내는 것이다.
     + average filter는 마스크의 모든 필터를 합하여 평균을 내는 것
 
 - 필터링 명령에 가장 기본적이 활용이 가능한 방법
@@ -228,14 +228,14 @@ use_math: true
         2) 임계값을 통해 임계값보다 작으면 삭제
         3) 비최대치 억제 알고리즘을 통해(finning 알고리즘) 엣지를 추출
 
-- 이미지로부터 특징을 찾기
+- 이미지로부터 특징을 찾기  
     1) 엣지  
     2) 포인트(코너)  
        - SIFT, SURF, ORB(포인트에 대해서 구분이 가능하도록 해주는 구분자(디스크립터)가 필요  
        - 주변의 인텐시티브 값을 비교하면 포인트에 대해 정확히 구분이 가능할 수 있기 때문에)  
     3) 직선, 평면, 등  
 
-- 피처는 어디에 쓰이나?
+- 피처는 어디에 쓰이나?  
     1) 로봇 네비게이션  
     2) 오브젝트 인식  
        - 포인트 피처를 찾아서, 포이트 디스크립터로 또 다른 이미지의 디스크립터와 매칭 -> 유사도를 찾아서 두 이미지 간의 correspondence를 계산  
@@ -256,7 +256,7 @@ use_math: true
     3) 각 페어를 이미지를 겹침  
         <center><img src="/assets/images/ros4/21.PNG" width="100%"><br></center>
         
-    * 문제
+    * 문제  
     1) 한 영상에서는 추출이 되지만, 다른 영상에서는 추출이 안됨  
        -> 어느 시점에서 어떻게 뽑히더라도 특징이 추출이 되어야만을 전제로!  
         <center><img src="/assets/images/ros4/22.PNG" width="100%"><br></center>
@@ -281,7 +281,7 @@ use_math: true
     
     + SIFT 알고리즘은 이미지에서 스케일 불변인 키포인트를 추출하고, 추출한 키포인트들의 descriptor를 계산하는 것이다.
     + 간단히 설명하자면, 이미지의 크기와 회전에 불변하는 특징을 추출하는 알고리즘으로, 서로 다른 두 이미지에서 SIFT 특징을 각각 추출한 다음에 서로 가장 비슷한 특징끼리 매칭해주면 두 이미지에서 대응되는 부분을 찾을 수 있다는 것이 기본 원리이다.
-    + SIFT 알고리즘의 주요 5단계 절차
+    + SIFT 알고리즘의 주요 5단계 절차  
         1) Scale-space Extrema Detection(스케일-공간 극값 검출)  
            - 가우시안 필터 후 라플라시안 필터(Laplacian of Gaussian, LoG)를 적용하면 이미지에서 다양한 크기의 이미지를 검출한다.  
            - 하지만 LoG는 다소 시간이 소요되기 때문에 하나의 이미지에 서로 다른 필터를 적용한 가우시안 피라미드 이미지의 차이(Difference of Gaussian, DoG)를 이용한다.  
