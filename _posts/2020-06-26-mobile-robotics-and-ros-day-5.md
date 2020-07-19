@@ -154,12 +154,12 @@ tag: MobileRobotics
                  f) Set with the maximum number of inliers obtained within k iterations
                     <center><img src="/assets/images/ros5/23.PNG" width="100%"><br></center>
                
-               - RANSAC 알고리즘의 파라미터
-                 a) 샘플링 과정을 몇 번(N) 반복할 것인지  
-                    -> RANSAC을 무한히 돌릴 수 없기에 확률적으로 반복 횟수를 결정한다. RANSAC 반복횟수를 N, 한번에 뽑는 샘플 개수를 m, 입력 데이터들 중에서 inlier의 비율을 $$\alpha$$라 하면 N번 중 적어도 한번은 inlier에서만 샘플이 뽑힐 확률은 다음과 같다.
+               - RANSAC 알고리즘의 파라미터  
+                 a) 샘플링 과정을 몇 번(N) 반복할 것인지   
+                    -> RANSAC을 무한히 돌릴 수 없기에 확률적으로 반복 횟수를 결정한다. RANSAC 반복횟수를 N, 한번에 뽑는 샘플 개수를 m, 입력 데이터들 중에서 inlier의 비율을 $$\alpha$$라 하면 N번 중 적어도 한번은 inlier에서만 샘플이 뽑힐 확률은 다음과 같다.  
                     <center><img src="/assets/images/ros5/24.PNG" width="100%"><br></center>
 
-                    -> 위 포물선 근사 예에서 inlier 비율이 80%라 할 때, RANSAC 성공확률을 99.9%로 맞추려면 다음과 같이 계산한다.
+                    -> 위 포물선 근사 예에서 inlier 비율이 80%라 할 때, RANSAC 성공확률을 99.9%로 맞추려면 다음과 같이 계산한다.  
                     <center><img src="/assets/images/ros5/25.PNG" width="100%"><br></center>
                  
                  b) inliner와 outlier의 경계(T)를 어떻게 정할 것인지  
