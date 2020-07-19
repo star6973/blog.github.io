@@ -447,8 +447,8 @@ int main()
         + 위의 수식에서 (u, v)만큼 이동된 위치에서의 픽셀값 I(x+u, y+v)는 테일러 급수(Taylor series)에 의해 다음과 같이 근사될 수 있다.
         <center><img src="/assets/images/opencv10/38.PNG" width="70%"></center><br>
 
-        + 이 식을 다시 첫 번재 수식에 대입하여 정리하면 다음과 같다.
-        <center><img src="/assets/images/opencv10/39.PNG" width="70%"></center><br>
+        + 이 식을 다시 첫 번쩨 수식에 대입하여 정리하면 다음과 같다.
+        <center><img src="/assets/images/opencv10/39.png" width="70%"></center><br>
 
         + 위 수식에서 중앙의 2x2 행렬을 M이라고 정의하면, 다음과 같이 다시 정리할 수 있다.
         <center><img src="/assets/images/opencv10/40.PNG" width="70%"></center><br>
