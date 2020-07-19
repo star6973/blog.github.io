@@ -6,8 +6,6 @@ categories: MobileRobotics
 tag: MobileRobotics
 ---
 
-<center><img src="/assets/images/ros6/2.PNG" width="100%"><br></center>
-
 # Maps
 #### Contents
 1. Introduction of maps
@@ -26,6 +24,7 @@ tag: MobileRobotics
                        정보들이 축약되어 있는 형태이기 때문에 정확하지는 않음.
   3) feature map - continuous 환경에서 얻어지는 특징들을 위치 정보로 표현. 문제는 확보된 특징이 얼마나 좋고, 강인한 특징일지 확신할 수 없음.
                    마찬가지로 grid map에 비해 리소스가 적게 소요.
+<center><img src="/assets/images/ros7/1.PNG" width="100%"><br></center>
 
 ## 2. Grid based representation
 - occupancy grid representation
