@@ -87,13 +87,12 @@ use_math: true
     + 카메라 영상은 3차원 공간상의 점들을 2차원 이미지 평면에 투사(perspective projection)함으로써 얻어진다.
     + 핀홀 카메라 모델에서 이러한 변환 관계는 다음과 같다.
     <center><img src="/assets/images/ros4/10.PNG" width="100%"><br></center>
-<br>
-    + (X, Y, Z)는 월드 좌표계 상의 3D 점의 좌표, (R|t)는 월드 좌표계를 카메라 좌표계로 변환시키기 위한 회전/이동변환 행렬이며, A는 intrinsic camera matrix이다.
+
+    + (X, Y, Z)는 월드 좌표계 상의 3D 점의 좌표, [R|t]는 월드 좌표계를 카메라 좌표계로 변환시키기 위한 회전/이동변환 행렬이며, A는 intrinsic camera matrix이다.
     <center><img src="/assets/images/ros4/9.PNG" width="100%"><br></center>
 
     + 수직적으로 보면 캘리브레이션은 위와 같은 3차원 공간좌표와 2차원 영상좌표 사이의 변환관계 또는 변환관계를 설명하는 파라미터를 찾는 과정이다.
-    
-    + 위의 수식에서 (R|t)를 카메라 외부 파라미터, A를 내부 파라미터라고 하며, 둘을 합쳐서 camera matrix 또는 projection matrix라고 한다.<br>
+    + 위의 수식에서 [R|t]를 카메라 외부 파라미터, A를 내부 파라미터라고 하며, 둘을 합쳐서 camera matrix 또는 projection matrix라고 한다.
 
 - 카메라 내부 파라미터(Intrinsic Parameters)
     + 초점거리(focal length)
