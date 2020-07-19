@@ -133,34 +133,25 @@ tag: MobileRobotics
                - 최소자승법은 데이터들과의 잔차를 최소화하도록 모델을 찾지만, RANSAC은 가장 많은 수의 데이터들로부터 일치하는 모델을 선택하는 방법이다.  
                - 결국, 최소자승법과 RANSAC은 무엇을 기준으로 파라미터를 찾는가의 차이이다. 따라서, RANSAC의 기준을 사용하면 관측 데이터에 outlier가 많더라도 데이터 근사가 가능하다는 것이다.  
                - RANSAC 알고리즘  
-               <center><img src="/assets/images/ros5/17.PNG" width="100%"><br></center>
-                 
+                 <center><img src="/assets/images/ros5/17.PNG" width="100%"><br></center>
                  a) Select sample of 2 points at random
                     <center><img src="/assets/images/ros5/18.PNG" width="100%"><br></center>
-                 
                  b) Calculate model parameters that fit the data in the sample
                     <center><img src="/assets/images/ros5/19.PNG" width="100%"><br></center>
-                 
                  c) Calculate error function for each data point
                     <center><img src="/assets/images/ros5/20.PNG" width="100%"><br></center>
-                 
                  d) Select data that support current hypothesis
                     <center><img src="/assets/images/ros5/21.PNG" width="100%"><br></center>
-                 
                  e) Repeat sampling
                     <center><img src="/assets/images/ros5/22.PNG" width="100%"><br></center>
-                 
                  f) Set with the maximum number of inliers obtained within k iterations
                     <center><img src="/assets/images/ros5/23.PNG" width="100%"><br></center>
-               
                - RANSAC 알고리즘의 파라미터  
                  a) 샘플링 과정을 몇 번(N) 반복할 것인지   
                     -> RANSAC을 무한히 돌릴 수 없기에 확률적으로 반복 횟수를 결정한다. RANSAC 반복횟수를 N, 한번에 뽑는 샘플 개수를 m, 입력 데이터들 중에서 inlier의 비율을 $$\alpha$$라 하면 N번 중 적어도 한번은 inlier에서만 샘플이 뽑힐 확률은 다음과 같다.  
                     <center><img src="/assets/images/ros5/24.PNG" width="100%"><br></center>
-
                     -> 위 포물선 근사 예에서 inlier 비율이 80%라 할 때, RANSAC 성공확률을 99.9%로 맞추려면 다음과 같이 계산한다.  
                     <center><img src="/assets/images/ros5/25.PNG" width="100%"><br></center>
-                 
                  b) inliner와 outlier의 경계(T)를 어떻게 정할 것인지  
                     -> RNASAC은 지지하는 데이터 개수가 가장 많은 모델을 뽑는 파라미터 추정 방법이다. 지지하는 데이터는 추정된 모델과 가까이 있는 데이터들을 말한다. 그렇다면 얼마나 가까워야 그 모델을 따르는 데이터라고 간주하는 것일까?  
                     -> RANSAC 알고리즘에서 데이터 $$(x_i, y_i)$$와 모델 f와의 거리 $$r_i = |y_i - f(x_i)|$$가 T 이하이면 그 모델을 지지하는 데이터로 간주한다.  
