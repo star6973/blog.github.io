@@ -102,8 +102,8 @@ use_math: true
         <center><img src="/assets/images/opencv10/24.PNG" width="70%"></center><br>
 <br><br>
 
-### 11.2.1. Feature 검출인식 및 실습
-#### 11.2.1.1. 허프 변환 직선 검출
+### 11.2. Feature 검출인식 및 실습
+#### 11.2.1. 허프 변환 직선 검출
 - 직선은 영상에서 찾을 수 있는 특징 중 가장 중요한 정보를 제공한다.
 - 영상에서 직선 성분을 찾기 위해서는 우선 엣지 픽셀의 위치를 찾아내고, 이러한 엣지 픽셀들이 직선의 방정식에 맞게 일렬로 배열되어 있는지를 확인해야 한다.
 - 주로 직선 검출은 허프 변환 기법을 사용한다.
@@ -295,7 +295,7 @@ int main()
 ```
 <center><img src="/assets/images/opencv10/31.PNG" width="70%"></center><br>
 
-#### 11.2.1.2. 허프 변환 원 검출
+#### 11.2.2. 허프 변환 원 검출
 - 중심 좌표가 (a, b)이고 반지름이 r인 원의 방정식은 (x-a)^2 + (y-b)^2 = r^2이다.
 - 원의 방정식은 세 개의 파라미터를 가지고 있으므로, 허프 변환을 적용하려면 3차원 파라미터 공간에서 축적 배열을 정의하고 가장 누적이 많은 위치를 찾아야 한다.
 - 그러나 3차원 파라미터 공간에서 축적 배열을 정의하고 사용하려면 너무 많은 메모리와 연산 시간이 필요하기 때문에 허프 변환 대신 허프 그래디언트 방법을 사용한다.
@@ -340,7 +340,7 @@ int main(void) {
 <center><img src="/assets/images/opencv10/32_1.jpg" width="70%"></center><br>
 <center><img src="/assets/images/opencv10/32.jpg" width="70%"></center><br>
 
-#### 11.2.1.3. 허프 변환 심화 예제
+#### 11.2.3. 허프 변환 심화 예제
 멀티 하네스의 기울기 보정
 ```cython
 #include "hough.hpp"
@@ -408,7 +408,7 @@ int main()
 ```
 <center><img src="/assets/images/opencv10/33.PNG" width="70%"></center><br>
 
-#### 11.2.1.3. 코너 검출
+#### 11.2.4. 코너 검출
 - 코너 검출
     + 에지나 직선은 영상 구조 파악 및 객체 검출에는 도움이 되지만, 영상 매칭에는 큰 도움이 되지 않는다. 에지 강도와 방향 정보만 가지고 있기에 영상 매칭하기엔 정보가 부족하다.
     + 영상에서 특징(feature)이란 영상으로부터 추출할 수 있는 유용한 정보를 의미하며 평균 밝기, 히스토그램, 에지, 직선 성분, 코너 등이 있다.
@@ -573,3 +573,272 @@ int main()
 <center><img src="/assets/images/opencv10/45_1.PNG" width="70%"></center><br>
 <center><img src="/assets/images/opencv10/45.PNG" width="70%"></center><br>
 <center><img src="/assets/images/opencv10/46.PNG" width="70%"></center><br>
+
+#### 11.2.5. K-최근접 이웃 분류기의 이해
+- 최근접 이웃 알고리즘
+    + 기존에 가지고 있는 데이터들을 일정한 규칙에 의해 분류된 상태에서 새로운 입력 데이터의 종류를 예측하는 분류 알고리즘
+    + 장점
+        + 단순하고 효율적이다.
+        + 기저 데이터 분포에 대한 가정을 하지 않는다. = 비모수이고, 분포에 대한 가정이 없다.
+        + 훈련 단계가 빠르다.
+        + 어떤 데이터가 주어져도 해당 사례에 대한 유사성을 측정할 수 있다.
+        
+    + 단점
+        + 대용량 데이터에 대한 계산 효율성이 매우 떨어진다.
+        + 성능이 차원에 달려있다.
+        + 모델을 생성하지 않아 특징과 클래스간의 관계를 이해하는 능력이 제약된다.
+        + 적절한 k의 선택이 필요하다.
+        + 분류 단계가 느리다.
+
+- k는 최근접 이웃의 개수를 임의로 사용해도 된다는 것을 의미하는 변수 항목이며, k가 선택된 이후 알고리즘은 여러 범주로 분류되어 명목 변수로 레이블된 예시들로 구성된 훈련 데이터셋을 필요로 한다.
+<center><img src="/assets/images/opencv10/47.PNG" width="70%"></center><br>
+
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void make_tranData(Mat trainData, Mat group[2], Mat& classLable)
+{
+   int half = trainData.rows / 2;
+   Range r1(0, half);
+   Range r2(half, trainData.rows);
+
+   group[0] = trainData.rowRange(r1);
+   group[1] = trainData.rowRange(r2);
+
+   randn(group[0], 150, 50);
+   randn(group[1], 250, 50);
+   classLable.rowRange(r1).setTo(0);
+   classLable.rowRange(r2).setTo(1);
+}
+
+
+// group[0]은 빨간색 원(윗쪽)
+// group[1]은 초록색 원(아랫쪽)
+void draw_points(Mat& image, Mat group[2])
+{
+   for (int i = 0; i < group[0].rows; i++)
+   {
+      Point2f pt1(group[0].at<float>(i, 0), group[0].at<float>(i, 1)); // 윗부분 (x, y)
+      Point2f pt2(group[1].at<float>(i, 0), group[1].at<float>(i, 1)); // 아랫부분 (x, y)
+      circle(image, pt1, 3, Scalar(0, 0, 255), FILLED);
+      circle(image, pt2, 3, Scalar(0, 255, 0), FILLED);
+   }
+}
+
+int main()
+{
+   int Nsample = 100;
+   Mat trainData(Nsample, 2, CV_32FC1, Scalar(0));
+   Mat classLable(Nsample, 1, CV_32FC1, Scalar(0));
+   Mat image(400, 400, CV_8UC3, Scalar(255, 255, 255));
+
+   Mat group[2];
+   make_tranData(trainData, group, classLable);
+   draw_points(image, group);
+   imshow("학습데이터", image);
+   waitKey();
+   return 0;
+}
+```
+<center><img src="/assets/images/opencv10/48.PNG" width="70%"></center><br>
+
+```cython
+// KNearst 클래스
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+void make_trainData(Mat trainData, Mat group[2], Mat& classLable)
+{
+   int half = trainData.rows / 2;
+   Range r1(0, half);
+   Range r2(half, trainData.rows);
+
+   group[0] = trainData.rowRange(r1);
+   group[1] = trainData.rowRange(r2);
+   randn(group[0], 150, 50);
+   randn(group[1], 250, 50);
+   classLable.rowRange(r1).setTo(0);
+   classLable.rowRange(r2).setTo(1);
+}
+
+void draw_points(Mat& image, Mat group[2])
+{
+   for (int i = 0; i < group[0].rows; i++)
+   {
+      Point2f pt1(group[0].at<float>(i, 0), group[0].at<float>(i, 1));
+      Point2f pt2(group[1].at<float>(i, 0), group[1].at<float>(i, 1));
+      circle(image, pt1, 3, Scalar(0, 0, 255), FILLED);
+      circle(image, pt2, 3, Scalar(0, 255, 0), FILLED);
+   }
+}
+
+void kNN_test(Ptr<ml::KNearest>  knn, int K, Mat& image)
+{
+   for (int y = 0; y < image.rows; y++) {
+      for (int x = 0; x < image.cols; x++)
+      {
+         Matx12f sample((float)x, (float)y);
+         Mat response;
+         knn->findNearest(sample, K, response); // 분류 수행
+
+         int resp = (int)response.at<float>(0);
+         if (resp == 1)   image.at<Vec3b>(y, x) = Vec3b(0, 180, 0);
+         else         image.at<Vec3b>(y, x) = Vec3b(0, 0, 180);
+      }
+   }
+}
+
+int main()
+{
+   int Nsample = 100;
+   Mat trainData(Nsample, 2, CV_32FC1, Scalar(0));
+   Mat classLable(Nsample, 1, CV_32FC1, Scalar(0));
+
+   Mat group[2];
+   make_trainData(trainData, group, classLable);
+
+   Mat image(400, 400, CV_8UC3, Scalar(255, 255, 255));
+
+   int K = 7;
+   Ptr<ml::KNearest>  knn = ml::KNearest::create();
+   knn->train(trainData, ml::ROW_SAMPLE, classLable);
+   kNN_test(knn, K, image);
+
+   draw_points(image, group);
+   imshow("sample K=" + to_string(K), image);
+   waitKey();
+   return 0;
+}
+```
+<center><img src="/assets/images/opencv10/49.PNG" width="70%"></center><br>
+
+#### 11.2.6. K-NN으로 숫자 분류하기 실습
+```cython
+#include "kNN.hpp"
+
+int main()
+{
+   Size  size(40, 40);      // 학습 셀 크기 
+   int  K = 15;         // 선출하는 이웃 샘플수
+   int  Nclass = 10;      // 인식 숫자(카테고리) 개수
+   int  Nsample = 20;      // 숫자당 학습 샘플수
+
+   string image_file = "../image/train_numbers.png";
+   Mat  train_image = imread(image_file, 0);      // 영상 로드
+   CV_Assert(train_image.data);
+
+   threshold(train_image, train_image, 32, 255, CV_THRESH_BINARY);
+
+   Mat  trainData, classLable;
+   for (int i = 0, k = 0; i < Nclass; i++) {
+      for (int j = 0; j < Nsample; j++, k++)
+      {
+         Point start(j * size.width, i * size.height);
+         Rect  roi(start, size);
+         Mat   part = train_image(roi);         // 숫자 영상 분리
+
+         Mat  num = find_number(part);      // 숫자 영역 영상
+         Mat  data = place_middle(num, size);   // 정규화 및 1행데이터 구성
+         trainData.push_back(data);      // 학습 데이터 수집
+         classLable.push_back(i);      // 레이블링
+      }
+   }
+
+   Ptr<ml::KNearest>  knn = ml::KNearest::create();
+   knn->train(trainData, ml::ROW_SAMPLE, classLable);   // k-NN 학습
+
+
+   int no;
+   cout << "영상번호를 입력하세요: ";
+   cin >> no;                           // 영상번호 입력
+
+   string demo_file = format("../image/num/%02d.png", no);
+   Mat  test_img = imread(demo_file, 0);         // 실험 영상 로드
+   CV_Assert(test_img.data);                  // 예외처리
+
+   threshold(test_img, test_img, 128, 255, THRESH_BINARY);   // 이진화
+   Mat  num = find_number(test_img);      // 숫자객체 검출
+   Mat  data = place_middle(num, size);         // 숫자객체 셀 중심 배치 
+
+   Mat result;
+   knn->findNearest(data, K, result);            // 숫자 분류 수행
+
+   cout << "분류결과 : " << result.at<float>(0) << endl;
+
+   imshow("test_img", test_img);
+   waitKey();
+   return 0;
+}
+```
+
+#### 11.2.7. 영상 워핑과 영상 모핑
+```cython
+#include <opencv2/opencv.hpp>
+using namespace cv;
+using namespace std;
+
+Point2f pt1, pt2;
+Mat image;
+
+void morphing()
+{
+   Mat dst(image.size(), image.type(), Scalar(0));
+   int  width = image.cols;
+   int height = image.rows;
+
+   for (float y = 0; y < image.rows; y += 0.1f) {
+      for (float x = 0; x < image.cols; x += 1) // x가 0.1인 이유는 값이 너무 크면 홀이 생겨버리기 때문에
+      {
+         float ratio;
+         if (y < pt1.y) {
+            ratio = y / pt1.y;
+         }
+         else {
+            ratio = (height - y) / (height - pt1.y);
+         }
+
+         /*
+         if (x < pt1.x) {
+            ratio = x / pt1.x;
+         }
+         else {
+            ratio = (width - x) / (width - pt1.x);
+         }
+
+         float dx = ratio * (pt2.x - pt1.x);
+         float dy = ratio * (pt2.y - pt1.y);
+
+         dst.at<uchar>(y, x + dx) = image.at<uchar>(y, x); // 역방향 사상
+//         dst.at<uchar>(y + dy, x) = image.at<uchar>(y, x); // 역방향 사상
+      }
+   }
+   dst.copyTo(image);
+   imshow("image", image);
+}
+
+void onMouse(int event, int x, int y, int flags, void* param)
+{
+   if (event == EVENT_LBUTTONDOWN) {
+      pt1 = Point2f(x, y);
+   }
+   else if (event == EVENT_LBUTTONUP) {
+      pt2 = Point2f(x, y);
+      morphing();
+   }
+}
+
+int main()
+{
+   image = imread("../image/warp_test.jpg", 0);
+   CV_Assert(image.data);
+
+   imshow("image", image);
+   setMouseCallback("image", onMouse);
+   waitKey();
+
+   return 0;
+}
+```
