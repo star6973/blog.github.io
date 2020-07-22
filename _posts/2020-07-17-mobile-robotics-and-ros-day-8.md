@@ -98,12 +98,12 @@ use_math: true
     - 백엔드: 전체 풀 path를 가지고(전체적인 에러를 가지고) 최적화하는 작업.
         + loop clousure를 하면서 생성되는 에러 등을 비교하면서 전체적으로 최적화
 
-- 최근 이슈
-    1) sementic SLAM: 의미적인 SLAM - 인식된 물체의 의미를 찾음
-    2) 동적인 환경 문제 -> 3D로 인식 -> 움직이는 물체인지, 고정된 물체인지를 판단하여 연구
-    3) loop closure -> 계절적인 환경에 따라 localization(눈이 오거나 비가 올 때 같은 자리로 인식 가능한가)
-    4) robust perception
-    5) sementic reasoning -> BOG
+- 최근 이슈  
+    1) sementic SLAM: 의미적인 SLAM - 인식된 물체의 의미를 찾음  
+    2) 동적인 환경 문제 -> 3D로 인식 -> 움직이는 물체인지, 고정된 물체인지를 판단하여 연구  
+    3) loop closure -> 계절적인 환경에 따라 localization(눈이 오거나 비가 올 때 같은 자리로 인식 가능한가)  
+    4) robust perception  
+    5) sementic reasoning -> BOG  
 
 <br><br>
 
