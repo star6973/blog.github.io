@@ -4,6 +4,7 @@ title:  Mobile Robotics and ROS [Day 5]
 date:   2020-06-26 10:00:00-19:00:00
 categories: MobileRobotics
 tag: MobileRobotics
+use_math: true
 ---
 
 > [스카이비전](https://bskyvision.com/475){: target="_blank"}
