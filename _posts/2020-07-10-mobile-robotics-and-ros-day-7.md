@@ -52,7 +52,7 @@ use_math: true
 - quadtree
     + 대량의 좌표 데이터를 메모리 안에 압축해 저장하기 위해 사용하는 여러 기법 중 하나
     + 주어진 공간을 항상 4개로 분할해 재귀적으로 표현
-    <center><img src="/assets/images/ros7/1.PNG" width="100%"><br></center>
+    <center><img src="/assets/images/ros7/1_1.PNG" width="100%"><br></center>
   
 - Occupancy grid map using Sensor Model
   1) Gaussian Sensor model
