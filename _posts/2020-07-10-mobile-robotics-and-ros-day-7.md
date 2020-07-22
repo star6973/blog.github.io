@@ -9,7 +9,7 @@ use_math: true
 
 > [Kalman Filter](https://medium.com/@celinachild/kalman-filter-%EC%86%8C%EA%B0%9C-395c2016b4d6)
 > [Extended Kalman Filter](http://jinyongjeong.github.io/2017/02/14/lec03_kalman_filter_and_EKF/)
->
+> [Monte Carlo Filter](http://jinyongjeong.github.io/2017/02/22/lec11_Particle_filter/)
 
 # Maps
 #### Contents
@@ -249,64 +249,45 @@ use_math: true
     
     + 파티클 필터의 목적은 가우시안 분포가 아닌 임의의 분포를 다루기 위한 접근 방법이다.
     + 가중치를 갖는 파티큭들의 set은 다음과 같다. $$x^[j]$$는 particle의 위치, $$w^[j]$$는 particle의 weight을 의미한다.
+    + Posterior(사후 확률)은 다음과 같다.
+    <center><img src="/assets/images/ros7/26.PNG" width="100%"><br></center>
 
+    + 파티클 필터가 다음 두 가지의 분산 형태를 갖는다고 가정할 때, 샘플을 어떻게 추출할 수 있을까?
+    <center><img src="/assets/images/ros7/27.PNG" width="100%"><br></center>
 
-- 파티클 기반, 파티클 분산으로 오차 추정 -> 불확실성 추정
+    + 왼쪽의 그림은 가우시안 분포를 따르고 있기에 임의의 값을 뽑고 합을 구함으로써 샘플을 추출할 수 있지만, 오른쪽의 임의의 분포는 같은 방식으로 샘플을 추출할 수 없다.
+    + 따라서 가우시안 분포가 아닐 때의 샘플링하는 방법은 다음과 같은 방법과 알고리즘을 사용한다.
+    <center><img src="/assets/images/ros7/27_2.PNG" width="100%"><br></center>
+    <center><img src="/assets/images/ros7/28.PNG" width="100%"><br></center>
+    
+    + proposal(x)는 실제 분포인 target(x)를 가우시안 분포로 근사한 함수이다.
+        <center><img src="/assets/images/ros7/27_3.PNG" width="100%"><br></center>
 
+        + 하나의 point에 대해서 uncertainty 분포가 구해지면, 그 분포가 proposal distribution이다.
+        + 그리고 다시 새로운 예측값이 생길 때, proposal distribution에서 방금 구해진 point가 포함되는 분포가 target distribution이다.
+        + 예를 들어, 별의 위치를 예측하여 target distribution이 정해졌지만, 실제로 별의 위치에 obstacle이 없다면 target distribution이 0으로 수렴하므로 importance weight의 값은 0으로 수렴한다.
+    
+    + 위의 알고리즘을 localization에 적용시키면 다음과 같다.
+    <center><img src="/assets/images/ros7/29.PNG" width="100%"><br></center>
+    
+    + 샘플을 구하는 3번 라인은 로봇의 모션 모델이 되며, 각 파티클의 가중치는 센서의 observation model이다.
+    + 7번 라인부터 10번 라인까지는 resampling 과정이다.
+        + resampling이란 확률이 작은 파티클은 제거하고, 확률이 큰 파티클은 여러 개로 나눈다.
+        + resampling을 하는 이유는 우리가 사용할 수 있는 point의 갯수가 한정적이기 때문에 resampling 전과 후의 particle의 개수는 같아야 한다.
+        + 또한, resampling 전에 particle들의 가중치는 다르지만, resampling을 한 후에는 모두 같아진다.
+        + 다음은 resampling의 방법들이다.
+        <center><img src="/assets/images/ros7/30.PNG" width="100%"><br></center>
 
-- (차이)ETK는 오차를 공분산으로 오차 추정 + 단일 모델 + 가우시안 분포 -> 불확실성 추정 
-- 파티클이 처음에 퍼져있다가, 높은 확률의 state에 위치한 파티클이 resampling이 되면서 모이기 됨
-- state(센서값)와 weight(신뢰도) 값을 같이 가지고 있는 모델
-- 현실적으로 무한대의 샘플을 가지고 계산할 수 없기 때문에 고른 가우시안 분포를 이루지는 않음
-- probability에 의해 랜덤하게 분포됨
+        + 왼족 그림과 같이 룰렛에서 weight에 따라(한쪽으로 모아두는 경우) 1~1000까지를 나눠서 랜덤으로 뽑을 경우, 운이 나쁘면 weight가 적은 것만 계속 뽑힐 수 있다.
+        + 이를 방지하기 위해 오른쪽 그림과 같이 1~1000까지를 고르게 나누고, weight값을 계산하여(각각 다르게) 그 부분을 resampling한다.
 
-- proposal distribution
-  : 하나의 point에 대해서 uncertainty 분포가 구해지면, 그 분포가 proposal distribution
-  : 다시 새로운 예측값이 생길 때, proposal distribution에서 방금 구해진 point가 포함되는 분포가 target distribution
+    + Monte Carlo Filter는 다음과 같이 하나의 주기를 가지며 계속 반복적으로 시행한다.
+        
+          particle sampling -> importance weight 계산 -> resampling
 
-  -> 별의 위치를 예측하여 target distribution이 정해졌지만, 실제로 별의 위치에 obstacle이 없다면 target distribution이 0으로 수렴하므로
-     importance weight의 값 역시 0으로 수렴(작아짐)
+- 정리
+    + Kalman Filter - 선형 함수 + 가우시안 분포
+    + Extended Kalman Filter - 비선형 함수 + 가우시안 분포
+    + Monte Carlo Filter - 비선형 함수 + 임의 분포
 
-
-* 룰렛에서 weight에 따라(한쪽으로 모아두는 경우) 1~1000까지를 나눠서 랜덤으로 뽑을 경우, 운이 나쁘게 weight가 적은 것만 계속 뽑힐 수 있음
--> 이를 방지하기 위해 1~1000까지를 고르게 나누고, weight값을 계산하여(각각 다르게) 그 부분을 resampling한다.
--> 373p
-
-[하나의 주기]
-particle sampling -> importance weight 계산 -> resampling
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<center><img src="/assets/images/ros7/31.PNG" width="100%"><br></center>
