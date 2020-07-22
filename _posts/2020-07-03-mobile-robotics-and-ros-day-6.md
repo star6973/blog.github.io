@@ -4,6 +4,7 @@ title:  Mobile Robotics and ROS [Day 6]
 date:   2020-07-03 10:00:00-19:00:00
 categories: MobileRobotics
 tag: MobileRobotics
+use_math: true
 ---
 
 # Motion and Sensing
