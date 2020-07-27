@@ -182,3 +182,164 @@ print(dist(doc1, docQ))
 print(dist(doc2, docQ))
 print(dist(doc3, docQ))
 ```
+
+# Deep Learning for NLP 2 [Text Understanding]
+## IMDB 영화 리뷰 데이터 처리
+
+```jupyter
+#%%
+
+import os
+import re
+import pandas as pd
+import tensorflow as tf
+from tensorflow.keras import utils
+
+# IMDB 데이터 다운로드
+data_set = tf.keras.utils.get_file(
+    fname="imdb.tar.gz",
+    origin="http://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
+    extract=True
+)
+
+def directory_data(directory):
+  data = {}
+  data["review"] = []
+  for file_path in os.listdir(directory):
+    with open(os.path.join(directory, file_path), "r", encoding="utf-8") as file:
+      data["review"].append(file.read())
+  return pd.DataFrame.from_dict(data)
+
+def data(directory):
+  pos_df = directory_data(os.path.join(directory, "pos"))
+  neg_df = directory_data(os.path.join(directory, "neg"))
+  pos_df["sentiment"] = 1
+  neg_df["sentiment"] = 0
+  return pd.concat([pos_df, neg_df])
+
+train_df = data(os.path.join(os.path.dirname(data_set), "aclImdb", "train"))
+test_df = data(os.path.join(os.path.dirname(data_set), "aclImdb", "test"))
+
+#%%
+
+train_df.head()
+
+#%%
+
+reviews = list(train_df["review"])
+
+# 문자열 문장 리스트를 토큰화
+tokenized_reviews = [r.split() for r in reviews]
+# 토큰화된 리스트에 대한 각 길이를 저장(단어의 길이)
+review_by_token = [t for t in tokenized_reviews]
+review_len_by_token = [len(t) for t in tokenized_reviews]
+# 토큰화된 것을 붙여서 음절의 길이를 저장(문장의 길이 - 공백을 제거해서 그냥 한줄로 표현)
+review_by_alphabet = [s.replace(' ', '') for s in reviews]
+review_len_by_alphabet = [len(s.replace(' ', '')) for s in reviews]
+
+#%%
+
+print(tokenized_reviews[:10])
+
+#%%
+
+print(review_by_token[:10])
+
+#%%
+
+print(review_len_by_token[:10])
+
+#%%
+
+print(review_by_alphabet[:10])
+
+#%%
+
+print(review_len_by_alphabet[:10])
+
+#%%
+
+import matplotlib.pyplot as plt
+# 이미지 사이즈 선언, figsize: [가로, 세로] 형태의 튜플로 입력
+plt.figure(figsize=(12, 5))
+
+# 히스토그램 선언
+# bins: 히스토그램 값들에 대한 버켓 범위
+# range: x축 값의 범위
+# alpha: 그래프 색상 투명도
+# color: 그래프 색상
+# label: 그래프에 대한 라벨
+plt.hist(review_len_by_token, bins=50, alpha=0.5, color='r', label='word')
+plt.hist(review_len_by_alphabet, bins=50, alpha=0.5, color='b', label='alphabet')
+
+# 그래프 제목, x축 라벨, y축 라벨
+plt.title("Review Length Histogram")
+plt.xlabel("Review Length")
+plt.ylabel("Number of Review")
+
+#%% md
+
+단어는 2,000개밖에 쓰지 않았지만, 문장의 길이는 훨씬 더 많다는 것을 알 수 있다.
+
+#%%
+
+import numpy as np
+
+print("문장 최대길이: ", np.max(review_len_by_token))
+print("문장 최소길이: ", np.min(review_len_by_token))
+print("문장 평균길이: ", np.mean(review_len_by_token))
+print("문장 길이 표준편차: ", np.std(review_len_by_token))
+print("문장 중간길이: ", np.median(review_len_by_token))
+
+# 사분위의 대한 경우는 0~100 스케일로 되어있음
+print("제 1 사분위 길이: ", np.percentile(review_len_by_token, 25)) # 1/4의 위치(하위 25%)
+print("제 3 사분위 길이: ", np.percentile(review_len_by_token, 75)) # 3/4의 위치(상위 25%)
+
+#%% md
+
+### 문장 내 단어 수에 대한 히스토그램
+
+#%%
+
+plt.figure(figsize=(12, 5))
+# 박스플롯 생성
+# 첫 번재 파라미터: 여러 분포에 대한 데이터 리스트를 입력
+# labels: 입력한 데이터에 대한 라벨
+# showmeans: 평균값을 마크함
+plt.boxplot([review_len_by_token], labels=['token'], showmeans=True)
+
+#%% md
+
+### 문장 내 알파벳 수에 대한 히스토그램
+
+#%%
+
+plt.figure(figsize=(12, 5))
+plt.boxplot([review_len_by_alphabet], labels=['alphabet'], showmeans=True)
+
+#%%
+
+from wordcloud import WordCloud, STOPWORDS
+
+my_stopwords = STOPWORDS.add("br")
+wordcloud = WordCloud(stopwords=STOPWORDS, background_color='black', width=800, height=600).generate(" ".join(train_df["review"]))
+
+plt.figure(figsize=(15, 10))
+plt.imshow(wordcloud)
+plt.axis("off")
+plt.show()
+
+#%% md
+
+### 긍정/부정의 분포 확인
+
+#%%
+
+import seaborn as sns
+
+sentiment = train_df["sentiment"].value_counts()
+fig, axe = plt.subplots(ncols=1)
+fig.set_size_inches(6, 3)
+sns.countplot(train_df["sentiment"])
+plt.show()
+```
