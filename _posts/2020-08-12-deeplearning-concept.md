@@ -82,7 +82,7 @@ use_math: true
     1) MSE(Mean Squared Error, 평균제곱오차)
         + 오차의 제곱에 대한 평균을 취한 값으로, 통계적 추정의 정확성에 대한 질적인 척도로 사용된다.
 
-        <center><img src="/assets/images/deeplearning/92.png" width="50%"></center><br>
+    <center><img src="/assets/images/deeplearning/92.png" width="50%"></center><br>
 
         + 예측값과 실제값의 차이가 클수록 MSE의 값도 커진다는 것은, 이 값이 작을수록 예측력이 좋다(추정의 정확성이 높아진다)고 할 수 있다.
 
@@ -141,4 +141,27 @@ use_math: true
     + batch size의 양에 따라 비유를 해보자면, batch size가 작다면 조금씩 학습하기 때문에 한 번에 많이 학습하는 것보다는 메모리를 덜 잡아먹는다. 반대로 batch size가 크다면 작을 경우보다 안정적으로 학습할 수 있다. 일반적으로 batch size가 커질 수록 성능이 좋아지지만, 자신의 메모리 양에 따라 적절하게 크기를 정해줘야 한다.
 <br><br>
 
-## 5. Propagation
+## 5. Back Propagation
+- Neural Network에서 학습은 inpuy layer에서 output layer를 향해 순차적으로 학습하면서 Loss Function가 최소가 되도록 Weight을 계산하고 저장하는 것을 Forward Propagation이라고 한다. 하지만 한 번 Forward Propagation 했다고 출력값이 정확하기란 어려울 것이다.
+
+- 따라서 Forward Propagation을 하면서 발생하는 오차를 줄일 필요가 있다. 이때 Loss Function이 최소값을 찾아가는 방법을 GD 알고리즘을 활용하며, 각 layer에서 가중치를 업데이트하기 위해서는 각 layer의 gradient를 계산해야 한다. gradient가 얼마나 변했는지를 계산하기 위해서는 변화량을 구해야 하는 것이므로 미분을 활용한다. 
+
+- propagation이 한 번 돌리는 것을 1 epoch 주기라고 하며, epoch를 늘릴수록 가중치가 계속 업데이트되면서 점점 오차가 줄어나간다.
+
+<center><img src="/assets/images/deeplearning/97.PNG" width="50%"></center><br>
+
+- 위의 그림을 보면 output layer에서 나온 결과값이 가진 오차가 0.6이고, 이전 노드 output layer에서 위의 노드와 아래 노드는 각각 3과 2를 전달해주고 있다. 이는 output error에 위의 노드와 아래 노드는 각각 60%, 40%의 영향을 주었다고 볼 수 있다. 균등하게 가중치를 나눠줄 수 있지만 영향을 더 준 노드가 의미가 더 있기 때문에 Back Propagation을 할 때도 영향을 준 크기만큼 비례하여 주는 것이 좋다. 이렇듯 Back Propagation은 오차를 점점 거슬러 올라가면서 다시 전파하는 것을 의미하며, 오차를 전파시키면서 각 layer의 가중치를 업데이트하고 최적의 학습 결과를 찾아가는 방법이다.
+
+- 또한, Back Propagation은 chain rule을 사용하여 gradient의 계산과 업데이트를 엄청 간단하게 만들어주는 알고리즘으로, 각각의 parameter의 gradient를 계산할 때 parallelization도 용이하고, 메모리도 아낄 수 있다.
+    + Chain Rule
+        + 1) x가 변화했을 때 함수 g가 얼마나 변하는지
+        + 2) 함수 g의 변화로 인해 함수 f가 얼마나 변하는지
+        + 3) 함수 f의 인자가 함수 g이면 최종값 F의 변화량에 기여하는 각 함수 f와 g의 기여도가 어떤지
+
+        <center><img src="/assets/images/deeplearning/98.PNG" width="50%"></center><br>
+
+> [순전파(forward propagation), 역전파(back propagation)](https://ko.d2l.ai/chapter_deep-learning-basics/backprop.html){:target="_blank"}
+> [오차 역전파, 경사하강법](https://sacko.tistory.com/19){:target="_blank"}
+> [Machine Learning 스터디 (18) Neural Network Introduction](http://sanghyukchun.github.io/74/){:target="_blank"}
+> [[Deep Learning이란 무엇인가?] Backpropagation, 역전파 알아보기](https://evan-moon.github.io/2018/07/19/deep-learning-backpropagation/){:target="_blank"}
+> [What is backpropagation really doing? | Deep learning, chapter 3](https://www.youtube.com/watch?v=Ilg3gGewQ5U&feature=youtu.be){:target="_blank"}
