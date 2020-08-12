@@ -107,7 +107,7 @@ use_math: true
 
         + 예측 모형은 실제 분포인 q를 모르고, 모델링을 하여 q분포를 예측하고자 하는 것이다. 예측 모델링을 통해 구한 분포를 p(x)라고 하자. 실제 분포인 q를 예측하는 p분포를 만들었을 때, cross-entropy는 아래의 식과 같다.
 
-    <center><img src="/assets/images/deeplearning/94.jpg" width="50%"></center><br>
+    <center><img src="/assets/images/deeplearning/94.PNG" width="50%"></center><br>
 
         + 훈련 데이터를 사용한 예측 모형에서 cross-entropy는 실제값과 예측값의 차이를 계산하는데 사용할 수 있다.
 
@@ -116,12 +116,23 @@ use_math: true
 > [Cross-entropy 의 이해: 정보이론과의 관계](https://3months.tistory.com/436){:target="_blank"}
 <br><br>
 
-
-
-## 3. Optimizer
+## 3. Optimization
+[5. Artificial Neural Networks(ANN)](https://star6973.github.io/blog/2020/06/19/deeplearning-day-2){:target="_blank"}
+<br><br>
 
 ## 4. Learning rate & Batch size
+- Optimization에서 배운 GD 알고리즘에서 loss function이 최소가 되는 최적의 해를 구하는 과정에서, iteration을 수행할 때 다음 point를 어느 정도로 옮길지를 결정하는 것이 learning rate라고 한다.
+<center><img src="/assets/images/deeplearning/96.PNG" width="50%"></center><br>
+
+- learning rate를 설정할 때 주의해야 할 점은
+    1) learning rate가 너무 크게 되면, 최적의 값으로 수렴하지 않고 발산해버리는(overshooting) 경우가 발생한다.  
+
+    2) learning rate가 너무 작게 되면, 수렴하는 속도가 너무 느려 local minimum에 빠질 확률이 증가한다.  
+
+<center><img src="/assets/images/deeplearning/95.PNG" width="50%"></center><br>
+
+> [Learning Rate, Overfitting, Regularization](https://m.blog.naver.com/PostView.nhn?blogId=cattree_studio&logNo=220703210504&proxyReferer=https:%2F%2Fwww.google.com%2F){:target="_blank"}
+> [Learning Rate Scheduling](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/){:target="_blank"}
+<br><br>
 
 ## 5. Propagation
-
-## 6. Linearity vs Non-Linearity
