@@ -121,18 +121,24 @@ use_math: true
 <br><br>
 
 ## 4. Learning rate & Batch size
-- Optimization에서 배운 GD 알고리즘에서 loss function이 최소가 되는 최적의 해를 구하는 과정에서, iteration을 수행할 때 다음 point를 어느 정도로 옮길지를 결정하는 것이 learning rate라고 한다.
-<center><img src="/assets/images/deeplearning/96.PNG" width="50%"></center><br>
+- Learning rate
+    + Optimization에서 배운 GD 알고리즘에서 loss function이 최소가 되는 최적의 해를 구하는 과정에서, iteration을 수행할 때 다음 point를 어느 정도로 옮길지를 결정하는 것이 learning rate라고 한다.
+    <center><img src="/assets/images/deeplearning/96.PNG" width="50%"></center><br>
 
-- learning rate를 설정할 때 주의해야 할 점은
-    1) learning rate가 너무 크게 되면, 최적의 값으로 수렴하지 않고 발산해버리는(overshooting) 경우가 발생한다.  
+    + learning rate를 설정할 때 주의해야 할 점은
+        1) learning rate가 너무 크게 되면, 최적의 값으로 수렴하지 않고 발산해버리는(overshooting) 경우가 발생한다.  
 
-    2) learning rate가 너무 작게 되면, 수렴하는 속도가 너무 느려 local minimum에 빠질 확률이 증가한다.  
+        2) learning rate가 너무 작게 되면, 수렴하는 속도가 너무 느려 local minimum에 빠질 확률이 증가한다.  
 
-<center><img src="/assets/images/deeplearning/95.PNG" width="50%"></center><br>
+    <center><img src="/assets/images/deeplearning/95.PNG" width="50%"></center><br>
 
-> [Learning Rate, Overfitting, Regularization](https://m.blog.naver.com/PostView.nhn?blogId=cattree_studio&logNo=220703210504&proxyReferer=https:%2F%2Fwww.google.com%2F){:target="_blank"}
-> [Learning Rate Scheduling](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/){:target="_blank"}
+    > [Learning Rate, Overfitting, Regularization](https://m.blog.naver.com/PostView.nhn?blogId=cattree_studio&logNo=220703210504&proxyReferer=https:%2F%2Fwww.google.com%2F){:target="_blank"}
+    > [Learning Rate Scheduling](https://www.deeplearningwizard.com/deep_learning/boosting_models_pytorch/lr_scheduling/){:target="_blank"}
+
+- Batch size
+    + batch size는 한 번의 batch마다 주는 데이터 샘플의 사이즈이다. 보통 mini-batch를 사용하여 데이터셋을 나누어 학습을 시켜준다.
+
+    + batch size의 양에 따라 비유를 해보자면, batch size가 작다면 조금씩 학습하기 때문에 한 번에 많이 학습하는 것보다는 메모리를 덜 잡아먹는다. 반대로 batch size가 크다면 작을 경우보다 안정적으로 학습할 수 있다. 일반적으로 batch size가 커질 수록 성능이 좋아지지만, 자신의 메모리 양에 따라 적절하게 크기를 정해줘야 한다.
 <br><br>
 
 ## 5. Propagation
