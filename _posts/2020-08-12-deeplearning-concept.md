@@ -16,16 +16,16 @@ use_math: true
     + Neural Network에서 Perceptron 개념에서 등장하는 수식은 가중치(Weight)와 편향(bias)로 구성된다. 이때의 W와 b는 데이터를 통해 구해지며, 모델 내부적으로 결정되는 값으로 파라미터라고 한다.
 
     + Parameter의 특징
-        1) 예측을 수행할 때, 모델에 의해 요구되어지는 값들이다.
-        2) 모델의 능력을 결정한다.
-        3) 측정되거나 데이터로부터 학습되어진다.
-        4) 사용자에 의해 조정되지 않는다.
-        5) 학습된 모델의 일부로 저장된다.
+        1) 예측을 수행할 때, 모델에 의해 요구되어지는 값들이다.  
+        2) 모델의 능력을 결정한다.  
+        3) 측정되거나 데이터로부터 학습되어진다.  
+        4) 사용자에 의해 조정되지 않는다.  
+        5) 학습된 모델의 일부로 저장된다.  
 
     + Parameter의 예
-        1) 딥러닝에서의 Weight과 bias
-        2) SVM에서의 서포트 벡터
-        3) Linear Regression에서의 결정계수
+        1) 딥러닝에서의 Weight과 bias  
+        2) SVM에서의 서포트 벡터  
+        3) Linear Regression에서의 결정계수  
 
 - Hyper Parameter
     + Hyper Parameter는 모델링을 할 때, 사용자가 직접 설정해주는 값을 뜻한다.
@@ -33,31 +33,31 @@ use_math: true
     + Hyper Parameter는 정해진 최적의 값이 없고, heuristics 방법이나 empirical하게 결정하는 경우가 많다.
 
     + Hyper Parameter의 특징
-        1) 모델의 parameter값을 측정하기 위해 알고리즘 구현 과정에서 사용된다.
-        2) Empirical하게 측정되기도 하며, 알고리즘을 여러 번 수행하면서 최적의 값을 구해나간다.
-        3) 사용자에 의해 조정된다.
-        4) 예측 알고리즘 모델링의 문제점을 위해 조절된다.
+        1) 모델의 parameter값을 측정하기 위해 알고리즘 구현 과정에서 사용된다.  
+        2) Empirical하게 측정되기도 하며, 알고리즘을 여러 번 수행하면서 최적의 값을 구해나간다.  
+        3) 사용자에 의해 조정된다.  
+        4) 예측 알고리즘 모델링의 문제점을 위해 조절된다.  
 
     + Hyper Parameter의 예
-        1) 딥러닝에서의 learning rate, batch size, loss function 등
-        2) SVM에서의 C
+        1) 딥러닝에서의 learning rate, batch size, loss function 등  
+        2) SVM에서의 C  
 
     + Hyper Parameter의 최적화 방법
-        1) Manual Search
+        1) Manual Search  
             + 사용자의 직감 또는 경험에 의해
 
-        2) Grid Search
+        2) Grid Search  
             + 처음부터 시작하여 모든 조합을 시행
 
-        3) Random Search
+        3) Random Search  
             + 범위 내에서 무작위값을 반복적으로 추출
 
-            <center><img src="/assets/images/deeplearning/87.jpg" width="50%"></center><br>
+        <center><img src="/assets/images/deeplearning/87.jpg" width="50%"></center><br>
 
-        4) Bayesian Optimization
+        4) Bayesian Optimization  
             + 기존에 추출되어 평가된 결과를 바탕으로 추출 범위를 좁혀서 효율적으로 시행
 
-            <center><img src="/assets/images/deeplearning/88.png" width="50%"></center><br>
+        <center><img src="/assets/images/deeplearning/88.png" width="50%"></center><br>
 
 
 > [파라미터(Parameter)와 하이퍼 파라미터(Hyper parameter)](https://bkshin.tistory.com/entry/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D-13-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0Parameter%EC%99%80-%ED%95%98%EC%9D%B4%ED%8D%BC-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0Hyper-parameter){:target="_blank"}
@@ -92,9 +92,9 @@ use_math: true
     [확률과 통계 챕터5. 표집분포와 통계적추론](https://star6973.github.io/blog/2020/06/21/probability-and-statistics-chapter-5){:target="_blank"}
 
             + 모집단에서 표본을 추출하여 각 표본 추정량의 값을 계산할 때 추정량이 바람직하기 위해서는 추정값들의 확률분포가 모수를 중심으로 밀집되어야 할 것이다.
-
                 + 바람직한 추정량: 평균적으로 모수에 근접하고 그 밀집도가 높은 추정량
-                    <center><img src="/assets/images/deeplearning/93.jpg" width="50%"></center><br>
+
+    <center><img src="/assets/images/deeplearning/93.jpg" width="50%"></center><br>
 
             + 이 밀집성의 정도는 MSE로 측정할 수 있다. 추정량($$\theta$$)과 추정모수($$\hat{\theta})와의 차이가 밀집성의 정도를 나타내는 지표로 사용할 수 있으며, 양의 값으로 취하기 위해서 제곱을 사용한다. 추정량은 일종의 확률변수이기 때문에 위에서 구한 차이의 제곱 역시 확률변수가 되기 때문에 이것의 평균을 구할 수 있으며, 그 결과를 평균제곱오차라고 한다.
 
@@ -103,12 +103,17 @@ use_math: true
             + 전자의 특성을 불편성(unbiasedness), 후자의 특성을 효율성(efficiency)이라 한다. 그리고 표본의 크기가 커질수록 MSE의 값이 감소하는 특성인 일치성(consistency)을 바람직한 추정량의 기준으로 고려한다.
 
     2) Cross Entropy Error
-        + 
+        + entropy란 불확실성(uncertainty)에 대한 척도이다. 예측 모형으로 하려고 하는 것은 결국 불확실성을 제어하고자 하는 것이다. 만약 파란공만 들어가있는 가방에서 공을 뽑을 때의 불확실성은 0이다. 왜냐하면 결국 가방 안에는 모두 파란공만 들어있기 때문이다. 하지만 만약 빨간공과 파란공이 모두 들어가 있다면, 불확실성이 0보다 커질 수 밖에 없다. 즉, entropy는 예측하기 쉬운 일보다, 예측하기 힘든 일에서 더 높은 값을 가진다.
+
+        + 예측 모형은 실제 분포인 q를 모르고, 모델링을 하여 q분포를 예측하고자 하는 것이다. 예측 모델링을 통해 구한 분포를 p(x)라고 하자. 실제 분포인 q를 예측하는 p분포를 만들었을 때, cross-entropy는 아래의 식과 같다.
+
+    <center><img src="/assets/images/deeplearning/94.jpg" width="50%"></center><br>
+
+        + 훈련 데이터를 사용한 예측 모형에서 cross-entropy는 실제값과 예측값의 차이를 계산하는데 사용할 수 있다.
 
 > [추정의 이해(점추정, 평균제곱오차(MSE))](https://m.blog.naver.com/PostView.nhn?blogId=victor3dh&logNo=220877005939&proxyReferer=https:%2F%2Fwww.google.com%2F){:target="_blank"}
-
 > [통계학 개론](http://jangun.com/study/IntroductionStatistics.html){:target="_blank"}
-
+> [Cross-entropy 의 이해: 정보이론과의 관계](https://3months.tistory.com/436){:target="_blank"}
 <br><br>
 
 
