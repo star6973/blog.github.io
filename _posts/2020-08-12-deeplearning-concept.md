@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Deep Learning [Day 8]
+title:  Deep Learning Concept Theorem
 date:   2020-08-12 10:00:00-19:00:00
 categories: DeepLearning
 tag: DeepLearning
