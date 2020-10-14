@@ -42,49 +42,49 @@ tag: Article
 
     + 이러한 방식으로 weight size는 획기적으로 줄이면서, accuracy는 AlexNet과 동급 혹은 그 이상인 모델을 설계할 수 있었다.
 
-- 구조
-    + SqueezeNet의 이론의 흐름
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/131.png" width="70%"></center><br>
+### 구조
++ SqueezeNet의 이론의 흐름
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/131.png" width="70%"></center><br>
 
-    + SqeezeNet의 전체적인 구조는 다음 그림과 같다. 모든 SqeezeNet은 전부 1개의 convolution filter를 거치고 나서 max pooling이 이어진다. 그 이후에 8개의 fire module로 이루어져 있고, 마지막에 convolution filter를 거치고 GAP(Global Average Pooling)으로 마무리가 된다. Pooling layer를 conv1, fire4, fire8, conv10 이후에 배치하며 design stratigies의 세 번째 전략을 취했다고 볼 수 있다. 
++ SqeezeNet의 전체적인 구조는 다음 그림과 같다. 모든 SqeezeNet은 전부 1개의 convolution filter를 거치고 나서 max pooling이 이어진다. 그 이후에 8개의 fire module로 이루어져 있고, 마지막에 convolution filter를 거치고 GAP(Global Average Pooling)으로 마무리가 된다. Pooling layer를 conv1, fire4, fire8, conv10 이후에 배치하며 design stratigies의 세 번째 전략을 취했다고 볼 수 있다. 
 
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/129.png" width="70%"></center><br>
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/130.png" width="70%"></center><br>
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/129.png" width="70%"></center><br>
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/130.png" width="70%"></center><br>
 
-    + NIN, GoogLeNet 등에서 사용했던 것처럼 FC layer 대신 GAP를 이용하고, 실험에서는 추가적으로 pruning 기법과 compression 기법 등을 같이 적용하여 최종적으로 AlexNet 대비 ImageNet Accuracy는 비슷하거나 약간 더 높은 수치를 얻었다. 또한, Model size는 50배에서 510배까지 줄일 수 있음을 보였다. 또한, pruning, compression 등의 모델 경량화 기법들을 많이 사용하며, architecture 관점에서도 연산량을 줄이기 위한 시도를 보여주었다.
++ NIN, GoogLeNet 등에서 사용했던 것처럼 FC layer 대신 GAP를 이용하고, 실험에서는 추가적으로 pruning 기법과 compression 기법 등을 같이 적용하여 최종적으로 AlexNet 대비 ImageNet Accuracy는 비슷하거나 약간 더 높은 수치를 얻었다. 또한, Model size는 50배에서 510배까지 줄일 수 있음을 보였다. 또한, pruning, compression 등의 모델 경량화 기법들을 많이 사용하며, architecture 관점에서도 연산량을 줄이기 위한 시도를 보여주었다.
 
-- 실험
+### 실험
     
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/133.png" width="70%"></center><br>
-    
-    + AlexNet과 비교를 통해 단순 SqueezeNet만을 사용해도 50배 가까이 모델 사이즈가 줄어들었으며, 기존 AlexNet의 top-1, top-5 accuracy에 근접하거나 뛰어넘는 모습을 보여주고 있다. 또한, uncompressed된 32bit의 데이터 타입을 사용한 SqueezeNet과 deep compression을 적용한 8bit, 6bit 짜리 데이터 타입을 사용한 결과, 510배까지 줄어들었으며 성능도 큰 차이가 나지 않았다. 즉, SqueezeNet 또한 모델 압축에 굉장히 유연하다는 뜻이다.
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/133.png" width="70%"></center><br>
 
-- 중요한 점
-    + 모델의 정확도를 올리는 것에 초점을 두지 않고 CNN의 구조가 모델의 크기와 정확도에 어떤 영향을 끼치는지 알아보기 위해, microarchitecture exploration(모델 세부 구조 탐색)과 macroarchitecture exploration(모델 전체 구조 탐색)에 대해 알아보자.
++ AlexNet과 비교를 통해 단순 SqueezeNet만을 사용해도 50배 가까이 모델 사이즈가 줄어들었으며, 기존 AlexNet의 top-1, top-5 accuracy에 근접하거나 뛰어넘는 모습을 보여주고 있다. 또한, uncompressed된 32bit의 데이터 타입을 사용한 SqueezeNet과 deep compression을 적용한 8bit, 6bit 짜리 데이터 타입을 사용한 결과, 510배까지 줄어들었으며 성능도 큰 차이가 나지 않았다. 즉, SqueezeNet 또한 모델 압축에 굉장히 유연하다는 뜻이다.
 
-    + CNN Microarchitecture Metaparameters
-        - Fire module은 hyper parameter가 3개로 구성되며, SqueezeNet은 총 8개의 Fire module로 구성되어 있기에 총 24개의 hyper parameter를 가지고 있다. 본 논문에서는 24개의 파라미터를 전부 통제하는 파라미터를 metaparameter라고 지명하였다.
+### 중요한 점
++ 모델의 정확도를 올리는 것에 초점을 두지 않고 CNN의 구조가 모델의 크기와 정확도에 어떤 영향을 끼치는지 알아보기 위해, microarchitecture exploration(모델 세부 구조 탐색)과 macroarchitecture exploration(모델 전체 구조 탐색)에 대해 알아보자.
 
-        - SqueezeNet의 전체적인 파라미터 수식은 다음과 같이 설정하고, 값을 바꾸면서 성능을 확인한다. 다음 그림에서 SR(Squeeze Ratio)는 squeeze layer에서 expand layer로 들어가는 input channel의 수를 줄여주는 역할을 한다.
-        <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/134.png" width="70%"></center><br>
-        <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/135.png" width="70%"></center><br>
++ CNN Microarchitecture Metaparameters
+    - Fire module은 hyper parameter가 3개로 구성되며, SqueezeNet은 총 8개의 Fire module로 구성되어 있기에 총 24개의 hyper parameter를 가지고 있다. 본 논문에서는 24개의 파라미터를 전부 통제하는 파라미터를 metaparameter라고 지명하였다.
 
-    + CNN Macroarchitecture Design Space Exploration
-        - 모델의 세부 부분들에 대한 최적화가 끝나고, 전체 구조 탐색에 대해 다음과 같이 총 3가지 모델에 대한 실험을 진행한다.
-        <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/136.png" width="70%"></center><br>
+    - SqueezeNet의 전체적인 파라미터 수식은 다음과 같이 설정하고, 값을 바꾸면서 성능을 확인한다. 다음 그림에서 SR(Squeeze Ratio)는 squeeze layer에서 expand layer로 들어가는 input channel의 수를 줄여주는 역할을 한다.
+    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/134.png" width="70%"></center><br>
+    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/135.png" width="70%"></center><br>
 
-            1) Vanilla SqueezeNet  
-            2) SqueezeNet with simple bypass connections between some Fire modules  
-            3) SqueezeNet with complex bypass connections between the remainig Fire modules  
++ CNN Macroarchitecture Design Space Exploration
+    - 모델의 세부 부분들에 대한 최적화가 끝나고, 전체 구조 탐색에 대해 다음과 같이 총 3가지 모델에 대한 실험을 진행한다.
+    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/136.png" width="70%"></center><br>
 
-        - bypass connection은 ResNet에서 쓰이는 skip connection과 같은 개념이다. 그림의 가운데를 보면, fire module을 1개 이상 건너뛰지 않고, bypass connection이 연결되어 있다. 이는 fire module의 input과 output 모두 같은 수의 채널을 가지고 있어야되기 때문이다. 이러한 한계점으로 논문의 저자들은 complex bypass connection이라는 개념을 추가한다. 단순히 1x1짜리 convolution을 거치면서 채널의 수를 맞춰주는 것이다. 이렇게하면 각 fire module의 output 채널의 수가 달라도 숫자를 맞춰서 element-wise addition(요소별 연산 덧셈, 두 벡터와 행렬에서 같은 위치에 있는 원소끼리 덧셈)을 해줄 수 있다.
+        1) Vanilla SqueezeNet  
+        2) SqueezeNet with simple bypass connections between some Fire modules  
+        3) SqueezeNet with complex bypass connections between the remainig Fire modules  
 
-    + Fire module의 구조에서 squeeze layer가 expand layer보다 필터 수가 더 적은데, 이는 중요한 정보가 bottleneck에서 사라질 수 있는 문제가 있다. 하지만 bypass connection을 추가하면 중요한 정보도 손실없이 쉽게 흘러갈 수 있다.
+    - bypass connection은 ResNet에서 쓰이는 skip connection과 같은 개념이다. 그림의 가운데를 보면, fire module을 1개 이상 건너뛰지 않고, bypass connection이 연결되어 있다. 이는 fire module의 input과 output 모두 같은 수의 채널을 가지고 있어야되기 때문이다. 이러한 한계점으로 논문의 저자들은 complex bypass connection이라는 개념을 추가한다. 단순히 1x1짜리 convolution을 거치면서 채널의 수를 맞춰주는 것이다. 이렇게하면 각 fire module의 output 채널의 수가 달라도 숫자를 맞춰서 element-wise addition(요소별 연산 덧셈, 두 벡터와 행렬에서 같은 위치에 있는 원소끼리 덧셈)을 해줄 수 있다.
 
-    + 3가지 종류의 SqueezeNet의 정확도의 성능은 Simple Bypass SqueezeNet > Complex Bypass SqueezeNet > SqueezeNet 순으로 정확도가 높았다. 
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/137.png" width="70%"></center><br>
++ Fire module의 구조에서 squeeze layer가 expand layer보다 필터 수가 더 적은데, 이는 중요한 정보가 bottleneck에서 사라질 수 있는 문제가 있다. 하지만 bypass connection을 추가하면 중요한 정보도 손실없이 쉽게 흘러갈 수 있다.
 
-- 참고자료
++ 3가지 종류의 SqueezeNet의 정확도의 성능은 Simple Bypass SqueezeNet > Complex Bypass SqueezeNet > SqueezeNet 순으로 정확도가 높았다. 
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/137.png" width="70%"></center><br>
+
+- 참고자료  
 
 > [Deep Learning Image Classification Guidebook [3] SqueezeNet, Xception, MobileNet, ResNext, PolyNet, PyramidNet, Residual Attention Network, DenseNet, Dual Path Network (DPN)](https://hoya012.github.io/blog/deeplearning-classification-guidebook-3/)
 

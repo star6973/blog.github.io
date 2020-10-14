@@ -33,19 +33,19 @@ tag: Article
 
     <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/143.png" width="70%"></center><br>
 
-- 구조
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/148.png" width="70%"></center><br>
+### 구조
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/148.png" width="70%"></center><br>
 
-    + Xception 구조는 36개의 convolution layer로 feature extraction을 수행한다. Entry flow를 시작으로, 8회 반복되는 middle flow, 마지막에는 exit flow를 거치는 구조이다.
+- Xception 구조는 36개의 convolution layer로 feature extraction을 수행한다. Entry flow를 시작으로, 8회 반복되는 middle flow, 마지막에는 exit flow를 거치는 구조이다.
 
-    + 모든 convolution과 separable convolution의 뒤에는 BN(Batch Normalization)이 뒤따른다.
-        + BN(Batch Normalization)이란? [Deep Learning Concept](https://github.com/star6973/lotte_studying/blob/master/Research/MH.Ji/Deep%20Learning%20Concept.md)를 참고
-    
-    + 요약하자면, Xception 구조는 residual connection이 있는 depthwise separable convolution의 linear stack으로 볼 수 있다. 
+- 모든 convolution과 separable convolution의 뒤에는 BN(Batch Normalization)이 뒤따른다.
+    + BN(Batch Normalization)이란? [Deep Learning Concept](https://github.com/star6973/lotte_studying/blob/master/Research/MH.Ji/Deep%20Learning%20Concept.md)를 참고
 
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/149.png" width="70%"></center><br>
+- 요약하자면, Xception 구조는 residual connection이 있는 depthwise separable convolution의 linear stack으로 볼 수 있다. 
 
-- 참고자료
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/149.png" width="70%"></center><br>
+
+### 참고자료
 
 > [Deep Learning Image Classification Guidebook [3] SqueezeNet, Xception, MobileNet, ResNext, PolyNet, PyramidNet, Residual Attention Network, DenseNet, Dual Path Network (DPN)](https://hoya012.github.io/blog/deeplearning-classification-guidebook-3/)
  

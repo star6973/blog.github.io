@@ -23,23 +23,23 @@ tag: Article
 - 학습 효율성 증가
 - 단일 머신러닝 훈련을 위한 batch size를 조정하기 위해 4개의 heuristic을 사용한다.
 
-    1) Linear scaling learning rate
-        + mini-batch SGD에서 batch size를 증가시키는 것은 SGD의 기댓값을 바꾸지는 못하지만, 분산을 줄여준다.
-        + 다른 말로 batch size가 크게 되면, graident에 있는 noise를 줄여주기 때문에 learning_rate를 증가시켜야만 한다.
-        + 즉, batch size가 커지면 learning_rate도 크게, batch size가 작아지면 learning_rate도 작게 만들어주는 것이 좋다.
+    1) Linear scaling learning rate  
+        - mini-batch SGD에서 batch size를 증가시키는 것은 SGD의 기댓값을 바꾸지는 못하지만, 분산을 줄여준다.   
+        - 다른 말로 batch size가 크게 되면, graident에 있는 noise를 줄여주기 때문에 learning_rate를 증가시켜야만 한다.    
+        - 즉, batch size가 커지면 learning_rate도 크게, batch size가 작아지면 learning_rate도 작게 만들어주는 것이 좋다.   
 
-    2) Learning rate warmup
-        + 처음 시작하는 training은 모든 파라미터들이 랜덤으로 설정되어 있기 때문에, 정답(우리가 목표로 하는)에서 멀어져 있다. 그렇다고 learning_rate를 크게 잡아버리면 수치적으로 불안정해진다.
-        + 따라서, 처음에는 learning_rate를 작게 잡고 trainig process가 안정적이게 되면 learning_rate를 바꿔준다.
+    2) Learning rate warmup  
+        -  처음 시작하는 training은 모든 파라미터들이 랜덤으로 설정되어 있기 때문에, 정답(우리가 목표로 하는)에서 멀어져 있다. 그렇다고 learning_rate를 크게 잡아버리면 수치적으로 불안정해진다.  
+        - 따라서, 처음에는 learning_rate를 작게 잡고 trainig process가 안정적이게 되면 learning_rate를 바꿔준다.  
 
-    3) Zero gamma
-        + ResNet network는 multiple residual blocks로 구성되어 있는데, 이 residual blocks는 입력과 출력의 잔차를 학습하는 지름길이다.
-        + 각각의 block들은 convolutional layer로 이루어져 있다. 이때, 마지막 block의 layer인 Batch Normalization(BN) Layer에서 x와 곱해지는 값인 gamma는 beta와 마찬가지로 학습할 수 있는 learnable parameter이므로, 학습 전에 초기화를 시켜주어야 한다.
-        + gamma가 0이면, back propagation을 발생하지 않게 해주며 이는 학습 초기 단계의 안정성을 높여준다.
+    3) Zero gamma  
+        - ResNet network는 multiple residual blocks로 구성되어 있는데, 이 residual blocks는 입력과 출력의 잔차를 학습하는 지름길이다.  
+        - 각각의 block들은 convolutional layer로 이루어져 있다. 이때, 마지막 block의 layer인 Batch Normalization(BN) Layer에서 x와 곱해지는 값인 gamma는 beta와 마찬가지로 학습할 수 있는 learnable parameter이므로, 학습 전에 초기화를 시켜주어야 한다.  
+        - gamma가 0이면, back propagation을 발생하지 않게 해주며 이는 학습 초기 단계의 안정성을 높여준다.  
 
-    4) No bias decay
-        + weight decay는 overfitting이 발생하지 않도록, weight값을 decay해주는 기법이다.
-        + [Highly scalable deep learning training system with mixed-precision: Training imagenet in four minutes.](https://arxiv.org/pdf/1807.11205.pdf)의 논문에 따르면, weight에만 decay를 주는 것이 overfitting을 방지할 수 있다고 한다.
+    4) No bias decay  
+        - weight decay는 overfitting이 발생하지 않도록, weight값을 decay해주는 기법이다.  
+        - [Highly scalable deep learning training system with mixed-precision: Training imagenet in four minutes.](https://arxiv.org/pdf/1807.11205.pdf)의 논문에 따르면, weight에만 decay를 주는 것이 overfitting을 방지할 수 있다고 한다.  
 
 - precision을 감소시킨 training(FP32 -> FP16)을 통해 연산량의 속도를 증가시킬 수 있다. 하지만, 수를 표현할 수 있는 범위가 줄게되어 학습 성능이 저하될 수 있는데, 이를 해결하기 위해 Mixed precision training 방식을 적용하여 학습을 시킨다.
 

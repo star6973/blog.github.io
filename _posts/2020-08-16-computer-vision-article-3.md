@@ -13,7 +13,7 @@ tag: Article
 - input을 2차원으로 확장하였고, parameter sharing을 통해 input의 픽셀 수가 증가해도 parameter 수가 변하지 않는다는 특징을 가지고 있다.
 
 ### 2. 구조
-    
+
 <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/99.PNG" width="70%"></center><br>
 
 - C1 layer에서는 32x32 픽셀의 image를 input으로 사용하고, 6개의 5x5 필터와 convolution 연산을 해준다. 그 결과, 6장의 28x28 feature map을 산출한다.
