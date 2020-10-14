@@ -141,14 +141,21 @@ tag: Article
 - 데이터에 독립적인 이미지를 augumentation하는 기법으로, 두 데이터의 이미지와 라벨을 각각 weighted linear interpolation하여 새로운 샘플을 생성하는 기법이다.
 <br><br>
 
-## 참고자료
-- [Batch Size in Deep Learning](https://blog.lunit.io/2018/08/03/batch-size-in-deep-learning/)
-- [Regularization - weight decay](https://deepapple.tistory.com/6)
-- [Reduced-Precision Computation for Neural Network Training](https://www.rambus.com/blogs/reduced-precision-computation-for-neural-network-training/)
-- [Label smoothing: 딥러닝 모델의 일반화와 Calibration 향상을 위한 테크닉](https://3months.tistory.com/465)
-- [딥러닝 용어 정리, Knowledge distillation 이란?](https://light-tree.tistory.com/196)
-- [On Mixup Training: Improved Calibration and Predictive Uncertainty for Deep Neural Networks](http://www.gatsby.ucl.ac.uk/~balaji/udl2019/accepted-papers/UDL2019-paper-43.pdf)
-- [논문 요약](https://hoya012.github.io/blog/Bag-of-Tricks-for-Image-Classification-with-Convolutional-Neural-Networks-Review/)
+## 참고자료  
+
+> [Batch Size in Deep Learning](https://blog.lunit.io/2018/08/03/batch-size-in-deep-learning/)
+
+> [Regularization - weight decay](https://deepapple.tistory.com/6)
+
+> [Reduced-Precision Computation for Neural Network Training](https://www.rambus.com/blogs/reduced-precision-computation-for-neural-network-training/)
+
+> [Label smoothing: 딥러닝 모델의 일반화와 Calibration 향상을 위한 테크닉](https://3months.tistory.com/465)
+
+> [딥러닝 용어 정리, Knowledge distillation 이란?](https://light-tree.tistory.com/196)
+
+> [On Mixup Training: Improved Calibration and Predictive Uncertainty for Deep Neural Networks](http://www.gatsby.ucl.ac.uk/~balaji/udl2019/accepted-papers/UDL2019-paper-43.pdf)
+
+> [논문 요약](https://hoya012.github.io/blog/Bag-of-Tricks-for-Image-Classification-with-Convolutional-Neural-Networks-Review/)
 <br><br>
 
 ## 추후에 학습해야할 것
