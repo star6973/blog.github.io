@@ -7,7 +7,7 @@ tag: Article
 ---
 
 ## VGGNet
-- 2014년 ILSVRC에서 GoogLeNet과 함께 큰 주목을 받으며, 준우승을 차지한 모델이다. 준우승이었지만, 구조적인 측면에서 GoogLeNet보다 훨씬 간단한 구조로 되어 있으며, 향후 모델의 발전 역사에서 VGGNet 모델부터 시작해서 네트워크의 깊이가 확 깊어졌다.
+#### 2014년 ILSVRC에서 GoogLeNet과 함께 큰 주목을 받으며, 준우승을 차지한 모델이다. 준우승이었지만, 구조적인 측면에서 GoogLeNet보다 훨씬 간단한 구조로 되어 있으며, 향후 모델의 발전 역사에서 VGGNet 모델부터 시작해서 네트워크의 깊이가 확 깊어졌다.
 
 - Depth
     + VGGNet이 발표되기 전까지만해도 AlexNet이나 ZFNet과 같은 대부분의 모델은 8 layer의 수준이었다. 하지만 GoogLeNet과 VGGNet 모두 이전 구조에 비해 훨씬 deep해진다.
@@ -33,24 +33,25 @@ tag: Article
 
     + B 구조는 3x3 convolution layer를 2번 사용하는 경우와 5x5 convolution layer를 1번 사용하는 모델을 만들어 실험을 했는데, 결과는 3x3 필터를 2번 사용하는 경우가 5x5 필터를 1번 사용하는 것보다 top-1 error에서 7% 성능을 높일 수 있었다.
 
-- 특징
-    + LRN을 적용하지 않는다.
-    + 학습 parameter의 수를 적게 만들고, depth의 깊이를 늘리기 위해 3x3 필터를 사용한다.
+### 1. 특징
+- LRN을 적용하지 않는다.
+- 학습 parameter의 수를 적게 만들고, depth의 깊이를 늘리기 위해 3x3 필터를 사용한다.
 
-- 구조
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/110.PNG" width="70%"></center><br>
+### 2. 구조
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/110.PNG" width="70%"></center><br>
 
-    + input layer에서는 224x224 사이즈의 컬러 이미지를 입력받는다(224x224x3)
+- input layer에서는 224x224 사이즈의 컬러 이미지를 입력받는다(224x224x3)
 
-    + 첫 번째 레이어에서 convolution layer에서 64개의 3x3x3 필터로 입력 이미지를 convolution 연산을 해준다. stride=1, zero padding=1로 설정해준다. 이 두 개의 하이퍼파라미터는 다음 모든 convolution layer에서 동일하게 적용한다. 결과적으로 64장의 224x224x64의 feature map을 산출한다. activation function은 ReLU를 사용하였고, 마찬가지로 output layer를 제외하고 모든 convolution layer에서 동일하게 적용한다.
+- 첫 번째 레이어에서 convolution layer에서 64개의 3x3x3 필터로 입력 이미지를 convolution 연산을 해준다. stride=1, zero padding=1로 설정해준다. 이 두 개의 하이퍼파라미터는 다음 모든 convolution layer에서 동일하게 적용한다. 결과적으로 64장의 224x224x64의 feature map을 산출한다. activation function은 ReLU를 사용하였고, 마찬가지로 output layer를 제외하고 모든 convolution layer에서 동일하게 적용한다.
 
-    + 두 번째 레이어에서 convolution layer에서 64개의 3x3x64 필터로 convolution 연산을 해주어, 결과적으로 224x224x64의 feature map이 산출된다. pooling layer에서는 2x2 필터로 stride=2로 적용하여 max pooling을 하여, 결과적으로 feature map의 사이즈를 112x112x64로 줄인다.
+- 두 번째 레이어에서 convolution layer에서 64개의 3x3x64 필터로 convolution 연산을 해주어, 결과적으로 224x224x64의 feature map이 산출된다. pooling layer에서는 2x2 필터로 stride=2로 적용하여 max pooling을 하여, 결과적으로 feature map의 사이즈를 112x112x64로 줄인다.
 
-    + 세 번째 레이어에서부터는 AlexNet과 비슷한 맥락으로 진행한다. 자세하게 살펴보려면 [VGGNet의 구조 (VGG16)](https://bskyvision.com/504)로 GoGo..
+- 세 번째 레이어에서부터는 AlexNet과 비슷한 맥락으로 진행한다. 자세하게 살펴보려면 [VGGNet의 구조 (VGG16)](https://bskyvision.com/504)로 GoGo..
 
 - VGGNet은 AlexNet이나 ZFNet처럼 224x224 크기의 컬러 이미지를 입력으로 받아들이고, 1개 혹은 그 이상의 convolutional layer 뒤에 max pooling layer가 오는 단순한 구조가 되어 있다. 또한, 맨 마지막 단에는 fully connected layer가 온다. 이러한 구조 덕분에 간단하고 이해나 변형이 쉬운 장점을 가지고 있지만, 파라미터의 수가 엄청나게 많기 때문에 학습 시간이 오래 걸린다.
 
-- 참고자료
+### 3. 참고자료  
+
 > [Deep Learning Image Classification Guidebook [1] LeNet, AlexNet, ZFNet, VGG, GoogLeNet, ResNet](https://hoya012.github.io/blog/deeplearning-classification-guidebook-1/)
 
 > [VGGNet의 구조 (VGG16)](https://bskyvision.com/504)

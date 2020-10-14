@@ -10,7 +10,7 @@ tag: Article
 #### MLP가 가지는 한계점인 input의 픽셀수가 많아지면 parameter가 기하급수적으로 증가하는 문제를 해결할 수 있는 CNN 구조 제시하였다.
 
 ### 1. 특징
-    + input을 2차원으로 확장하였고, parameter sharing을 통해 input의 픽셀 수가 증가해도 parameter 수가 변하지 않는다는 특징을 가지고 있다.
+- input을 2차원으로 확장하였고, parameter sharing을 통해 input의 픽셀 수가 증가해도 parameter 수가 변하지 않는다는 특징을 가지고 있다.
 
 ### 2. 구조
     
