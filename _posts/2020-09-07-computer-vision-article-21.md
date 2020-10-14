@@ -253,7 +253,10 @@ tag: Article
 
 <br>
 
-### 참고자료
-[[Object Detection] Feature Pyramid Network (FPN)](https://eehoeskrap.tistory.com/300)  
-[FPN (Feature Pyramid Network) 과 BiFPN](http://machinelearningkorea.com/2020/01/19/fpn-feature-pyramid-network-%EA%B3%BC-bifpn/)  
-[EfficientDet ： Scalable and Efficient Object Detection Review](https://hoya012.github.io/blog/EfficientDet-Review/)
+### 참고자료  
+
+> [[Object Detection] Feature Pyramid Network (FPN)](https://eehoeskrap.tistory.com/300)  
+
+> [FPN (Feature Pyramid Network) 과 BiFPN](http://machinelearningkorea.com/2020/01/19/fpn-feature-pyramid-network-%EA%B3%BC-bifpn/)  
+
+> [EfficientDet ： Scalable and Efficient Object Detection Review](https://hoya012.github.io/blog/EfficientDet-Review/)
