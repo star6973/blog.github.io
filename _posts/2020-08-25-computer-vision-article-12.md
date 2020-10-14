@@ -37,7 +37,7 @@ tag: Article
 - 네트워크의 깊이가 깊어질수록 처음에 가지고 있던 정보가 사라지는 문제가 발생할 수 있는데, 이러한 문제를 다룬 연구들의 공통점은 전부 초반부 layer를 후반부 layer로 이어주려는 것이었다.
 
 - DenseNet은 이 문제를 처음 쌓은 층을 네트워크가 깊어져도 차곡차곡 쌓아가는 것으로 해결할 수 있다고 제시한다.
-<center><img src="/reference_image/MH.Ji/Deep Learning Image Classification/162.png" width="70%"></center><br>
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/162.png" width="70%"></center><br>
 
 - ResNet의 경우도 skip connection으로 어느정도 정보가 사라지는 문제를 해결할 수 있다고 하지만, dense connectivity를 사용하면 아예 초반 레이어의 정보를 쌓아가며 뒤쪽 레이어까지 효율적으로 전달할 수 있다고 한다. 이는 뒤집어 말하면 error를 back propagation할 때도 더 효율적으로 전달한다는 말이 된다.
 
