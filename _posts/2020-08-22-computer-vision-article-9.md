@@ -30,20 +30,20 @@ tag: Article
     + 이러한 엣지 컴퓨팅 환경은 MobileNet과 같이 비대한 크기의 네트워크보다는 빠른 성능이 필요한 곳에서 사용한다.
 
 - Techniques for Small Deep Neural Networks
-    + DNN에서 작은 네트워크를 만들기 위한 기법으로 다음과 같이 있다.
-        1) Remove fully-connected layers
-        2) Kernel reduction(3x3 -> 1x1)
-        3) Channel reduction
-        4) Evenly spaced downsampling
-            - 초반에 downsampling을 많이 하면 accuracy가 떨어지지만, 파라미터의 수가 적어짐.
-            - 후반에 downsampling을 많이 하면 accuracy가 좋아지지만, 파라미터의 수가 많아짐.
+    + DNN에서 작은 네트워크를 만들기 위한 기법으로 다음과 같이 있다.  
+        1) Remove fully-connected layers  
+        2) Kernel reduction(3x3 -> 1x1)  
+        3) Channel reduction  
+        4) Evenly spaced downsampling  
+            - 초반에 downsampling을 많이 하면 accuracy가 떨어지지만, 파라미터의 수가 적어짐.  
+            - 후반에 downsampling을 많이 하면 accuracy가 좋아지지만, 파라미터의 수가 많아짐.  
 
-        5) Depthwise separable convolutions
-            - depthwise convolution은 채널 숫자는 줄어들지 않고, 한 채널에서의 크기만 줄어든다.
-            - pointwise convolution은 채널 숫자가 하나로 줄어든다.
+        5) Depthwise separable convolutions  
+            - depthwise convolution은 채널 숫자는 줄어들지 않고, 한 채널에서의 크기만 줄어든다.  
+            - pointwise convolution은 채널 숫자가 하나로 줄어든다.  
 
-        6) Shuffle operations
-        7) Distillation & Compression
+        6) Shuffle operations  
+        7) Distillation & Compression  
 
     + MobileNet은 위의 7가지 중 3) channel reduction, 5) depth separable convolutions 7) distillation & compression 기법을 사용한다.
 
@@ -61,12 +61,12 @@ tag: Article
     + depthwise separable convolution은 다음 그림과 같은 효율이 있다.
     <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/141.png" width="70%"></center><br>
 
-- 구조
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/140.png" width="70%"></center><br>
+### 구조
+<center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/140.png" width="70%"></center><br>
 
-    + MobileNet의 구조는 VGGNet의 구조와 비슷하지만, 기존의 convolution을 depthwise separable convolution으로 대체하고, pooling 대신에 stride를 2로 설정하여 사이즈를 축소하고 있다.
++ MobileNet의 구조는 VGGNet의 구조와 비슷하지만, 기존의 convolution을 depthwise separable convolution으로 대체하고, pooling 대신에 stride를 2로 설정하여 사이즈를 축소하고 있다.
 
-- 참고자료
+### 참고자료
 
 > [Deep Learning Image Classification Guidebook [3] SqueezeNet, Xception, MobileNet, ResNext, PolyNet, PyramidNet, Residual Attention Network, DenseNet, Dual Path Network (DPN)](https://hoya012.github.io/blog/deeplearning-classification-guidebook-3/)
  

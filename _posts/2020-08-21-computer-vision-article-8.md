@@ -70,8 +70,9 @@ tag: Article
     <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/135.png" width="70%"></center><br>
 
 + CNN Macroarchitecture Design Space Exploration
-    - 모델의 세부 부분들에 대한 최적화가 끝나고, 전체 구조 탐색에 대해 다음과 같이 총 3가지 모델에 대한 실험을 진행한다.
-    <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/136.png" width="70%"></center><br>
+    - 모델의 세부 부분들에 대한 최적화가 끝나고, 전체 구조 탐색에 대해 다음과 같이 총 3가지 모델에 대한 실험을 진행한다.  
+        
+        <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/136.png" width="70%"></center><br>
 
         1) Vanilla SqueezeNet  
         2) SqueezeNet with simple bypass connections between some Fire modules  

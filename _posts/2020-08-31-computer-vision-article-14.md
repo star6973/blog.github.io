@@ -7,15 +7,15 @@ tag: Article
 ---
 
 ## R-CNN
-- 구조
-    <center><img src="/assets/images/reference_image/MH.Ji/R-CNN models/1.PNG" width="70%"></center><br>
+### 1. 구조
+<center><img src="/assets/images/reference_image/MH.Ji/R-CNN models/1.PNG" width="70%"></center><br>
 
-- 동작 방식
-    + input image에 bounding box를 그리고, selective search 기법을 통해 RoI(Region Of Interest)를 약 2,000개 정도 추출한다.
-    + 추출된 RoI 조각들을 동일한 크기로 만들어서, 각각을 CNN(pretrained된 AlexNet)의 끝 단을 object detection class로 fine tuning시켜서 훈련을 한다.
-    + 훈련 결과 나온 feature들을 SVM에서 classification, bounding regression으로 back propagation 업데이트를 해준다.
+### 2. 동작 방식
++ input image에 bounding box를 그리고, selective search 기법을 통해 RoI(Region Of Interest)를 약 2,000개 정도 추출한다.
++ 추출된 RoI 조각들을 동일한 크기로 만들어서, 각각을 CNN(pretrained된 AlexNet)의 끝 단을 object detection class로 fine tuning시켜서 훈련을 한다.
++ 훈련 결과 나온 feature들을 SVM에서 classification, bounding regression으로 back propagation 업데이트를 해준다.
 
-    <center><img src="/assets/images/reference_image/MH.Ji/R-CNN models/2.PNG" width="70%"></center><br>
+<center><img src="/assets/images/reference_image/MH.Ji/R-CNN models/2.PNG" width="70%"></center><br>
 
 - Selective Search
 
@@ -59,11 +59,12 @@ tag: Article
 
     <center><img src="/assets/images/reference_image/MH.Ji/R-CNN models/8.PNG" width="30%"></center><br>
 
-- R-CNN의 특징
-    + multi staged training을 해야 한다(fine tune, svm classifier, bounding box regression).
-    + 2,000개의 영역을 모두 CNN으로 학습하기 때문에 속도가 느리다.
+### 3. R-CNN의 특징
++ multi staged training을 해야 한다(fine tune, svm classifier, bounding box regression).
++ 2,000개의 영역을 모두 CNN으로 학습하기 때문에 속도가 느리다.
 
-## 참고자료
+### 4. 참고자료  
+
 > [갈아먹는 Object Detection](https://yeomko.tistory.com/)  
 
 > [Mask R-CNN 정리](https://mylifemystudy.tistory.com/82)  

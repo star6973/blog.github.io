@@ -24,11 +24,13 @@ tag: Article
 
     + 위의 마지막 그림은 extreme version의 Inception moduel로, 먼저 1x1 convolution으로 cross-channel correlation을 mapping하고, 모든 output channel들의 spatial correlation들의 spatial correlation을 따로 mapping한다. 
 
-- Xception은 Inception module이 지향하고자 한, 채널간의 상관관계와 image의 지역적인 상관관계를 완벽하게 분리하는 더 높은 목표를 세우고 연구를 시작하였고, 그것이 바로 depthwise separable convolution이다. 위의 그림에 나오는 extreme version의 module은 depthwise separable convolution과 거의 동일하다고 할 수 있지만, 2가지의 차이점이 있다.
+<br><br>
+
+- Xception은 Inception module이 지향하고자 한, 채널간의 상관관계와 image의 지역적인 상관관계를 완벽하게 분리하는 더 높은 목표를 세우고 연구를 시작하였고, 그것이 바로 depthwise separable convolution이다. 위의 그림에 나오는 extreme version의 module은 depthwise separable convolution과 거의 동일하다고 할 수 있지만, 2가지의 차이점이 있다.  
     1) Operation의 순서  
        : Inception에서는 1x1 convolution을 먼저 수행하는 반면, Tensorflow와 같이 일반적으로 구현된 depthwise separable convolution은 channel-wise spatial convolution을 먼저 수행한 뒤(depthwise convolution)에 1x1 convolution을 수행(pointwise convolution)한다.
 
-    2) 첫 번째 operation 뒤의 non-linearity 여부
+    2) 첫 번째 operation 뒤의 non-linearity 여부  
        : Inception에서는 두 operation 모두 non-linearity로 ReLU가 뒤따르는 반면, separable convolution은 일반적으로 non-linearity 없이 구현된다. 실험을 통해 연산의 지역 정보와 채널간의 상관관계를 연산하는 사이에 non-linearity 함수가 있으면 성능이 크게 저하된다는 사실을 알게되었기 때문이다.
 
     <center><img src="/assets/images/reference_image/MH.Ji/Deep Learning Image Classification/143.png" width="70%"></center><br>
