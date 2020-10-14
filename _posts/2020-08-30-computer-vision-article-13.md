@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Computer Vision Article 13 [Object Detection Tutorial]
-date:   2020-08-25 10:00:00-18:00:00
+date:   2020-08-30 10:00:00-18:00:00
 categories: Article
 tag: Article
 ---
