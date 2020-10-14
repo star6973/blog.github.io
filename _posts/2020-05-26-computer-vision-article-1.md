@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Computer Vision Article 1
+title:  Computer Vision Article 1 [기술 동향]
 date:   2020-05-26 19:00:00-22:00:00
 categories: Article
 tag: Article
