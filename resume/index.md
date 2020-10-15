@@ -78,6 +78,7 @@ theme: red
 		</ul>
 	</div>
 </section>
+<ht/>
 <!-- Activity -->
 <section class="row">
 	<header class="col-md-3">
