@@ -16,14 +16,18 @@ theme: red
 				<ul class="list-group">
 					<li class="list-group-item active"><h4><strong>Programming</strong></h4></li>
 					<li class="list-group-item">C / C++ / Java / Python</li>
+					<li class="list-group-item">TensorFlow / Keras / Pytorch</li>
 					<li class="list-group-item">Javascript</li>
 					<li class="list-group-item">HTML & CSS</li>
+					<li class="list-group-item">D3.js</li>
 				</ul>
 			</div>
 			<div class="col-md-6">
 				<ul class="list-group">
 					<li class="list-group-item active"><h4><strong>Tool</strong></h4></li>
 					<li class="list-group-item">Pycharm</li>
+					<li class="list-group-item">VSCode</li>
+					<li class="list-group-item">Jupyter Notebook</li>
 				</ul>
 			</div>
 		</div>
@@ -70,6 +74,26 @@ theme: red
 				<h4>DoTS Founding Club</h4>
 				<h5>September 2018 - December 2019</h5>
 				<p>Back-End Developer</p>
+			</li>
+		</ul>
+	</div>
+</section>
+<!-- Activity -->
+<section class="row">
+	<header class="col-md-3">
+		<h3 style="text-transform:uppercase;color:gray">External Activity</h3>
+	</header>
+	<div class="col-md-9">
+		<ul>
+			<li>
+				<h4>Chungcheong Area Camp by Paul & Mark</h4>
+				<h5>May 2017 - May 2017</h5>
+				<p>Engineering Design</p>
+			</li>
+			<li>
+				<h4>Drone Makers Camp - KOREATECH x KAU</h4>
+				<h5>July 2017 - July 2017</h5>
+				<p>Back-Edn Developer</p>
 			</li>
 		</ul>
 	</div>
