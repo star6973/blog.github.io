@@ -20,6 +20,7 @@ theme: red
 					<li class="list-group-item">Javascript</li>
 					<li class="list-group-item">HTML & CSS</li>
 					<li class="list-group-item">D3.js</li>
+                    <li class="list-group-item">ROS</li>
 				</ul>
 			</div>
 			<div class="col-md-6">
@@ -60,6 +61,11 @@ theme: red
 	</header>
 	<div class="col-md-9">
 		<ul>
+            <li>
+                <h4>WONIK Robotics</h4>
+                <h5>January 2021 - </h5>
+                <p>Software Engineer and Vision AI Engineer</p>
+            </li>
 			<li>
 				<h4>DI.Mosaic Startup</h4>
 				<h5>June 2020 - December 2020</h5>
