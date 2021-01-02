@@ -52,3 +52,8 @@ theme: purple
 [프로젝트]
 - [Kaggle Competition](https://kaggle-kr.tistory.com/32){: target="_blank"}
 - 국비지원 프로젝트(컴퓨터 비전)
+
+## 2021 목표
+1. 컴퓨터비전 논문 읽기
+2. 영어회화 공부하기
+3. 코딩테스트 준비하기
