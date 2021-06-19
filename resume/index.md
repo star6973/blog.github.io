@@ -16,10 +16,9 @@ theme: red
 				<ul class="list-group">
 					<li class="list-group-item active"><h4><strong>Programming</strong></h4></li>
 					<li class="list-group-item">C / C++ / Java / Python</li>
-					<li class="list-group-item">TensorFlow / Keras / Pytorch</li>
-					<li class="list-group-item">Javascript</li>
 					<li class="list-group-item">HTML & CSS</li>
-					<li class="list-group-item">D3.js</li>
+					<li class="list-group-item">Javascript</li>
+					<li class="list-group-item">TensorFlow / Keras / Pytorch</li>
                     <li class="list-group-item">ROS</li>
 				</ul>
 			</div>
@@ -42,13 +41,13 @@ theme: red
 	</header>
 	<div class="col-md-9">
 		<ul>
-			<li>
+			<!-- <li>
 				<h4>AI Training Course for Mobile Robot Recognition and Movement</h4>
 				<p>May 2020 - November 2020, KIRO </p>
-			</li>
+			</li> -->
 			<li>
 				<h4>Computer Science Engineering</h4>
-				<p>March 2014 - December 2019, University of Koreatech</p>
+				<p>March 2014 - Feburary 2021, University of Koreatech</p>
 			</li>
 		</ul>
 	</div>
@@ -64,17 +63,17 @@ theme: red
             <li>
                 <h4>WONIK Robotics</h4>
                 <h5>January 2021 - </h5>
-                <p>Software Engineer and Vision AI Engineer</p>
+                <p>Software Engineer</p>
             </li>
 			<li>
-				<h4>DI.Mosaic Startup</h4>
+				<h4>DI.Mosaic Start-Up</h4>
 				<h5>June 2020 - December 2020</h5>
-				<p>Data Engineer and Machine Learning Engineer</p>
+				<p>Back-End Developer</p>
 			</li>
 			<li>
 				<h4>Daumsoft Internship</h4>
 				<h5>January 2020 - February 2020</h5>
-				<p>Data Analysist and Fullstack Developer</p>
+				<p>Data Analysist and Back-End Developer</p>
 			</li>
 			<li>
 				<h4>DoTS Founding Club</h4>
@@ -95,12 +94,12 @@ theme: red
 			<li>
 				<h4>Chungcheong Area Camp by Paul & Mark</h4>
 				<h5>May 2017 - May 2017</h5>
-				<p>Engineering Design</p>
+				<p>Design Engineering</p>
 			</li>
 			<li>
 				<h4>Drone Makers Camp - KOREATECH x KAU</h4>
 				<h5>July 2017 - July 2017</h5>
-				<p>Back-Edn Developer</p>
+				<p>Back-End Developer</p>
 			</li>
 		</ul>
 	</div>
